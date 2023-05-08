@@ -1,0 +1,15 @@
+FROM node:lts-alpine
+
+WORKDIR /app
+
+COPY package.json package.json
+
+RUN yarn install
+
+COPY . .
+
+RUN yarn build
+
+EXPOSE 5137
+
+CMD [ "yarn", "start" ]
