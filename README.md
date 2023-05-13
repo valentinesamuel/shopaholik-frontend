@@ -1,1 +1,1 @@
-# shopaholik-frontend
+# shopaholik-frontend for alx project
