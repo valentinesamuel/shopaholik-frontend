@@ -1,1 +1,0 @@
-# shopaholik-frontend
