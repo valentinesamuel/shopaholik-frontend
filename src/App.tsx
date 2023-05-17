@@ -1,9 +1,9 @@
 import { PaletteMode, ThemeProvider, createTheme } from '@mui/material';
 import { useMemo, useState } from 'react';
 import { getDesignTokens } from './Utils/MaterialTheme';
-import { ColorModeContext } from './ColorMode.context';
+import { ColorModeContext } from './Utils/ColorMode.context';
 import { Route, Routes } from 'react-router-dom';
-import SignIn from './Pages/Signin.component';
+import SignIn from './pages/Signin.component';
 import Home from './routes/Home/Home.component';
 
 function App() {
