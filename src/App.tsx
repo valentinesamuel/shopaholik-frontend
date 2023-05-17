@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { PaletteMode, ThemeProvider, createTheme } from '@mui/material';
+import { useMemo, useState } from 'react';
+import { getDesignTokens } from './Utils/MaterialTheme';
+import { ColorModeContext } from './ColorMode.context';
+import { Route, Routes } from 'react-router-dom';
+import SignIn from './Pages/Signin.component';
+import Home from './routes/Home/Home.component';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [mode, setMode] = useState<PaletteMode>('dark');
+  const colorMode = useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode: PaletteMode) =>
+          prevMode === 'light' ? 'dark' : 'light',
+        );
+      },
+    }),
+    [],
+  );
+  const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/login" element={<SignIn />} />
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
 }
 
-export default App
+export default App;
