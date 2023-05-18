@@ -11,7 +11,7 @@ import {
 import { sideRoutes } from './sideroutes';
 import SideLink from '../../../components/SideLink';
 import logout from '../../../assets/icons/logout.svg';
-import { Box, Button, Modal, Typography } from '@mui/material';
+import { Box, Modal } from '@mui/material';
 
 const ManagerHome: FC = () => {
   const [showNav, setShowNav] = useState(false);

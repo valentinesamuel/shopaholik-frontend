@@ -16,8 +16,8 @@ background: red;
 `;
 
 export const Sidebar = MUIStyled('div')(({ theme }) => ({
-  // minWidth: '15%',
-  width: '15%',
+  // minWidth: '18%',
+  width: '18%',
   backgroundColor: theme.palette.primary.main,
   padding: '0 .625rem',
   display: 'flex',

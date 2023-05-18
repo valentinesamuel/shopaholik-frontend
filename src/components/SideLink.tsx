@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
-import { Box, styled as MUIStyled } from '@mui/material';
+import { styled as MUIStyled } from '@mui/material';
 import { shouldForwardProp } from '../Utils/ShouldForwardProp';
 
 type Props = {
