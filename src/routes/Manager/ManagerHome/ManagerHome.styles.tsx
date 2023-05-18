@@ -5,8 +5,6 @@ import { styled as MUIStyled } from '@mui/material';
 
 export const Wrapper = Styled.section`
 display:flex;
-align-items:top;
-background: red;
 // position:relative;
 
 .btn{
@@ -17,7 +15,7 @@ background: red;
 
 export const Sidebar = MUIStyled('div')(({ theme }) => ({
   // minWidth: '18%',
-  width: '18%',
+  width: '300px',
   backgroundColor: theme.palette.primary.main,
   padding: '0 .625rem',
   display: 'flex',
@@ -30,6 +28,7 @@ export const Sidebar = MUIStyled('div')(({ theme }) => ({
 export const DisplayArea = Styled.main`
 height: 100vh;
 overflow-x: auto;
+width:100%;
 `;
 
 export const StyledLink = Styled(Link)`
