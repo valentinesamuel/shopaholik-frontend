@@ -24,7 +24,6 @@ const Home: FC = () => {
 
   return (
     <>
-      {/* {userRoles[role]} */}
       <Outlet />
     </>
   );

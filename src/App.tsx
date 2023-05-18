@@ -5,10 +5,10 @@ import { ColorModeContext } from './Utils/ColorMode.context';
 import { Route, Routes } from 'react-router-dom';
 import SignIn from './pages/Signin.component';
 import Home from './routes/Home/Home.component';
-import ManagerHome from './routes/Manager/ManagerHome.component';
+import ManagerHome from './routes/Manager/ManagerHome/ManagerHome.component';
 import SupervisorHome from './routes/Supervisor/SupervisorHome.component';
 import CashierHome from './routes/Cashier/CashierHome.component';
-import ManagerDashboard from './routes/Manager/ManagerDashboard.component';
+import ManagerDashboard from './routes/Manager/ManagerDashboard/ManagerDashboard.component';
 import SupervisorDashboard from './routes/Supervisor/SupervisorDashboard.component';
 import CashierDashboard from './routes/Cashier/CashierDashboard.component';
 
@@ -34,6 +34,7 @@ function App() {
           <Route path="/" element={<Home />}>
             <Route path="/manager" element={<ManagerHome />}>
               <Route index element={<ManagerDashboard />} />
+              <Route path='inventory' element={<>test</>} />
             </Route>
             <Route path="supervisor" element={<SupervisorHome />}>
               <Route index element={<SupervisorDashboard />} />
@@ -42,6 +43,14 @@ function App() {
               <Route index element={<CashierDashboard />} />
             </Route>
           </Route>
+          <Route
+            path="*"
+            element={
+              <>
+                <h1>not ready</h1>
+              </>
+            }
+          />
         </Routes>
       </ThemeProvider>
     </ColorModeContext.Provider>
