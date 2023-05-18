@@ -16,7 +16,7 @@ display:flex;
 export const Sidebar = MUIStyled('div')(({ theme }) => ({
   // minWidth: '18%',
   width: '300px',
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: theme.palette.primary.dark,
   padding: '0 .625rem',
   display: 'flex',
   flexDirection: 'column',

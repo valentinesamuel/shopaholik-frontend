@@ -4,10 +4,20 @@ import { Box } from '@mui/material';
 import { dashboardMetrics } from './metrics';
 import StockQuantityCard from '../../../components/StockQuantityRow';
 import TopSellingProduct from '../../../components/TopSellingProduct';
+import Navbar from '../../../components/Navbar';
 
 const ManagerDashboard: FC = () => {
   return (
-    <div style={{ width: '100%', backgroundColor: 'pink' }}>
+    <Box
+      sx={{
+        width: '100%',
+        height: '100vh',
+        overflowX: 'auto',
+        backgroundColor: 'primary.main',
+        padding: '1% 3% 0% 3%',
+      }}
+    >
+      <Navbar />
       <Box
         sx={{
           display: 'grid',
@@ -29,9 +39,18 @@ const ManagerDashboard: FC = () => {
         })}
       </Box>
       <StockQuantityCard />
-      <h3>Best Selling Product</h3>
-      <TopSellingProduct />
-    </div>
+      <Box
+        sx={{
+          backgroundColor: 'secondary.light',
+          padding: 3,
+          borderRadius: 2,
+        }}
+      >
+        <h3 style={{ marginBottom: 20 }}>Best Selling Products</h3>
+
+        <TopSellingProduct />
+      </Box>
+    </Box>
   );
 };
 

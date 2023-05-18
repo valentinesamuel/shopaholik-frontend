@@ -80,8 +80,7 @@ const rows = [
   createData('Brazil', 'BR', 210147125, 8515767),
 ];
 const TopSellingProductContainer = styled(Box)`
-  background-color: red;
-  height: max-content;
+  height: fit-content;
 `;
 
 const TopSellingProduct = () => {
@@ -101,13 +100,24 @@ const TopSellingProduct = () => {
 
   return (
     <TopSellingProductContainer>
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+      {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}> */}
+      <Paper
+        sx={{
+          height: '100%',
+          overflow: 'hidden',
+          backgroundColor: 'secondary.light',
+      
+        }}
+      >
+        <TableContainer
+          sx={{ maxHeight: 440, backgroundColor: 'primary.light' }}
+        >
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
+                    sx={{ backgroundColor: 'primary.light' }}
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
@@ -131,7 +141,11 @@ const TopSellingProduct = () => {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell
+                            sx={{ backgroundColor: 'secondary.light' }}
+                            key={column.id}
+                            align={column.align}
+                          >
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}

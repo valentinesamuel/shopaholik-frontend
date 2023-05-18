@@ -19,7 +19,12 @@ const StockQuantityRow = () => {
         }
         spacing={2}
         justifyContent="space-between"
-        sx={{ padding: '1% 0' }}
+        sx={{
+          padding: '1% 0',
+          backgroundColor: 'secondary.light',
+          margin: '2% 0',
+          borderRadius: 2
+        }}
       >
         <StockQtyItem>
           <div className="icon">
@@ -50,7 +55,7 @@ const StockQuantityRow = () => {
         </StockQtyItem>
         <StockQtyItem>
           <div className="icon">
-            <LocalShippingIcon color="secondary" />
+            <LocalShippingIcon color="action" />
           </div>
           <div className="text">
             <p className="quantity">23</p>

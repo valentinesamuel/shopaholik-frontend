@@ -6,18 +6,18 @@ export const getDesignTokens = (mode: PaletteMode) => ({
     ...(mode === 'light'
       ? {
           primary: {
-            main: '#0193bb',
+            main: '#D9DDFF',
           },
           secondary: {
-            main: '#f97c00',
+            main: '#FFFEFC',
           },
         }
       : {
           primary: {
-            main: '#0193bb',
+            main: '#6c78ff',
           },
           secondary: {
-            main: '#f97c00',
+            main: '#ff9400',
           },
         }),
   },

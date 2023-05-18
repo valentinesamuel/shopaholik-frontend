@@ -13,7 +13,7 @@ import SupervisorDashboard from './routes/Supervisor/SupervisorDashboard.compone
 import CashierDashboard from './routes/Cashier/CashierDashboard.component';
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>('dark');
+  const [mode, setMode] = useState<PaletteMode>('light');
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
