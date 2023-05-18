@@ -3,9 +3,8 @@ import { styled as MUIStyled } from '@mui/material';
 import { FC } from 'react';
 import styled from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
-import { borderRadius } from '@mui/system';
 
-const DashboardMetricContainer = MUIStyled('div')(({ theme }) => ({
+const DashboardMetricContainer = MUIStyled('div')(() => ({
   // maxWidth: '356px',
   display: 'flex',
   alignItems: 'center',

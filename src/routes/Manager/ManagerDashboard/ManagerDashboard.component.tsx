@@ -30,17 +30,7 @@ const ManagerDashboard: FC = () => {
           );
         })}
       </Box>
-      <Stack
-        direction="row"
-        divider={<Divider orientation="vertical" />}
-        spacing={2}
-        justifyContent="center"
-      >
-        <p>Item 1</p>
-        <p>Item 2</p>
-        <p>Item 3</p>
-      </Stack>
-      <StockQuantityCard/>
+      <StockQuantityCard />
     </div>
   );
 };
