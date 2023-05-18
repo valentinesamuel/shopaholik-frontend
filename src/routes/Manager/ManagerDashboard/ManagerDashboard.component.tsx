@@ -1,15 +1,13 @@
 import { FC } from 'react';
 import DashboardMetric from '../../../components/DashboardMetric';
-import { Box, Divider, Stack } from '@mui/material';
+import { Box } from '@mui/material';
 import { dashboardMetrics } from './metrics';
 import StockQuantityCard from '../../../components/StockQuantityRow';
+import TopSellingProduct from '../../../components/TopSellingProduct';
 
 const ManagerDashboard: FC = () => {
   return (
     <div style={{ width: '100%', backgroundColor: 'pink' }}>
-      Manager dashboard
-      <br />
-      lorem5000
       <Box
         sx={{
           display: 'grid',
@@ -31,6 +29,8 @@ const ManagerDashboard: FC = () => {
         })}
       </Box>
       <StockQuantityCard />
+      <h3>Best Selling Product</h3>
+      <TopSellingProduct />
     </div>
   );
 };
