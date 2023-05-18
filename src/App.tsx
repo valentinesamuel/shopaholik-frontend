@@ -5,6 +5,12 @@ import { ColorModeContext } from './Utils/ColorMode.context';
 import { Route, Routes } from 'react-router-dom';
 import SignIn from './pages/Signin.component';
 import Home from './routes/Home/Home.component';
+import ManagerHome from './routes/Manager/ManagerHome.component';
+import SupervisorHome from './routes/Supervisor/SupervisorHome.component';
+import CashierHome from './routes/Cashier/CashierHome.component';
+import ManagerDashboard from './routes/Manager/ManagerDashboard.component';
+import SupervisorDashboard from './routes/Supervisor/SupervisorDashboard.component';
+import CashierDashboard from './routes/Cashier/CashierDashboard.component';
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>('dark');
@@ -25,7 +31,17 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/login" element={<SignIn />} />
-          <Route path="/" element={<Home />}></Route>
+          <Route path="/" element={<Home />}>
+            <Route path="/manager" element={<ManagerHome />}>
+              <Route index element={<ManagerDashboard />} />
+            </Route>
+            <Route path="supervisor" element={<SupervisorHome />}>
+              <Route index element={<SupervisorDashboard />} />
+            </Route>
+            <Route path="cashier" element={<CashierHome />}>
+              <Route index element={<CashierDashboard />} />
+            </Route>
+          </Route>
         </Routes>
       </ThemeProvider>
     </ColorModeContext.Provider>

@@ -1,22 +1,30 @@
-import { FC } from 'react';
-import ManagerHome from './ManagerHome.component';
-import SupervisorHome from './SupervisorHome.component';
-import CashierHome from './CashierHome.component';
+import { FC, useEffect } from 'react';
 import { ADMINROLE } from '../../Utils/Types';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-const userRoles = {
-  MANAGER: <ManagerHome />,
-  SUPERVISOR: <SupervisorHome />,
-  CASHIER: <CashierHome />,
-};
+// const userRoles = {
+//   MANAGER: <ManagerHome />,
+//   SUPERVISOR: <SupervisorHome />,
+//   CASHIER: <CashierHome />,
+// };
 
-export const role: ADMINROLE = ADMINROLE.SUPERVISOR;
+export const role: ADMINROLE = ADMINROLE.MANAGER;
 
 const Home: FC = () => {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (role === String(ADMINROLE.MANAGER)) {
+      navigate('/manager');
+    } else if (role === String(ADMINROLE.SUPERVISOR)) {
+      navigate('/supervisor');
+    } else if (role === String(ADMINROLE.CASHIER)) {
+      navigate('/cashier');
+    }
+  }, [role]);
+
   return (
     <>
-      {userRoles[role]}
+      {/* {userRoles[role]} */}
       <Outlet />
     </>
   );
