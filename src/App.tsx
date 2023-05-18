@@ -34,7 +34,8 @@ function App() {
           <Route path="/" element={<Home />}>
             <Route path="/manager" element={<ManagerHome />}>
               <Route index element={<ManagerDashboard />} />
-              <Route path='inventory' element={<>test</>} />
+              <Route path="dashboard" element={<ManagerDashboard />} />
+              <Route path="inventory" element={<>test</>} />
             </Route>
             <Route path="supervisor" element={<SupervisorHome />}>
               <Route index element={<SupervisorDashboard />} />

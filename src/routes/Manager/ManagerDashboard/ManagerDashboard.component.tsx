@@ -1,7 +1,10 @@
 import { FC } from 'react';
 
 const ManagerDashboard: FC = () => {
-  return <h2>Manager dashboard</h2>;
+  return <h2>Manager dashboard
+    <br />
+    lorem5000
+  </h2>;
 };
 
 export default ManagerDashboard;

@@ -9,7 +9,7 @@ export const sideRoutes = [
     id: 1,
     name: 'dashboard',
     icon: dashboard,
-    destination: '',
+    destination: 'dashboard',
   },
   {
     id: 2,

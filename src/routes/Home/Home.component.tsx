@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
 import { ADMINROLE } from '../../Utils/Types';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 // const userRoles = {
 //   MANAGER: <ManagerHome />,
@@ -12,6 +12,8 @@ export const role: ADMINROLE = ADMINROLE.MANAGER;
 
 const Home: FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     if (role === String(ADMINROLE.MANAGER)) {
       navigate('/manager');

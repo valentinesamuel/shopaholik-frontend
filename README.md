@@ -151,10 +151,9 @@ Here are more screenshots from the product
 
 ## Roadmap
 
-- [ ] Map out routing for application
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
+- [ ] Build interface for manager
+- [ ] Feature 1
+  - [ ] Nested Feature 1
 
 See the [open issues](https://github.com/valentinesamuel/shopaholik-frontend/issues) for a full list of proposed features (and known issues).
 

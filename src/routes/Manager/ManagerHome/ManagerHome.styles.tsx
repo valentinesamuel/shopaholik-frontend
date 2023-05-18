@@ -6,19 +6,31 @@ import { styled as MUIStyled } from '@mui/material';
 export const Wrapper = Styled.section`
 display:flex;
 align-items:top;
+background: red;
+// position:relative;
+
+.btn{
+  // position: absolute;
+
+}
 `;
 
 export const Sidebar = MUIStyled('div')(({ theme }) => ({
-  minWidth: '15%',
-  height: '100vh',
+  // minWidth: '15%',
+  width: '15%',
   backgroundColor: theme.palette.primary.main,
   padding: '0 .625rem',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
+  height: '100vh',
+  overflowX: 'auto',
 }));
 
-export const DisplayArea = Styled.main``;
+export const DisplayArea = Styled.main`
+height: 100vh;
+overflow-x: auto;
+`;
 
 export const StyledLink = Styled(Link)`
   text-decoration: none;

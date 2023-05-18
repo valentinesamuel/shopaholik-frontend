@@ -27,7 +27,7 @@ const StyledSideLink = styled(Link)`
   }
 
   &:hover {
-    background-color: rgba(186, 223, 233, 0.70);
+    background-color: rgba(186, 223, 233, 0.7);
     border-radius: 0.3125rem;
   }
 `;
@@ -51,7 +51,7 @@ const SideLink: FC<Props> = ({ icon, destination, name }) => {
   useEffect(() => {
     setActive(location.pathname.includes(`/${destination}`) ? true : false);
   }, [location]);
-
+  // ||  location.pathname.includes(`/dashboard`);
   return (
     <StyledSideLinkContainer active={active}>
       <StyledSideLink to={destination}>
