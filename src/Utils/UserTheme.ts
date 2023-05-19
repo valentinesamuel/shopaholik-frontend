@@ -27,4 +27,9 @@ export const UserTheme = {
   borderRadius: {
     5: '.3125rem',
   },
+  mediaQuery: {
+    mobile: 'screen and (max-width: 450px)',
+    tablet: 'screen and (max-width: 768px)',
+    laptop: 'screen and (min-width: 1200px)',
+  },
 };

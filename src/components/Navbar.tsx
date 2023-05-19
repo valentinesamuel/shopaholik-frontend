@@ -1,7 +1,8 @@
-import { Avatar, Box } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { FC } from 'react';
 import { styled } from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
+import blue from '@mui/material/colors/blue';
 
 const NavbarContainer = styled(Box)`
   display: flex;
@@ -35,13 +36,41 @@ const Navbar: FC = () => {
   return (
     <NavbarContainer>
       <div className="role-greeting">
-        <p className="greeting">Good Morning,</p>
-        <p className="role">Manager</p>
+        <Typography>Good Morning,</Typography>
+        <Typography
+          sx={{
+            marginTop: '10%',
+            color: blue[500],
+          }}
+          variant="body1"
+        >
+          Emmanuel
+        </Typography>
       </div>
       <div className="image">
         {/* <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" /> */}
-        <Avatar sx={{ bgcolor: 'primary.dark', padding:3 }}>EM</Avatar>
-        <p className="name">Emmauel</p>
+        <Avatar
+          sx={{
+            bgcolor: 'primary.light',
+            color: 'secondary.dark',
+            padding: 3,
+            marginRight: 3,
+          }}
+        >
+          EM
+        </Avatar>
+        <Typography
+          sx={{
+            color: 'primary.contrastText',
+            display: {
+              mobile: 'none',
+              tablet: 'block',
+            },
+          }}
+          variant="body1"
+        >
+          Emmanuel
+        </Typography>
       </div>
     </NavbarContainer>
   );

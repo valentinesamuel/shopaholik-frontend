@@ -11,6 +11,7 @@ const DashboardMetricContainer = MUIStyled('div')(() => ({
   padding: 16,
   borderRadius: 5,
   justifyContent: 'space-between',
+  width: '100%',
 }));
 
 const Content = styled(Box)`
