@@ -2,10 +2,10 @@ import { Box, Button, IconButton, Paper, Typography } from '@mui/material';
 import { FC } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import CreateIcon from '@mui/icons-material/Create';
-import SelectCategories from './SelectCategories';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import SaveIcon from '@mui/icons-material/Save';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import SelectOptions from './SelectOptions';
 interface Props {}
 
 const ProductDetailModal: FC<Props> = () => {
@@ -76,7 +76,7 @@ const ProductDetailModal: FC<Props> = () => {
             }}
           >
             <Typography sx={{ color: '#96989E' }}>Shipping Status</Typography>
-            <SelectCategories width="40%" />
+            <SelectOptions width="40%" />
           </Box>
           <Box
             sx={{
@@ -96,9 +96,7 @@ const ProductDetailModal: FC<Props> = () => {
               22-24 Industrial Avenue, Ilupeju. PMB 21164 Ikeja, Lagos State.
               Nigeria
             </Typography>
-            <Typography variant="body1" >
-              +234 (1) 280 1300
-            </Typography>
+            <Typography variant="body1">+234 (1) 280 1300</Typography>
           </Box>
         </Box>
       </Box>

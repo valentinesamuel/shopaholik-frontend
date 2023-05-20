@@ -19,7 +19,7 @@ import { ChangeEvent, useState } from 'react';
 import InventoryMetrics from './InventoryMetrics';
 
 import TopSellingProduct from '../../../components/TopSellingProduct';
-import SelectCategories from '../../../components/SelectCategories';
+import SelectCategories from '../../../components/SelectOptions';
 
 function a11yProps(index: number) {
   return {
@@ -91,10 +91,14 @@ const ManagerInventory = () => {
             <Tab label="Expired Products" {...a11yProps(3)} />
           </Tabs>
         </Box>
-        <Box sx={{
-          display: 'flex', justifyContent: {
-            tablet: 'space-between'
-        } }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: {
+              tablet: 'space-between',
+            },
+          }}
+        >
           <SelectCategories />
           <Box
             sx={{
@@ -143,4 +147,3 @@ const ManagerInventory = () => {
 };
 
 export default ManagerInventory;
-

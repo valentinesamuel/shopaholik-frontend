@@ -10,9 +10,11 @@ import { FC, useState } from 'react';
 
 interface Props {
   width?: string;
+  options?: { value: number; name: string; id: string }[];
+  label?:string
 }
 
-const SelectCategories: FC<Props> = ({ width = 120 }) => {
+const SelectOptions: FC<Props> = ({ width = 120, options,label }) => {
   const [age, setAge] = useState('');
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -27,16 +29,17 @@ const SelectCategories: FC<Props> = ({ width = 120 }) => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={age}
-          label="Age"
+          label={label}
           onChange={handleChange}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={''}>Select</MenuItem>
+          {options?.map((option) => {
+            return <MenuItem key={option.id} value={option.value}>{option.name}</MenuItem>;
+          })}
         </Select>
       </FormControl>
     </Box>
   );
 };
 
-export default SelectCategories;
+export default SelectOptions;
