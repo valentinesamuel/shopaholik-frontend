@@ -97,7 +97,6 @@ const ManagerInventory = () => {
           <SelectCategories />
           <Box
             sx={{
-              //   p: '2px 4px',
               display: 'flex',
             }}
           >
@@ -105,7 +104,7 @@ const ManagerInventory = () => {
               label="Search Product"
               onChange={handleSearchedProductChange}
               value={searchedProduct}
-              placeholder="Search Prodcuts"
+              placeholder="Search Products"
               sx={{
                 marginLeft: 5,
                 outline: 'none',

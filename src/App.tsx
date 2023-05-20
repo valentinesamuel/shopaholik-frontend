@@ -11,6 +11,7 @@ import CashierHome from './routes/Cashier/CashierHome.component';
 import ManagerDashboard from './routes/Manager/ManagerDashboard/ManagerDashboard.component';
 import SupervisorDashboard from './routes/Supervisor/SupervisorDashboard.component';
 import CashierDashboard from './routes/Cashier/CashierDashboard.component';
+import ManagerInventory from './routes/Manager/ManagerInventory/ManagerInventory.component';
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>('dark');
@@ -35,7 +36,7 @@ function App() {
             <Route path="/manager" element={<ManagerHome />}>
               <Route index element={<ManagerDashboard />} />
               <Route path="dashboard" element={<ManagerDashboard />} />
-              <Route path="inventory" element={<>test</>} />
+              <Route path="inventory" element={<ManagerInventory/>} />
             </Route>
             <Route path="supervisor" element={<SupervisorHome />}>
               <Route index element={<SupervisorDashboard />} />

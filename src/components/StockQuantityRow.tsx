@@ -3,25 +3,10 @@ import FmdBadIcon from '@mui/icons-material/FmdBad';
 import WarningIcon from '@mui/icons-material/Warning';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Box, Typography, Paper } from '@mui/material';
-import styled from 'styled-components';
-import { UserTheme } from '../Utils/UserTheme';
+
 import { styled as MUIStyled } from '@mui/material';
 
-const StockQtyItem2 = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
-  .text {
-    margin-left: 20px;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-  }
-
-  @media ${UserTheme.mediaQuery.mobile} {
-  }
-`;
 
 export const StockQtyItem = MUIStyled(Box)(() => ({
   display: 'flex',

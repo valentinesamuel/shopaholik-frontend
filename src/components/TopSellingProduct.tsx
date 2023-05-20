@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -9,6 +9,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import { MoreHoriz } from '@mui/icons-material';
 
 interface Column {
   id: 'name' | 'code' | 'population' | 'size' | 'density';
@@ -19,26 +20,34 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Name', minWidth: 170 },
-  { id: 'code', label: 'ISO\u00a0Code', minWidth: 100 },
+  {
+    id: 'name',
+    label: 'Name',
+    // minWidth: 170
+  },
+  {
+    id: 'code',
+    label: 'ISO\u00a0Code',
+    // minWidth: 100
+  },
   {
     id: 'population',
     label: 'Population',
-    minWidth: 170,
+    // minWidth: 170,
     align: 'right',
     format: (value: number) => value.toLocaleString('en-US'),
   },
   {
     id: 'size',
     label: 'Size\u00a0(km\u00b2)',
-    minWidth: 170,
+    // minWidth: 170,
     align: 'right',
     format: (value: number) => value.toLocaleString('en-US'),
   },
   {
     id: 'density',
     label: 'Density',
-    minWidth: 170,
+    // minWidth: 170,
     align: 'right',
     format: (value: number) => value.toFixed(2),
   },
@@ -104,6 +113,11 @@ const TopSellingProduct = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  const handleIconClick = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    console.log('button clicked!');
+  };
+
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -128,15 +142,23 @@ const TopSellingProduct = () => {
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
-                  <TableCell
-                    sx={{ backgroundColor: 'primary.main' }}
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
+                  <>
+                    <TableCell
+                      sx={{ backgroundColor: 'primary.main' }}
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth }}
+                    >
+                      {column.label}
+                    </TableCell>
+                  </>
                 ))}
+                <TableCell
+                  sx={{ backgroundColor: 'primary.main' }}
+                  align="right"
+                >
+                  
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -144,30 +166,40 @@ const TopSellingProduct = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        return (
-                          <TableCell align={column.align} key={column.id}>
-                            {column.format && typeof value === 'number'
-                              ? column.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
+                    <>
+                      <TableRow
+                        key={row.code}
+                        sx={{ cursor: 'pointer' }}
+                        hover
+                        role="checkbox"
+                        tabIndex={-1}
+                      >
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          return (
+                            <TableCell align={column.align} key={column.id}>
+                              {column.format && typeof value === 'number'
+                                ? column.format(value)
+                                : value}
+                            </TableCell>
+                          );
+                        })}
+                        <TableCell align="right">
+                          <Tooltip title="Survey options">
+                            <IconButton onClick={handleIconClick}>
+                              <MoreHoriz />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                      </TableRow>
+                    </>
                   );
                 })}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
-          sx={{backgroundColor: 'primary.light'}}
+          sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}
