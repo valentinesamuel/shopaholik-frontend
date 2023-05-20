@@ -78,6 +78,23 @@ const rows = [
   createData('Russia', 'RU', 146793744, 17098246),
   createData('Nigeria', 'NG', 200962417, 923768),
   createData('Brazil', 'BR', 210147125, 8515767),
+  createData('India', 'IN', 1324171354, 3287263),
+  createData('China', 'CN', 1403500365, 9596961),
+  createData('Italy', 'IT', 60483973, 301340),
+  createData('United States', 'US', 327167434, 9833520),
+  createData('Canada', 'CA', 37602103, 9984670),
+  createData('Australia', 'AU', 25475400, 7692024),
+  createData('Nigeria', 'NG', 200962417, 923768),
+  createData('Germany', 'DE', 83019200, 357578),
+  createData('Ireland', 'IE', 4857000, 70273),
+  createData('Mexico', 'MX', 126577691, 1972550),
+  createData('Japan', 'JP', 126317000, 377973),
+  createData('France', 'FR', 67022000, 640679),
+  createData('United Kingdom', 'GB', 67545757, 242495),
+  createData('Russia', 'RU', 146793744, 17098246),
+  createData('Nigeria', 'NG', 200962417, 923768),
+  createData('Brazil', 'BR', 210147125, 8515767),
+  createData('Nigeria', 'NG', 200962417, 923768),
 ];
 const TopSellingProductContainer = styled(Box)`
   height: fit-content;
@@ -100,24 +117,19 @@ const TopSellingProduct = () => {
 
   return (
     <TopSellingProductContainer>
-      {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}> */}
       <Paper
+        elevation={1}
         sx={{
-          height: '100%',
-          overflow: 'hidden',
-          backgroundColor: 'secondary.light',
-      
+          overflowX: 'auto',
         }}
       >
-        <TableContainer
-          sx={{ maxHeight: 440, backgroundColor: 'primary.light' }}
-        >
+        <TableContainer sx={{ height: '100%', minHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
-                    sx={{ backgroundColor: 'primary.light' }}
+                    sx={{ backgroundColor: 'primary.main' }}
                     key={column.id}
                     align={column.align}
                     style={{ minWidth: column.minWidth }}
@@ -141,11 +153,7 @@ const TopSellingProduct = () => {
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell
-                            sx={{ backgroundColor: 'secondary.light' }}
-                            key={column.id}
-                            align={column.align}
-                          >
+                          <TableCell align={column.align} key={column.id}>
                             {column.format && typeof value === 'number'
                               ? column.format(value)
                               : value}
@@ -159,6 +167,7 @@ const TopSellingProduct = () => {
           </Table>
         </TableContainer>
         <TablePagination
+          sx={{backgroundColor: 'primary.light'}}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { styled as Styled } from 'styled-components';
 import { UserTheme } from '../../../Utils/UserTheme';
-import { styled as MUIStyled } from '@mui/material';
+import { styled as MUIStyled, Paper } from '@mui/material';
 
 export const Wrapper = Styled.section`
 display:flex;
@@ -9,9 +9,12 @@ display:flex;
 
 .btn{
   // position: absolute;
-
 }
 `;
+
+export const Wrapper2 = MUIStyled(Paper)(() => ({
+  display: 'flex',
+}));
 
 export const Sidebar = MUIStyled('div')(({ theme }) => ({
   // minWidth: '18%',
@@ -29,6 +32,7 @@ export const DisplayArea = Styled.main`
 height: 100vh;
 overflow-x: auto;
 width:100%;
+
 `;
 
 export const StyledLink = Styled(Link)`

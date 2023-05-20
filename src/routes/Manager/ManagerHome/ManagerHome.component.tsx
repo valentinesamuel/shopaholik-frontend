@@ -7,11 +7,13 @@ import {
   Sidebar,
   StyledLink,
   Wrapper,
+  Wrapper2,
 } from './ManagerHome.styles';
 import { sideRoutes } from './sideroutes';
 import SideLink from '../../../components/SideLink';
 import logout from '../../../assets/icons/logout.svg';
 import { Box, Modal } from '@mui/material';
+import Navbar from '../../../components/Navbar';
 
 const ManagerHome: FC = () => {
   const [showNav, setShowNav] = useState(false);
@@ -19,7 +21,7 @@ const ManagerHome: FC = () => {
   const handleClose = () => setShowNav(false);
 
   return (
-    <Wrapper>
+    <Wrapper2>
       <Box
         className="btn"
         onClick={() => setShowNav(!showNav)}
@@ -78,9 +80,10 @@ const ManagerHome: FC = () => {
         </Sidebar>
       )} */}
       <DisplayArea>
+        <Navbar />
         <Outlet />
       </DisplayArea>
-    </Wrapper>
+    </Wrapper2>
   );
 };
 

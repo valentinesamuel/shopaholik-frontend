@@ -2,7 +2,7 @@ import ReportIcon from '@mui/icons-material/Report';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
 import WarningIcon from '@mui/icons-material/Warning';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import { Divider, Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 import styled from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
 

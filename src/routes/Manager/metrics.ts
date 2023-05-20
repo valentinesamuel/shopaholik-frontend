@@ -1,8 +1,8 @@
-import personnel from '../../../assets/icons/personnel.svg';
-import profit from '../../../assets/icons/income.svg';
-import coins from '../../../assets/icons/coins.svg';
-import tag from '../../../assets/icons/price-tag.svg';
-import loss from '../../../assets/icons/stop.svg';
+import personnel from '../../assets/icons/personnel.svg';
+import profit from '../../assets/icons/income.svg';
+import coins from '../../assets/icons/coins.svg';
+import tag from '../../assets/icons/price-tag.svg';
+import loss from '../../assets/icons/stop.svg';
 
 export const dashboardMetrics = [
   {
@@ -16,7 +16,7 @@ export const dashboardMetrics = [
     id: 2,
     color: '#DEB03B',
     icon: tag,
-    title: "today's purhcase amount",
+    title: "today's purchase amount",
     value: '₦ 220,265',
   },
   {
@@ -49,3 +49,9 @@ export const dashboardMetrics = [
   },
 ];
 
+export const inventoryMetrics = [
+  {
+    title: 'Low in stock',
+    quantity: 5,
+  },
+];
