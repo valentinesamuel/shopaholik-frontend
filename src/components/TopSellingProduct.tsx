@@ -200,7 +200,7 @@ const TopSellingProduct = () => {
         </TableContainer>
         <TablePagination
           sx={{ backgroundColor: 'primary.light' }}
-          rowsPerPageOptions={[10, 25, 100]}
+            rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
