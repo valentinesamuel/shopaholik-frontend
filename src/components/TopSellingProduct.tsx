@@ -1,4 +1,4 @@
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, IconButton, Modal } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -10,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
+import ProductDetailModal from './ProductDetailModal';
 
 interface Column {
   id: 'name' | 'code' | 'population' | 'size' | 'density';
@@ -113,11 +114,6 @@ const TopSellingProduct = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleIconClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    console.log('button clicked!');
-  };
-
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -156,9 +152,7 @@ const TopSellingProduct = () => {
                 <TableCell
                   sx={{ backgroundColor: 'primary.main' }}
                   align="right"
-                >
-                  
-                </TableCell>
+                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -185,11 +179,7 @@ const TopSellingProduct = () => {
                           );
                         })}
                         <TableCell align="right">
-                          <Tooltip title="Survey options">
-                            <IconButton onClick={handleIconClick}>
-                              <MoreHoriz />
-                            </IconButton>
-                          </Tooltip>
+                          <ProductModal />
                         </TableCell>
                       </TableRow>
                     </>
@@ -200,7 +190,7 @@ const TopSellingProduct = () => {
         </TableContainer>
         <TablePagination
           sx={{ backgroundColor: 'primary.light' }}
-            rowsPerPageOptions={[10, 25, 100]}
+          rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -214,3 +204,18 @@ const TopSellingProduct = () => {
 };
 
 export default TopSellingProduct;
+
+const ProductModal = () => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <div>
+      <IconButton onClick={() => setOpen(true)}>
+        <MoreHoriz />
+      </IconButton>
+      <Modal keepMounted open={open} onClose={() => setOpen(false)}>
+        <ProductDetailModal />
+      </Modal>
+    </div>
+  );
+};

@@ -19,6 +19,7 @@ import { ChangeEvent, useState } from 'react';
 import InventoryMetrics from './InventoryMetrics';
 
 import TopSellingProduct from '../../../components/TopSellingProduct';
+import SelectCategories from '../../../components/SelectCategories';
 
 function a11yProps(index: number) {
   return {
@@ -143,29 +144,3 @@ const ManagerInventory = () => {
 
 export default ManagerInventory;
 
-const SelectCategories = () => {
-  const [age, setAge] = useState('');
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value as string);
-  };
-
-  return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
-};

@@ -14,7 +14,7 @@ import CashierDashboard from './routes/Cashier/CashierDashboard.component';
 import ManagerInventory from './routes/Manager/ManagerInventory/ManagerInventory.component';
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>('dark');
+  const [mode, setMode] = useState<PaletteMode>('light');
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
