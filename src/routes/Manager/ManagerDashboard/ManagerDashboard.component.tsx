@@ -16,6 +16,7 @@ const ManagerDashboard: FC = () => {
       }}
     >
       <Paper
+        elevation={1}
         sx={{
           display: 'grid',
           gridTemplateColumns: {
@@ -26,6 +27,7 @@ const ManagerDashboard: FC = () => {
           justifyItems: 'stretch',
           justifyContent: 'space-between',
           rowGap: '1rem',
+          padding: 3
         }}
       >
         {dashboardMetrics.map((metric) => {

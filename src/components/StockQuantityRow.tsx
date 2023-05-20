@@ -5,10 +5,10 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Box, Typography, Paper } from '@mui/material';
 import styled from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
+import { styled as MUIStyled } from '@mui/material';
 
-const StockQtyItem = styled(Box)`
+const StockQtyItem2 = styled(Box)`
   display: flex;
-  padding: 1.6875rem 15px 1.6875rem 15px;
   align-items: center;
   justify-content: center;
 
@@ -16,11 +16,26 @@ const StockQtyItem = styled(Box)`
     margin-left: 20px;
     align-items: center;
     display: flex;
+    justify-content: center;
   }
 
   @media ${UserTheme.mediaQuery.mobile} {
   }
 `;
+
+export const StockQtyItem = MUIStyled(Box)(() => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}));
+
+export const StockQtyItemText = MUIStyled(Box)(() => ({
+  marginLeft: '20px',
+  alignItems: 'center',
+  display: 'flex',
+  padding: '4% 0',
+  justifyContent: 'center',
+}));
 
 const StockQuantityRow = () => {
   return (
@@ -28,7 +43,7 @@ const StockQuantityRow = () => {
       <Paper
         elevation={2}
         sx={{
-          padding: '1% 0',
+          padding: '2% 1.5%',
           display: 'flex',
           margin: '2% 0',
           color: 'white',
@@ -46,7 +61,7 @@ const StockQuantityRow = () => {
           <div className="icon">
             <WarningIcon color="warning" />
           </div>
-          <div className="text">
+          <StockQtyItemText>
             <Typography
               variant="h4"
               sx={{
@@ -66,13 +81,13 @@ const StockQuantityRow = () => {
             >
               Low in stock
             </Typography>
-          </div>
+          </StockQtyItemText>
         </StockQtyItem>
         <StockQtyItem>
           <div className="icon">
             <ReportIcon color="error" />
           </div>
-          <div className="text">
+          <StockQtyItemText>
             <Typography
               variant="h4"
               sx={{
@@ -92,13 +107,13 @@ const StockQuantityRow = () => {
             >
               Out of stock
             </Typography>
-          </div>
+          </StockQtyItemText>
         </StockQtyItem>
         <StockQtyItem>
           <div className="icon">
             <FmdBadIcon color="error" />
           </div>
-          <div className="text">
+          <StockQtyItemText>
             <Typography
               variant="h4"
               sx={{
@@ -118,13 +133,13 @@ const StockQuantityRow = () => {
             >
               Expired Products
             </Typography>
-          </div>
+          </StockQtyItemText>
         </StockQtyItem>
         <StockQtyItem>
           <div className="icon">
             <LocalShippingIcon color="error" />
           </div>
-          <div className="text">
+          <StockQtyItemText>
             <Typography
               variant="h4"
               sx={{
@@ -144,7 +159,7 @@ const StockQuantityRow = () => {
             >
               Overdue Shipments
             </Typography>
-          </div>
+          </StockQtyItemText>
         </StockQtyItem>
       </Paper>
     </>
