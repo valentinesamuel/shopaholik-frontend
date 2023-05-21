@@ -8,46 +8,32 @@ import {
   Tab,
   Tabs,
 } from '@mui/material';
-import Search from '@mui/icons-material/Search';
-
-import TabPanel from './TabPanel.component';
-import { ChangeEvent, useState } from 'react';
-import InventoryMetrics from './InventoryMetrics';
-
-import TopSellingProduct from '../../../components/TopSellingProduct';
-import { categories } from '../categories';
+import { ChangeEvent, FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
-import { inventoryTabs } from './InventoryTable';
-import ProductDetailModal from '../../../components/ProductDetailModal';
+import { categories } from '../categories';
+import { Search } from '@mui/icons-material';
+import TabPanel from '../ManagerInventory/TabPanel.component';
+import TopSellingProduct from '../../../components/TopSellingProduct';
+import OrderMetrics from './OrderMetrics';
+import { orderTabs } from './OrderTable';
+import ProductOrderDetailModal from '../../../components/ProductOrderDetailModal';
 
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
-}
+type Props = {};
 
-const ManagerInventory = () => {
-  const [currentTab, setCurrentTab] = useState(0);
-  const [searchedProduct, setSearchedProduct] = useState('');
+const ManagerOrder: FC<Props> = ({}) => {
   const [category, setCategory] = useState('electronics');
-
-  const handleCategoryChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value as string);
-    console.log(event.target.value);
-  };
+  const [search, setSearchOrder] = useState('');
+  const [currentTab, setCurrentTab] = useState(0);
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
   };
-  const handleSearchedProductChange = (
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
-    setSearchedProduct(event.target.value);
-  };
 
-  const searchProducts = () => {
-    console.log(searchedProduct);
+  const handleCategoryChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value);
+  };
+  const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchOrder(event.target.value);
   };
 
   return (
@@ -59,7 +45,8 @@ const ManagerInventory = () => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
-      <InventoryMetrics />
+      <OrderMetrics />
+
       <Box
         sx={{
           display: 'flex',
@@ -90,10 +77,8 @@ const ManagerInventory = () => {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            {inventoryTabs.map((tab) => {
-              return (
-                <Tab key={tab.id} label={tab.label} {...a11yProps(+tab.id)} />
-              );
+            {orderTabs.map((tab: (typeof orderTabs)[0]) => {
+              return <Tab key={tab.id} label={tab.label} />;
             })}
           </Tabs>
         </Box>
@@ -120,8 +105,8 @@ const ManagerInventory = () => {
           >
             <OutlinedInput
               label="Search Product"
-              onChange={handleSearchedProductChange}
-              value={searchedProduct}
+              onChange={handleSearchChange}
+              value={search}
               placeholder="Search Products"
               sx={{
                 marginLeft: 5,
@@ -131,7 +116,7 @@ const ManagerInventory = () => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="search button"
-                    onClick={searchProducts}
+                    onClick={() => console.log(search)}
                     edge="end"
                   >
                     <Search />
@@ -144,19 +129,19 @@ const ManagerInventory = () => {
       </Box>
 
       <TabPanel value={currentTab} index={0}>
-        <TopSellingProduct source="product" />
+        <TopSellingProduct source='order' />
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
-        <TopSellingProduct source="product" />
+        <TopSellingProduct source='order' />
       </TabPanel>
       <TabPanel value={currentTab} index={2}>
-        <TopSellingProduct source="product" />
+        <TopSellingProduct source='order' />
       </TabPanel>
       <TabPanel value={currentTab} index={3}>
-        <TopSellingProduct source="product" />
+        <TopSellingProduct source='order' />
       </TabPanel>
     </Paper>
   );
 };
 
-export default ManagerInventory;
+export default ManagerOrder;

@@ -111,7 +111,11 @@ const TopSellingProductContainer = styled(Box)`
   height: fit-content;
 `;
 
-const TopSellingProduct = () => {
+interface Props {
+  source: 'order' | 'supplier' | 'product';
+}
+
+const TopSellingProduct: React.FC<Props> = ({ source }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -180,7 +184,7 @@ const TopSellingProduct = () => {
                           );
                         })}
                         <TableCell align="right">
-                          <ProductOrderModal />
+                          <TableModal source={source} />
                         </TableCell>
                       </TableRow>
                     </>
@@ -206,7 +210,9 @@ const TopSellingProduct = () => {
 
 export default TopSellingProduct;
 
-const ProductOrderModal = () => {
+const TableModal: React.FC<{
+  source: 'order' | 'supplier' | 'product';
+}> = ({ source }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -215,8 +221,15 @@ const ProductOrderModal = () => {
         <MoreHoriz />
       </IconButton>
       <Modal keepMounted open={open} onClose={() => setOpen(false)}>
-        {/* <ProductOrderDetailModal /> */}
-        <ProductDetailModal />
+        {source === 'order' ? (
+          <ProductOrderDetailModal />
+        ) : source === 'product' ? (
+          <ProductDetailModal />
+        ) : (
+          <p>No modal child for this source</p>
+        )}
+
+        {/* */}
       </Modal>
     </div>
   );

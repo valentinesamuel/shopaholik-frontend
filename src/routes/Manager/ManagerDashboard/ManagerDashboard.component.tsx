@@ -27,7 +27,7 @@ const ManagerDashboard: FC = () => {
           justifyItems: 'stretch',
           justifyContent: 'space-between',
           rowGap: '1rem',
-          padding: 3
+          padding: 3,
         }}
       >
         {dashboardMetrics.map((metric) => {
@@ -51,8 +51,7 @@ const ManagerDashboard: FC = () => {
         }}
       >
         <h3 style={{ marginBottom: 20 }}>Best Selling Products</h3>
-        {/* <TestColors /> */}
-        <TopSellingProduct />
+        <TopSellingProduct source="product" />
       </Paper>
     </Paper>
   );

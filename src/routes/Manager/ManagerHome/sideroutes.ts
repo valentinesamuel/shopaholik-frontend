@@ -21,13 +21,13 @@ export const sideRoutes = [
     id: 3,
     name: 'orders',
     icon: orders,
-    destination: 'orders',
+    destination: 'order',
   },
   {
     id: 4,
     name: 'suppliers',
     icon: suppliers,
-    destination: 'suppliers',
+    destination: 'supplier',
   },
   {
     id: 5,
