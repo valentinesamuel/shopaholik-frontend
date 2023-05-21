@@ -10,14 +10,14 @@ import {
 } from '@mui/material';
 import Search from '@mui/icons-material/Search';
 
-import TabPanel from './TabPanel.component';
+import TabPanel from '../../../components/TabPanel.component';
 import { ChangeEvent, useState } from 'react';
 import InventoryMetrics from './InventoryMetrics';
 
 import TopSellingProduct from '../../../components/TopSellingProduct';
 import { categories } from '../categories';
 import SelectOptions from '../../../components/SelectOptions';
-import { inventoryTabs } from './InventoryTable';
+import { inventoryTabs } from '../OrderandShippinTab';
 import ProductDetailModal from '../../../components/ProductDetailModal';
 
 function a11yProps(index: number) {

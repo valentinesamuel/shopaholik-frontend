@@ -13,9 +13,11 @@ import SupervisorDashboard from './routes/Supervisor/SupervisorDashboard.compone
 import CashierDashboard from './routes/Cashier/CashierDashboard.component';
 import ManagerInventory from './routes/Manager/ManagerInventory/ManagerInventory.component';
 import ManagerOrder from './routes/Manager/ManagerOrder/ManagerOrder.component';
+import ManagerSupplier from './routes/Manager/ManagerSupplier/ManagerSupplier.component';
+import SupplierDetail from './routes/Manager/ManagerSupplier/SupplierDetail';
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>('dark');
+  const [mode, setMode] = useState<PaletteMode>('light');
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
@@ -39,6 +41,8 @@ function App() {
               <Route path="dashboard" element={<ManagerDashboard />} />
               <Route path="inventory" element={<ManagerInventory />} />
               <Route path="order" element={<ManagerOrder />} />
+              <Route path="supplier" element={<ManagerSupplier />}/>
+                <Route path="supplier/:supplierId" element={<SupplierDetail />} />
             </Route>
             <Route path="supervisor" element={<SupervisorHome />}>
               <Route index element={<SupervisorDashboard />} />

@@ -12,17 +12,17 @@ import { ChangeEvent, FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { categories } from '../categories';
 import { Search } from '@mui/icons-material';
-import TabPanel from '../ManagerInventory/TabPanel.component';
+import TabPanel from '../../../components/TabPanel.component';
 import TopSellingProduct from '../../../components/TopSellingProduct';
 import OrderMetrics from './OrderMetrics';
-import { orderTabs } from './OrderTable';
+import { orderTabs } from '../OrderandShippinTab';
 import ProductOrderDetailModal from '../../../components/ProductOrderDetailModal';
 
 type Props = {};
 
 const ManagerOrder: FC<Props> = ({}) => {
   const [category, setCategory] = useState('electronics');
-  const [search, setSearchOrder] = useState('');
+  const [searchedOrder, setSearchedOrder] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
@@ -33,7 +33,7 @@ const ManagerOrder: FC<Props> = ({}) => {
     setCategory(event.target.value);
   };
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchOrder(event.target.value);
+    setSearchedOrder(event.target.value);
   };
 
   return (
@@ -106,7 +106,7 @@ const ManagerOrder: FC<Props> = ({}) => {
             <OutlinedInput
               label="Search Product"
               onChange={handleSearchChange}
-              value={search}
+              value={searchedOrder}
               placeholder="Search Products"
               sx={{
                 marginLeft: 5,
@@ -116,7 +116,7 @@ const ManagerOrder: FC<Props> = ({}) => {
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="search button"
-                    onClick={() => console.log(search)}
+                    onClick={() => console.log(searchedOrder)}
                     edge="end"
                   >
                     <Search />
@@ -129,16 +129,16 @@ const ManagerOrder: FC<Props> = ({}) => {
       </Box>
 
       <TabPanel value={currentTab} index={0}>
-        <TopSellingProduct source='order' />
+        <TopSellingProduct source="order" />
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
-        <TopSellingProduct source='order' />
+        <TopSellingProduct source="order" />
       </TabPanel>
       <TabPanel value={currentTab} index={2}>
-        <TopSellingProduct source='order' />
+        <TopSellingProduct source="order" />
       </TabPanel>
       <TabPanel value={currentTab} index={3}>
-        <TopSellingProduct source='order' />
+        <TopSellingProduct source="order" />
       </TabPanel>
     </Paper>
   );
