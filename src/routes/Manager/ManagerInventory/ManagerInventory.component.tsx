@@ -1,13 +1,9 @@
 import {
   Box,
-  FormControl,
   IconButton,
   InputAdornment,
-  InputLabel,
-  MenuItem,
   OutlinedInput,
   Paper,
-  Select,
   SelectChangeEvent,
   Tab,
   Tabs,
@@ -28,9 +24,33 @@ function a11yProps(index: number) {
   };
 }
 
+const categories = [
+  {
+    value: 'beverages',
+    name: 'Beverages',
+    id: '1',
+  },
+  {
+    value: 'clothing',
+    name: 'Clothing',
+    id: '2',
+  },
+  {
+    value: 'electronics',
+    name: 'Electronics',
+    id: '3',
+  },
+];
+
 const ManagerInventory = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [searchedProduct, setSearchedProduct] = useState('');
+  const [category, setCategory] = useState('electronics');
+
+  const handleCategoryChange = (event: SelectChangeEvent) => {
+    setCategory(event.target.value as string);
+    console.log(event.target.value);
+  };
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
@@ -99,7 +119,14 @@ const ManagerInventory = () => {
             },
           }}
         >
-          <SelectCategories />
+          <SelectCategories
+            width="50%"
+            selectLabel="Categories"
+            label="categories"
+            options={categories}
+            handleChange={handleCategoryChange}
+            value={category}
+          />
           <Box
             sx={{
               display: 'flex',

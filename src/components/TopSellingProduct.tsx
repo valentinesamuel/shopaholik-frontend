@@ -10,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
+import ProductOrderDetailModal from './ProductOrderDetailModal';
 import ProductDetailModal from './ProductDetailModal';
 
 interface Column {
@@ -179,7 +180,7 @@ const TopSellingProduct = () => {
                           );
                         })}
                         <TableCell align="right">
-                          <ProductModal />
+                          <ProductOrderModal />
                         </TableCell>
                       </TableRow>
                     </>
@@ -205,7 +206,7 @@ const TopSellingProduct = () => {
 
 export default TopSellingProduct;
 
-const ProductModal = () => {
+const ProductOrderModal = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -214,6 +215,7 @@ const ProductModal = () => {
         <MoreHoriz />
       </IconButton>
       <Modal keepMounted open={open} onClose={() => setOpen(false)}>
+        {/* <ProductOrderDetailModal /> */}
         <ProductDetailModal />
       </Modal>
     </div>

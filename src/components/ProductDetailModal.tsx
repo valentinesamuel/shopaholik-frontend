@@ -1,14 +1,12 @@
 import { Box, Button, IconButton, Paper, Typography } from '@mui/material';
-import { FC } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteForever from '@mui/icons-material/DeleteForever';
-import SaveIcon from '@mui/icons-material/Save';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import SelectOptions from './SelectOptions';
-interface Props {}
+import { FC } from 'react';
 
-const ProductDetailModal: FC<Props> = () => {
+type Props = {};
+
+const ProductDetailModal: FC<Props> = ({}) => {
   return (
     <Paper
       sx={{
@@ -20,52 +18,82 @@ const ProductDetailModal: FC<Props> = () => {
         padding: '30px',
       }}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          margin: '0 0 4% 0',
+        }}
+      >
         <Button disabled startIcon={<CreateIcon />} variant="contained">
-          Edit Order
+          Edit Product
         </Button>
         <IconButton aria-label="close" size="large">
           <CloseIcon fontSize="inherit" />
         </IconButton>
       </Box>
-      <Typography sx={{ margin: '1.5% 0' }} variant="h3">
-        Nike Alphafly
-      </Typography>
+
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <Box sx={{ width: '100%' }}>
-          <Box sx={{ marginBottom: '29px' }}>
-            <Typography sx={{ 1: '#96989E' }}>Date of Placement</Typography>
-            <Typography variant="subtitle1">12 May, 2023</Typography>
-          </Box>
+          <Typography
+            sx={{ margin: '1.5% 0', fontWeight: '600', width: '100%' }}
+            variant="h5"
+          >
+            Addidas Climacool
+          </Typography>
+          <Typography sx={{ margin: '1.5% 0 4% 0' }} variant="body1">
+            QPNRTG0Q4
+          </Typography>
           <Box sx={{ marginBottom: '29px' }}>
             <Typography sx={{ color: '#96989E' }}>
-              Estimated Date of Arrival
+              Estimated time of arrival
             </Typography>
-            <Typography variant="subtitle1">24 May, 2023</Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+              24 May, 2023
+            </Typography>
+          </Box>
+          <Box sx={{ marginBottom: '29px' }}>
+            <Typography sx={{ color: '#96989E' }}>Stock Status</Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+              Low in stock
+            </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
-              Quantity:
+              Category:
             </Typography>
-            <Typography variant="subtitle1">50</Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+              Shoes
+            </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
-              Unit Price:
+              Stock Quantity:
             </Typography>
-            <Typography variant="subtitle1">1000</Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+              3
+            </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
-              Total Price:
+              Expired Date:
             </Typography>
-            <Typography variant="subtitle1">50000</Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+              Nil
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
+              Unit of Measurement:
+            </Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+              Piece
+            </Typography>
           </Box>
         </Box>
         <Box sx={{ width: '100%' }}>
           <Box sx={{ marginBottom: '37px', textAlign: 'right' }}>
-            <Typography sx={{ color: '#96989E' }}>Order Number</Typography>
-            <Typography variant="subtitle1">4WNGO39EJ46</Typography>
+            <Typography variant="h5">N 25,000</Typography>
           </Box>
           <Box
             sx={{
@@ -75,8 +103,30 @@ const ProductDetailModal: FC<Props> = () => {
               placeItems: 'end',
             }}
           >
-            <Typography sx={{ color: '#96989E' }}>Shipping Status</Typography>
-            <SelectOptions width="40%" />
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
+                Shelf Life:
+              </Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+                Nil
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
+                Min. Quantity:
+              </Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+                15
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
+                Max Quantity:
+              </Typography>
+              <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+                100
+              </Typography>
+            </Box>
           </Box>
           <Box
             sx={{
@@ -89,7 +139,10 @@ const ProductDetailModal: FC<Props> = () => {
             <Typography sx={{ color: '#96989E' }}>
               Supplier Information
             </Typography>
-            <Typography variant="caption" sx={{ marginTop: '1% ' }}>
+            <Typography
+              variant="caption"
+              sx={{ marginTop: '1%', fontWeight: '600' }}
+            >
               Nestle Inc.
             </Typography>
             <Typography variant="body1" sx={{ width: '90%', margin: '1.5% 0' }}>
@@ -100,17 +153,16 @@ const ProductDetailModal: FC<Props> = () => {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <Button color="error" startIcon={<DeleteForever />} variant="contained">
-          Delete Order
-        </Button>
-        <Button color="info" startIcon={<SaveIcon />} variant="contained">
-          Save Order
-        </Button>
-        <Button color="success" startIcon={<DoneAllIcon />} variant="contained">
-          Confirm Delivery
-        </Button>
-      </Box>
+      <Button
+        color="error"
+        startIcon={<DeleteForever />}
+        variant="contained"
+        sx={{
+          marginTop: '7%',
+        }}
+      >
+        Delete Product
+      </Button>
     </Paper>
   );
 };
