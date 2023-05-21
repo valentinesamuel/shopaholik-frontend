@@ -14,8 +14,10 @@ const ProductDetailModal: FC<Props> = ({}) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        maxWidth: '40%',
+        width: { desktop: '40%', mobile: '80%' },
         padding: '30px',
+        height: { desktop: 'auto', mobile: '80%' },
+        overflowX: 'auto',
       }}
     >
       <Box
@@ -28,12 +30,22 @@ const ProductDetailModal: FC<Props> = ({}) => {
         <Button disabled startIcon={<CreateIcon />} variant="contained">
           Edit Product
         </Button>
-        <IconButton aria-label="close" size="large">
+        <IconButton
+          aria-label="close"
+          size="large"
+          sx={{ display: { desktop: 'inline-block', mobile: 'none' } }}
+        >
           <CloseIcon fontSize="inherit" />
         </IconButton>
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: { mobile: 'column', desktop: 'row' },
+        }}
+      >
         <Box sx={{ width: '100%' }}>
           <Typography
             sx={{ margin: '1.5% 0', fontWeight: '600', width: '100%' }}
@@ -92,15 +104,42 @@ const ProductDetailModal: FC<Props> = ({}) => {
           </Box>
         </Box>
         <Box sx={{ width: '100%' }}>
-          <Box sx={{ marginBottom: '37px', textAlign: 'right' }}>
+          <Box
+            sx={{
+              marginBottom: '6%',
+              marginTop: {
+                desktop: 'inherit',
+                mobile: '10%',
+              },
+              textAlign: { desktop: 'right', mobile: 'left' },
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: {
+                mobile: 'left',
+                desktop: 'flex-end',
+              },
+            }}
+          >
+            <Typography
+              sx={{
+                color: '#96989E',
+                marginRight: '14px',
+                display: {
+                  desktop: 'none',
+                  mobile: 'block',
+                },
+              }}
+            >
+              Price:
+            </Typography>
             <Typography variant="h5">N 25,000</Typography>
           </Box>
           <Box
             sx={{
               marginBottom: '49px',
-              textAlign: 'right',
+              textAlign: { desktop: 'right', mobile: 'left' },
               display: 'grid',
-              placeItems: 'end',
+              placeItems: { desktop: 'end', mobile: 'left' },
             }}
           >
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -131,9 +170,9 @@ const ProductDetailModal: FC<Props> = ({}) => {
           <Box
             sx={{
               marginBottom: '37px',
-              textAlign: 'right',
+              textAlign: { desktop: 'right', mobile: 'left' },
               display: 'grid',
-              placeItems: 'end',
+              placeItems: { desktop: 'end', mobile: 'left' },
             }}
           >
             <Typography sx={{ color: '#96989E' }}>
