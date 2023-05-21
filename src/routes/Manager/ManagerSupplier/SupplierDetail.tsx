@@ -17,6 +17,7 @@ import SelectOptions from '../../../components/SelectOptions';
 import AddIcon from '@mui/icons-material/Add';
 import { orderTabs } from '../OrderandShippinTab';
 import TabPanel from '../../../components/TabPanel.component';
+import TopSellingProduct from '../../../components/TopSellingProduct';
 
 interface Props {}
 
@@ -38,7 +39,7 @@ const SupplierDetail: FC<Props> = ({}) => {
   };
 
   return (
-    <Paper>
+    <Paper elevation={1}>
       <Box
         sx={{
           display: 'flex',
@@ -152,13 +153,24 @@ const SupplierDetail: FC<Props> = ({}) => {
             },
           }}
         >
-          <Button startIcon={<AddIcon />}>Place New Order</Button>
+          <Button
+            variant="contained"
+            sx={{
+              width: {
+                desktop: 'auto',
+                mobile: '100%',
+              },
+            }}
+            startIcon={<AddIcon />}
+          >
+            Place New Order
+          </Button>
         </Box>
       </Box>
 
       <TabPanel value={currentTab} index={0}>
-        {/* <TopSellingProduct source="product" /> */}
-        <p>all products</p>
+        <TopSellingProduct source="product" />
+        {/* <p>all products</p> */}
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
         {/* <TopSellingProduct source="product" /> */}
