@@ -1,9 +1,11 @@
-import { Avatar, Box, Paper, Typography } from '@mui/material';
-import { FC } from 'react';
+import { Avatar, Box, Modal, Paper, Typography } from '@mui/material';
+import { FC, useState } from 'react';
 
 interface Props {}
 
 const PersonnelCard: FC<Props> = () => {
+  const [open, setOpen] = useState(false);
+
   return (
     <Paper
       sx={{
@@ -11,9 +13,12 @@ const PersonnelCard: FC<Props> = () => {
         alignItems: 'center',
         padding: '20px',
       }}
-      onClick={() => console.log('')}
     >
-      <Avatar sx={{ width: 80, height: 80, marginRight: '8%' }}>OJ</Avatar>
+      <Avatar
+        sx={{ width: 80, height: 80, marginRight: '8%' }}
+      >
+        OJ
+      </Avatar>
       <Box>
         <Typography variant="body1" sx={{ fontWeight: '600' }}>
           Osahon James
@@ -36,6 +41,7 @@ const PersonnelCard: FC<Props> = () => {
           hrs
         </Typography>
       </Box>
+     
     </Paper>
   );
 };
