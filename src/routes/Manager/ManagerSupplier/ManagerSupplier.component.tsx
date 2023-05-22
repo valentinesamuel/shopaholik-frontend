@@ -78,7 +78,7 @@ const ManagerSupplier = () => {
           },
           justifyItems: 'stretch',
           justifyContent: 'space-between',
-          gap: '1%',
+          rowGap: '5%',
         }}
       >
         <SupplierCard destination="s" />

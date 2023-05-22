@@ -35,3 +35,26 @@ export const inventoryTabs = [
     label: 'Expired Products',
   },
 ];
+
+export const personnelTabs = [
+  {
+    id: '1',
+    label: 'All Personnel',
+  },
+  {
+    id: '2',
+    label: 'Management',
+  },
+  {
+    id: '3',
+    label: 'Floor Worker',
+  },
+  {
+    id: '4',
+    label: 'Cashier',
+  },
+  {
+    id: '5',
+    label: 'Security',
+  },
+];
