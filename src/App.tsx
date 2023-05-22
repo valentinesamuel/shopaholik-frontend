@@ -1,4 +1,5 @@
 import { PaletteMode, ThemeProvider, createTheme } from '@mui/material';
+
 import { useMemo, useState } from 'react';
 import { getDesignTokens } from './Utils/MaterialTheme';
 import { ColorModeContext } from './Utils/ColorMode.context';

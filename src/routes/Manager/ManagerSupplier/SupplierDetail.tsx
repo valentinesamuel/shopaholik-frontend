@@ -4,6 +4,7 @@ import {
   Button,
   IconButton,
   InputAdornment,
+  Modal,
   OutlinedInput,
   Paper,
   SelectChangeEvent,
@@ -18,6 +19,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { orderTabs } from '../OrderandShippinTab';
 import TabPanel from '../../../components/TabPanel.component';
 import TopSellingProduct from '../../../components/TopSellingProduct';
+import NewOrderModal from './NewOrderModal';
 
 interface Props {}
 
@@ -25,6 +27,7 @@ const SupplierDetail: FC<Props> = ({}) => {
   const [search, setSearchOrder] = useState('');
   const [shippingStatus, setShippingStatus] = useState('pending');
   const [currentTab, setCurrentTab] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const handleShippingStatusChange = (event: SelectChangeEvent) => {
     setShippingStatus(event.target.value);
@@ -39,7 +42,15 @@ const SupplierDetail: FC<Props> = ({}) => {
   };
 
   return (
-    <Paper elevation={1}>
+    <Paper
+      elevation={1}
+      sx={{
+        width: '100%',
+        // height: '100vh',
+        overflowX: 'auto',
+        padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
+      }}
+    >
       <Box
         sx={{
           display: 'flex',
@@ -155,6 +166,7 @@ const SupplierDetail: FC<Props> = ({}) => {
         >
           <Button
             variant="contained"
+            onClick={() => setOpen(true)}
             sx={{
               width: {
                 desktop: 'auto',
@@ -165,6 +177,14 @@ const SupplierDetail: FC<Props> = ({}) => {
           >
             Place New Order
           </Button>
+          <Modal
+            open={open}
+            onClose={() => setOpen(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <NewOrderModal />
+          </Modal>
         </Box>
       </Box>
 

@@ -16,7 +16,6 @@ import TabPanel from '../../../components/TabPanel.component';
 import TopSellingProduct from '../../../components/TopSellingProduct';
 import OrderMetrics from './OrderMetrics';
 import { orderTabs } from '../OrderandShippinTab';
-import ProductOrderDetailModal from '../../../components/ProductOrderDetailModal';
 
 type Props = {};
 
