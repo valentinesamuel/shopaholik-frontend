@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Modal,
   Paper,
   SelectChangeEvent,
@@ -9,6 +10,9 @@ import {
 import { FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { jobDesignationOptions } from '../categories';
+import CloseIcon from '@mui/icons-material/Close';
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 interface Props {}
 
@@ -80,18 +84,35 @@ const PersonnelDetailModal = () => {
         transform: 'translate(-50%, -50%)',
         bgcolor: 'background.paper',
         boxShadow: 24,
-        width: { desktop: '40%', mobile: '80%' },
+        width: { desktop: 'fit-content', mobile: '80%' },
         padding: '30px',
         height: { desktop: 'auto', mobile: '90%' },
-      overflowX: 'auto',
+        overflowX: 'auto',
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: {
+            desktop: 'row',
+            mobile: 'column',
+          },
+          marginBottom: {
+            desktop: '0',
+            mobile: '5%',
+          },
+        }}
+      >
         <Avatar
           sx={{
             height: 218,
             width: 218,
             marginRight: '3%',
+            marginBottom: {
+              desktop: '0',
+              mobile: '4%',
+            },
           }}
         >
           SM
@@ -132,88 +153,297 @@ const PersonnelDetailModal = () => {
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
+          flexDirection: 'column',
+        }}
+      >
+        <Box sx={{ width: '100%' }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+            Personal Info
+          </Typography>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: {
+                mobile: 'column',
+                desktop: 'row',
+              },
+              alignItems: 'stretch',
+              justifyContent: 'space-between',
+            }}
+          >
+            <div style={{ width: '100%', marginRight: '40px' }}>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography variant="subtitle2" color="gray">
+                  First Name
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  Uwaila
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography variant="subtitle2" color="gray">
+                  First Name
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  Uwaila
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography variant="subtitle2" color="gray">
+                  First Name
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  Uwaila
+                </Typography>
+              </Box>
+            </div>
+            <div style={{ width: '100%', marginRight: '40px' }}>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography variant="subtitle2" color="gray">
+                  Phone No.
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  +234 (1) 2850 1300
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography variant="subtitle2" color="gray">
+                  Email
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  priscillia4life@yahoo.com
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography variant="subtitle2" color="gray">
+                  Date of Birth
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  13, January, 1997
+                </Typography>
+              </Box>
+            </div>
+            <div style={{ width: '100%', marginRight: '40px' }}>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography color="gray">Date of Hire</Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  23, March, 2020
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography color="gray">Date of Birth</Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  13, January, 1997
+                </Typography>
+              </Box>
+              <Box
+                sx={{
+                  margin: {
+                    desktop: '2% 0',
+                    mobile: '5% 0',
+                  },
+                }}
+              >
+                <Typography color="gray">Address</Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+                >
+                  38, Bori camp. Niger State, Minna
+                </Typography>
+              </Box>
+            </div>
+          </Box>
+        </Box>
+        <Box sx={{ marginTop: '6%' }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+            Guarantor's Info
+          </Typography>
+          <Box>
+            <Box
+              sx={{
+                margin: {
+                  desktop: '2% 0',
+                  mobile: '5% 0',
+                },
+              }}
+            >
+              <Typography variant="subtitle2" color="gray">
+                Name
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+              >
+                Rogers James
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                margin: {
+                  desktop: '2% 0',
+                  mobile: '5% 0',
+                },
+              }}
+            >
+              <Typography variant="subtitle2" color="gray">
+                Phone No.
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+              >
+                +234 (080) 4275 2486
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                margin: {
+                  desktop: '2% 0',
+                  mobile: '5% 0',
+                },
+              }}
+            >
+              <Typography variant="subtitle2" color="gray">
+                Address
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
+              >
+                Upper Lawane. Benin City{' '}
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+
+      <Box
+        sx={{
+          marginTop: '10%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
           flexDirection: {
             desktop: 'row',
             mobile: 'column',
           },
         }}
       >
-        <Box>
-          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-            Personal Info
-          </Typography>
-          <Box
-            sx={{
-              display: 'grid',
-              gridTemplateColumns: {
-                mobile: 'repeat(auto-fit, minmax(100%, 100%))',
-                tablet: 'repeat(auto-fit, minmax(100%, 30%))',
-                desktop: 'repeat(auto-fit, minmax(130px, auto))',
-              },
-              justifyItems: 'stretch',
-              justifyContent: 'space-between',
-              rowGap: '5%',
-              columnGap: '1%',
-              width: '100%',
-            }}
-          >
-            <div style={{ width: '100%' }}>
-              <Typography color="gray">First Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Uwaila
-              </Typography>
-            </div>
-            <div>
-              <Typography color="gray">Last Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Jemila
-              </Typography>
-            </div>
-            <div>
-              <Typography color="gray">Middle Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Dora
-              </Typography>
-            </div>
-            <div>
-              <Typography color="gray">First Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Uwaila
-              </Typography>
-            </div>
-            <div>
-              <Typography color="gray">First Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Uwaila
-              </Typography>
-            </div>
-          </Box>
-        </Box>
-        <Box>
-          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-            Personal Info
-          </Typography>
-          <Box>
-            <div>
-              <Typography color="gray">First Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Uwaila
-              </Typography>
-            </div>
-            <div>
-              <Typography color="gray">First Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Uwaila
-              </Typography>
-            </div>
-            <div>
-              <Typography color="gray">First Name</Typography>
-              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                Uwaila
-              </Typography>
-            </div>
-          </Box>
-        </Box>
+        <Button
+          color="error"
+          variant="contained"
+          startIcon={<DeleteForever />}
+          sx={{
+            marginTop: {
+              desktop: '0%',
+              mobile: '5%',
+            },
+            width: {
+              desktop: 'fit-content',
+              mobile: '100%',
+            },
+          }}
+        >
+          Delete Personnel
+        </Button>
+        <Button
+          color="success"
+          startIcon={<DoneAllIcon />}
+          variant="contained"
+          sx={{
+            marginTop: {
+              desktop: '0%',
+              mobile: '5%',
+            },
+            width: {
+              desktop: '30%',
+              mobile: '100%',
+            },
+          }}
+        >
+          Save Personnel
+        </Button>
       </Box>
     </Box>
   );
