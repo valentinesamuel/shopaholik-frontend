@@ -6,7 +6,6 @@ import {
   DisplayArea,
   Sidebar,
   StyledLink,
-  Wrapper,
   Wrapper2,
 } from './ManagerHome.styles';
 import { sideRoutes } from './sideroutes';

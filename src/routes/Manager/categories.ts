@@ -1,4 +1,9 @@
-import { ShippingStatus } from './../../Utils/Types';
+import {
+  ShippingStatus,
+  JobDesignation,
+  AvailAbilityStatus,
+} from './../../Utils/Types';
+
 export const categories = [
   {
     value: 'beverages',
@@ -32,5 +37,51 @@ export const shippingStatusOptions = [
     id: '3',
     name: ShippingStatus.DELIVERED,
     value: ShippingStatus.DELIVERED,
+  },
+];
+
+export const jobDesignationOptions = [
+  {
+    id: '1',
+    name: JobDesignation.MANAGER,
+    value: JobDesignation.MANAGER,
+  },
+  {
+    id: '2',
+    name: JobDesignation.SUPERVISOR,
+    value: JobDesignation.SUPERVISOR,
+  },
+  {
+    id: '3',
+    name: JobDesignation.CASHIER,
+    value: JobDesignation.CASHIER,
+  },
+  {
+    id: '4',
+    name: JobDesignation.JANITOR,
+    value: JobDesignation.JANITOR,
+  },
+  {
+    id: '5',
+    name: JobDesignation.SECURITY,
+    value: JobDesignation.SECURITY,
+  },
+];
+
+export const jobAvailabilityStatus = [
+  {
+    id: '1',
+    name: AvailAbilityStatus.OFF_DUTY,
+    value: AvailAbilityStatus.OFF_DUTY,
+  },
+  {
+    id: '2',
+    name: AvailAbilityStatus.ON_DUTY,
+    value: AvailAbilityStatus.ON_DUTY,
+  },
+  {
+    id: '3',
+    name: AvailAbilityStatus.ON_LEAVE,
+    value: AvailAbilityStatus.ON_LEAVE,
   },
 ];
