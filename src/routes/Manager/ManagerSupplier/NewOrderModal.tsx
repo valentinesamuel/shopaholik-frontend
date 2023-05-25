@@ -13,8 +13,8 @@ import {
   Typography,
 } from '@mui/material';
 import { FC, useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
 import { DatePicker } from '@mui/x-date-pickers';
+import CloseIcon from '@mui/icons-material/Close';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
@@ -119,23 +119,28 @@ const NewOrderModal: FC<Props> = ({}) => {
             alignItems: 'center',
           }}
         >
-          <Select
-            labelId="measurement-unit"
-            id="measurement-unit"
-            value={measurementUnit}
+          <FormControl
             sx={{
               width: {
-                desktop: '30%',
+                desktop: '40%',
                 mobile: '100%',
               },
             }}
-            label="measurement-unit"
-            onChange={handleMeasurementUnitChange}
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
+            <InputLabel id="measurement-unit">Unit of Measurement</InputLabel>
+            <Select
+              labelId="measurement-unit"
+              id="measurement-unit"
+              value={measurementUnit}
+              label="measurement-unit"
+              onChange={handleMeasurementUnitChange}
+            >
+              <MenuItem value={10}>Ten</MenuItem>
+              <MenuItem value={20}>Twenty</MenuItem>
+              <MenuItem value={30}>Thirty</MenuItem>
+            </Select>
+          </FormControl>
+
           <DatePicker
             sx={{
               margin: {
@@ -152,6 +157,7 @@ const NewOrderModal: FC<Props> = ({}) => {
             onChange={(newArrivalDate) => setArrivalDate(newArrivalDate)}
           />
           <TextField
+            type="number"
             placeholder="Quantity"
             sx={{
               width: {

@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Modal,
   Paper,
   SelectChangeEvent,
@@ -9,6 +10,8 @@ import {
 import { FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { jobDesignationOptions } from '../categories';
+import DeleteForever from '@mui/icons-material/DeleteForever';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
 
 interface Props {}
 
@@ -83,10 +86,19 @@ const PersonnelDetailModal = () => {
         width: { desktop: '40%', mobile: '80%' },
         padding: '30px',
         height: { desktop: 'auto', mobile: '90%' },
-      overflowX: 'auto',
+        overflowX: 'auto',
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: {
+            desktop: 'row',
+            mobile: 'column',
+          },
+        }}
+      >
         <Avatar
           sx={{
             height: 218,
@@ -96,7 +108,7 @@ const PersonnelDetailModal = () => {
         >
           SM
         </Avatar>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', marginTop: { mobile: '5%', desktop: '0' } }}>
           <Box sx={{ display: 'flex' }}>
             <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
               Staff ID:
@@ -132,13 +144,10 @@ const PersonnelDetailModal = () => {
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
-          flexDirection: {
-            desktop: 'row',
-            mobile: 'column',
-          },
+          flexDirection: 'column',
         }}
       >
-        <Box>
+        <Box sx={{ marginTop: '8%' }}>
           <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
             Personal Info
           </Typography>
@@ -152,9 +161,7 @@ const PersonnelDetailModal = () => {
               },
               justifyItems: 'stretch',
               justifyContent: 'space-between',
-              rowGap: '5%',
-              columnGap: '1%',
-              width: '100%',
+              gap: '5%',
             }}
           >
             <div style={{ width: '100%' }}>
@@ -189,24 +196,32 @@ const PersonnelDetailModal = () => {
             </div>
           </Box>
         </Box>
-        <Box>
-          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
-            Personal Info
+        <Box sx={{ marginTop: { mobile: '25%', desktop: '2%' } }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', marginTop: '5%' }}>
+            Guarantor's Info
           </Typography>
-          <Box>
-            <div>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: {
+                desktop: 'row',
+                mobile: 'column',
+              },
+            }}
+          >
+            <div style={{ width: '100%', margin: '4% 0' }}>
               <Typography color="gray">First Name</Typography>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Uwaila
               </Typography>
             </div>
-            <div>
+            <div style={{ width: '100%', margin: '4% 0' }}>
               <Typography color="gray">First Name</Typography>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Uwaila
               </Typography>
             </div>
-            <div>
+            <div style={{ width: '100%', margin: '4% 0' }}>
               <Typography color="gray">First Name</Typography>
               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
                 Uwaila
@@ -214,6 +229,53 @@ const PersonnelDetailModal = () => {
             </div>
           </Box>
         </Box>
+      </Box>
+      <Box
+        sx={{
+          marginTop: '10%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          flexDirection: {
+            desktop: 'row',
+            mobile: 'column',
+          },
+        }}
+      >
+        <Button
+          color="error"
+          variant="contained"
+          startIcon={<DeleteForever />}
+          sx={{
+            marginTop: {
+              desktop: '0%',
+              mobile: '5%',
+            },
+            width: {
+              desktop: '30%',
+              mobile: '100%',
+            },
+          }}
+        >
+          Cancel Order
+        </Button>
+        <Button
+          color="success"
+          startIcon={<DoneAllIcon />}
+          variant="contained"
+          sx={{
+            marginTop: {
+              desktop: '0%',
+              mobile: '5%',
+            },
+            width: {
+              desktop: '30%',
+              mobile: '100%',
+            },
+          }}
+        >
+          Place Order
+        </Button>
       </Box>
     </Box>
   );
