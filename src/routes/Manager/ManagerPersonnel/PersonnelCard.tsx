@@ -1,5 +1,5 @@
+import { FC, useState, useRef, ChangeEvent } from 'react';
 import { Avatar, Box, Modal, Paper, Typography } from '@mui/material';
-import { FC, useState, useRef, ChangeEventHandler, ChangeEvent } from 'react';
 import PersonnelDetailModal from './PersonnelDetailModal';
 import NewPersonnelModal from './NewPersonnelModal';
 
@@ -7,6 +7,7 @@ interface Props {}
 
 const PersonnelCard: FC<Props> = () => {
   const [open, setOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleOpen = () => setOpen(true);
@@ -19,11 +20,23 @@ const PersonnelCard: FC<Props> = () => {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     console.log(file);
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
     <>
-      <NewPersonnelModal fileInputRef={fileInputRef} handleFileInputChange={handleFileChange} onFileInputButtonClick={handleButtonClick}/>
+      <NewPersonnelModal
+        imageUrl={selectedImage}
+        fileInputRef={fileInputRef}
+        handleFileInputChange={handleFileChange}
+        onFileInputButtonClick={handleButtonClick}
+      />
       <Paper
         sx={{
           display: 'flex',
