@@ -10,7 +10,6 @@ import {
 import { FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { jobDesignationOptions } from '../categories';
-import CloseIcon from '@mui/icons-material/Close';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
@@ -102,6 +101,7 @@ const PersonnelDetailModal = () => {
             desktop: '0',
             mobile: '5%',
           },
+
         }}
       >
         <Avatar
@@ -117,7 +117,7 @@ const PersonnelDetailModal = () => {
         >
           SM
         </Avatar>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', marginTop: { mobile: '5%', desktop: '0' } }}>
           <Box sx={{ display: 'flex' }}>
             <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
               Staff ID:
@@ -445,6 +445,7 @@ const PersonnelDetailModal = () => {
           Save Personnel
         </Button>
       </Box>
+    
     </Box>
   );
 };
