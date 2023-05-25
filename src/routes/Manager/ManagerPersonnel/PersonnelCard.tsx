@@ -10,7 +10,6 @@ import {
 import { FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { jobDesignationOptions } from '../categories';
-import CloseIcon from '@mui/icons-material/Close';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 
@@ -98,10 +97,6 @@ const PersonnelDetailModal = () => {
             desktop: 'row',
             mobile: 'column',
           },
-          marginBottom: {
-            desktop: '0',
-            mobile: '5%',
-          },
         }}
       >
         <Avatar
@@ -117,7 +112,7 @@ const PersonnelDetailModal = () => {
         >
           SM
         </Avatar>
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%', marginTop: { mobile: '5%', desktop: '0' } }}>
           <Box sx={{ display: 'flex' }}>
             <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
               Staff ID:
@@ -156,248 +151,89 @@ const PersonnelDetailModal = () => {
           flexDirection: 'column',
         }}
       >
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ marginTop: '8%' }}>
           <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
             Personal Info
           </Typography>
           <Box
             sx={{
-              display: 'flex',
-              flexDirection: {
-                mobile: 'column',
-                desktop: 'row',
+              display: 'grid',
+              gridTemplateColumns: {
+                mobile: 'repeat(auto-fit, minmax(100%, 100%))',
+                tablet: 'repeat(auto-fit, minmax(100%, 30%))',
+                desktop: 'repeat(auto-fit, minmax(130px, auto))',
               },
-              alignItems: 'stretch',
+              justifyItems: 'stretch',
               justifyContent: 'space-between',
+              gap: '5%',
             }}
           >
-            <div style={{ width: '100%', marginRight: '40px' }}>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography variant="subtitle2" color="gray">
-                  First Name
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  Uwaila
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography variant="subtitle2" color="gray">
-                  First Name
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  Uwaila
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography variant="subtitle2" color="gray">
-                  First Name
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  Uwaila
-                </Typography>
-              </Box>
+            <div style={{ width: '100%' }}>
+              <Typography color="gray">First Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Uwaila
+              </Typography>
             </div>
-            <div style={{ width: '100%', marginRight: '40px' }}>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography variant="subtitle2" color="gray">
-                  Phone No.
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  +234 (1) 2850 1300
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography variant="subtitle2" color="gray">
-                  Email
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  priscillia4life@yahoo.com
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography variant="subtitle2" color="gray">
-                  Date of Birth
-                </Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  13, January, 1997
-                </Typography>
-              </Box>
+            <div>
+              <Typography color="gray">Last Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Jemila
+              </Typography>
             </div>
-            <div style={{ width: '100%', marginRight: '40px' }}>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography color="gray">Date of Hire</Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  23, March, 2020
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography color="gray">Date of Birth</Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  13, January, 1997
-                </Typography>
-              </Box>
-              <Box
-                sx={{
-                  margin: {
-                    desktop: '2% 0',
-                    mobile: '5% 0',
-                  },
-                }}
-              >
-                <Typography color="gray">Address</Typography>
-                <Typography
-                  variant="body1"
-                  sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                >
-                  38, Bori camp. Niger State, Minna
-                </Typography>
-              </Box>
+            <div>
+              <Typography color="gray">Middle Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Dora
+              </Typography>
+            </div>
+            <div>
+              <Typography color="gray">First Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Uwaila
+              </Typography>
+            </div>
+            <div>
+              <Typography color="gray">First Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Uwaila
+              </Typography>
             </div>
           </Box>
         </Box>
-        <Box sx={{ marginTop: '6%' }}>
-          <Typography variant="h4" sx={{ fontWeight: 'bold' }}>
+        <Box sx={{ marginTop: { mobile: '25%', desktop: '2%' } }}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', marginTop: '5%' }}>
             Guarantor's Info
           </Typography>
-          <Box>
-            <Box
-              sx={{
-                margin: {
-                  desktop: '2% 0',
-                  mobile: '5% 0',
-                },
-              }}
-            >
-              <Typography variant="subtitle2" color="gray">
-                Name
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: {
+                desktop: 'row',
+                mobile: 'column',
+              },
+            }}
+          >
+            <div style={{ width: '100%', margin: '4% 0' }}>
+              <Typography color="gray">First Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Uwaila
               </Typography>
-              <Typography
-                variant="body1"
-                sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-              >
-                Rogers James
+            </div>
+            <div style={{ width: '100%', margin: '4% 0' }}>
+              <Typography color="gray">First Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Uwaila
               </Typography>
-            </Box>
-            <Box
-              sx={{
-                margin: {
-                  desktop: '2% 0',
-                  mobile: '5% 0',
-                },
-              }}
-            >
-              <Typography variant="subtitle2" color="gray">
-                Phone No.
+            </div>
+            <div style={{ width: '100%', margin: '4% 0' }}>
+              <Typography color="gray">First Name</Typography>
+              <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
+                Uwaila
               </Typography>
-              <Typography
-                variant="body1"
-                sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-              >
-                +234 (080) 4275 2486
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                margin: {
-                  desktop: '2% 0',
-                  mobile: '5% 0',
-                },
-              }}
-            >
-              <Typography variant="subtitle2" color="gray">
-                Address
-              </Typography>
-              <Typography
-                variant="body1"
-                sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-              >
-                Upper Lawane. Benin City{' '}
-              </Typography>
-            </Box>
+            </div>
           </Box>
         </Box>
       </Box>
-
       <Box
         sx={{
           marginTop: '10%',
@@ -420,12 +256,12 @@ const PersonnelDetailModal = () => {
               mobile: '5%',
             },
             width: {
-              desktop: 'fit-content',
+              desktop: '30%',
               mobile: '100%',
             },
           }}
         >
-          Delete Personnel
+          Cancel Order
         </Button>
         <Button
           color="success"
@@ -442,7 +278,7 @@ const PersonnelDetailModal = () => {
             },
           }}
         >
-          Save Personnel
+          Place Order
         </Button>
       </Box>
     </Box>

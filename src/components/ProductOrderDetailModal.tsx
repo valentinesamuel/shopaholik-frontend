@@ -123,7 +123,7 @@ const ProductOrderDetailModal: FC<Props> = () => {
               Shipping Status
             </Typography>
             <SelectOptions
-              width="max-content%"
+              width="70%"
               selectLabel="Shipping Status"
               options={statusOptions}
               value={shippingstatus}
