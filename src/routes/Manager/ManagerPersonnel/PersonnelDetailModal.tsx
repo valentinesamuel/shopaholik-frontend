@@ -7,6 +7,7 @@ import {
   Avatar,
   Box,
   Button,
+  Paper,
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
@@ -18,7 +19,7 @@ const PersonnelDetailModal: FC = () => {
     setJobDesignation(event.target.value);
   };
   return (
-    <Box
+    <Paper
       sx={{
         position: 'absolute',
         top: '50%',
@@ -64,7 +65,7 @@ const PersonnelDetailModal: FC = () => {
             <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
               Staff ID:
             </Typography>
-            <Typography sx={{ color: 'black', fontWeight: 'bold' }}>
+            <Typography sx={{  fontWeight: 'bold' }}>
               FLWK5UJ3UNT0D
             </Typography>
           </Box>
@@ -73,10 +74,10 @@ const PersonnelDetailModal: FC = () => {
               Job Desc.:
             </Typography>
             <SelectOptions
-              selectLabel="Job Description"
+              selectLabel="Job Designation"
               options={jobDesignationOptions}
-              label="job-description"
-              width={'60%'}
+              label="job-desgination"
+              width={'40%'}
               handleChange={handleJobDesignationChange}
               value={jobDesignation}
             />
@@ -387,7 +388,7 @@ const PersonnelDetailModal: FC = () => {
           Save Personnel
         </Button>
       </Box>
-    </Box>
+    </Paper>
   );
 };
 

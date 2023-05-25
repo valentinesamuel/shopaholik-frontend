@@ -19,7 +19,7 @@ import SupplierDetail from './routes/Manager/ManagerSupplier/SupplierDetail';
 import ManagerPersonnel from './routes/Manager/ManagerPersonnel/ManagerPersonnel.component';
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>('light');
+  const [mode, setMode] = useState<PaletteMode>('dark');
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {

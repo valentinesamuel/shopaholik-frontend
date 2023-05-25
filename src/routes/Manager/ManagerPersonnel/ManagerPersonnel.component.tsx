@@ -2,8 +2,11 @@ import { Add, Search } from '@mui/icons-material';
 import {
   Box,
   Button,
+  FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
+  Modal,
   OutlinedInput,
   Paper,
   Tab,
@@ -13,12 +16,17 @@ import { ChangeEvent, FC, useState } from 'react';
 import TabPanel from '../../../components/TabPanel.component';
 import { orderTabs, personnelTabs } from '../OrderandShippinTab';
 import PersonnelCard from './PersonnelCard';
+import NewPersonnelModal from './NewPersonnelModal';
 
 interface Props {}
 
 const ManagerPersonnel: FC<Props> = () => {
   const [searchedPersonnel, setSearchedPersonnel] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
@@ -37,27 +45,31 @@ const ManagerPersonnel: FC<Props> = () => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
-      <OutlinedInput
-        label="Search Product"
-        onChange={handleSearchPersonnel}
-        value={searchedPersonnel}
-        placeholder="Search Personnel"
-        sx={{
-          width: '100%',
-          outline: 'none',
-        }}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              aria-label="search button"
-              onClick={() => console.log(searchedPersonnel)}
-              edge="end"
-            >
-              <Search />
-            </IconButton>
-          </InputAdornment>
-        }
-      />
+      <FormControl>
+        <InputLabel htmlFor="searchPersonnel">Search Personnel</InputLabel>
+        <OutlinedInput
+          id="searchPersonnel"
+          label="Search Personnel"
+          onChange={handleSearchPersonnel}
+          value={searchedPersonnel}
+          placeholder="Search Personnel"
+          sx={{
+            width: '100%',
+            outline: 'none',
+          }}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="search button"
+                onClick={() => console.log(searchedPersonnel)}
+                edge="end"
+              >
+                <Search />
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
       <Box
         sx={{
           display: 'flex',
@@ -94,11 +106,7 @@ const ManagerPersonnel: FC<Props> = () => {
           </Tabs>
         </Box>
 
-        <Button
-          variant="contained"
-          onClick={() => console.log(searchedPersonnel)}
-          startIcon={<Add />}
-        >
+        <Button variant="contained" onClick={handleOpen} startIcon={<Add />}>
           Add new Personnel
         </Button>
       </Box>
@@ -140,6 +148,15 @@ const ManagerPersonnel: FC<Props> = () => {
       <TabPanel value={currentTab} index={4}>
         <p>security</p>
       </TabPanel>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <NewPersonnelModal />
+      </Modal>
     </Paper>
   );
 };

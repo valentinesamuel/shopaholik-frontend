@@ -37,7 +37,7 @@ const NewOrderModal: FC<Props> = ({}) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: { desktop: '40%', mobile: '80%' },
+        width: { desktop: 'fit-content', mobile: '80%' },
         padding: '30px',
         height: { desktop: 'auto', mobile: '80%' },
         overflowX: 'auto',
