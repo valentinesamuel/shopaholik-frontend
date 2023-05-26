@@ -17,6 +17,8 @@ import ManagerOrder from './routes/Manager/ManagerOrder/ManagerOrder.component';
 import ManagerSupplier from './routes/Manager/ManagerSupplier/ManagerSupplier.component';
 import SupplierDetail from './routes/Manager/ManagerSupplier/SupplierDetail';
 import ManagerPersonnel from './routes/Manager/ManagerPersonnel/ManagerPersonnel.component';
+import SignOut from './pages/Signout.component';
+import SignUp from './pages/Signup.component';
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>('dark');
@@ -36,7 +38,9 @@ function App() {
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <Routes>
-          <Route path="/login" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup" element={<SignOut />} />
           <Route path="/" element={<Home />}>
             <Route path="/manager" element={<ManagerHome />}>
               <Route index element={<ManagerDashboard />} />
@@ -49,9 +53,13 @@ function App() {
             </Route>
             <Route path="/supervisor" element={<SupervisorHome />}>
               <Route index element={<SupervisorDashboard />} />
+              <Route path="dashboard" element={<>supervisor dashboard</>} />
+              <Route path="inventory" element={<>supervisor inventory</>} />
             </Route>
             <Route path="/cashier" element={<CashierHome />}>
               <Route index element={<CashierDashboard />} />
+              <Route path="dashboard" element={<>cashier dashboard</>} />
+              <Route path="sale" element={<>cashier sale</>} />
             </Route>
           </Route>
           <Route
