@@ -1,0 +1,9 @@
+git push
+git checkout feature
+git merge dev
+git push
+git checkout main
+git merge feature
+git push
+git checkout dev
+git branch

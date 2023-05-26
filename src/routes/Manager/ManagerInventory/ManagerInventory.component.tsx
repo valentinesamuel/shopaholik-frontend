@@ -18,7 +18,6 @@ import TopSellingProduct from '../../../components/TopSellingProduct';
 import { categories } from '../categories';
 import SelectOptions from '../../../components/SelectOptions';
 import { inventoryTabs } from '../OrderandShippinTab';
-import ProductDetailModal from '../../../components/ProductDetailModal';
 
 function a11yProps(index: number) {
   return {
