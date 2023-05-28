@@ -2,7 +2,7 @@ import {
   ShippingStatus,
   JobDesignation,
   AvailAbilityStatus,
-} from './../../Utils/Types';
+} from './Types';
 
 export const categories = [
   {

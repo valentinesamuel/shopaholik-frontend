@@ -10,16 +10,16 @@ import {
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
-import { categories } from '../categories';
+import { categories } from '../../../Utils/categories';
 import { Search } from '@mui/icons-material';
 import TabPanel from '../../../components/TabPanel.component';
 import TopSellingProduct from '../../../components/TopSellingProduct';
 import OrderMetrics from './OrderMetrics';
-import { orderTabs } from '../OrderandShippinTab';
+import { orderTabs } from '../../../Utils/OrderandShippinTab';
 
 type Props = {};
 
-const ManagerOrder: FC<Props> = ({}) => {
+const AdminOrder: FC<Props> = ({}) => {
   const [category, setCategory] = useState('electronics');
   const [searchedOrder, setSearchedOrder] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
@@ -143,4 +143,4 @@ const ManagerOrder: FC<Props> = ({}) => {
   );
 };
 
-export default ManagerOrder;
+export default AdminOrder;

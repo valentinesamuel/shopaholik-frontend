@@ -1,7 +1,9 @@
 import {
   Box,
+  Button,
   IconButton,
   InputAdornment,
+  Modal,
   OutlinedInput,
   Paper,
   SelectChangeEvent,
@@ -15,9 +17,10 @@ import { ChangeEvent, useState } from 'react';
 import InventoryMetrics from './InventoryMetrics';
 
 import TopSellingProduct from '../../../components/TopSellingProduct';
-import { categories } from '../categories';
+import { categories } from '../../../Utils/categories';
 import SelectOptions from '../../../components/SelectOptions';
-import { inventoryTabs } from '../OrderandShippinTab';
+import { inventoryTabs } from '../../../Utils/OrderandShippinTab';
+import AddProductModal from '../../../components/AddProductModal';
 
 function a11yProps(index: number) {
   return {
@@ -26,10 +29,11 @@ function a11yProps(index: number) {
   };
 }
 
-const ManagerInventory = () => {
+const AdminInventory = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [searchedProduct, setSearchedProduct] = useState('');
   const [category, setCategory] = useState('electronics');
+  const [open, setOpen] = useState(false);
 
   const handleCategoryChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
@@ -59,6 +63,38 @@ const ManagerInventory = () => {
       }}
     >
       <InventoryMetrics />
+
+      <Button
+        variant="contained"
+        onClick={() => setOpen(true)}
+        fullWidth
+        sx={{ margin: '5% 0' }}
+      >
+        Add Order
+      </Button>
+
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Paper
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: { desktop: '-webkit-fill-available', mobile: '80%' },
+            padding: '30px',
+            height: { desktop: 'auto', mobile: '90%' },
+            overflowX: 'auto',
+          }}
+        >
+          <AddProductModal />
+        </Paper>
+      </Modal>
+
       <Box
         sx={{
           display: 'flex',
@@ -158,4 +194,4 @@ const ManagerInventory = () => {
   );
 };
 
-export default ManagerInventory;
+export default AdminInventory;

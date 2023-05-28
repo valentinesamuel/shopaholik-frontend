@@ -13,10 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
-import { shippingStatusOptions } from '../categories';
+import { shippingStatusOptions } from '../../../Utils/categories';
 import SelectOptions from '../../../components/SelectOptions';
 import AddIcon from '@mui/icons-material/Add';
-import { orderTabs } from '../OrderandShippinTab';
+import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import TabPanel from '../../../components/TabPanel.component';
 import TopSellingProduct from '../../../components/TopSellingProduct';
 import NewOrderModal from './NewOrderModal';

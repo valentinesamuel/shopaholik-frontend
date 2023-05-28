@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
-import { jobDesignationOptions } from '../categories';
+import { jobDesignationOptions } from '../../../Utils/categories';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import {
@@ -65,9 +65,7 @@ const PersonnelDetailModal: FC = () => {
             <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
               Staff ID:
             </Typography>
-            <Typography sx={{  fontWeight: 'bold' }}>
-              FLWK5UJ3UNT0D
-            </Typography>
+            <Typography sx={{ fontWeight: 'bold' }}>FLWK5UJ3UNT0D</Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
             <Typography sx={{ color: '#96989E', marginRight: '3%' }}>

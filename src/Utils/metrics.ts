@@ -1,8 +1,8 @@
-import personnel from '../../assets/icons/personnel.svg';
-import profit from '../../assets/icons/income.svg';
-import coins from '../../assets/icons/coins.svg';
-import tag from '../../assets/icons/price-tag.svg';
-import loss from '../../assets/icons/stop.svg';
+import personnel from '../assets/icons/personnel.svg';
+import profit from '../assets/icons/income.svg';
+import coins from '../assets/icons/coins.svg';
+import tag from '../assets/icons/price-tag.svg';
+import loss from '../assets/icons/stop.svg';
 
 export const dashboardMetrics = [
   {

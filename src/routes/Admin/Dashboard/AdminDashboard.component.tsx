@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import DashboardMetric from '../../../components/DashboardMetric';
 import { Paper } from '@mui/material';
-import { dashboardMetrics } from '../metrics';
+import { dashboardMetrics } from '../../../Utils/metrics';
 import StockQuantityCard from '../../../components/StockQuantityRow';
 import TopSellingProduct from '../../../components/TopSellingProduct';
 
-const ManagerDashboard: FC = () => {
+const AdminDashboard: FC = () => {
   return (
     <Paper
       sx={{
@@ -57,6 +57,4 @@ const ManagerDashboard: FC = () => {
   );
 };
 
-export default ManagerDashboard;
-
-ManagerDashboard.propTypes = {};
+export default AdminDashboard;

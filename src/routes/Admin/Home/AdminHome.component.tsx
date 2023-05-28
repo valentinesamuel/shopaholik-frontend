@@ -2,19 +2,14 @@ import { FC, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import {
-  DisplayArea,
-  Sidebar,
-  StyledLink,
-  Wrapper2,
-} from './ManagerHome.styles';
+import { DisplayArea, Sidebar, StyledLink, Wrapper2 } from './AdminHome.styles';
 import { sideRoutes } from './sideroutes';
 import SideLink from '../../../components/SideLink';
 import logout from '../../../assets/icons/logout.svg';
 import { Box, Modal } from '@mui/material';
 import Navbar from '../../../components/Navbar';
 
-const ManagerHome: FC = () => {
+const AdminHome: FC = () => {
   const [showNav, setShowNav] = useState(false);
   const handleOpen = () => setShowNav(true);
   const handleClose = () => setShowNav(false);
@@ -86,6 +81,4 @@ const ManagerHome: FC = () => {
   );
 };
 
-export default ManagerHome;
-
-ManagerHome.propTypes = {};
+export default AdminHome;

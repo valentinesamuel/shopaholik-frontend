@@ -37,12 +37,10 @@ export interface Product {
   product_code: string;
   quantity_in_stock: number;
   min_quantity: number;
-  max_quantity: number;
   unit_price: number;
   date_of_arrival: Date;
   supplier_id: string;
-  shelf_life_duation: string;
-  product_image_url: string;
+  shelf_life_duration: string;
   stock_status: StockStatus;
 }
 

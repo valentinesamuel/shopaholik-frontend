@@ -10,7 +10,7 @@ import { ChangeEvent, useState } from 'react';
 import { Search } from '@mui/icons-material';
 import SupplierCard from '../../../components/SupplierCard';
 
-const ManagerSupplier = () => {
+const AdminSupplier = () => {
   const [searchedSupplier, setSearchedSupplier] = useState('');
 
   const handleSearchedProductChange = (
@@ -94,4 +94,4 @@ const ManagerSupplier = () => {
   );
 };
 
-export default ManagerSupplier;
+export default AdminSupplier;

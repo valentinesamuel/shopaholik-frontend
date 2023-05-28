@@ -74,7 +74,6 @@ const NewPersonnelModal: FC = () => {
         overflowX: 'auto',
       }}
     >
-      <button onClick={() => console.log(newPersonnel)}>sef</button>
       <Box
         sx={{
           display: 'flex',
