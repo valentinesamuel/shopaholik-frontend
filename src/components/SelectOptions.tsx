@@ -5,6 +5,7 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
+  SxProps,
 } from '@mui/material';
 import { FC } from 'react';
 
@@ -15,6 +16,7 @@ interface Props {
   value: string;
   selectLabel: string;
   handleChange: (event: SelectChangeEvent) => void;
+  sxStyles?: SxProps;
 }
 
 const SelectOptions: FC<Props> = ({
@@ -23,10 +25,11 @@ const SelectOptions: FC<Props> = ({
   label,
   value,
   selectLabel,
+  sxStyles,
   handleChange,
 }) => {
   return (
-    <Box sx={{ width: width }}>
+    <Box sx={{ width: width, ...sxStyles }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">{selectLabel}</InputLabel>
         <Select

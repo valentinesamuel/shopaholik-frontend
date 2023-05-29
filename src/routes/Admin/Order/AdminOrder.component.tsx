@@ -13,7 +13,6 @@ import SelectOptions from '../../../components/SelectOptions';
 import { categories } from '../../../Utils/categories';
 import { Search } from '@mui/icons-material';
 import TabPanel from '../../../components/TabPanel.component';
-import TopSellingProduct from '../../../components/TopSellingProduct';
 import OrderMetrics from './OrderMetrics';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import OrdersTable from './OrdersTable';

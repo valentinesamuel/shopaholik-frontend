@@ -1,20 +1,114 @@
-import { Paper } from '@mui/material';
-import  { FC } from 'react';
+import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
+import { FC, useState } from 'react';
+import SelectOptions from '../../../components/SelectOptions';
+import { shippingStatusOptions } from '../../../Utils/categories';
+import OrderDetailsTable from './OrderDetailsTable';
 
 interface Props {}
 
 const OrderDetails: FC<Props> = ({}) => {
+  const [shippingStatus, setShippingStatus] = useState('');
+
+  const handleShippingStatusChange = (event: SelectChangeEvent) => {
+    setShippingStatus(event.target.value);
+  };
+
   return (
     <Paper
       elevation={1}
       sx={{
         width: '100%',
-        // height: '100vh',
         overflowX: 'auto',
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
-      OrderDetails
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          flexDirection: {
+            desktop: 'row',
+            mobile: 'column',
+          },
+          marginBottom: '40px',
+        }}
+      >
+        <Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
+            <Typography sx={{ color: '#96999F', marginRight: '10px' }}>
+              Order Number:
+            </Typography>
+            <Typography sx={{ fontWeight: 'bold' }}>4WNGO39EJ46</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
+            <Typography sx={{ color: '#96999F', marginRight: '10px' }}>
+              Date of Order:
+            </Typography>
+            <Typography sx={{ fontWeight: 'bold' }}>12 May, 2023</Typography>
+          </Box>
+          <SelectOptions
+            sxStyles={{
+              width: {
+                desktop: '100%',
+                mobile: '100%',
+                tablet: '60%',
+              },
+            }}
+            selectLabel="Delivery Status"
+            label="shipping-status"
+            options={shippingStatusOptions}
+            handleChange={handleShippingStatusChange}
+            value={shippingStatus}
+          />
+        </Box>
+
+        <Box>
+          <Box sx={{ display: 'flex', margin: '20px 0' }}>
+            <Typography
+              sx={{
+                color: '#96999F',
+                marginRight: '10px',
+                textAlign: 'center',
+              }}
+            >
+              Total Price:
+            </Typography>
+            <Typography sx={{ fontWeight: 'bold' }}>N 450,000</Typography>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
+            <Typography sx={{ color: '#96999F', marginRight: '10px' }}>
+              Estimated Time of Arrival:
+            </Typography>
+            <Typography sx={{ fontWeight: 'bold' }}>22 May, 2023</Typography>
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            textAlign: {
+              desktop: 'right',
+              mobile: 'left',
+            },
+            margin: {
+              desktop: '0',
+              mobile: '4% 0 0 0',
+            },
+          }}
+        >
+          <Typography variant="body1" sx={{ fontWeight: '600' }}>
+            Nestle Inc
+          </Typography>
+          <Typography
+            sx={{ margin: '10px 0', width: '50%', display: 'inline-flex' }}
+          >
+            22-24 Industrial Avenue, Ilupeju. PMB 21164 Ikeja, Lagos State.
+            Nigeria
+          </Typography>
+          <Typography sx={{ margin: '10px 0' }}>+234 (1) 280 1300</Typography>
+        </Box>
+      </Box>
+
+      <OrderDetailsTable />
     </Paper>
   );
 };

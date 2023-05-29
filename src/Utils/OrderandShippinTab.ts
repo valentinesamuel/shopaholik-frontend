@@ -5,15 +5,15 @@ export const orderTabs = [
   },
   {
     id: '2',
-    label: 'Shipped',
-  },
-  {
-    id: '3',
     label: 'Pending',
   },
   {
+    id: '3',
+    label: 'Confirmed',
+  },
+  {
     id: '4',
-    label: 'Received',
+    label: 'Delivered',
   },
 ];
 

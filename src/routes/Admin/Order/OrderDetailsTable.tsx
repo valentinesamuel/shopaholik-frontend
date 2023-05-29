@@ -9,20 +9,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { ShippingStatus } from '../../../Utils/Types';
+import { MoreHoriz } from '@mui/icons-material';
+import { ProductCategory } from '../../../Utils/Types';
 import dayjs from 'dayjs';
-import { getShippingStatusColor } from '../../../Utils/StatusColor';
-import { useNavigate } from 'react-router-dom';
-import InfoIcon from '@mui/icons-material/Info';
+import ProductDetailModal from '../../../components/ProductDetailModal';
 
 interface Column {
   id:
-    | 'orderNumber'
-    | 'supplier'
+    | 'quantity'
+    | 'productName'
     | 'dateOfOrder'
-    | 'price'
+    | 'totalPrice'
+    | 'unitPrice'
     | 'estimatedTimeOfArrival'
-    | 'shippingStatus';
+    | 'shippingStatus'
+    | 'category';
   label: string;
   minWidth?: number | string;
   width?: number | string;
@@ -32,10 +33,17 @@ interface Column {
 
 const columns: readonly Column[] = [
   {
-    id: 'orderNumber',
-    label: 'Order No.',
+    id: 'quantity',
+    label: 'Qty',
     minWidth: '5%',
     width: '6%',
+    align: 'left',
+  },
+  {
+    id: 'productName',
+    label: 'Product Name',
+    // minWidth: '5%',
+    // width: '6%',
     align: 'left',
   },
   {
@@ -44,15 +52,17 @@ const columns: readonly Column[] = [
     // minWidth: 100
     align: 'center',
   },
+
   {
-    id: 'shippingStatus',
-    label: 'Status',
+    id: 'unitPrice',
+    label: 'Unit Price',
+    format: (value: number) => value.toLocaleString('en-US'),
     // minWidth: 170,
     align: 'center',
   },
   {
-    id: 'price',
-    label: 'Price',
+    id: 'totalPrice',
+    label: 'Total Price',
     format: (value: number) => value.toLocaleString('en-US'),
     // minWidth: 170,
     align: 'center',
@@ -64,66 +74,66 @@ const columns: readonly Column[] = [
     align: 'center',
   },
   {
-    id: 'supplier',
-    label: 'Supplier',
+    id: 'category',
+    label: 'Category',
     // minWidth: 170,
     align: 'center',
   },
 ];
 
 interface Data {
-  orderNumber: string;
-  price: number;
-  shippingStatus: ShippingStatus;
-  dateOfOrder: string;
+  quantity: number;
+  productName: string;
   estimatedTimeOfArrival: string;
-  supplier: string;
+  dateOfOrder: string;
+  unitPrice: number;
+  totalPrice: number;
+
+  category: ProductCategory;
 }
 
 function createData(
-  orderNumber: string,
-  price: number,
+  quantity: number,
+  productName: string,
   dateOfOrder: dayjs.Dayjs,
-  shippingStatus: ShippingStatus,
   estimatedTimeOfArrival: dayjs.Dayjs,
-  supplier: string,
+  unitPrice: number,
+  totalPrice: number,
+
+  category: ProductCategory,
 ): Data {
   return {
-    orderNumber,
-    price,
+    quantity,
+    productName,
     dateOfOrder: dateOfOrder.format('D MMM, YYYY.  H:M A'),
-    shippingStatus,
     estimatedTimeOfArrival: estimatedTimeOfArrival.format(
       'D MMM, YYYY.  H:M A',
     ),
-    supplier,
+    unitPrice,
+    totalPrice,
+
+    category,
   };
 }
 
 const rows = [
   createData(
-    'W4NU935',
-    12000,
+    23,
+    'Nike Tech Fleece',
     dayjs(new Date()),
-    ShippingStatus.DELIVERED,
     dayjs(new Date()),
-    'Nike Inc',
-  ),
-  createData(
-    'KF5M6YR',
-    63060,
-    dayjs(new Date()),
-    ShippingStatus.PENDING,
-    dayjs(new Date()),
-    'Nestle Inc',
+    15000,
+    345000,
+
+    ProductCategory.CLOTHING_AND_ACCESSORIES,
   ),
 ];
 
-const OrdersTableContainer = styled(Box)`
+const OrderDetailsTableContainer = styled(Box)`
   height: fit-content;
 `;
 
-const OrdersTable: React.FC = () => {
+const OrderDetailsTable: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -139,7 +149,7 @@ const OrdersTable: React.FC = () => {
   };
 
   return (
-    <OrdersTableContainer>
+    <OrderDetailsTableContainer>
       <Paper
         elevation={1}
         sx={{
@@ -172,7 +182,7 @@ const OrdersTable: React.FC = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <React.Fragment key={row.orderNumber}>
+                    <React.Fragment key={row.productName}>
                       <TableRow
                         sx={{ cursor: 'pointer' }}
                         hover
@@ -182,13 +192,7 @@ const OrdersTable: React.FC = () => {
                         {columns.map((column) => {
                           const value = row[column.id];
                           return (
-                            <TableCell
-                              align={column.align}
-                              key={column.id}
-                              sx={{
-                                color: getShippingStatusColor(column, value),
-                              }}
-                            >
+                            <TableCell align={column.align} key={column.id}>
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
                                 : String(value)}
@@ -217,20 +221,21 @@ const OrdersTable: React.FC = () => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-    </OrdersTableContainer>
+    </OrderDetailsTableContainer>
   );
 };
 
-export default OrdersTable;
+export default OrderDetailsTable;
 
-const TableModal: React.FC<{ orderRow: Data }> = ({ orderRow }) => {
-  const navigate = useNavigate();
+const TableModal: React.FC<{ orderRow: Data }> = () => {
+  const [open, setOpen] = React.useState(false);
 
   return (
     <div>
-      <IconButton onClick={() => navigate(`${orderRow.orderNumber}`)}>
-        <InfoIcon />
+      <IconButton onClick={() => setOpen(true)}>
+        <MoreHoriz />
       </IconButton>
+      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };
