@@ -16,6 +16,7 @@ import AdminOrder from './routes/Admin/Order/AdminOrder.component';
 import AdminSupplier from './routes/Admin/Supplier/AdminSupplier.component';
 import RoleHome from './routes/RoleHome/RoleHome.component';
 import CashierSale from './routes/Cashier/CashierSale.component';
+import OrderDetails from './routes/Admin/Order/OrderDetails';
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>('light');
@@ -44,6 +45,7 @@ function App() {
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="inventory" element={<AdminInventory />} />
               <Route path="order" element={<AdminOrder />} />
+              <Route path="order/:orderId" element={<OrderDetails />} />
               <Route path="supplier" element={<AdminSupplier />} />
               <Route path="supplier/:supplierId" element={<SupplierDetail />} />
               <Route path="personnel" element={<ManagerPersonnel />} />

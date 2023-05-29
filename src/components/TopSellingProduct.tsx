@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -183,7 +183,6 @@ const TopSellingProduct: React.FC<Props> = ({ source }) => {
                         })}
                         <TableCell align="right">
                           <TableModal source={source} />
-                          <p>gh</p>
                         </TableCell>
                       </TableRow>
                     </React.Fragment>

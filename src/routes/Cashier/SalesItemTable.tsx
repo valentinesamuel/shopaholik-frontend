@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -128,7 +128,7 @@ const SalesItemTable: React.FC = () => {
                             <TableCell align={column.align} key={column.id}>
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
-                                : value }
+                                : value}
                             </TableCell>
                           );
                         })}

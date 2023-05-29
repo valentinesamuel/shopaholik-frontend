@@ -4,7 +4,6 @@ import {
   Button,
   IconButton,
   InputAdornment,
-  Modal,
   OutlinedInput,
   Paper,
   SelectChangeEvent,
@@ -25,7 +24,7 @@ interface Props {}
 
 const SupplierDetail: FC<Props> = ({}) => {
   const [search, setSearchOrder] = useState('');
-  const [shippingStatus, setShippingStatus] = useState('pending');
+  const [shippingStatus, setShippingStatus] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -177,31 +176,21 @@ const SupplierDetail: FC<Props> = ({}) => {
           >
             Place New Order
           </Button>
-          <Modal
-            open={open}
-            onClose={() => setOpen(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-          >
-            <NewOrderModal />
-          </Modal>
+
+          <NewOrderModal onClose={() => setOpen(false)} open={open} />
         </Box>
       </Box>
 
       <TabPanel value={currentTab} index={0}>
         <TopSellingProduct source="product" />
-        {/* <p>all products</p> */}
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
-        {/* <TopSellingProduct source="product" /> */}
         <p>shipped products</p>
       </TabPanel>
       <TabPanel value={currentTab} index={2}>
-        {/* <TopSellingProduct source="product" /> */}
         <p>pending products</p>
       </TabPanel>
       <TabPanel value={currentTab} index={3}>
-        {/* <TopSellingProduct source="product" /> */}
         <p>received products</p>
       </TabPanel>
     </Paper>

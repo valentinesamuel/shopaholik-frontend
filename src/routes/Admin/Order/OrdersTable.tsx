@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -10,10 +10,10 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
-import ProductDetailModal from '../../../components/ProductDetailModal';
 import { ShippingStatus } from '../../../Utils/Types';
 import dayjs from 'dayjs';
 import { getShippingStatusColor } from '../../../Utils/StatusColor';
+import { useNavigate } from 'react-router-dom';
 
 interface Column {
   id:
@@ -196,7 +196,7 @@ const OrdersTable: React.FC = () => {
                           );
                         })}
                         <TableCell align="right">
-                          <TableModal />
+                          <TableModal orderRow={row} />
                         </TableCell>
                       </TableRow>
                     </React.Fragment>
@@ -223,16 +223,14 @@ const OrdersTable: React.FC = () => {
 
 export default OrdersTable;
 
-const TableModal: React.FC = () => {
-  const [open, setOpen] = React.useState(false);
+const TableModal: React.FC<{ orderRow: Data }> = ({ orderRow }) => {
+  const navigate = useNavigate();
 
   return (
     <div>
-      <IconButton onClick={() => setOpen(true)}>
+      <IconButton onClick={() => navigate(`${orderRow.orderNumber}`)}>
         <MoreHoriz />
       </IconButton>
-
-      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };

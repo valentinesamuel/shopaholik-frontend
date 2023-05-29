@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -285,7 +285,7 @@ const TableModal: React.FC = () => {
       <IconButton onClick={() => setOpen(true)}>
         <MoreHoriz />
       </IconButton>
-     
+
       <ProductDetailModal open={open} onClose={() => setOpen(false)} />
     </div>
   );

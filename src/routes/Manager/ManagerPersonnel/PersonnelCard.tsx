@@ -1,5 +1,5 @@
 import { FC, Fragment, useState } from 'react';
-import { Avatar, Box, Modal, Paper, Typography } from '@mui/material';
+import { Avatar, Box, Paper, Typography } from '@mui/material';
 import PersonnelDetailModal from './PersonnelDetailModal';
 
 interface Props {}
