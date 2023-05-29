@@ -3,7 +3,7 @@ import inventory from '../../../assets/icons/inventory.svg';
 import orders from '../../../assets/icons/order.svg';
 import suppliers from '../../../assets/icons/suppliers.svg';
 import personnel from '../../../assets/icons/personnel.svg';
-import profit from '../../../assets/icons/small-profit.svg'
+import profit from '../../../assets/icons/small-profit.svg';
 
 export const sideRoutes = [
   {
@@ -38,6 +38,69 @@ export const sideRoutes = [
   },
   {
     id: 6,
+    name: 'sale',
+    icon: profit,
+    destination: 'sale',
+  },
+];
+
+export const managerSideRoutes = [
+  {
+    id: 1,
+    name: 'dashboard',
+    icon: dashboard,
+    destination: 'dashboard',
+  },
+  {
+    id: 2,
+    name: 'inventory',
+    icon: inventory,
+    destination: 'inventory',
+  },
+  {
+    id: 3,
+    name: 'orders',
+    icon: orders,
+    destination: 'order',
+  },
+  {
+    id: 4,
+    name: 'suppliers',
+    icon: suppliers,
+    destination: 'supplier',
+  },
+  {
+    id: 5,
+    name: 'personnel',
+    icon: personnel,
+    destination: 'personnel',
+  },
+];
+
+export const supervisorSideRoutes = [
+  {
+    id: 1,
+    name: 'dashboard',
+    icon: dashboard,
+    destination: 'dashboard',
+  },
+  {
+    id: 2,
+    name: 'inventory',
+    icon: inventory,
+    destination: 'inventory',
+  },
+];
+
+export const cashierSideRoutes = [
+  {
+    id: 1,
+    name: 'dashboard',
+    icon: dashboard,
+    destination: 'dashboard',
+  },
+  {
+    id: 2,
     name: 'sale',
     icon: profit,
     destination: 'sale',

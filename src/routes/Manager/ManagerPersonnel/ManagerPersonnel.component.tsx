@@ -149,6 +149,7 @@ const ManagerPersonnel: FC<Props> = () => {
           <PersonnelCard />
           <PersonnelCard />
           <PersonnelCard />
+          // FIXME Add pagination to show only 9 items
         </Box>
       </TabPanel>
       <TabPanel value={currentTab} index={1}>

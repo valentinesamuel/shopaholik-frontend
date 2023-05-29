@@ -51,7 +51,6 @@ const SideLink: FC<Props> = ({ icon, destination, name }) => {
   useEffect(() => {
     setActive(location.pathname.includes(`/${destination}`) ? true : false);
   }, [location]);
-  // ||  location.pathname.includes(`/dashboard`);
   return (
     <StyledSideLinkContainer active={active}>
       <StyledSideLink to={destination}>

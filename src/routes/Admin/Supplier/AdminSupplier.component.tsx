@@ -87,9 +87,17 @@ const AdminSupplier = () => {
         <SupplierCard destination="sdf" />
         <SupplierCard destination="g" />
         <SupplierCard destination="gd" />
+        <SupplierCard destination="gd" />
+        <SupplierCard destination="gd" />
+        <SupplierCard destination="gd" />
+        <SupplierCard destination="gd" />
+        <SupplierCard destination="gd" />
+        <SupplierCard destination="gd" />
+        <SupplierCard destination="gd" />
         <SupplierCard destination="d" />
         <SupplierCard destination="db" />
         <SupplierCard destination="dggg" />
+        // FIXME Add pagination to show only 9 items
       </Box>
     </Paper>
   );

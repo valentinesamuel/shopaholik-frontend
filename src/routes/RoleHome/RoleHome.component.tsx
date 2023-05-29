@@ -8,7 +8,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 //   CASHIER: <CashierHome />,
 // };
 
-export const role: ADMINROLE = ADMINROLE.MANAGER;
+export const role: ADMINROLE = ADMINROLE.SUPERVISOR;
 
 const RoleHome: FC = () => {
   const navigate = useNavigate();

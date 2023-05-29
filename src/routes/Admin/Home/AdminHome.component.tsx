@@ -3,7 +3,11 @@ import { Outlet } from 'react-router-dom';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { DisplayArea, Sidebar, StyledLink, Wrapper2 } from './AdminHome.styles';
-import { sideRoutes } from './sideroutes';
+import {
+  cashierSideRoutes,
+  managerSideRoutes,
+  supervisorSideRoutes,
+} from './sideroutes';
 import SideLink from '../../../components/SideLink';
 import logout from '../../../assets/icons/logout.svg';
 import { Box, Modal } from '@mui/material';
@@ -37,7 +41,7 @@ const AdminHome: FC = () => {
         <Sidebar>
           <div className="routes">
             <StyledLink to="/manager">Shopaholik</StyledLink>
-            {sideRoutes.map((route) => {
+            {managerSideRoutes.map((route) => {
               return (
                 <SideLink
                   destination={route.destination}

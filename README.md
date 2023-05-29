@@ -152,8 +152,10 @@ Here are more screenshots from the product
 ## Roadmap
 
 - [x] Build interface for manager
-- [ ] Feature 1
-  - [ ] Nested Feature 1
+- [x] Build interface for supercisor
+- [x] Build interface for cashier
+- [ ] Hide sidelink based on the user's role
+
 
 See the [open issues](https://github.com/valentinesamuel/shopaholik-frontend/issues) for a full list of proposed features (and known issues).
 

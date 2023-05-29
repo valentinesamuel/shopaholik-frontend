@@ -69,7 +69,7 @@ const AdminInventory = () => {
         fullWidth
         sx={{ margin: '5% 0' }}
       >
-        Add Order
+        Add Product to Inventory
       </Button>
 
       <Modal
