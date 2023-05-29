@@ -15,12 +15,11 @@ import Search from '@mui/icons-material/Search';
 import TabPanel from '../../../components/TabPanel.component';
 import { ChangeEvent, useState } from 'react';
 import InventoryMetrics from './InventoryMetrics';
-
-import TopSellingProduct from '../../../components/TopSellingProduct';
 import { categories } from '../../../Utils/categories';
 import SelectOptions from '../../../components/SelectOptions';
 import { inventoryTabs } from '../../../Utils/OrderandShippinTab';
 import AddProductModal from '../../../components/AddProductModal';
+import InventoryProductTable from './InventoryProductsTable';
 
 function a11yProps(index: number) {
   return {
@@ -32,7 +31,7 @@ function a11yProps(index: number) {
 const AdminInventory = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [searchedProduct, setSearchedProduct] = useState('');
-  const [category, setCategory] = useState('electronics');
+  const [category, setCategory] = useState('');
   const [open, setOpen] = useState(false);
 
   const handleCategoryChange = (event: SelectChangeEvent) => {
@@ -179,16 +178,16 @@ const AdminInventory = () => {
       </Box>
 
       <TabPanel value={currentTab} index={0}>
-        <TopSellingProduct source="product" />
+        <InventoryProductTable />
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
-        <TopSellingProduct source="product" />
+        <p>sdfsdf</p>
       </TabPanel>
       <TabPanel value={currentTab} index={2}>
-        <TopSellingProduct source="product" />
+        <p>sdfsdf</p>
       </TabPanel>
       <TabPanel value={currentTab} index={3}>
-        <TopSellingProduct source="product" />
+        <p>sdfsdf</p>
       </TabPanel>
     </Paper>
   );

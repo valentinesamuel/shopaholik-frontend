@@ -33,7 +33,7 @@ export interface OrderedItem {
 export interface Product {
   product_id: string;
   name: string;
-  category: string;
+  category: ProductCategory;
   product_code: string;
   quantity_in_stock: number;
   min_quantity: number;
@@ -72,48 +72,72 @@ export interface Personnel {
   };
   job_designation: JobDesignation;
   availability_status: AvailAbilityStatus;
-  working_days: WorkingDay;
   monthly_salary: number;
 }
 
 export enum StockStatus {
-  'IN_STOCK' = 'IN STOCK',
-  'OUT_OF_STOCK' = 'OUT OF STOCK',
-  'LOW_IN_STOCK' = 'LOW IN STOCK',
-  'EXPIRED' = 'EXPIRED',
+  IN_STOCK = 'IN STOCK',
+  OUT_OF_STOCK = 'OUT OF STOCK',
+  LOW_IN_STOCK = 'LOW IN STOCK',
+  EXPIRED = 'EXPIRED',
 }
 
 export enum ADMINROLE {
-  'MANAGER' = 'MANAGER',
-  'SUPERVISOR' = 'SUPERVISOR',
-  'CASHIER' = 'CASHIER',
+  MANAGER = 'MANAGER',
+  SUPERVISOR = 'SUPERVISOR',
+  CASHIER = 'CASHIER',
 }
 export enum JobDesignation {
-  'MANAGER' = 'MANAGER',
-  'SUPERVISOR' = 'SUPERVISOR',
-  'CASHIER' = 'CASHIER',
-  'SECURITY' = 'SECURITY',
-  'JANITOR' = 'JANITOR',
+  MANAGER = 'MANAGER',
+  SUPERVISOR = 'SUPERVISOR',
+  CASHIER = 'CASHIER',
+  SECURITY = 'SECURITY',
+  JANITOR = 'JANITOR',
 }
 
 export enum AvailAbilityStatus {
-  'ON_DUTY' = 'ON DUTY',
-  'OFF_DUTY' = 'OFF DUTY',
-  'ON_LEAVE' = 'ON LEAVE',
-}
-
-export enum WorkingDay {
-  'MONDAY' = 'MONDAY',
-  'TUESDAY' = 'TUESDAY',
-  'WEDNESDAY' = 'WEDNESDAY',
-  'THURSDAY' = 'THURSDAY',
-  'FRIDAY' = 'FRIDAY',
-  'SATURDAY' = 'SATURDAY',
-  'SUNDAY' = 'SUNDAY',
+  ON_DUTY = 'ON DUTY',
+  OFF_DUTY = 'OFF DUTY',
+  ON_LEAVE = 'ON LEAVE',
 }
 
 export enum ShippingStatus {
-  'CONFIRMED' = 'CONFIRMED',
-  'PENDING' = 'PENDING',
-  'DELIVERED' = 'DELIVERED',
+  CONFIRMED = 'CONFIRMED',
+  PENDING = 'PENDING',
+  DELIVERED = 'DELIVERED',
+}
+
+export const enum ProductCategory {
+  GROCERIES = 'Groceries',
+  DAIRY_AND_EGGS = 'Dairy and Eggs',
+  MEAT_AND_POULTRY = 'Meat and Poultry',
+  SEAFOOD = 'Seafood',
+  FRESH_PRODUCE = 'Fresh Produce',
+  FROZEN_FOODS = 'Frozen Foods',
+  BAKERY_AND_BAKED_GOODS = 'Bakery and Baked Goods',
+  SNACKS_AND_CHIPS = 'Snacks and Chips',
+  BEVERAGES = 'Beverages',
+  CANNED_AND_PACKAGED_GOODS = 'Canned and Packaged Goods',
+  CONDIMENTS_AND_SAUCES = 'Condiments and Sauces',
+  BREAKFAST_AND_CEREAL = 'Breakfast and Cereal',
+  PASTA_AND_RICE = 'Pasta and Rice',
+  COOKING_OILS_AND_VINEGARS = 'Cooking Oils and Vinegars',
+  SPICES_AND_SEASONINGS = 'Spices and Seasonings',
+  CANDY_AND_SWEETS = 'Candy and Sweets',
+  HEALTH_AND_WELLNESS = 'Health and Wellness',
+  PERSONAL_CARE_AND_HYGIENE = 'Personal Care and Hygiene',
+  HOUSEHOLD_SUPPLIES = 'Household Supplies',
+  BABY_AND_CHILD_CARE = 'Baby and Child Care',
+  PET_CARE = 'Pet Care',
+  OFFICE_AND_SCHOOL_SUPPLIES = 'Office and School Supplies',
+  ELECTRONICS_AND_APPLIANCES = 'Electronics and Appliances',
+  HOME_AND_KITCHEN = 'Home and Kitchen',
+  CLOTHING_AND_ACCESSORIES = 'Clothing and Accessories',
+  CLEANING_PRODUCTS = 'Cleaning Products',
+  GARDENING_AND_OUTDOOR = 'Gardening and Outdoor',
+  AUTOMOTIVE_AND_CAR_CARE = 'Automotive and Car Care',
+  SPORTS_AND_FITNESS = 'Sports and Fitness',
+  TOYS_AND_GAMES = 'Toys and Games',
+  BOOKS_AND_MAGAZINES = 'Books and Magazines',
+  MISCELLANEOUS = 'Miscellaneous',
 }

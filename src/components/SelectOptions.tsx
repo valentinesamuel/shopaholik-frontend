@@ -10,7 +10,7 @@ import { FC } from 'react';
 
 interface Props {
   width?: string;
-  options?: { value: number | string; name: string; id: string }[];
+  options?: { value: number | string; id: string; name?: number | string }[];
   label?: string;
   value: string;
   selectLabel: string;
@@ -36,11 +36,11 @@ const SelectOptions: FC<Props> = ({
           label={label}
           onChange={handleChange}
         >
-          <MenuItem value={'  '}>Select</MenuItem>
+          <MenuItem value={''}>Select</MenuItem>
           {options?.map((option) => {
             return (
               <MenuItem key={option.id} value={option.value}>
-                {option.name}
+                {option.name ? option.name : option.value}
               </MenuItem>
             );
           })}
