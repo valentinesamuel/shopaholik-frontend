@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -9,13 +9,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { MoreHoriz } from '@mui/icons-material';
-import ProductOrderDetailModal from '../../../components/ProductOrderDetailModal';
-import ProductDetailModal from '../../../components/ProductDetailModal';
-import { StockStatus } from '../../../Utils/Types';
+import { ShippingStatus } from '../../../Utils/Types';
+import dayjs from 'dayjs';
+import { getShippingStatusColor } from '../../../Utils/StatusColor';
+import { useNavigate } from 'react-router-dom';
+import InfoIcon from '@mui/icons-material/Info';
 
 interface Column {
-  id: 'product' | 'price' | 'quantity_sold' | 'stock_status';
+  id:
+    | 'orderNumber'
+    | 'supplier'
+    | 'dateOfOrder'
+    | 'price'
+    | 'estimatedTimeOfArrival'
+    | 'shippingStatus';
   label: string;
   minWidth?: number | string;
   width?: number | string;
@@ -25,105 +32,98 @@ interface Column {
 
 const columns: readonly Column[] = [
   {
-    id: 'product',
-    label: 'Product',
-    minWidth: '50%',
-    width: '60%',
+    id: 'orderNumber',
+    label: 'Order No.',
+    minWidth: '5%',
+    width: '6%',
     align: 'left',
+  },
+  {
+    id: 'dateOfOrder',
+    label: 'Date of Order',
+    // minWidth: 100
+    align: 'center',
+  },
+  {
+    id: 'shippingStatus',
+    label: 'Status',
+    // minWidth: 170,
+    align: 'center',
   },
   {
     id: 'price',
     label: 'Price',
-    // minWidth: 100
     format: (value: number) => value.toLocaleString('en-US'),
-    align: 'right',
+    // minWidth: 170,
+    align: 'center',
   },
   {
-    id: 'quantity_sold',
-    label: 'Quantity Sold',
+    id: 'estimatedTimeOfArrival',
+    label: 'ETA',
     // minWidth: 170,
-    align: 'right',
+    align: 'center',
   },
   {
-    id: 'stock_status',
-    label: 'Stock Status',
+    id: 'supplier',
+    label: 'Supplier',
     // minWidth: 170,
-    align: 'right',
+    align: 'center',
   },
 ];
 
 interface Data {
-  product: string;
+  orderNumber: string;
   price: number;
-  quantity_sold: number;
-  min_quantity: number;
-  stock_quantity: number;
-  stock_status: StockStatus;
+  shippingStatus: ShippingStatus;
+  dateOfOrder: string;
+  estimatedTimeOfArrival: string;
+  supplier: string;
 }
 
 function createData(
-  product: string,
+  orderNumber: string,
   price: number,
-  quantity_sold: number,
-  min_quantity: number,
-  stock_quantity: number,
+  dateOfOrder: dayjs.Dayjs,
+  shippingStatus: ShippingStatus,
+  estimatedTimeOfArrival: dayjs.Dayjs,
+  supplier: string,
 ): Data {
-  const stock_status =
-    stock_quantity === 0
-      ? StockStatus.OUT_OF_STOCK
-      : stock_quantity < min_quantity
-      ? StockStatus.LOW_IN_STOCK
-      : stock_quantity > min_quantity
-      ? StockStatus.IN_STOCK
-      : StockStatus.EXPIRED;
   return {
+    orderNumber,
     price,
-    product,
-    quantity_sold,
-    stock_quantity,
-    min_quantity,
-    stock_status,
+    dateOfOrder: dateOfOrder.format('D MMM, YYYY.  H:M A'),
+    shippingStatus,
+    estimatedTimeOfArrival: estimatedTimeOfArrival.format(
+      'D MMM, YYYY.  H:M A',
+    ),
+    supplier,
   };
 }
 
 const rows = [
-  createData('Moncler Padded Cotton Jacket', 15000, 34, 5, 3),
-  createData('Fresh Apples', 50, 100, 10, 2),
-  createData('Organic Eggs (Dozen)', 80, 80, 15, 0),
-  createData('Premium Coffee Beans', 120, 60, 5, 8),
-  createData('Artisanal Bread Loaf', 70, 40, 8, 4),
-  createData('Imported Cheese Selection', 150, 30, 3, 0),
-  createData('Denim Jeans', 500, 50, 5, 10),
-  createData('Cotton T-Shirt', 200, 80, 10, 15),
-  createData('Leather Jacket', 1500, 20, 3, 5),
-  createData('Designer Dress', 2000, 30, 5, 0),
-  createData('Athletic Sneakers', 800, 70, 12, 20),
-  createData('Smartphone', 60000, 30, 5, 10),
-  createData('Laptop', 80000, 25, 4, 6),
-  createData('Wireless Earphones', 5000, 60, 8, 12),
-  createData('Smart TV', 90000, 15, 2, 4),
-  createData('Gaming Console', 40000, 20, 3, 5),
-  createData('Skincare Set', 3000, 40, 6, 10),
-  createData('Perfume', 2500, 70, 8, 15),
-  createData('Hair Styling Tool', 2000, 60, 10, 18),
-  createData('Makeup Palette', 1500, 50, 5, 10),
-  createData("Men's Grooming Kit", 1200, 30, 4, 8),
-  createData('Cookware Set', 5000, 20, 3, 5),
-  createData('Bedding Sheets', 2500, 40, 6, 10),
-  createData('Vacuum Cleaner', 3000, 30, 4, 6),
-  createData('Air Purifier', 4000, 25, 2, 4),
-  createData('Coffee Maker', 2000, 35, 5, 8),
-  createData('Travel Backpack', 1500, 50, 8, 12),
-  createData('Fitness Tracker', 3000, 30, 5, 10),
-  createData('Bluetooth Speaker', 2000, 40, 6, 8),
-  createData('Pet Supplies', 1000, 45, 10, 15),
-  createData('Outdoor Camping Gear', 5000, 20, 4, 6),
+  createData(
+    'W4NU935',
+    12000,
+    dayjs(new Date()),
+    ShippingStatus.DELIVERED,
+    dayjs(new Date()),
+    'Nike Inc',
+  ),
+  createData(
+    'KF5M6YR',
+    63060,
+    dayjs(new Date()),
+    ShippingStatus.PENDING,
+    dayjs(new Date()),
+    'Nestle Inc',
+  ),
 ];
-const TopSellingProductContainer = styled(Box)`
+
+const SupplierOrderTableContainer = styled(Box)`
   height: fit-content;
 `;
 
-const TopSellingProduct: React.FC = () => {
+const SupplierOrderTable: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -139,7 +139,7 @@ const TopSellingProduct: React.FC = () => {
   };
 
   return (
-    <TopSellingProductContainer>
+    <SupplierOrderTableContainer>
       <Paper
         elevation={1}
         sx={{
@@ -172,7 +172,7 @@ const TopSellingProduct: React.FC = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <React.Fragment key={row.product}>
+                    <React.Fragment key={row.orderNumber}>
                       <TableRow
                         sx={{ cursor: 'pointer' }}
                         hover
@@ -182,15 +182,21 @@ const TopSellingProduct: React.FC = () => {
                         {columns.map((column) => {
                           const value = row[column.id];
                           return (
-                            <TableCell align={column.align} key={column.id}>
+                            <TableCell
+                              align={column.align}
+                              key={column.id}
+                              sx={{
+                                color: getShippingStatusColor(column, value),
+                              }}
+                            >
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
-                                : value}
+                                : String(value)}
                             </TableCell>
                           );
                         })}
                         <TableCell align="right">
-                          <TableModal />
+                          <TableModal orderRow={row} />
                         </TableCell>
                       </TableRow>
                     </React.Fragment>
@@ -204,27 +210,29 @@ const TopSellingProduct: React.FC = () => {
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}
+          key={page}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-    </TopSellingProductContainer>
+    </SupplierOrderTableContainer>
   );
 };
 
-export default TopSellingProduct;
+export default SupplierOrderTable;
 
-const TableModal: React.FC = () => {
-  const [open, setOpen] = React.useState(false);
+const TableModal: React.FC<{ orderRow: Data }> = ({ orderRow }) => {
+  const navigate = useNavigate();
 
   return (
-    <Box>
-      <IconButton onClick={() => setOpen(true)}>
-        <MoreHoriz />
+    <div>
+      <IconButton
+        onClick={() => navigate(`/manager/order/${orderRow.orderNumber}`)}
+      >
+        <InfoIcon />
       </IconButton>
-      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
-    </Box>
+    </div>
   );
 };

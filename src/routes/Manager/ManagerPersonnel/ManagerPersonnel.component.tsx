@@ -6,7 +6,6 @@ import {
   IconButton,
   InputAdornment,
   InputLabel,
-  Modal,
   OutlinedInput,
   Paper,
   Tab,
@@ -40,6 +39,7 @@ const ManagerPersonnel: FC<Props> = () => {
     <Paper
       sx={{
         width: '100%',
+        height: '100%',
         // height: '100vh',
         overflowX: 'auto',
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
@@ -117,8 +117,8 @@ const ManagerPersonnel: FC<Props> = () => {
             display: 'grid',
             gridTemplateColumns: {
               mobile: 'repeat(auto-fit, minmax(100%, 30%))',
-              tablet: 'repeat(auto-fit, minmax(100%, 30%))',
-              desktop: 'repeat(auto-fit, minmax(auto, 24%))',
+              tablet: 'repeat(auto-fit, minmax(100%, 33%))',
+              desktop: 'repeat(auto-fit, minmax(auto, 32%))',
             },
             justifyItems: 'stretch',
             justifyContent: 'space-between',
@@ -126,6 +126,21 @@ const ManagerPersonnel: FC<Props> = () => {
             columnGap: '1%',
           }}
         >
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
+          <PersonnelCard />
           <PersonnelCard />
           <PersonnelCard />
           <PersonnelCard />

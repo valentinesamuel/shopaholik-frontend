@@ -6,31 +6,23 @@ import {
   InputAdornment,
   OutlinedInput,
   Paper,
-  SelectChangeEvent,
   Tab,
   Tabs,
   Typography,
 } from '@mui/material';
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
-import { shippingStatusOptions } from '../../../Utils/categories';
-import SelectOptions from '../../../components/SelectOptions';
 import AddIcon from '@mui/icons-material/Add';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import TabPanel from '../../../components/TabPanel.component';
-import TopSellingProduct from '../../../components/TopSellingProduct';
 import NewOrderModal from './NewOrderModal';
+import SupplierOrderTable from './SupplierOrderTable';
 
 interface Props {}
 
 const SupplierDetail: FC<Props> = ({}) => {
   const [search, setSearchOrder] = useState('');
-  const [shippingStatus, setShippingStatus] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
-
-  const handleShippingStatusChange = (event: SelectChangeEvent) => {
-    setShippingStatus(event.target.value);
-  };
 
   const handleTabChange = (_: SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
@@ -84,14 +76,6 @@ const SupplierDetail: FC<Props> = ({}) => {
                 </IconButton>
               </InputAdornment>
             }
-          />
-          <SelectOptions
-            width="100%"
-            selectLabel="Shipping Status"
-            label="shipping-status"
-            options={shippingStatusOptions}
-            handleChange={handleShippingStatusChange}
-            value={shippingStatus}
           />
         </Box>
         <Box
@@ -182,7 +166,7 @@ const SupplierDetail: FC<Props> = ({}) => {
       </Box>
 
       <TabPanel value={currentTab} index={0}>
-        <TopSellingProduct source="product" />
+        <SupplierOrderTable />
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
         <p>shipped products</p>

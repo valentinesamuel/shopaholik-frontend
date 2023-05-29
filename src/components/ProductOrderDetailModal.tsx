@@ -1,15 +1,12 @@
 import {
   Box,
   Button,
-  IconButton,
   Modal,
   Paper,
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
 import { FC, useState } from 'react';
-import CloseIcon from '@mui/icons-material/Close';
-import CreateIcon from '@mui/icons-material/Create';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import SaveIcon from '@mui/icons-material/Save';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
@@ -49,19 +46,6 @@ const ProductOrderDetailModal: FC<Props> = ({ open, onClose }) => {
           overflowX: 'auto',
         }}
       >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <Button disabled startIcon={<CreateIcon />} variant="contained">
-            Edit Order
-          </Button>
-          <IconButton
-            aria-label="close"
-            size="large"
-            sx={{ display: { desktop: 'inline-block', mobile: 'none' } }}
-          >
-            <CloseIcon fontSize="inherit" />
-          </IconButton>
-        </Box>
-
         <Typography sx={{ margin: '1.5% 0' }} variant="h4">
           Nike Alphafly
         </Typography>

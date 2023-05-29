@@ -27,6 +27,7 @@ const AdminSupplier = () => {
     <Paper
       sx={{
         width: '100%',
+        height: '100%',
         // height: '100vh',
         overflowX: 'auto',
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
@@ -73,8 +74,8 @@ const AdminSupplier = () => {
           display: 'grid',
           gridTemplateColumns: {
             mobile: 'repeat(auto-fit, minmax(100%, 30%))',
-            tablet: 'repeat(auto-fit, minmax(100%, 30%))',
-            desktop: 'repeat(auto-fit, minmax(auto, 24%))',
+            tablet: 'repeat(auto-fit, minmax(100%, 33%))',
+            desktop: 'repeat(auto-fit, minmax(auto, 32%))',
           },
           justifyItems: 'stretch',
           justifyContent: 'space-between',

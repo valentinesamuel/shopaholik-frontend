@@ -17,6 +17,7 @@ import AdminSupplier from './routes/Admin/Supplier/AdminSupplier.component';
 import RoleHome from './routes/RoleHome/RoleHome.component';
 import CashierSale from './routes/Cashier/CashierSale.component';
 import OrderDetails from './routes/Admin/Order/OrderDetails';
+import MissingPage from './pages/404';
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>('light');
@@ -61,14 +62,7 @@ function App() {
               <Route path="sale" element={<CashierSale />} />
             </Route>
           </Route>
-          <Route
-            path="*"
-            element={
-              <>
-                <h1>not ready</h1>
-              </>
-            }
-          />
+          <Route path="*" element={<MissingPage />} />
         </Routes>
       </ThemeProvider>
     </ColorModeContext.Provider>

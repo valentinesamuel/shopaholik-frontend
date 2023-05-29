@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  IconButton,
-  Modal,
-  Paper,
-  Typography,
-} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import CreateIcon from '@mui/icons-material/Create';
+import { Box, Button, Modal, Paper, Typography } from '@mui/material';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import { FC } from 'react';
 
@@ -31,25 +22,6 @@ const ProductDetailModal: FC<Props> = ({ open, onClose }) => {
           overflowX: 'auto',
         }}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            margin: '0 0 4% 0',
-          }}
-        >
-          <Button disabled startIcon={<CreateIcon />} variant="contained">
-            Edit Product
-          </Button>
-          <IconButton
-            aria-label="close"
-            size="large"
-            sx={{ display: { desktop: 'inline-block', mobile: 'none' } }}
-          >
-            <CloseIcon fontSize="inherit" />
-          </IconButton>
-        </Box>
-
         <Box
           sx={{
             display: 'flex',
