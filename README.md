@@ -151,7 +151,7 @@ Here are more screenshots from the product
 
 ## Roadmap
 
-- [ ] Build interface for manager
+- [x] Build interface for manager
 - [ ] Feature 1
   - [ ] Nested Feature 1
 
