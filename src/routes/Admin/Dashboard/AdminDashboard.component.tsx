@@ -3,7 +3,7 @@ import DashboardMetric from '../../../components/DashboardMetric';
 import { Paper } from '@mui/material';
 import { dashboardMetrics } from '../../../Utils/metrics';
 import StockQuantityCard from '../../../components/StockQuantityRow';
-import TopSellingProduct from '../../../components/TopSellingProduct';
+import TopSellingProduct from './TopSellingProduct';
 
 const AdminDashboard: FC = () => {
   return (
@@ -51,7 +51,7 @@ const AdminDashboard: FC = () => {
         }}
       >
         <h3 style={{ marginBottom: 20 }}>Best Selling Products</h3>
-        <TopSellingProduct source="product" />
+        <TopSellingProduct />
       </Paper>
     </Paper>
   );
