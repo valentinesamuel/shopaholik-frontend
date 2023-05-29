@@ -29,7 +29,7 @@ const PersonnelDetailModal: FC = () => {
         boxShadow: 24,
         width: { desktop: 'fit-content', mobile: '80%' },
         padding: '30px',
-        height: { desktop: 'auto', mobile: '90%' },
+        height: '90%',
         overflowX: 'auto',
       }}
     >
