@@ -151,16 +151,15 @@ const TopSellingProduct: React.FC = () => {
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
-                  <>
+                  <React.Fragment key={column.id}>
                     <TableCell
                       sx={{ backgroundColor: 'primary.main' }}
-                      key={column.id}
                       align={column.align}
                       style={{ minWidth: column.minWidth, width: column.width }}
                     >
                       {column.label}
                     </TableCell>
-                  </>
+                  </React.Fragment>
                 ))}
                 <TableCell
                   sx={{ backgroundColor: 'primary.main', width: '5%' }}
@@ -173,9 +172,8 @@ const TopSellingProduct: React.FC = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <>
+                    <React.Fragment key={row.product}>
                       <TableRow
-                        key={row.product}
                         sx={{ cursor: 'pointer' }}
                         hover
                         role="checkbox"
@@ -195,7 +193,7 @@ const TopSellingProduct: React.FC = () => {
                           <TableModal />
                         </TableCell>
                       </TableRow>
-                    </>
+                    </React.Fragment>
                   );
                 })}
             </TableBody>
@@ -222,13 +220,11 @@ const TableModal: React.FC = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div>
+    <Box>
       <IconButton onClick={() => setOpen(true)}>
         <MoreHoriz />
       </IconButton>
-      <Modal keepMounted open={open} onClose={() => setOpen(false)}>
-        <ProductDetailModal />
-      </Modal>
-    </div>
+      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
+    </Box>
   );
 };

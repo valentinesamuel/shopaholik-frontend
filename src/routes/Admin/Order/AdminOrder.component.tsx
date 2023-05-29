@@ -16,11 +16,12 @@ import TabPanel from '../../../components/TabPanel.component';
 import TopSellingProduct from '../../../components/TopSellingProduct';
 import OrderMetrics from './OrderMetrics';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
+import OrdersTable from './OrdersTable';
 
 type Props = {};
 
 const AdminOrder: FC<Props> = ({}) => {
-  const [category, setCategory] = useState('electronics');
+  const [category, setCategory] = useState('');
   const [searchedOrder, setSearchedOrder] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -128,16 +129,16 @@ const AdminOrder: FC<Props> = ({}) => {
       </Box>
 
       <TabPanel value={currentTab} index={0}>
-        <TopSellingProduct source="order" />
+        <OrdersTable />
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
-        <TopSellingProduct source="order" />
+        alrn
       </TabPanel>
       <TabPanel value={currentTab} index={2}>
-        <TopSellingProduct source="order" />
+        alrn
       </TabPanel>
       <TabPanel value={currentTab} index={3}>
-        <TopSellingProduct source="order" />
+        alrn
       </TabPanel>
     </Paper>
   );

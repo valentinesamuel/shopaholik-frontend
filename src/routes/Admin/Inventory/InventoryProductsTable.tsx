@@ -211,16 +211,15 @@ const InventoryProductTable: React.FC = () => {
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
-                  <>
+                  <React.Fragment key={column.id}>
                     <TableCell
                       sx={{ backgroundColor: 'primary.main' }}
-                      key={column.id}
                       align={column.align}
                       style={{ minWidth: column.minWidth, width: column.width }}
                     >
                       {column.label}
                     </TableCell>
-                  </>
+                  </React.Fragment>
                 ))}
                 <TableCell
                   sx={{ backgroundColor: 'primary.main', width: '5%' }}
@@ -233,9 +232,8 @@ const InventoryProductTable: React.FC = () => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <>
+                    <React.Fragment key={row.product}>
                       <TableRow
-                        key={row.product}
                         sx={{ cursor: 'pointer' }}
                         hover
                         role="checkbox"
@@ -255,7 +253,7 @@ const InventoryProductTable: React.FC = () => {
                           <TableModal />
                         </TableCell>
                       </TableRow>
-                    </>
+                    </React.Fragment>
                   );
                 })}
             </TableBody>
@@ -264,6 +262,7 @@ const InventoryProductTable: React.FC = () => {
         <TablePagination
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
+          key={page}
           component="div"
           count={rows.length}
           rowsPerPage={rowsPerPage}
@@ -286,9 +285,8 @@ const TableModal: React.FC = () => {
       <IconButton onClick={() => setOpen(true)}>
         <MoreHoriz />
       </IconButton>
-      <Modal keepMounted open={open} onClose={() => setOpen(false)}>
-        <ProductDetailModal />
-      </Modal>
+     
+      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
     </div>
   );
 };

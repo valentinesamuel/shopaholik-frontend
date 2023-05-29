@@ -149,14 +149,7 @@ const ManagerPersonnel: FC<Props> = () => {
         <p>security</p>
       </TabPanel>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <NewPersonnelModal />
-      </Modal>
+      <NewPersonnelModal open={open} onClose={handleClose} />
     </Paper>
   );
 };

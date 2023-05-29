@@ -128,7 +128,7 @@ const SalesItemTable: React.FC = () => {
                             <TableCell align={column.align} key={column.id}>
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
-                                : value}
+                                : value }
                             </TableCell>
                           );
                         })}

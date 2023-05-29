@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, Fragment, useState } from 'react';
 import { Avatar, Box, Modal, Paper, Typography } from '@mui/material';
 import PersonnelDetailModal from './PersonnelDetailModal';
 
@@ -11,7 +11,7 @@ const PersonnelCard: FC<Props> = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <>
+    <Fragment>
       <Paper
         sx={{
           display: 'flex',
@@ -43,15 +43,9 @@ const PersonnelCard: FC<Props> = () => {
           </Typography>
         </Box>
       </Paper>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <PersonnelDetailModal />
-      </Modal>
-    </>
+
+      <PersonnelDetailModal open={open} onClose={handleClose} />
+    </Fragment>
   );
 };
 

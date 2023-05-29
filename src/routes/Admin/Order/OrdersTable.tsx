@@ -10,112 +10,120 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
-import ProductOrderDetailModal from './ProductOrderDetailModal';
-import ProductDetailModal from './ProductDetailModal';
+import ProductDetailModal from '../../../components/ProductDetailModal';
+import { ShippingStatus } from '../../../Utils/Types';
+import dayjs from 'dayjs';
+import { getShippingStatusColor } from '../../../Utils/StatusColor';
 
 interface Column {
-  id: 'name' | 'code' | 'population' | 'size' | 'density';
+  id:
+    | 'orderNumber'
+    | 'supplier'
+    | 'dateOfOrder'
+    | 'price'
+    | 'estimatedTimeOfArrival'
+    | 'shippingStatus';
   label: string;
-  minWidth?: number;
-  align?: 'right';
+  minWidth?: number | string;
+  width?: number | string;
+  align?: 'right' | 'left' | 'center';
   format?: (value: number) => string;
 }
 
 const columns: readonly Column[] = [
   {
-    id: 'name',
-    label: 'Name',
-    // minWidth: 170
+    id: 'orderNumber',
+    label: 'Order No.',
+    minWidth: '5%',
+    width: '6%',
+    align: 'left',
   },
   {
-    id: 'code',
-    label: 'ISO\u00a0Code',
+    id: 'dateOfOrder',
+    label: 'Date of Order',
     // minWidth: 100
+    align: 'center',
   },
   {
-    id: 'population',
-    label: 'Population',
+    id: 'shippingStatus',
+    label: 'Status',
     // minWidth: 170,
-    align: 'right',
+    align: 'center',
+  },
+  {
+    id: 'price',
+    label: 'Price',
     format: (value: number) => value.toLocaleString('en-US'),
+    // minWidth: 170,
+    align: 'center',
   },
   {
-    id: 'size',
-    label: 'Size\u00a0(km\u00b2)',
+    id: 'estimatedTimeOfArrival',
+    label: 'ETA',
     // minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toLocaleString('en-US'),
+    align: 'center',
   },
   {
-    id: 'density',
-    label: 'Density',
+    id: 'supplier',
+    label: 'Supplier',
     // minWidth: 170,
-    align: 'right',
-    format: (value: number) => value.toFixed(2),
+    align: 'center',
   },
 ];
 
 interface Data {
-  name: string;
-  code: string;
-  population: number;
-  size: number;
-  density: number;
+  orderNumber: string;
+  price: number;
+  shippingStatus: ShippingStatus;
+  dateOfOrder: string;
+  estimatedTimeOfArrival: string;
+  supplier: string;
 }
 
 function createData(
-  name: string,
-  code: string,
-  population: number,
-  size: number,
+  orderNumber: string,
+  price: number,
+  dateOfOrder: dayjs.Dayjs,
+  shippingStatus: ShippingStatus,
+  estimatedTimeOfArrival: dayjs.Dayjs,
+  supplier: string,
 ): Data {
-  const density = population / size;
-  return { name, code, population, size, density };
+  return {
+    orderNumber,
+    price,
+    dateOfOrder: dateOfOrder.format('D MMM, YYYY.  H:M A'),
+    shippingStatus,
+    estimatedTimeOfArrival: estimatedTimeOfArrival.format(
+      'D MMM, YYYY.  H:M A',
+    ),
+    supplier,
+  };
 }
 
 const rows = [
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-  createData('India', 'IN', 1324171354, 3287263),
-  createData('China', 'CN', 1403500365, 9596961),
-  createData('Italy', 'IT', 60483973, 301340),
-  createData('United States', 'US', 327167434, 9833520),
-  createData('Canada', 'CA', 37602103, 9984670),
-  createData('Australia', 'AU', 25475400, 7692024),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Germany', 'DE', 83019200, 357578),
-  createData('Ireland', 'IE', 4857000, 70273),
-  createData('Mexico', 'MX', 126577691, 1972550),
-  createData('Japan', 'JP', 126317000, 377973),
-  createData('France', 'FR', 67022000, 640679),
-  createData('United Kingdom', 'GB', 67545757, 242495),
-  createData('Russia', 'RU', 146793744, 17098246),
-  createData('Nigeria', 'NG', 200962417, 923768),
-  createData('Brazil', 'BR', 210147125, 8515767),
-  createData('Nigeria', 'NG', 200962417, 923768),
+  createData(
+    'W4NU935',
+    12000,
+    dayjs(new Date()),
+    ShippingStatus.DELIVERED,
+    dayjs(new Date()),
+    'Nike Inc',
+  ),
+  createData(
+    'KF5M6YR',
+    63060,
+    dayjs(new Date()),
+    ShippingStatus.PENDING,
+    dayjs(new Date()),
+    'Nestle Inc',
+  ),
 ];
-const TopSellingProductContainer = styled(Box)`
+
+const OrdersTableContainer = styled(Box)`
   height: fit-content;
 `;
 
-interface Props {
-  source: 'order' | 'supplier' | 'product';
-}
-
-const TopSellingProduct: React.FC<Props> = ({ source }) => {
+const OrdersTable: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -131,7 +139,7 @@ const TopSellingProduct: React.FC<Props> = ({ source }) => {
   };
 
   return (
-    <TopSellingProductContainer>
+    <OrdersTableContainer>
       <Paper
         elevation={1}
         sx={{
@@ -147,14 +155,14 @@ const TopSellingProduct: React.FC<Props> = ({ source }) => {
                     <TableCell
                       sx={{ backgroundColor: 'primary.main' }}
                       align={column.align}
-                      style={{ minWidth: column.minWidth }}
+                      style={{ minWidth: column.minWidth, width: column.width }}
                     >
                       {column.label}
                     </TableCell>
                   </React.Fragment>
                 ))}
                 <TableCell
-                  sx={{ backgroundColor: 'primary.main' }}
+                  sx={{ backgroundColor: 'primary.main', width: '5%' }}
                   align="right"
                 ></TableCell>
               </TableRow>
@@ -164,7 +172,7 @@ const TopSellingProduct: React.FC<Props> = ({ source }) => {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <React.Fragment key={row.code}>
+                    <React.Fragment key={row.orderNumber}>
                       <TableRow
                         sx={{ cursor: 'pointer' }}
                         hover
@@ -174,16 +182,21 @@ const TopSellingProduct: React.FC<Props> = ({ source }) => {
                         {columns.map((column) => {
                           const value = row[column.id];
                           return (
-                            <TableCell align={column.align} key={column.id}>
+                            <TableCell
+                              align={column.align}
+                              key={column.id}
+                              sx={{
+                                color: getShippingStatusColor(column, value),
+                              }}
+                            >
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
-                                : value}
+                                : String(value)}
                             </TableCell>
                           );
                         })}
                         <TableCell align="right">
-                          <TableModal source={source} />
-                          <p>gh</p>
+                          <TableModal />
                         </TableCell>
                       </TableRow>
                     </React.Fragment>
@@ -197,35 +210,29 @@ const TopSellingProduct: React.FC<Props> = ({ source }) => {
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}
+          key={page}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-    </TopSellingProductContainer>
+    </OrdersTableContainer>
   );
 };
 
-export default TopSellingProduct;
+export default OrdersTable;
 
-const TableModal: React.FC<{
-  source: 'order' | 'supplier' | 'product';
-}> = ({ source }) => {
+const TableModal: React.FC = () => {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Box>
+    <div>
       <IconButton onClick={() => setOpen(true)}>
         <MoreHoriz />
       </IconButton>
-      {source === 'order' ? (
-        <ProductOrderDetailModal open={open} onClose={() => setOpen(false)} />
-      ) : source === 'product' ? (
-        <ProductDetailModal open={open} onClose={() => setOpen(false)} />
-      ) : (
-        <p>No modal child for this source</p>
-      )}
-    </Box>
+
+      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
+    </div>
   );
 };
