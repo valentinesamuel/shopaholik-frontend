@@ -15,9 +15,10 @@ import AdminHome from './routes/Admin/Home/AdminHome.component';
 import AdminOrder from './routes/Admin/Order/AdminOrder.component';
 import AdminSupplier from './routes/Admin/Supplier/AdminSupplier.component';
 import RoleHome from './routes/RoleHome/RoleHome.component';
+import CashierSale from './routes/Cashier/CashierSale.component';
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>('dark');
+  const [mode, setMode] = useState<PaletteMode>('light');
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
@@ -55,7 +56,7 @@ function App() {
             <Route path="/cashier" element={<AdminHome />}>
               <Route index element={<AdminDashboard />} />
               <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="sale" element={<>cashier sale</>} />
+              <Route path="sale" element={<CashierSale />} />
             </Route>
           </Route>
           <Route

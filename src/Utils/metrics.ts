@@ -37,7 +37,7 @@ export const dashboardMetrics = [
     id: 5,
     color: '#D635B2',
     icon: tag,
-    title: 'total invemtory cost',
+    title: 'total inventory cost',
     value: '₦ 12,000,000',
   },
   {

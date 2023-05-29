@@ -7,6 +7,7 @@ import blue from '@mui/material/colors/blue';
 const NavbarContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
+  padding: 1% 3% 0 3%;
 
   .role-greeting {
     .greeting {
