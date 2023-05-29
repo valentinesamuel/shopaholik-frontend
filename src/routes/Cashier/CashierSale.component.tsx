@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
+import SalesItemTable from './SalesItemTable';
 
 const CashierSale = () => {
   const [searchedProduct, setSearchedSProduct] = useState('');
@@ -81,6 +82,7 @@ const CashierSale = () => {
             }
           />
         </FormControl>
+        <SalesItemTable />
       </Paper>
       <Paper
         sx={{
@@ -231,7 +233,7 @@ const CashierSale = () => {
             </Button>
             <TextField
               type="number"
-              placeholder="Cash"
+              placeholder="Card"
               inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             />
           </Box>
@@ -252,7 +254,7 @@ const CashierSale = () => {
             </Button>
             <TextField
               type="number"
-              placeholder="Cash"
+              placeholder="Cheque"
               inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             />
           </Box>
@@ -273,7 +275,7 @@ const CashierSale = () => {
             </Button>
             <TextField
               type="number"
-              placeholder="Cash"
+              placeholder="Gift Card"
               inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
             />
           </Box>
