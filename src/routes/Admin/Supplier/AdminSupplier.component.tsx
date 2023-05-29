@@ -1,16 +1,18 @@
 import {
   Box,
+  FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
   OutlinedInput,
   Paper,
   Typography,
 } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { Search } from '@mui/icons-material';
 import SupplierCard from '../../../components/SupplierCard';
 
-const AdminSupplier = () => {
+const AdminSupplier: FC = () => {
   const [searchedSupplier, setSearchedSupplier] = useState('');
 
   const handleSearchedProductChange = (
@@ -33,19 +35,13 @@ const AdminSupplier = () => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: {
-            tablet: 'space-between',
-          },
-        }}
-      >
+      <FormControl fullWidth>
+        <InputLabel htmlFor="searchSupplier">Search Supplier</InputLabel>
         <OutlinedInput
-          label="Search Product"
+          id="searchSupplier"
+          label="Search Supplier"
           onChange={handleSearchedProductChange}
           value={searchedSupplier}
-          placeholder="Search Supplier"
           sx={{
             width: '100%',
             outline: 'none',
@@ -62,7 +58,7 @@ const AdminSupplier = () => {
             </InputAdornment>
           }
         />
-      </Box>
+      </FormControl>
       <Typography
         sx={{ fontWeight: '600', margin: '38px 0 27px 0' }}
         variant="h6"
@@ -71,6 +67,7 @@ const AdminSupplier = () => {
       </Typography>
       <Box
         sx={{
+          height: 'inherit',
           display: 'grid',
           gridTemplateColumns: {
             mobile: 'repeat(auto-fit, minmax(100%, 30%))',
@@ -91,13 +88,6 @@ const AdminSupplier = () => {
         <SupplierCard destination="gd" />
         <SupplierCard destination="gd" />
         <SupplierCard destination="gd" />
-        <SupplierCard destination="gd" />
-        <SupplierCard destination="gd" />
-        <SupplierCard destination="gd" />
-        <SupplierCard destination="d" />
-        <SupplierCard destination="db" />
-        <SupplierCard destination="dggg" />
-        // FIXME Add pagination to show only 9 items
       </Box>
     </Paper>
   );

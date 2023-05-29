@@ -12,6 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
 import ProductDetailModal from '../../../components/ProductDetailModal';
 import { ProductCategory, StockStatus } from '../../../Utils/Types';
+import { filterAndSearchInventoryItems } from './helpers';
 
 interface Column {
   id: 'product' | 'price' | 'quantity_sold' | 'stock_status' | 'category';
@@ -183,7 +184,11 @@ const InventoryProductTableContainer = styled(Box)`
   height: fit-content;
 `;
 
-const InventoryProductTable: React.FC = () => {
+const InventoryProductTable: React.FC<{
+  filterTab: string;
+  filterCategory: string;
+  searchFilter: string;
+}> = ({ filterTab, filterCategory, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -228,7 +233,12 @@ const InventoryProductTable: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {filterAndSearchInventoryItems(
+                rows,
+                filterTab,
+                searchFilter,
+                filterCategory,
+              )
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (

@@ -1,8 +1,10 @@
 import {
   Box,
   Button,
+  FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
   Modal,
   OutlinedInput,
   Paper,
@@ -12,7 +14,6 @@ import {
 } from '@mui/material';
 import Search from '@mui/icons-material/Search';
 
-import TabPanel from '../../../components/TabPanel.component';
 import { ChangeEvent, useState } from 'react';
 import InventoryMetrics from './InventoryMetrics';
 import { categories } from '../../../Utils/categories';
@@ -20,6 +21,7 @@ import SelectOptions from '../../../components/SelectOptions';
 import { inventoryTabs } from '../../../Utils/OrderandShippinTab';
 import AddProductModal from '../../../components/AddProductModal';
 import InventoryProductTable from './InventoryProductsTable';
+import { useDebounce } from '../../../hooks/UseDebounce';
 
 function a11yProps(index: number) {
   return {
@@ -31,16 +33,18 @@ function a11yProps(index: number) {
 const AdminInventory = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [searchedProduct, setSearchedProduct] = useState('');
+  const debouncedSearchedProduct = useDebounce(searchedProduct, 500);
   const [category, setCategory] = useState('');
+  const [filter, setFilter] = useState('');
   const [open, setOpen] = useState(false);
 
   const handleCategoryChange = (event: SelectChangeEvent) => {
     setCategory(event.target.value as string);
-    console.log(event.target.value);
   };
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
+    setFilter(inventoryTabs[newTab].stockStatusTab);
   };
   const handleSearchedProductChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -146,21 +150,17 @@ const AdminInventory = () => {
             options={categories}
             handleChange={handleCategoryChange}
             value={category}
+            sxStyles={{ marginRight: '5%' }}
           />
-          <Box
-            sx={{
-              display: 'flex',
-            }}
-          >
+
+          <FormControl fullWidth>
+            <InputLabel htmlFor="searchProduct">Search Product</InputLabel>
             <OutlinedInput
+              id="searchProduct"
               label="Search Product"
               onChange={handleSearchedProductChange}
               value={searchedProduct}
               placeholder="Search Products"
-              sx={{
-                marginLeft: 5,
-                outline: 'none',
-              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -173,22 +173,15 @@ const AdminInventory = () => {
                 </InputAdornment>
               }
             />
-          </Box>
+          </FormControl>
         </Box>
       </Box>
 
-      <TabPanel value={currentTab} index={0}>
-        <InventoryProductTable />
-      </TabPanel>
-      <TabPanel value={currentTab} index={1}>
-        <p>sdfsdf</p>
-      </TabPanel>
-      <TabPanel value={currentTab} index={2}>
-        <p>sdfsdf</p>
-      </TabPanel>
-      <TabPanel value={currentTab} index={3}>
-        <p>sdfsdf</p>
-      </TabPanel>
+      <InventoryProductTable
+        filterTab={filter}
+        filterCategory={category}
+        searchFilter={debouncedSearchedProduct as string}
+      />
     </Paper>
   );
 };

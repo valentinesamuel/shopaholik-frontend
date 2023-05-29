@@ -1,7 +1,9 @@
 import {
   Box,
+  FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
   OutlinedInput,
   Paper,
   SelectChangeEvent,
@@ -96,21 +98,18 @@ const AdminOrder: FC<Props> = ({}) => {
             options={categories}
             handleChange={handleCategoryChange}
             value={category}
-          />
-          <Box
-            sx={{
-              display: 'flex',
+            sxStyles={{
+              marginRight: 5,
             }}
-          >
+          />
+          <FormControl fullWidth>
+            <InputLabel htmlFor="searchProduct">Search Prodcuts</InputLabel>
             <OutlinedInput
+              id="searchProduct"
               label="Search Product"
               onChange={handleSearchChange}
               value={searchedOrder}
               placeholder="Search Products"
-              sx={{
-                marginLeft: 5,
-                outline: 'none',
-              }}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -123,7 +122,7 @@ const AdminOrder: FC<Props> = ({}) => {
                 </InputAdornment>
               }
             />
-          </Box>
+          </FormControl>
         </Box>
       </Box>
 

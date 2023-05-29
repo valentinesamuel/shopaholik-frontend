@@ -2,8 +2,10 @@ import { Search } from '@mui/icons-material';
 import {
   Box,
   Button,
+  FormControl,
   IconButton,
   InputAdornment,
+  InputLabel,
   OutlinedInput,
   Paper,
   Tab,
@@ -52,19 +54,20 @@ const SupplierDetail: FC<Props> = ({}) => {
           },
         }}
       >
-        <Box>
+        <FormControl
+          sx={{
+            width: {
+              desktop: '50%',
+              mobile: '100%',
+            },
+          }}
+        >
+          <InputLabel htmlFor="searchorder">Search order</InputLabel>
           <OutlinedInput
-            label="Search Product"
+            id="searchorder"
+            label="Search Order"
             onChange={handleSearchChange}
-            fullWidth
-            sx={{
-              margin: {
-                desktop: '0 0 15% 0',
-                mobile: '0 0 5% 0',
-              },
-            }}
             value={search}
-            placeholder="Search Products"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -77,7 +80,7 @@ const SupplierDetail: FC<Props> = ({}) => {
               </InputAdornment>
             }
           />
-        </Box>
+        </FormControl>
         <Box
           sx={{
             textAlign: {

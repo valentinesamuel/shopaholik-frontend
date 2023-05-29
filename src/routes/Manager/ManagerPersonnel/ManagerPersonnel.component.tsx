@@ -135,21 +135,6 @@ const ManagerPersonnel: FC<Props> = () => {
           <PersonnelCard />
           <PersonnelCard />
           <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          // FIXME Add pagination to show only 9 items
         </Box>
       </TabPanel>
       <TabPanel value={currentTab} index={1}>
@@ -164,7 +149,6 @@ const ManagerPersonnel: FC<Props> = () => {
       <TabPanel value={currentTab} index={4}>
         <p>security</p>
       </TabPanel>
-
       <NewPersonnelModal open={open} onClose={handleClose} />
     </Paper>
   );

@@ -39,14 +39,14 @@ const ProductDetailModal: FC<Props> = ({ open, onClose }) => {
             <Typography sx={{ margin: '1.5% 0 4% 0' }} variant="body1">
               QPNRTG0Q4
             </Typography>
-            <Box sx={{ marginBottom: '29px' }}>
+            {/* <Box sx={{ marginBottom: '29px' }}>
               <Typography sx={{ color: '#96989E' }}>
                 Estimated time of arrival
               </Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
                 24 May, 2023
               </Typography>
-            </Box>
+            </Box> */}
             <Box sx={{ marginBottom: '29px' }}>
               <Typography sx={{ color: '#96989E' }}>Stock Status</Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
