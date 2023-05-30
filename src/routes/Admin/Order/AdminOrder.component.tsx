@@ -6,33 +6,29 @@ import {
   InputLabel,
   OutlinedInput,
   Paper,
-  SelectChangeEvent,
   Tab,
   Tabs,
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
-import SelectOptions from '../../../components/SelectOptions';
-import { categories } from '../../../Utils/categories';
 import { Search } from '@mui/icons-material';
-import TabPanel from '../../../components/TabPanel.component';
 import OrderMetrics from './OrderMetrics';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import OrdersTable from './OrdersTable';
+import { useDebounce } from '../../../hooks/UseDebounce';
 
 type Props = {};
 
 const AdminOrder: FC<Props> = ({}) => {
-  const [category, setCategory] = useState('');
   const [searchedOrder, setSearchedOrder] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
+  const [filter, setFilter] = useState('');
+  const debouncedSearchedOrder = useDebounce(searchedOrder, 500);
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
+    setFilter(orderTabs[newTab].shippingStatusTab);
   };
 
-  const handleCategoryChange = (event: SelectChangeEvent) => {
-    setCategory(event.target.value);
-  };
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchedOrder(event.target.value);
   };
@@ -83,61 +79,37 @@ const AdminOrder: FC<Props> = ({}) => {
             })}
           </Tabs>
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: {
-              tablet: 'space-between',
-            },
-          }}
+
+        <FormControl
+          fullWidth
+          sx={{ width: { desktop: '50%', mobile: '100%' } }}
         >
-          <SelectOptions
-            width="50%"
-            selectLabel="Categories"
-            label="categories"
-            options={categories}
-            handleChange={handleCategoryChange}
-            value={category}
-            sxStyles={{
-              marginRight: 5,
-            }}
+          <InputLabel htmlFor="searchProduct">Search Prodcuts</InputLabel>
+          <OutlinedInput
+            id="searchProduct"
+            label="Search Product"
+            onChange={handleSearchChange}
+            value={searchedOrder}
+            placeholder="Search Products"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="search button"
+                  onClick={() => console.log(searchedOrder)}
+                  edge="end"
+                >
+                  <Search />
+                </IconButton>
+              </InputAdornment>
+            }
           />
-          <FormControl fullWidth>
-            <InputLabel htmlFor="searchProduct">Search Prodcuts</InputLabel>
-            <OutlinedInput
-              id="searchProduct"
-              label="Search Product"
-              onChange={handleSearchChange}
-              value={searchedOrder}
-              placeholder="Search Products"
-              endAdornment={
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="search button"
-                    onClick={() => console.log(searchedOrder)}
-                    edge="end"
-                  >
-                    <Search />
-                  </IconButton>
-                </InputAdornment>
-              }
-            />
-          </FormControl>
-        </Box>
+        </FormControl>
       </Box>
 
-      <TabPanel value={currentTab} index={0}>
-        <OrdersTable />
-      </TabPanel>
-      <TabPanel value={currentTab} index={1}>
-        alrn
-      </TabPanel>
-      <TabPanel value={currentTab} index={2}>
-        alrn
-      </TabPanel>
-      <TabPanel value={currentTab} index={3}>
-        alrn
-      </TabPanel>
+      <OrdersTable
+        searchFilter={debouncedSearchedOrder as string}
+        filterTab={filter}
+      />
     </Paper>
   );
 };

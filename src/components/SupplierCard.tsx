@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface Props {
   destination: string;
+  name: string
 }
 
-const SupplierCard: FC<Props> = ({ destination }) => {
+const SupplierCard: FC<Props> = ({ destination, name }) => {
   const navigate = useNavigate();
 
   const gotoSupplierDetails = () => {
@@ -25,7 +26,7 @@ const SupplierCard: FC<Props> = ({ destination }) => {
       <Avatar sx={{ width: 80, height: 80, marginRight: '8%' }}>NI</Avatar>
       <Box>
         <Typography variant="body1" sx={{ fontWeight: '600' }}>
-          Nestle Inc
+          {name}
         </Typography>
         <Typography sx={{ margin: '10px 0' }}>
           22-24 Industrial Avenue, Ilupeju. PMB 21164 Ikeja, Lagos State.

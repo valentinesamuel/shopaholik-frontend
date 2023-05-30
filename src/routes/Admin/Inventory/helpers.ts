@@ -1,10 +1,11 @@
-interface Data {
+import { ShippingStatus } from './../../../Utils/Types';
+interface InventoryData {
   product: string;
   category: string;
   stock_status: string;
 }
 
-export const filterAndSearchInventoryItems = <T extends Data>(
+export const filterAndSearchInventoryItems = <T extends InventoryData>(
   rows: T[],
   tabOption: string,
   search: string,

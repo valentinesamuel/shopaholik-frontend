@@ -1,20 +1,24 @@
-import { StockStatus } from './Types';
+import { ShippingStatus, StockStatus } from './Types';
 export const orderTabs = [
   {
     id: '1',
     label: 'All Products',
+    shippingStatusTab: '',
   },
   {
     id: '2',
     label: 'Pending',
+    shippingStatusTab: ShippingStatus.PENDING,
   },
   {
     id: '3',
     label: 'Confirmed',
+    shippingStatusTab: ShippingStatus.CONFIRMED,
   },
   {
     id: '4',
     label: 'Delivered',
+    shippingStatusTab: ShippingStatus.DELIVERED,
   },
 ];
 
