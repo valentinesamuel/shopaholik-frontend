@@ -81,6 +81,12 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open }) => {
               </Typography>
               <Typography sx={{ fontWeight: 'bold' }}>FLWK5UJ3UNT0D</Typography>
             </Box>
+            <Box sx={{ display: 'flex', margin: '3% 0' }}>
+              <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
+                Department:
+              </Typography>
+              <Typography sx={{ fontWeight: 'bold' }}>Management</Typography>
+            </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
               <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
                 Job Desc.:
@@ -94,7 +100,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open }) => {
                 value={jobDesignation}
               />
             </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', margin: '3% 0' }}>
               <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
                 Pay rate:
               </Typography>

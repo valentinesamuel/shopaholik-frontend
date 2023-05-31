@@ -90,6 +90,7 @@ export enum ADMINROLE {
 export enum JobDesignation {
   MANAGER = 'MANAGER',
   SUPERVISOR = 'SUPERVISOR',
+  FLOOR_WORKER = 'FlOOR WORKER',
   CASHIER = 'CASHIER',
   SECURITY = 'SECURITY',
   JANITOR = 'JANITOR',

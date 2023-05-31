@@ -1,10 +1,14 @@
 import { FC, Fragment, useState } from 'react';
 import { Avatar, Box, Paper, Typography } from '@mui/material';
 import PersonnelDetailModal from './PersonnelDetailModal';
+import { Personnel } from './personnels';
 
-interface Props {}
+interface Props {
+  personnel: Personnel;
+}
 
-const PersonnelCard: FC<Props> = () => {
+const PersonnelCard: FC<Props> = ({ personnel }) => {
+  const { name, department } = personnel;
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -23,7 +27,7 @@ const PersonnelCard: FC<Props> = () => {
         <Avatar sx={{ width: 80, height: 80, marginRight: '8%' }}>OJ</Avatar>
         <Box>
           <Typography variant="body1" sx={{ fontWeight: '600' }}>
-            Osahon James
+            {name}
           </Typography>
           <Typography sx={{ margin: '10px 0' }}>
             38, Bori camp. Niger State Minna Nigeria
@@ -39,6 +43,18 @@ const PersonnelCard: FC<Props> = () => {
               }}
             >
               8 hours
+            </span>
+          </Typography>
+          <Typography sx={{ display: 'flex', alignItems: 'center' }}>
+            Department:
+            <span
+              style={{
+                color: '#4558FF',
+                marginLeft: '2%',
+                marginRight: '2%',
+              }}
+            >
+              {department}
             </span>
           </Typography>
         </Box>

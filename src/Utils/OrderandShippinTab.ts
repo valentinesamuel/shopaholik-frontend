@@ -1,4 +1,4 @@
-import { ShippingStatus, StockStatus } from './Types';
+import { ShippingStatus, StockStatus, JobDesignation } from './Types';
 export const orderTabs = [
   {
     id: '1',
@@ -49,21 +49,36 @@ export const personnelTabs = [
   {
     id: '1',
     label: 'All Personnel',
+    personnelTab: '',
   },
   {
     id: '2',
     label: 'Management',
+    personnelTab: JobDesignation.MANAGER,
   },
   {
     id: '3',
-    label: 'Floor Worker',
+    label: 'Supervisor',
+    personnelTab: JobDesignation.SUPERVISOR,
   },
   {
     id: '4',
-    label: 'Cashier',
+    label: 'Floor Worker',
+    personnelTab: JobDesignation.FLOOR_WORKER,
   },
   {
     id: '5',
+    label: 'Cashier',
+    personnelTab: JobDesignation.CASHIER,
+  },
+  {
+    id: '6',
     label: 'Security',
+    personnelTab: JobDesignation.SECURITY,
+  },
+  {
+    id: '7',
+    label: 'Janitor',
+    personnelTab: JobDesignation.JANITOR,
   },
 ];

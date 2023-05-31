@@ -13,9 +13,10 @@ import {
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import TabPanel from '../../../components/TabPanel.component';
-import { orderTabs, personnelTabs } from '../../../Utils/OrderandShippinTab';
+import { personnelTabs } from '../../../Utils/OrderandShippinTab';
 import PersonnelCard from './PersonnelCard';
 import NewPersonnelModal from './NewPersonnelModal';
+import { personnels as personnelsList } from './personnels';
 
 interface Props {}
 
@@ -23,12 +24,23 @@ const ManagerPersonnel: FC<Props> = () => {
   const [searchedPersonnel, setSearchedPersonnel] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
+  const [personnels, setPersonnels] = useState(personnelsList);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
+    const currentPersonnelDepartment = personnelTabs[newTab].personnelTab;
+
+    const filterPersonnels = personnelsList.filter((personnel) => {
+      if (currentPersonnelDepartment === '') {
+        return true;
+      }
+      return personnel.department === currentPersonnelDepartment;
+    });
+
+    setPersonnels(filterPersonnels);
   };
 
   const handleSearchPersonnel = (event: ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +112,7 @@ const ManagerPersonnel: FC<Props> = () => {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
-            {personnelTabs.map((tab: (typeof orderTabs)[0]) => {
+            {personnelTabs.map((tab: { id: string; label: string }) => {
               return <Tab key={tab.id} label={tab.label} />;
             })}
           </Tabs>
@@ -111,44 +123,25 @@ const ManagerPersonnel: FC<Props> = () => {
         </Button>
       </Box>
 
-      <TabPanel value={currentTab} index={0}>
-        <Box
-          sx={{
-            display: 'grid',
-            gridTemplateColumns: {
-              mobile: 'repeat(auto-fit, minmax(100%, 30%))',
-              tablet: 'repeat(auto-fit, minmax(100%, 33%))',
-              desktop: 'repeat(auto-fit, minmax(auto, 32%))',
-            },
-            justifyItems: 'stretch',
-            justifyContent: 'space-between',
-            rowGap: '5%',
-            columnGap: '1%',
-          }}
-        >
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-          <PersonnelCard />
-        </Box>
-      </TabPanel>
-      <TabPanel value={currentTab} index={1}>
-        <p>management</p>
-      </TabPanel>
-      <TabPanel value={currentTab} index={2}>
-        <p>floor worker</p>
-      </TabPanel>
-      <TabPanel value={currentTab} index={3}>
-        <p>sounter</p>
-      </TabPanel>
-      <TabPanel value={currentTab} index={4}>
-        <p>security</p>
-      </TabPanel>
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            mobile: 'repeat(auto-fit, minmax(100%, 30%))',
+            tablet: 'repeat(auto-fit, minmax(100%, 33%))',
+            desktop: 'repeat(auto-fit, minmax(auto, 32%))',
+          },
+          justifyItems: 'stretch',
+          justifyContent: 'space-between',
+          rowGap: '5%',
+          columnGap: '1%',
+        }}
+      >
+        {personnels.map((personnel) => (
+          <PersonnelCard personnel={personnel} key={personnel.name} />
+        ))}
+      </Box>
+
       <NewPersonnelModal open={open} onClose={handleClose} />
     </Paper>
   );

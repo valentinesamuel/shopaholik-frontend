@@ -63,15 +63,14 @@ const suppliers = [
 const AdminSupplier: FC = () => {
   const [searchedSupplier, setSearchedSupplier] = useState('');
   const [suppliersList, setSuppliersList] = useState(suppliers);
-  const debouncedSearchedSupplier = useDebounce(searchedSupplier, 200);
+  let debouncedSearchedSupplier = useDebounce(searchedSupplier, 200);
 
   const handleSearchedProductChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => {
     setSearchedSupplier(event.target.value);
-  };
+    debouncedSearchedSupplier = event.target.value;
 
-  const searchSupplier = () => {
     const filterSupplierList = suppliers.filter((supplier) =>
       supplier.name
         .toLowerCase()
@@ -79,6 +78,8 @@ const AdminSupplier: FC = () => {
     );
     setSuppliersList(filterSupplierList);
   };
+
+  const searchSupplier = () => {};
 
   return (
     <Paper
