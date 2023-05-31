@@ -91,7 +91,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'space-evenly',
             flexDirection: {
               desktop: 'row',
               mobile: 'column',
@@ -103,7 +103,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
           }}
         >
           <Avatar
-            sx={{ marginRight: '4%' }}
+            sx={{ marginRight: '4%', height: '150px', width: '150px' }}
             alt="Remy Sharp"
             src={selectedImage as string}
           />
@@ -126,9 +126,6 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
             style={{ display: 'none' }}
             onChange={handleFileChange}
           />
-          <Typography sx={{ fontSize: '.875rem', color: '#717687' }}>
-            This is the name of the file.jpeg
-          </Typography>
         </Box>
         <Box>
           <Typography

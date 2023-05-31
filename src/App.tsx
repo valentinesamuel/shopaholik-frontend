@@ -9,8 +9,6 @@ import AdminDashboard from './routes/Admin/Dashboard/AdminDashboard.component';
 import AdminInventory from './routes/Admin/Inventory/AdminInventory.component';
 import SupplierDetail from './routes/Admin/Supplier/SupplierDetail';
 import ManagerPersonnel from './routes/Manager/ManagerPersonnel/ManagerPersonnel.component';
-import SignOut from './pages/Signout.component';
-import SignUp from './pages/Signup.component';
 import AdminHome from './routes/Admin/Home/AdminHome.component';
 import AdminOrder from './routes/Admin/Order/AdminOrder.component';
 import AdminSupplier from './routes/Admin/Supplier/AdminSupplier.component';
@@ -38,8 +36,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <Routes>
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signup" element={<SignOut />} />
           <Route path="/" element={<RoleHome />}>
             <Route path="/manager" element={<AdminHome />}>
               <Route index element={<AdminDashboard />} />

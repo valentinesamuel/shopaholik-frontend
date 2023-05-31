@@ -51,7 +51,7 @@ export interface Personnel {
   middle_name: string;
   date_of_birth: string;
   profile_picture_url: string;
-  phone: number;
+  phone: string;
   email: string;
   religion: string;
   address: string;
@@ -65,12 +65,12 @@ export interface Personnel {
     name: string;
     date_of_birth: string;
     relationship_with_staff: string;
-    phone: number;
+    phone: string;
     email: string;
     address: string;
     gender: string;
   };
-  job_designation: JobDesignation;
+  job_designation: JobDesignation | ADMINROLE;
   availability_status: AvailAbilityStatus;
   monthly_salary: number;
 }

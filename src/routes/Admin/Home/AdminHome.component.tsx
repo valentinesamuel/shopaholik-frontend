@@ -53,7 +53,7 @@ const AdminHome: FC = () => {
             })}
           </div>
           <div className="signout">
-            <SideLink destination="signout" icon={logout} name="sign out" />
+            <SideLink destination="/signin" icon={logout} name="sign out" />
           </div>
         </Sidebar>
       </Modal>

@@ -84,13 +84,13 @@ const AdminOrder: FC<Props> = ({}) => {
           fullWidth
           sx={{ width: { desktop: '50%', mobile: '100%' } }}
         >
-          <InputLabel htmlFor="searchProduct">Search Prodcuts</InputLabel>
+          <InputLabel htmlFor="searchProduct">Search Order</InputLabel>
           <OutlinedInput
             id="searchProduct"
-            label="Search Product"
+            label="Search Order"
             onChange={handleSearchChange}
             value={searchedOrder}
-            placeholder="Search Products"
+            placeholder="Search Order"
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
