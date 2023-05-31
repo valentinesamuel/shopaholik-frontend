@@ -233,7 +233,7 @@ const TableModal: React.FC<{ orderRow: Data }> = ({ orderRow }) => {
   return (
     <div>
       <IconButton onClick={() => navigate(`${orderRow.orderNumber}`)}>
-        <InfoIcon />
+        <InfoIcon/>
       </IconButton>
     </div>
   );

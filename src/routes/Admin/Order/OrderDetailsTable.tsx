@@ -232,7 +232,7 @@ const TableModal: React.FC<{ orderRow: Data }> = () => {
   return (
     <div>
       <IconButton onClick={() => setOpen(true)}>
-        <MoreHoriz />
+        <MoreHoriz sx={{ display: 'none' }} />
       </IconButton>
       <ProductDetailModal open={open} onClose={() => setOpen(false)} />
     </div>
