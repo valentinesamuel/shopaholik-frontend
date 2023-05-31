@@ -1,4 +1,3 @@
-import { ShippingStatus } from './../../../Utils/Types';
 interface InventoryData {
   product: string;
   category: string;

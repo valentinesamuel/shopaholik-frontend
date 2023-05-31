@@ -12,7 +12,6 @@ import {
   Tabs,
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
-import TabPanel from '../../../components/TabPanel.component';
 import { personnelTabs } from '../../../Utils/OrderandShippinTab';
 import PersonnelCard from './PersonnelCard';
 import NewPersonnelModal from './NewPersonnelModal';
