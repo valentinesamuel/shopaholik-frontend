@@ -15,7 +15,6 @@ import {
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
-import TabPanel from '../../../components/TabPanel.component';
 import NewSupplierOrderModal from './NewSupplierOrderModal';
 import SupplierOrderTable from './SupplierOrderTable';
 import { useDebounce } from '../../../hooks/UseDebounce';
