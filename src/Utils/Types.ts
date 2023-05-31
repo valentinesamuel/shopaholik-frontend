@@ -1,25 +1,26 @@
+import { Dayjs } from 'dayjs';
+
 export interface Supplier {
-  suplier_id: string;
+  supplierId: string;
   name: string;
   address: string;
-  phone: number;
-  last_order_date: Date;
-  orders: Order[];
+  phone: string;
+  last_order_date: Date | Dayjs;
   profile_pic_url: string;
   state: string;
-  country: string;
-  additional_infromation: string;
+  additional_infromation?: string;
+  orders?: Order[] | [];
 }
 
 export interface Order {
-  order_id: string;
-  date_of_placement: Date;
-  shipping_status: ShippingStatus;
-  total_price: string;
-  delivery_date: Date;
-  supplier_id: string;
-  order_number: string;
-  ordered_items: OrderedItem[];
+  orderId: string;
+  orderNumber: string;
+  dateOfOrder: Date | Dayjs;
+  shippingStatus: ShippingStatus;
+  price: number;
+  estimatedTimeOfArrival: Date | Dayjs;
+  supplier: string;
+  items?: OrderedItem[];
 }
 
 export interface OrderedItem {
@@ -90,7 +91,7 @@ export enum ADMINROLE {
 export enum JobDesignation {
   MANAGER = 'MANAGER',
   SUPERVISOR = 'SUPERVISOR',
-  FLOOR_WORKER = 'FlOOR WORKER',
+  FLOOR_WORKER = 'FLOOR WORKER',
   CASHIER = 'CASHIER',
   SECURITY = 'SECURITY',
   JANITOR = 'JANITOR',

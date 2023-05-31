@@ -1,4 +1,4 @@
-import { Box, IconButton, Modal } from '@mui/material';
+import { Box, IconButton,  } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -10,9 +10,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
-import ProductOrderDetailModal from '../../../components/ProductOrderDetailModal';
 import ProductDetailModal from '../../../components/ProductDetailModal';
 import { StockStatus } from '../../../Utils/Types';
+import { useAppSelector } from '../../../Utils/StateDispatch';
 
 interface Column {
   id: 'product' | 'price' | 'quantity_sold' | 'stock_status';
@@ -126,11 +126,12 @@ const DashboardTopSellingProductContainer = styled(Box)`
 const DashboardTopSellingProduct: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+    const res = useAppSelector((state) => state.orderReducer.orders);
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
-
+  
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -140,6 +141,7 @@ const DashboardTopSellingProduct: React.FC = () => {
 
   return (
     <DashboardTopSellingProductContainer>
+      {JSON.stringify(res)}
       <Paper
         elevation={1}
         sx={{

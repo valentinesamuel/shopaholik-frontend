@@ -141,6 +141,7 @@ const AdminSupplier: FC = () => {
             destination={supplier.destination}
             key={supplier.id}
             name={supplier.name}
+            id={supplier.id}
           />
         ))}
       </Box>

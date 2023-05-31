@@ -4,13 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 interface Props {
   destination: string;
-  name: string
+  name: string;
+  id: number;
 }
 
-const SupplierCard: FC<Props> = ({ destination, name }) => {
+const SupplierCard: FC<Props> = ({ destination, name, id }) => {
   const navigate = useNavigate();
 
   const gotoSupplierDetails = () => {
+    console.log(id);
     navigate(`${destination}`);
   };
 
