@@ -14,6 +14,7 @@ import dayjs from 'dayjs';
 import { getShippingStatusColor } from '../../../Utils/StatusColor';
 import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
+import { filterAndSearchOrders } from '../Order/helpers';
 
 interface Column {
   id:
@@ -123,7 +124,10 @@ const SupplierOrderTableContainer = styled(Box)`
   height: fit-content;
 `;
 
-const SupplierOrderTable: React.FC = () => {
+const SupplierOrderTable: React.FC<{
+  filterTab: string;
+  searchFilter: string;
+}> = ({ filterTab, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -168,7 +172,7 @@ const SupplierOrderTable: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {filterAndSearchOrders(rows, filterTab, searchFilter)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (

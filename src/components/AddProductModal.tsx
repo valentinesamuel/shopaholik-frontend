@@ -1,19 +1,13 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Button, TextField, Typography } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { StockStatus } from '../Utils/Types';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import SelectOptions from './SelectOptions';
+import { categories } from '../Utils/categories';
+import { supplierList } from '../Utils/supplier';
 
 const defaultNewProduct = {
   name: '',
@@ -24,7 +18,7 @@ const defaultNewProduct = {
   unit_price: 0,
   date_of_arrival: dayjs(new Date()),
   expiry_date: dayjs(new Date()),
-  supplier_id: '',
+  supplier: '',
   quantity: 0,
   unit_of_measurement: 'Carton',
   shelf_life_duration: '',
@@ -35,6 +29,10 @@ interface Props {}
 
 const AddProductModal: FC<Props> = () => {
   const [product, setProduct] = useState(defaultNewProduct);
+
+  const handleAddProduct = () => {
+    console.log(product);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -86,25 +84,20 @@ const AddProductModal: FC<Props> = () => {
           margin: { mobile: '5% 0', desktop: '2% 0' },
         }}
       >
-        <FormControl>
-          <InputLabel id="category">Category</InputLabel>
-          <Select
-            labelId="category"
-            id="category"
-            value={product.category}
-            label="category"
-            onChange={(category) =>
-              setProduct({
-                ...product,
-                category: category.target.value,
-              })
-            }
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
+        <SelectOptions
+          width="100%"
+          selectLabel="Categories"
+          label="categories"
+          options={categories}
+          handleChange={(category) =>
+            setProduct({
+              ...product,
+              category: category.target.value,
+            })
+          }
+          value={product.category}
+          sxStyles={{ marginRight: '5%' }}
+        />
 
         <TextField
           name="quantity"
@@ -128,7 +121,7 @@ const AddProductModal: FC<Props> = () => {
           onChange={handleChange}
           value={product.unit_price}
           type="text"
-          label="Stock Quantity"
+          label="Unit Price"
           variant="outlined"
         />
         <TextField
@@ -166,44 +159,21 @@ const AddProductModal: FC<Props> = () => {
           label="Unit of Measurement"
           variant="outlined"
         />
-        <FormControl>
-          <InputLabel id="category">Supplier</InputLabel>
-          <Select
-            labelId="supplier"
-            id="supplier"
-            value={product.supplier_id}
-            label="supplier"
-            onChange={(supplier) =>
-              setProduct({
-                ...product,
-                supplier_id: supplier.target.value,
-              })
-            }
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl>
-          <InputLabel id="category">Category</InputLabel>
-          <Select
-            labelId="category"
-            id="category"
-            value={product.category}
-            label="category"
-            onChange={(category) =>
-              setProduct({
-                ...product,
-                category: category.target.value,
-              })
-            }
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
+
+        <SelectOptions
+          width="100%"
+          selectLabel="Supplier"
+          label="supplier"
+          options={supplierList}
+          handleChange={(supplier) =>
+            setProduct({
+              ...product,
+              supplier: supplier.target.value,
+            })
+          }
+          value={product.supplier}
+          sxStyles={{ marginRight: '5%' }}
+        />
         <TextField
           name="shelf_life_duration"
           onChange={handleChange}
@@ -263,6 +233,7 @@ const AddProductModal: FC<Props> = () => {
         </Button>
         <Button
           color="success"
+          onClick={handleAddProduct}
           startIcon={<DoneAllIcon />}
           variant="contained"
           sx={{

@@ -29,10 +29,11 @@ const defaultNewPersonnel = {
   state: '',
   country: '',
   guarantor: {
-    name: '',
+    guarantorName: '',
     relationship: '',
     phone: '',
     address: '',
+    email: '',
     dateOfBirth: dayjs(new Date()),
   },
 };
@@ -50,6 +51,10 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setNewPersonnel({ ...newPersonnel, [name]: value });
+  };
+
+  const handleAddNewPersonnel = () => {
+    console.log(newPersonnel);
   };
 
   const handleButtonClick = () => {
@@ -314,9 +319,17 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
               }}
             >
               <TextField
-                name="guarantor-name"
-                onChange={handleChange}
-                value={newPersonnel.guarantor.name}
+                name="guarantorName"
+                onChange={(newGuarantorName) =>
+                  setNewPersonnel({
+                    ...newPersonnel,
+                    guarantor: {
+                      ...newPersonnel.guarantor,
+                      guarantorName: newGuarantorName.target.value,
+                    },
+                  })
+                }
+                value={newPersonnel.guarantor.guarantorName}
                 type="text"
                 label="Name"
                 variant="outlined"
@@ -351,9 +364,14 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                     })
                   }
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem disabled value={''}>
+                    Select
+                  </MenuItem>
+                  <MenuItem value={'father'}>Father</MenuItem>
+                  <MenuItem value={'mother'}>Mother</MenuItem>
+                  <MenuItem value={'brother'}>Brother</MenuItem>
+                  <MenuItem value={'sister'}>Sister</MenuItem>
+                  <MenuItem value={'other'}>Other</MenuItem>
                 </Select>
               </FormControl>
             </Box>
@@ -367,8 +385,16 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
             >
               <TextField
                 name="guarantor-phoneNumber"
-                onChange={handleChange}
-                value={newPersonnel.phoneNumber}
+                onChange={(newGuarantorPhone) =>
+                  setNewPersonnel({
+                    ...newPersonnel,
+                    guarantor: {
+                      ...newPersonnel.guarantor,
+                      phone: newGuarantorPhone.target.value,
+                    },
+                  })
+                }
+                value={newPersonnel.guarantor.phone}
                 type="tel"
                 label="Phone Number"
                 variant="outlined"
@@ -383,8 +409,16 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
 
               <TextField
                 name="guarantor-email"
-                onChange={handleChange}
-                value={newPersonnel.email}
+                onChange={(newGuarantorEmail) =>
+                  setNewPersonnel({
+                    ...newPersonnel,
+                    guarantor: {
+                      ...newPersonnel.guarantor,
+                      email: newGuarantorEmail.target.value,
+                    },
+                  })
+                }
+                value={newPersonnel.guarantor.email}
                 type="text"
                 label="Email"
                 variant="outlined"
@@ -396,8 +430,16 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
             <Box sx={{ marginTop: '2%' }}>
               <TextField
                 name="gurantor-address"
-                onChange={handleChange}
-                value={newPersonnel.address}
+                onChange={(newGuarantorAddress) =>
+                  setNewPersonnel({
+                    ...newPersonnel,
+                    guarantor: {
+                      ...newPersonnel.guarantor,
+                      address: newGuarantorAddress.target.value,
+                    },
+                  })
+                }
+                value={newPersonnel.guarantor.address}
                 label="Address"
                 variant="outlined"
                 sx={{
@@ -415,6 +457,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
         <Button
           color="success"
           startIcon={<DoneAllIcon />}
+          onClick={handleAddNewPersonnel}
           variant="contained"
           sx={{
             marginTop: '7%',
