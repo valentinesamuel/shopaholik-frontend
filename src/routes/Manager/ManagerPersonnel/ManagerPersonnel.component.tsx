@@ -44,7 +44,16 @@ const ManagerPersonnel: FC<Props> = () => {
   };
 
   const handleSearchPersonnel = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchedPersonnel(event.target.value);
+    const newPersonnel = event.target.value;
+    setSearchedPersonnel(newPersonnel);
+    const filterPersonnels = personnelsList.filter((personnel) => {
+      if (newPersonnel === '') {
+        return true;
+      }
+      return personnel.name.toLowerCase().includes(newPersonnel.toLowerCase());
+    });
+
+    setPersonnels(filterPersonnels);
   };
 
   return (
