@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { styled } from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
 import blue from '@mui/material/colors/blue';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const NavbarContainer = styled(Box)`
   display: flex;
@@ -63,6 +64,7 @@ const Navbar: FC = () => {
         <Typography
           sx={{
             color: 'primary.contrastText',
+            marginRight: '8%',
             display: {
               mobile: 'none',
               tablet: 'block',
@@ -72,6 +74,7 @@ const Navbar: FC = () => {
         >
           Emmanuel
         </Typography>
+        <ThemeSwitcher />
       </div>
     </NavbarContainer>
   );

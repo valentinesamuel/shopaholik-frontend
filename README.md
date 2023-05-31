@@ -25,6 +25,7 @@ The goal is to create a user-friendly interface that streamlines supermarket ope
 
 Overall, the project aims to develop a robust and intuitive web application that serves as a comprehensive solution for supermarket inventory management, supplier management and staff management.
 <br />
+<br />
 <a href="https://github.com/valentinesamuel/shopaholik-frontend"><strong>Explore the repo »</strong></a>
 <br />
 <br />
@@ -33,6 +34,7 @@ Overall, the project aims to develop a robust and intuitive web application that
 <a href="https://github.com/valentinesamuel/shopaholik-frontend/issues">Report Bug</a>
 ·
 <a href="https://github.com/valentinesamuel/shopaholik-frontend/issues">Request Feature</a>
+
   </p>
 </div>
 
@@ -154,8 +156,8 @@ Here are more screenshots from the product
 - [x] Build interface for manager
 - [x] Build interface for supercisor
 - [x] Build interface for cashier
-- [ ] Hide sidelink based on the user's role
-
+- [x] Hide sidelink based on the user's role
+- [ ] Add state management solution
 
 See the [open issues](https://github.com/valentinesamuel/shopaholik-frontend/issues) for a full list of proposed features (and known issues).
 
@@ -201,7 +203,6 @@ Project Link: [https://github.com/valentinesamuel/shopaholik-frontend](https://g
 ## Acknowledgments
 
 - []()
-
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
