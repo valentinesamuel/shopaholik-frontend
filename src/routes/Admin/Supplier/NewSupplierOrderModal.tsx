@@ -1,19 +1,15 @@
+import { useParams } from 'react-router-dom';
 import dayjs, { Dayjs } from 'dayjs';
 import {
   Box,
   Button,
-  FormControl,
   IconButton,
-  InputLabel,
-  MenuItem,
   Modal,
   Paper,
-  Select,
-  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
-import { FC, useState } from 'react';
+import { ChangeEvent, FC, useState } from 'react';
 import { DatePicker } from '@mui/x-date-pickers';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteForever from '@mui/icons-material/DeleteForever';
@@ -24,14 +20,22 @@ interface Props {
   open: boolean;
 }
 
-const NewOrderModal: FC<Props> = ({ open, onClose }) => {
-  const [measurementUnit, setMeasurementUnit] = useState('');
-  const [arrivalDate, setArrivalDate] = useState<Dayjs | null>(
-    dayjs(new Date()),
-  );
+const dummyProduct = {
+  name: '',
+  productCode: '',
+  measurementUnit: '',
+  quantity: 0,
+  dateOfArrival: dayjs(new Date()),
+  supplier_id: ''
+};
 
-  const handleMeasurementUnitChange = (event: SelectChangeEvent) => {
-    setMeasurementUnit(event.target.value as string);
+const NewSupplierOrderModal: FC<Props> = ({ open, onClose }) => {
+  const { supplierId } = useParams();
+  const [newOrder, setNewOrder] = useState(dummyProduct);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setNewOrder({ ...newOrder, [name]: value });
   };
 
   return (
@@ -91,8 +95,10 @@ const NewOrderModal: FC<Props> = ({ open, onClose }) => {
             }}
           >
             <TextField
-              id="name"
-              label="Prodcut Name"
+              name="productName"
+              value={newOrder.name}
+              onChange={handleChange}
+              label="Product Name"
               variant="outlined"
               sx={{
                 margin: {
@@ -106,8 +112,10 @@ const NewOrderModal: FC<Props> = ({ open, onClose }) => {
               }}
             />
             <TextField
-              id="code"
+              name="productCode"
               label="Product Code"
+              onChange={handleChange}
+              value={newOrder.productCode}
               variant="outlined"
               sx={{
                 width: {
@@ -129,27 +137,20 @@ const NewOrderModal: FC<Props> = ({ open, onClose }) => {
               alignItems: 'center',
             }}
           >
-            <FormControl
+            <TextField
               sx={{
                 width: {
                   desktop: '40%',
                   mobile: '100%',
                 },
               }}
-            >
-              <InputLabel id="measurement-unit">Unit of Measurement</InputLabel>
-              <Select
-                labelId="measurement-unit"
-                id="measurement-unit"
-                value={measurementUnit}
-                label="measurement-unit"
-                onChange={handleMeasurementUnitChange}
-              >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              </Select>
-            </FormControl>
+              name="measurementUnit"
+              onChange={handleChange}
+              value={newOrder.measurementUnit}
+              type="text"
+              label="Unit of Measurement"
+              variant="outlined"
+            />
 
             <DatePicker
               sx={{
@@ -163,11 +164,19 @@ const NewOrderModal: FC<Props> = ({ open, onClose }) => {
                 },
               }}
               label="Date of Arrival"
-              value={arrivalDate}
-              onChange={(newArrivalDate) => setArrivalDate(newArrivalDate)}
+              value={newOrder.dateOfArrival}
+              onChange={(newDateOfArrival) =>
+                setNewOrder({
+                  ...newOrder,
+                  dateOfArrival: newDateOfArrival as Dayjs,
+                })
+              }
             />
             <TextField
+              name="quantity"
+              value={newOrder.quantity}
               type="number"
+              onChange={handleChange}
               placeholder="Quantity"
               sx={{
                 width: {
@@ -180,99 +189,6 @@ const NewOrderModal: FC<Props> = ({ open, onClose }) => {
           </Box>
         </Box>
 
-        <Box>
-          <Typography
-            sx={{
-              margin: {
-                mobile: '10% 0 5% 0',
-              },
-            }}
-            variant="h6"
-            mb={2}
-          >
-            Supplier's Information
-          </Typography>
-          <Box
-            sx={{
-              margin: '4% 0',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <TextField
-              id="code"
-              label="Supplier's Name"
-              variant="outlined"
-              sx={{
-                width: {
-                  desktop: '60%',
-                  mobile: '100%',
-                },
-              }}
-            />
-            <TextField
-              label="Phone Number"
-              sx={{
-                width: {
-                  desktop: '30%',
-                  mobile: '100%',
-                },
-              }}
-              inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-            />
-          </Box>
-          <Box
-            sx={{
-              margin: '4% 0',
-              display: 'flex',
-              flexDirection: {
-                desktop: 'row',
-                mobile: 'column',
-              },
-              justifyContent: 'space-between',
-            }}
-          >
-            <TextField
-              id="address"
-              label="Address"
-              variant="outlined"
-              sx={{
-                width: {
-                  desktop: '50%',
-                  mobile: '100%',
-                },
-              }}
-            />
-            <FormControl
-              sx={{
-                width: {
-                  desktop: '40%',
-                  mobile: '100%',
-                },
-              }}
-            >
-              <InputLabel id="demo-simple-select-label">State</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={measurementUnit}
-                label="state"
-                onChange={handleMeasurementUnitChange}
-              >
-                <MenuItem value={10}>Bauchi</MenuItem>
-                <MenuItem value={20}>Edo State</MenuItem>
-                <MenuItem value={30}>Lagos State</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        </Box>
-        <TextField
-          id="outlined-multiline-static"
-          label="Additional Information"
-          multiline
-          fullWidth
-          rows={5}
-        />
 
         <Box
           sx={{
@@ -326,4 +242,4 @@ const NewOrderModal: FC<Props> = ({ open, onClose }) => {
   );
 };
 
-export default NewOrderModal;
+export default NewSupplierOrderModal;

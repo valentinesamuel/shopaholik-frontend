@@ -11,6 +11,7 @@ const OrderDetails: FC<Props> = ({}) => {
 
   const handleShippingStatusChange = (event: SelectChangeEvent) => {
     setShippingStatus(event.target.value);
+    console.log(event.target.value);
   };
 
   return (

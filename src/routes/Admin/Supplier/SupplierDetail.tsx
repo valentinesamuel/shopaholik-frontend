@@ -15,18 +15,19 @@ import {
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
-import NewOrderModal from './NewOrderModal';
+import TabPanel from '../../../components/TabPanel.component';
+import NewSupplierOrderModal from './NewSupplierOrderModal';
 import SupplierOrderTable from './SupplierOrderTable';
 import { useDebounce } from '../../../hooks/UseDebounce';
 
 interface Props {}
 
 const SupplierDetail: FC<Props> = ({}) => {
-  const [searchedOrder, setSearchedOrder] = useState('');
+  const [searchSupplierOrder, setSearchSupplierOrder] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState('');
-  const debouncedSearchedOrder = useDebounce(searchedOrder, 500);
+  const debouncedSearchedOrder = useDebounce(searchSupplierOrder, 500);
 
   const handleTabChange = (_: SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
@@ -34,7 +35,7 @@ const SupplierDetail: FC<Props> = ({}) => {
   };
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchedOrder(event.target.value);
+    setSearchSupplierOrder(event.target.value);
   };
 
   return (
@@ -70,12 +71,12 @@ const SupplierDetail: FC<Props> = ({}) => {
             id="searchorder"
             label="Search Order"
             onChange={handleSearchChange}
-            value={searchedOrder}
+            value={searchSupplierOrder}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="search button"
-                  onClick={() => console.log(searchedOrder)}
+                  onClick={() => console.log(searchSupplierOrder)}
                   edge="end"
                 >
                   <Search />
@@ -157,6 +158,7 @@ const SupplierDetail: FC<Props> = ({}) => {
             variant="contained"
             onClick={() => setOpen(true)}
             sx={{
+              display: 'none',
               width: {
                 desktop: 'auto',
                 mobile: '100%',
@@ -167,7 +169,7 @@ const SupplierDetail: FC<Props> = ({}) => {
             Place New Order
           </Button>
 
-          <NewOrderModal onClose={() => setOpen(false)} open={open} />
+          <NewSupplierOrderModal onClose={() => setOpen(false)} open={open} />
         </Box>
       </Box>
 
