@@ -15,23 +15,26 @@ import {
 import { ChangeEvent, FC, SyntheticEvent, useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
-import TabPanel from '../../../components/TabPanel.component';
 import NewOrderModal from './NewOrderModal';
 import SupplierOrderTable from './SupplierOrderTable';
+import { useDebounce } from '../../../hooks/UseDebounce';
 
 interface Props {}
 
 const SupplierDetail: FC<Props> = ({}) => {
-  const [search, setSearchOrder] = useState('');
+  const [searchedOrder, setSearchedOrder] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
+  const [filter, setFilter] = useState('');
+  const debouncedSearchedOrder = useDebounce(searchedOrder, 500);
 
   const handleTabChange = (_: SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
+    setFilter(orderTabs[newTab].shippingStatusTab);
   };
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchOrder(event.target.value);
+    setSearchedOrder(event.target.value);
   };
 
   return (
@@ -67,12 +70,12 @@ const SupplierDetail: FC<Props> = ({}) => {
             id="searchorder"
             label="Search Order"
             onChange={handleSearchChange}
-            value={search}
+            value={searchedOrder}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="search button"
-                  onClick={() => console.log(search)}
+                  onClick={() => console.log(searchedOrder)}
                   edge="end"
                 >
                   <Search />
@@ -168,18 +171,10 @@ const SupplierDetail: FC<Props> = ({}) => {
         </Box>
       </Box>
 
-      <TabPanel value={currentTab} index={0}>
-        <SupplierOrderTable />
-      </TabPanel>
-      <TabPanel value={currentTab} index={1}>
-        <p>shipped products</p>
-      </TabPanel>
-      <TabPanel value={currentTab} index={2}>
-        <p>pending products</p>
-      </TabPanel>
-      <TabPanel value={currentTab} index={3}>
-        <p>received products</p>
-      </TabPanel>
+      <SupplierOrderTable
+        searchFilter={debouncedSearchedOrder as string}
+        filterTab={filter}
+      />
     </Paper>
   );
 };
