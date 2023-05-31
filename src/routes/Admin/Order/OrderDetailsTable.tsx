@@ -22,7 +22,6 @@ interface Column {
     | 'totalPrice'
     | 'unitPrice'
     | 'estimatedTimeOfArrival'
-    | 'shippingStatus'
     | 'category';
   label: string;
   minWidth?: number | string;
