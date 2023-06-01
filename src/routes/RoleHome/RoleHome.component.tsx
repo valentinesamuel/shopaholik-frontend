@@ -12,6 +12,7 @@ export const role: ADMINROLE = ADMINROLE.MANAGER;
 
 const RoleHome: FC = () => {
   const navigate = useNavigate();
+  // TODO: create a user slice to hold the user role and details
 
   useEffect(() => {
     if (role === String(ADMINROLE.MANAGER)) {

@@ -5,9 +5,8 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { Box, Typography } from '@mui/material';
 
-type Props = {};
-
-const OrderMetrics: FC<Props> = ({}) => {
+const OrderMetrics: FC = () => {
+  // TODO: get the data from her and add it in the metrics reducer
   return (
     <Box
       sx={{

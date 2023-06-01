@@ -18,6 +18,7 @@ import OrderDetails from './routes/Admin/Order/OrderDetails';
 import MissingPage from './pages/404';
 
 function App() {
+  // TODO: create a slice for the theme
   const [mode, setMode] = useState<PaletteMode>('dark');
   const colorMode = useMemo(
     () => ({

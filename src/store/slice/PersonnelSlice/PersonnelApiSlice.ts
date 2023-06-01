@@ -15,6 +15,29 @@ export const personnelApiSlice = apiSlice.injectEndpoints({
             ]
           : ['Personnel'],
     }),
+    getPersonnel: builder.query<Personnel, string>({
+      query: (personnelId) => `/personnels/${personnelId}`,
+      providesTags: (result) =>
+        result
+          ? [{ type: 'Personnel', id: result.personnelId }]
+          : ['Personnel'],
+    }),
+    addPersonnel: builder.mutation<Personnel, Personnel>({
+      query: (personnel) => ({
+        url: '/personnels',
+        method: 'POST',
+        body: personnel,
+      }),
+      invalidatesTags: ['Personnel'],
+    }),
+    updatePersonnel: builder.mutation<Personnel, Personnel>({
+      query: (personnel) => ({
+        url: `/personnels/${personnel.personnelId}`,
+        method: 'PATCH',
+        body: personnel,
+      }),
+      invalidatesTags: ['Personnel'],
+    }),
   }),
 });
 

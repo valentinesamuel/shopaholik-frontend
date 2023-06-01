@@ -2,6 +2,7 @@ import { ChangeEvent, FC, MouseEventHandler, useState } from 'react';
 import {
   Box,
   Button,
+  Paper,
   SelectChangeEvent,
   TextField,
   Typography,
@@ -70,7 +71,7 @@ const SignIn: FC = () => {
   };
 
   return (
-    <Box sx={{ height: '100vh' }}>
+    <Paper sx={{ height: '100vh' }}>
       <Box
         sx={{
           display: 'flex',
@@ -181,7 +182,7 @@ const SignIn: FC = () => {
           />
         </Box>
       </Box>
-    </Box>
+    </Paper>
   );
 };
 
