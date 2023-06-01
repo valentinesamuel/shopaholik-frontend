@@ -9,15 +9,40 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
         result
           ? [
               ...result.map(({ product_id }) => ({
-                type: 'Inventory' as const,
+                type: 'InventoryProduct' as const,
                 id: product_id,
               })),
-              { type: 'Inventory' },
+              { type: 'InventoryProduct' },
             ]
-          : ['Inventory'],
+          : ['InventoryProduct'],
     }),
-    //   addInventoryProducts: builder.mutation<Product,>
+    getMostSoldInventoryProducts: builder.query<Product[], null>({
+      query: () => '/inventory/mostSold',
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ product_id }) => ({
+                type: 'Product' as const,
+                id: product_id,
+              })),
+              { type: 'Product' },
+            ]
+          : ['Product'],
+      // TODO: when a sale is made, invalidate this tag so that it reflects the new state of the system
+    }),
+    addInventoryProducts: builder.mutation<Product, Product>({
+      query: (product) => ({
+        url: '/inventory',
+        method: 'POST',
+        product,
+      }),
+      invalidatesTags: ['InventoryProduct'],
+    }),
   }),
 });
 
-export const { useGetInventoryProductsQuery } = inventoryApiSlice;
+export const {
+  useGetInventoryProductsQuery,
+  useGetMostSoldInventoryProductsQuery,
+  useAddInventoryProductsMutation,
+} = inventoryApiSlice;

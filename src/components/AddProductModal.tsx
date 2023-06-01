@@ -13,13 +13,15 @@ import dayjs, { Dayjs } from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import SelectOptions from './SelectOptions';
 import { categories } from '../Utils/categories';
-import { StockStatus } from '../Utils/Types';
+import { Product, ProductCategory, StockStatus } from '../Utils/Types';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-const defaultNewProduct = {
+const defaultNewProduct: Product = {
+  product_id: '',
+  quantity_sold: 0,
   name: '',
-  category: '',
+  category: ProductCategory.Select,
   product_code: '',
   quantity_in_stock: 0,
   min_quantity: 0,
@@ -115,7 +117,7 @@ const AddProductModal: FC<Props> = () => {
           handleChange={(category) =>
             setProduct({
               ...product,
-              category: category.target.value,
+              category: category.target.value as ProductCategory,
             })
           }
           value={product.category}

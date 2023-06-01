@@ -42,7 +42,8 @@ export interface Product {
   date_of_arrival: Date | Dayjs;
   expiry_date: Date | Dayjs;
   supplier_id: string;
-  quantity: number;
+  quantity?: number;
+  quantity_sold?: number;
   unit_of_measurement: string;
   shelf_life_duration: string;
   stock_status: StockStatus;
@@ -87,6 +88,7 @@ export enum ADMINROLE {
   SUPERVISOR = 'SUPERVISOR',
   CASHIER = 'CASHIER',
 }
+
 export enum JobDesignation {
   MANAGER = 'MANAGER',
   SUPERVISOR = 'SUPERVISOR',
@@ -109,6 +111,7 @@ export enum ShippingStatus {
 }
 
 export const enum ProductCategory {
+  Select = '',
   GROCERIES = 'Groceries',
   DAIRY_AND_EGGS = 'Dairy and Eggs',
   MEAT_AND_POULTRY = 'Meat and Poultry',
