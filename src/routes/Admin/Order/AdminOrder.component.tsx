@@ -16,7 +16,7 @@ import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import OrdersTable from './OrdersTable';
 import { useDebounce } from '../../../hooks/UseDebounce';
 
-type Props = {};
+interface Props {}
 
 const AdminOrder: FC<Props> = ({}) => {
   const [searchedOrder, setSearchedOrder] = useState('');

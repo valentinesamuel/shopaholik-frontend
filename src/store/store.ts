@@ -6,9 +6,11 @@ import orderReducer from './slice/OrderSlice/OrderSlice.store';
 import supplierReducer from './slice/SupplierSlice/SupplierSlice.store';
 import personnelReducer from './slice/PersonnelSlice/PersonnelSlice.store';
 import metricReducer from './slice/MetricSlice/MetricSlice.store';
+import inventoryReducer from './slice/InventorySlice/InventorySlice';
 
 const rootReducer = combineReducers({
   metricReducer,
+  inventoryReducer,
   orderReducer,
   supplierReducer,
   personnelReducer,

@@ -1,12 +1,14 @@
 import { Box, Button, Modal, Paper, Typography } from '@mui/material';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import { FC } from 'react';
-import { Data } from '../routes/Admin/Inventory/InventoryProductsTable';
+import { Product } from '../Utils/Types';
+import { convertNumberToLocale } from '../Utils/Converter';
+import dayjs from 'dayjs';
 
 interface Props {
   open: boolean;
   onClose: () => void;
-  productDetail: Data;
+  productDetail: Product;
 }
 
 const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
@@ -37,23 +39,14 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
               variant="h5"
             >
               {productDetail && productDetail.name}
-              Addidas Climacool
             </Typography>
             <Typography sx={{ margin: '1.5% 0 4% 0' }} variant="body1">
-              QPNRTG0Q4
+              {productDetail && productDetail.product_code}
             </Typography>
-            {/* <Box sx={{ marginBottom: '29px' }}>
-              <Typography sx={{ color: '#96989E' }}>
-                Estimated time of arrival
-              </Typography>
-              <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                24 May, 2023
-              </Typography>
-            </Box> */}
             <Box sx={{ marginBottom: '29px' }}>
               <Typography sx={{ color: '#96989E' }}>Stock Status</Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                Low in stock
+                {productDetail && productDetail.stock_status}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -61,7 +54,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                 Category:
               </Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                Shoes
+                {productDetail && productDetail.category}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -69,7 +62,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                 Stock Quantity:
               </Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                3
+                {productDetail && productDetail.quantity_in_stock}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -77,7 +70,8 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                 Expired Date:
               </Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                Nil
+                {productDetail &&
+                  dayjs(productDetail.expiry_date).format('DD MMMM, YYYY')}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -85,7 +79,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                 Unit of Measurement:
               </Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                Piece
+                {productDetail && productDetail.unit_of_measurement}
               </Typography>
             </Box>
           </Box>
@@ -118,7 +112,11 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
               >
                 Price:
               </Typography>
-              <Typography variant="h5">N 25,000</Typography>
+              <Typography variant="h5">
+                ₦{' '}
+                {productDetail &&
+                  convertNumberToLocale(productDetail.unit_price)}
+              </Typography>
             </Box>
             <Box
               sx={{
@@ -133,7 +131,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                   Shelf Life:
                 </Typography>
                 <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                  Nil
+                  {productDetail && productDetail.shelf_life_duration}
                 </Typography>
               </Box>
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -141,15 +139,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                   Min. Quantity:
                 </Typography>
                 <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                  15
-                </Typography>
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
-                  Max Quantity:
-                </Typography>
-                <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
-                  100
+                  {productDetail && productDetail.min_quantity}
                 </Typography>
               </Box>
             </Box>
@@ -168,7 +158,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                 variant="caption"
                 sx={{ marginTop: '1%', fontWeight: '600' }}
               >
-                Nestle Inc.
+                {productDetail && productDetail.supplier_id}
               </Typography>
               <Typography
                 variant="body1"

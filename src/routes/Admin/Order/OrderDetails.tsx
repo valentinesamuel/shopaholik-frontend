@@ -3,14 +3,20 @@ import { FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { shippingStatusOptions } from '../../../Utils/categories';
 import OrderDetailsTable from './OrderDetailsTable';
+import { useParams } from 'react-router-dom';
 
 interface Props {}
 
 const OrderDetails: FC<Props> = ({}) => {
   const [shippingStatus, setShippingStatus] = useState('');
-
+  const { orderId } = useParams();
+ 
+  // TODO: call the usequeryorderdetails
+  
   const handleShippingStatusChange = (event: SelectChangeEvent) => {
     setShippingStatus(event.target.value);
+    // TODO: fetch the order details with usequeryorderdetails
+    
     console.log(event.target.value);
   };
 

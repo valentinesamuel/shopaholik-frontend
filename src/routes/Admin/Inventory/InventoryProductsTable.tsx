@@ -11,8 +11,10 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
 import ProductDetailModal from '../../../components/ProductDetailModal';
-import { ProductCategory, StockStatus } from '../../../Utils/Types';
+import { Product, ProductCategory, StockStatus } from '../../../Utils/Types';
 import { filterAndSearchInventoryItems } from './helpers';
+import { useAppSelector } from '../../../Utils/StateDispatch';
+import { RootState } from '../../../store/store';
 
 interface Column {
   id: 'name' | 'unit_price' | 'quantity_sold' | 'stock_status' | 'category';
@@ -191,6 +193,9 @@ const InventoryProductTable: React.FC<{
 }> = ({ filterTab, filterCategory, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const inventoryProducts = useAppSelector(
+    (state: RootState) => state.inventoryReducer.inventoryProducts,
+  );
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -234,7 +239,7 @@ const InventoryProductTable: React.FC<{
             </TableHead>
             <TableBody>
               {filterAndSearchInventoryItems(
-                rows,
+                inventoryProducts,
                 filterTab,
                 searchFilter,
                 filterCategory,
@@ -287,7 +292,7 @@ const InventoryProductTable: React.FC<{
 
 export default InventoryProductTable;
 
-const TableModal: React.FC<{ product: Data }> = ({ product }) => {
+const TableModal: React.FC<{ product: Product }> = ({ product }) => {
   const [open, setOpen] = React.useState(false);
   return (
     <div>

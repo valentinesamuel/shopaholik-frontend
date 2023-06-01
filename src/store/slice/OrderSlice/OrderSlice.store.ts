@@ -1,7 +1,7 @@
 import { Order } from '../../../Utils/Types';
 import dayjs from 'dayjs';
 import { ShippingStatus } from '../../../Utils/Types';
-import { createSlice } from '@reduxjs/toolkit';
+import { Slice, createSlice } from '@reduxjs/toolkit';
 import { orderApiSlice } from './OrderApiSlice';
 
 interface IinitialState {
@@ -18,6 +18,7 @@ const initialState: IinitialState = {
       dateOfOrder: dayjs(new Date()),
       estimatedTimeOfArrival: dayjs(new Date()),
       supplier: 'Nestle Inc',
+      items: [],
     },
     {
       orderId: '2',
@@ -27,6 +28,7 @@ const initialState: IinitialState = {
       dateOfOrder: dayjs(new Date()),
       estimatedTimeOfArrival: dayjs(new Date()),
       supplier: 'Nike Inc',
+      items: [],
     },
     {
       orderId: '3',
@@ -36,6 +38,7 @@ const initialState: IinitialState = {
       dateOfOrder: dayjs(new Date()),
       estimatedTimeOfArrival: dayjs(new Date()),
       supplier: 'Black Waters',
+      items: [],
     },
     {
       orderId: '4',
@@ -45,11 +48,12 @@ const initialState: IinitialState = {
       dateOfOrder: dayjs(new Date()),
       estimatedTimeOfArrival: dayjs(new Date()),
       supplier: 'Bunker Fitness',
+      items: [],
     },
   ],
 };
 
-export const orderSlice = createSlice({
+export const orderSlice: Slice = createSlice({
   name: 'order',
   initialState,
   reducers: {},
@@ -63,4 +67,4 @@ export const orderSlice = createSlice({
   },
 });
 
-export default orderSlice.reducer
+export default orderSlice.reducer;

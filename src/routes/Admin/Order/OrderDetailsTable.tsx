@@ -227,14 +227,14 @@ const OrderDetailsTable: React.FC = () => {
 export default OrderDetailsTable;
 
 const TableModal: React.FC<{ orderRow: Data }> = () => {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
   return (
     <div>
-      <IconButton onClick={() => setOpen(true)}>
+      {/* <IconButton onClick={() => setOpen(true)}> */}
         <MoreHoriz sx={{ display: 'none' }} />
-      </IconButton>
-      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
+      {/* </IconButton> */}
+      {/* <ProductDetailModal open={open} onClose={() => setOpen(false)} /> */}
     </div>
   );
 };

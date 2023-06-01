@@ -16,18 +16,18 @@ export const orderApiSlice = apiSlice.injectEndpoints({
           : ['Order'],
     }),
 
-    // getSupplierOrders: builder.query<Order[], string>({
-    //   query: (supplierId) => `/orders/${supplierId}`,
-    //   providesTags: (result) =>
-    //     result
-    //       ? [
-    //           ...result.map(({ orderId }) => ({
-    //             type: 'Order' as const,
-    //             orderId,
-    //           })),
-    //         ]
-    //       : ['Order'],
-    // }),
+    getSupplierOrders: builder.query<Order[], string>({
+      query: (supplierId) => `/orders/${supplierId}`,
+      providesTags: (result) =>
+        result
+          ? [
+              ...result.map(({ orderId }) => ({
+                type: 'Order' as const,
+                orderId,
+              })),
+            ]
+          : ['Order'],
+    }),
 
     // TODO: use a comprehensive order which will include the order metadata and the items in that order(orderedItems)
     getOrder: builder.query<Order, string>({
@@ -35,7 +35,15 @@ export const orderApiSlice = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result ? [{ type: 'Order', id: result.orderId }] : ['Order'],
     }),
+
+    updateOrder: builder.query<Order, Order>({
+      query: (updatedOrder) => ({
+        url: `/orders/${updatedOrder.orderId}`,
+        method: 'PATCH',
+        body: updatedOrder,
+      }),
+    }),
   }),
 });
-
-export const { useGetOrderQuery, useGetOrdersQuery } = orderApiSlice;
+export const { useGetOrderQuery, useGetOrdersQuery, useUpdateOrderQuery } =
+  orderApiSlice;
