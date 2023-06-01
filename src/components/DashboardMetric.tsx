@@ -9,10 +9,7 @@ import coins from '../assets/icons/coins.svg';
 import tag from '../assets/icons/price-tag.svg';
 import loss from '../assets/icons/stop.svg';
 import { useAppSelector } from '../Utils/StateDispatch';
-import {
-  convertNumberToLocal,
-  convertNumberToLocale,
-} from '../Utils/Converter';
+import { convertNumberToLocale } from '../Utils/Converter';
 
 const DashboardMetricContainer = MUIStyled('div')(() => ({
   display: 'flex',
