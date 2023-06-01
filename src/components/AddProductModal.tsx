@@ -184,12 +184,12 @@ const AddProductModal: FC<Props> = () => {
         />
 
         <FormControl>
-          <InputLabel id="relationship">Supplier</InputLabel>
+          <InputLabel id="supplier">Supplier</InputLabel>
           <Select
-            labelId="relationship"
-            id="relationship"
+            labelId="supplier"
+            id="supplier"
             value={product.supplier_id}
-            label="relationship"
+            label="supplier"
             onChange={(supplier) =>
               setProduct({
                 ...product,

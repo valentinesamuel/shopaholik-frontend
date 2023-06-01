@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import DashboardMetric from '../../../components/DashboardMetric';
 import { Paper } from '@mui/material';
-import { dashboardMetrics } from '../../../Utils/metrics';
 import StockQuantityCard from '../../../components/StockQuantityRow';
 import DashboardTopSellingProduct from './DashboardTopSellingProduct';
 
@@ -15,33 +14,7 @@ const AdminDashboard: FC = () => {
         padding: '1% 3% 3% 3%',
       }}
     >
-      <Paper
-        elevation={1}
-        sx={{
-          display: 'grid',
-          gridTemplateColumns: {
-            mobile: 'repeat(auto-fit, minmax(100%, 30%))',
-            tablet: 'repeat(auto-fit, minmax(100%, 30%))',
-            desktop: 'repeat(auto-fit, minmax(300px, 30%))',
-          },
-          justifyItems: 'stretch',
-          justifyContent: 'space-between',
-          rowGap: '1rem',
-          padding: 3,
-        }}
-      >
-        {dashboardMetrics.map((metric) => {
-          return (
-            <DashboardMetric
-              key={metric.id}
-              color={metric.color}
-              icon={metric.icon}
-              title={metric.title}
-              value={metric.value}
-            />
-          );
-        })}
-      </Paper>
+      <DashboardMetric />
       <StockQuantityCard />
       <Paper
         elevation={2}

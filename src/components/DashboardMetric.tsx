@@ -1,11 +1,15 @@
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import { styled as MUIStyled } from '@mui/material';
 import { FC } from 'react';
 import styled from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
+import personnel from '../assets/icons/personnel.svg';
+import profit from '../assets/icons/income.svg';
+import coins from '../assets/icons/coins.svg';
+import tag from '../assets/icons/price-tag.svg';
+import loss from '../assets/icons/stop.svg';
 
 const DashboardMetricContainer = MUIStyled('div')(() => ({
-  // maxWidth: '356px',
   display: 'flex',
   alignItems: 'center',
   padding: 16,
@@ -13,6 +17,12 @@ const DashboardMetricContainer = MUIStyled('div')(() => ({
   justifyContent: 'space-between',
   width: '100%',
 }));
+
+const Icon = styled.img`
+  height: auto;
+  width: 2.5rem;
+  objectfit: contain;
+`;
 
 const Content = styled(Box)`
   .title {
@@ -29,27 +39,66 @@ const Content = styled(Box)`
   }
 `;
 
-type Props = {
-  color: string;
-  icon: string;
-  title: string;
-  value: string;
-};
-
-const DashboardMetric: FC<Props> = ({ color, icon, title, value }) => {
+const DashboardMetric: FC = () => {
   return (
-    <DashboardMetricContainer style={{ backgroundColor: color }}>
-      <Content>
-        <p className="title">{title}</p>
-        <p className="value">{value}</p>
-      </Content>
-      <img
-        src={icon}
-        alt="icon"
-        className="icon"
-        style={{ height: 'auto', width: '2.5rem', objectFit: 'contain' }}
-      />
-    </DashboardMetricContainer>
+    <Paper
+      elevation={1}
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: {
+          mobile: 'repeat(auto-fit, minmax(100%, 30%))',
+          tablet: 'repeat(auto-fit, minmax(100%, 30%))',
+          desktop: 'repeat(auto-fit, minmax(300px, 30%))',
+        },
+        justifyItems: 'stretch',
+        justifyContent: 'space-between',
+        rowGap: '1rem',
+        padding: 3,
+      }}
+    >
+      <DashboardMetricContainer style={{ backgroundColor: '#6FCF97' }}>
+        <Content>
+          <p className="title">today's profit</p>
+          <p className="value">₦ 120,170</p>
+        </Content>
+        <Icon src={profit} alt="profit" />
+      </DashboardMetricContainer>
+      <DashboardMetricContainer style={{ backgroundColor: '#DEB03B' }}>
+        <Content>
+          <p className="title">today's purchase count</p>
+          <p className="value">₦ 220,265</p>
+        </Content>
+        <Icon src={tag} alt="icon" />
+      </DashboardMetricContainer>
+      <DashboardMetricContainer style={{ backgroundColor: '#96999F' }}>
+        <Content>
+          <p className="title">today's loss</p>
+          <p className="value">₦ 2,340</p>
+        </Content>
+        <Icon src={loss} alt="loss" />
+      </DashboardMetricContainer>
+      <DashboardMetricContainer style={{ backgroundColor: '#9B51E0' }}>
+        <Content>
+          <p className="title">items sold since today</p>
+          <p className="value">110</p>
+        </Content>
+        <Icon src={coins} alt="coins" />
+      </DashboardMetricContainer>
+      <DashboardMetricContainer style={{ backgroundColor: '#D635B2' }}>
+        <Content>
+          <p className="title">total inventory cost</p>
+          <p className="value">₦ 12,000,000</p>
+        </Content>
+        <Icon src={tag} alt="tag" />
+      </DashboardMetricContainer>
+      <DashboardMetricContainer style={{ backgroundColor: '#5D16CF' }}>
+        <Content>
+          <p className="title">staff on duty</p>
+          <p className="value">12</p>
+        </Content>
+        <Icon src={personnel} alt="icon" />
+      </DashboardMetricContainer>
+    </Paper>
   );
 };
 
