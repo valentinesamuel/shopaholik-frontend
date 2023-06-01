@@ -1,5 +1,5 @@
 interface InventoryData {
-  product: string;
+  name: string;
   category: string;
   stock_status: string;
 }
@@ -11,7 +11,7 @@ export const filterAndSearchInventoryItems = <T extends InventoryData>(
   category: string,
 ): T[] => {
   const filteredRows = rows
-    .filter((row) => row.product.toLowerCase().includes(search.toLowerCase()))
+    .filter((row) => row.name.toLowerCase().includes(search.toLowerCase()))
     .filter((row) => {
       if (category === '') {
         return true;

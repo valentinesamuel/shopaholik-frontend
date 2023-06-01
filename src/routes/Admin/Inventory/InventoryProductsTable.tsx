@@ -15,7 +15,7 @@ import { ProductCategory, StockStatus } from '../../../Utils/Types';
 import { filterAndSearchInventoryItems } from './helpers';
 
 interface Column {
-  id: 'product' | 'price' | 'quantity_sold' | 'stock_status' | 'category';
+  id: 'name' | 'unit_price' | 'quantity_sold' | 'stock_status' | 'category';
   label: string;
   minWidth?: number | string;
   width?: number | string;
@@ -25,14 +25,14 @@ interface Column {
 
 const columns: readonly Column[] = [
   {
-    id: 'product',
-    label: 'Product',
+    id: 'name',
+    label: 'Product Name',
     minWidth: '30%',
     width: '40%',
     align: 'left',
   },
   {
-    id: 'price',
+    id: 'unit_price',
     label: 'Price',
     // minWidth: 100
     format: (value: number) => value.toLocaleString('en-US'),
@@ -58,22 +58,22 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
-  product: string;
-  price: number;
+export interface Data {
+  name: string;
+  unit_price: number;
   quantity_sold: number;
   min_quantity: number;
-  category: string;
+  category: ProductCategory;
   stock_quantity: number;
   stock_status: StockStatus;
 }
 
 function createData(
-  product: string,
-  price: number,
+  name: string,
+  unit_price: number,
   quantity_sold: number,
   min_quantity: number,
-  category: string,
+  category: ProductCategory,
 ): Data {
   const stock_quantity = Math.floor(Math.random() * (min_quantity + 10));
   const stock_status =
@@ -85,9 +85,9 @@ function createData(
       ? StockStatus.IN_STOCK
       : StockStatus.EXPIRED;
   return {
-    price,
+    unit_price,
     category,
-    product,
+    name,
     quantity_sold,
     stock_quantity,
     min_quantity,
@@ -242,7 +242,7 @@ const InventoryProductTable: React.FC<{
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <React.Fragment key={row.product}>
+                    <React.Fragment key={row.name}>
                       <TableRow
                         sx={{ cursor: 'pointer' }}
                         hover
@@ -260,7 +260,7 @@ const InventoryProductTable: React.FC<{
                           );
                         })}
                         <TableCell align="right">
-                          <TableModal />
+                          <TableModal product={row} />
                         </TableCell>
                       </TableRow>
                     </React.Fragment>
@@ -287,16 +287,19 @@ const InventoryProductTable: React.FC<{
 
 export default InventoryProductTable;
 
-const TableModal: React.FC = () => {
+const TableModal: React.FC<{ product: Data }> = ({ product }) => {
   const [open, setOpen] = React.useState(false);
-
   return (
     <div>
       <IconButton onClick={() => setOpen(true)}>
         <MoreHoriz />
       </IconButton>
 
-      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
+      <ProductDetailModal
+        open={open}
+        onClose={() => setOpen(false)}
+        productDetail={product}
+      />
     </div>
   );
 };

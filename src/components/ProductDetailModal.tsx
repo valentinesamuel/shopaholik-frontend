@@ -1,13 +1,15 @@
 import { Box, Button, Modal, Paper, Typography } from '@mui/material';
 import DeleteForever from '@mui/icons-material/DeleteForever';
 import { FC } from 'react';
+import { Data } from '../routes/Admin/Inventory/InventoryProductsTable';
 
 interface Props {
   open: boolean;
   onClose: () => void;
+  productDetail: Data;
 }
 
-const ProductDetailModal: FC<Props> = ({ open, onClose }) => {
+const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
   return (
     <Modal keepMounted open={open} onClose={onClose}>
       <Paper
@@ -34,6 +36,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose }) => {
               sx={{ margin: '1.5% 0', fontWeight: '600', width: '100%' }}
               variant="h5"
             >
+              {productDetail && productDetail.name}
               Addidas Climacool
             </Typography>
             <Typography sx={{ margin: '1.5% 0 4% 0' }} variant="body1">

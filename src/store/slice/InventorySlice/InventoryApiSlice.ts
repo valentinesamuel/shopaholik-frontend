@@ -38,6 +38,13 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['InventoryProduct'],
     }),
+    deleteInventoryProducts: builder.mutation<string, Product>({
+      query: (id) => ({
+        url: '/inventory',
+        method: 'DELETE',
+        body: id,
+      }),
+    }),
   }),
 });
 
