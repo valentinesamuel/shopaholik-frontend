@@ -9,7 +9,6 @@ const AdminDashboard: FC = () => {
     <Paper
       sx={{
         width: '100%',
-        // height: '100vh',
         overflowX: 'auto',
         padding: '1% 3% 3% 3%',
       }}

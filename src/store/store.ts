@@ -2,9 +2,9 @@ import storage from 'redux-persist/lib/storage';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { PERSIST, persistReducer, persistStore } from 'redux-persist';
 import { apiSlice } from './slice';
-import orderReducer from './slice/OrderSlice/OrderSlice';
-import supplierReducer from './slice/SupplierSlice/SupplierSlice';
-import personnelReducer from './slice/PersonnelSlice/PersonnelSlice';
+import orderReducer from './slice/OrderSlice/OrderSlice.store';
+import supplierReducer from './slice/SupplierSlice/SupplierSlice.store';
+import personnelReducer from './slice/PersonnelSlice/PersonnelSlice.store';
 
 const rootReducer = combineReducers({
   orderReducer,

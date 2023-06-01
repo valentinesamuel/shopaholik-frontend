@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Supplier } from './../../../Utils/Types';
+import { Supplier } from '../../../Utils/Types';
 import { supplierApiSlice } from './SupplierApiSlice';
 
 interface IinitialState {
