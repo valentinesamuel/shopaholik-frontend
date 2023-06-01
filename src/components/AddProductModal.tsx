@@ -1,13 +1,21 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import dayjs, { Dayjs } from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import { StockStatus } from '../Utils/Types';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import SelectOptions from './SelectOptions';
 import { categories } from '../Utils/categories';
-import { supplierList } from '../Utils/supplier';
+import { StockStatus } from '../Utils/Types';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const defaultNewProduct = {
   name: '',
@@ -18,17 +26,24 @@ const defaultNewProduct = {
   unit_price: 0,
   date_of_arrival: dayjs(new Date()),
   expiry_date: dayjs(new Date()),
-  supplier: '',
+  supplier_id: '',
   quantity: 0,
   unit_of_measurement: 'Carton',
   shelf_life_duration: '',
   stock_status: StockStatus.IN_STOCK,
 };
 
+const suppliersList = [
+  { id: 'w3094', name: 'Nike Inc', value: 'nike' },
+  { id: 'dfvn30', name: 'Nestle Inc', value: 'nestle' },
+  { id: '2904nm', name: 'Artzy Group Inc', value: 'artzy_group' },
+];
+
 interface Props {}
 
 const AddProductModal: FC<Props> = () => {
   const [product, setProduct] = useState(defaultNewProduct);
+  const [supplierList, _] = useState(suppliersList);
 
   const handleAddProduct = () => {
     console.log(product);
@@ -37,6 +52,14 @@ const AddProductModal: FC<Props> = () => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setProduct({ ...product, [name]: value });
+  };
+
+  const onSelectSupplier = (supplier: {
+    id: string;
+    name: string;
+    value: string;
+  }) => {
+    setProduct({ ...product, supplier_id: supplier.id });
   };
 
   return (
@@ -160,20 +183,35 @@ const AddProductModal: FC<Props> = () => {
           variant="outlined"
         />
 
-        <SelectOptions
-          width="100%"
-          selectLabel="Supplier"
-          label="supplier"
-          options={supplierList}
-          handleChange={(supplier) =>
-            setProduct({
-              ...product,
-              supplier: supplier.target.value,
-            })
-          }
-          value={product.supplier}
-          sxStyles={{ marginRight: '5%' }}
-        />
+        <FormControl>
+          <InputLabel id="relationship">Supplier</InputLabel>
+          <Select
+            labelId="relationship"
+            id="relationship"
+            value={product.supplier_id}
+            label="relationship"
+            onChange={(supplier) =>
+              setProduct({
+                ...product,
+                supplier_id: supplier.target.value,
+              })
+            }
+          >
+            <MenuItem disabled value={''}>
+              Select
+            </MenuItem>
+            {supplierList.map((supplier) => (
+              <MenuItem
+                key={supplier.id}
+                onClick={() => onSelectSupplier(supplier)}
+                value={supplier.id}
+              >
+                {supplier.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <TextField
           name="shelf_life_duration"
           onChange={handleChange}

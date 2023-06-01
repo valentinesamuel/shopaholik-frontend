@@ -12,13 +12,15 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
+import { Personnel } from './personnels';
 
 interface Props {
   open: boolean;
   onClose: () => void;
+  personnel: Personnel;
 }
 
-const PersonnelDetailModal: FC<Props> = ({ onClose, open }) => {
+const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
   const [jobDesignation, setJobDesignation] = useState('');
 
   const handleJobDesignationChange = (event: SelectChangeEvent) => {
@@ -79,7 +81,9 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open }) => {
               <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
                 Staff ID:
               </Typography>
-              <Typography sx={{ fontWeight: 'bold' }}>FLWK5UJ3UNT0D</Typography>
+              <Typography sx={{ fontWeight: 'bold' }}>
+                {personnel.id.toUpperCase()}
+              </Typography>
             </Box>
             <Box sx={{ display: 'flex', margin: '3% 0' }}>
               <Typography sx={{ color: '#96989E', marginRight: '3%' }}>

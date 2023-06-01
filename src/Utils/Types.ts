@@ -39,8 +39,11 @@ export interface Product {
   quantity_in_stock: number;
   min_quantity: number;
   unit_price: number;
-  date_of_arrival: Date;
+  date_of_arrival: Date | Dayjs;
+  expiry_date: Date | Dayjs;
   supplier_id: string;
+  quantity: number;
+  unit_of_measurement: string;
   shelf_life_duration: string;
   stock_status: StockStatus;
 }

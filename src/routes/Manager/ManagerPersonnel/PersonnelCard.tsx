@@ -60,7 +60,7 @@ const PersonnelCard: FC<Props> = ({ personnel }) => {
         </Box>
       </Paper>
 
-      <PersonnelDetailModal open={open} onClose={handleClose} />
+      <PersonnelDetailModal personnel={personnel} open={open} onClose={handleClose} />
     </Fragment>
   );
 };
