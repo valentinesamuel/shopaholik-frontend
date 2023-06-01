@@ -1,3 +1,5 @@
+import { createSlice } from '@reduxjs/toolkit';
+
 interface MetricValue {
   id: string;
   name: string;
@@ -11,9 +13,13 @@ interface IinitialState {
   dailySales: MetricValue;
   inventoryCost: MetricValue;
   staffOnDuty: MetricValue;
+  lowInStock: MetricValue;
+  outOfStock: MetricValue;
+  expiredProducts: MetricValue;
+  overdueShipments: MetricValue;
 }
 
-const initialState = {
+const initialState: IinitialState = {
   dailyProfit: {
     id: '220d9cdd',
     name: "today's profit",
@@ -44,4 +50,33 @@ const initialState = {
     name: 'staff on duty',
     value: 12,
   },
+  lowInStock: {
+    id: 'bb4eb591',
+    name: 'Low in Stock',
+    value: 23,
+  },
+  outOfStock: {
+    id: 'b24fb843',
+    name: 'Out of Stock',
+    value: 6,
+  },
+  expiredProducts: {
+    id: 'a826cf9d',
+    name: 'Expired Prodcuts',
+    value: 12,
+  },
+  overdueShipments: {
+    id: 'bb379300',
+    name: 'Overdue Shipments',
+    value: 40,
+  },
 };
+
+export const metricSlice = createSlice({
+  name: 'metric',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {},
+});
+
+export default metricSlice.reducer;

@@ -3,10 +3,9 @@ import FmdBadIcon from '@mui/icons-material/FmdBad';
 import WarningIcon from '@mui/icons-material/Warning';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Box, Typography, Paper } from '@mui/material';
-
 import { styled as MUIStyled } from '@mui/material';
-
-
+import { Fragment } from 'react';
+import { useAppSelector } from '../Utils/StateDispatch';
 
 export const StockQtyItem = MUIStyled(Box)(() => ({
   display: 'flex',
@@ -23,8 +22,10 @@ export const StockQtyItemText = MUIStyled(Box)(() => ({
 }));
 
 const StockQuantityRow = () => {
+  const metrics = useAppSelector((state) => state.metricReducer);
+
   return (
-    <>
+    <Fragment>
       <Paper
         elevation={2}
         sx={{
@@ -53,7 +54,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              23
+              {metrics.lowInStock.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -64,7 +65,7 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              Low in stock
+              {metrics.lowInStock.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -79,7 +80,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              6
+              {metrics.outOfStock.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -90,7 +91,7 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              Out of stock
+              {metrics.outOfStock.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -105,7 +106,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              12
+              {metrics.expiredProducts.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -116,7 +117,7 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              Expired Products
+              {metrics.expiredProducts.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -131,7 +132,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              40
+              {metrics.overdueShipments.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -142,12 +143,12 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              Overdue Shipments
+              {metrics.overdueShipments.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
       </Paper>
-    </>
+    </Fragment>
   );
 };
 
