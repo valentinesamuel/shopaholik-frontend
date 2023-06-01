@@ -3,11 +3,13 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { PERSIST, persistReducer, persistStore } from 'redux-persist';
 import { apiSlice } from './slice';
 import orderReducer from './slice/OrderSlice/OrderSlice';
-import supplierReducer from './slice/SupplierSlice/SupplierSlice'
+import supplierReducer from './slice/SupplierSlice/SupplierSlice';
+import personnelReducer from './slice/PersonnelSlice/PersonnelSlice';
 
 const rootReducer = combineReducers({
   orderReducer,
   supplierReducer,
+  personnelReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

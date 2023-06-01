@@ -46,34 +46,30 @@ export interface Product {
 }
 
 export interface Personnel {
-  personnel_id: string;
-  first_name: string;
-  last_name: string;
-  middle_name: string;
-  date_of_birth: string;
-  profile_picture_url: string;
+  personnelId: string;
+  firstName: string;
+  lastName: string;
+  middleName: string;
+  dateOfBirth: Date | Dayjs;
+  profilePictureUrl: string;
   phone: string;
   email: string;
-  religion: string;
   address: string;
   city: string;
   state: string;
-  marital_status: string;
+  maritalStatus: string;
   gender: string;
-  country: string;
-  additional_info: string;
+  additionalInfo: string;
   guarantor: {
     name: string;
-    date_of_birth: string;
-    relationship_with_staff: string;
+    relationshipWithStaff: string;
     phone: string;
     email: string;
     address: string;
-    gender: string;
   };
-  job_designation: JobDesignation | ADMINROLE;
-  availability_status: AvailAbilityStatus;
-  monthly_salary: number;
+  jobDesignation: JobDesignation | ADMINROLE;
+  availabilityStatus: AvailAbilityStatus;
+  monthlySalary: number;
 }
 
 export enum StockStatus {
