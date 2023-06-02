@@ -9,10 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { ProductCategory } from '../../../Utils/Types';
+import { OrderedItem } from '../../../Utils/Types';
 
 interface Column {
-  id: 'quantity' | 'productName' | 'totalPrice' | 'unitPrice' | 'category';
+  id: 'quantity' | 'name' | 'total_price' | 'unit_price' | 'category';
   label: string;
   minWidth?: number | string;
   width?: number | string;
@@ -29,21 +29,21 @@ const columns: readonly Column[] = [
     align: 'left',
   },
   {
-    id: 'productName',
+    id: 'name',
     label: 'Product Name',
     // minWidth: '5%',
     // width: '6%',
     align: 'left',
   },
   {
-    id: 'unitPrice',
+    id: 'unit_price',
     label: 'Unit Price',
     format: (value: number) => value.toLocaleString('en-US'),
     // minWidth: 170,
     align: 'center',
   },
   {
-    id: 'totalPrice',
+    id: 'total_price',
     label: 'Total Price',
     format: (value: number) => value.toLocaleString('en-US'),
     // minWidth: 170,
@@ -58,47 +58,14 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
-  quantity: number;
-  productName: string;
-  unitPrice: number;
-  totalPrice: number;
-
-  category: ProductCategory;
-}
-
-function createData(
-  quantity: number,
-  productName: string,
-  unitPrice: number,
-  totalPrice: number,
-
-  category: ProductCategory,
-): Data {
-  return {
-    quantity,
-    productName,
-    unitPrice,
-    totalPrice,
-    category,
-  };
-}
-
-const rows = [
-  createData(
-    23,
-    'Nike Tech Fleece',
-    15000,
-    345000,
-    ProductCategory.CLOTHING_AND_ACCESSORIES,
-  ),
-];
-
 const OrderDetailsTableContainer = styled(Box)`
   height: fit-content;
 `;
 
-const OrderDetailsTable: React.FC = () => {
+
+const OrderDetailsTable: React.FC<{ orderItemRows: OrderedItem[] }> = ({
+  orderItemRows,
+}) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -139,11 +106,11 @@ const OrderDetailsTable: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {orderItemRows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <React.Fragment key={row.productName}>
+                    <React.Fragment key={row.name}>
                       <TableRow
                         sx={{ cursor: 'pointer' }}
                         hover
@@ -171,7 +138,7 @@ const OrderDetailsTable: React.FC = () => {
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={orderItemRows.length}
           key={page}
           rowsPerPage={rowsPerPage}
           page={page}

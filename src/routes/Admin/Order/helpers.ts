@@ -1,11 +1,6 @@
-import { ShippingStatus } from "../../../Utils/Types";
+import { Order } from '../../../Utils/Types';
 
-interface OrderData {
-  orderNumber: string;
-  shippingStatus: ShippingStatus;
-}
-
-export const filterAndSearchOrders = <T extends OrderData>(
+export const filterAndSearchOrders = <T extends Order>(
   rows: T[],
   tabOption: string,
   search: string,

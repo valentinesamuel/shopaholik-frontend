@@ -53,7 +53,7 @@ const initialState: IinitialState = {
   ],
 };
 
-export const orderSlice: Slice = createSlice({
+export const orderSlice = createSlice({
   name: 'order',
   initialState,
   reducers: {},

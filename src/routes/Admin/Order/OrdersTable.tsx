@@ -189,7 +189,7 @@ const TableModal: React.FC<{ orderRow: Order }> = ({ orderRow }) => {
 
   return (
     <div>
-      <IconButton onClick={() => navigate(`${orderRow.orderNumber}`)}>
+      <IconButton onClick={() => navigate(`${orderRow.orderId}`)}>
         <InfoIcon />
       </IconButton>
     </div>

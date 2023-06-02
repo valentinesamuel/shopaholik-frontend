@@ -4,19 +4,20 @@ import SelectOptions from '../../../components/SelectOptions';
 import { shippingStatusOptions } from '../../../Utils/categories';
 import OrderDetailsTable from './OrderDetailsTable';
 import { useParams } from 'react-router-dom';
+import { orderedItems } from './OrderRows';
 
-interface Props {}
+const orderItemRows = orderedItems;
 
-const OrderDetails: FC<Props> = ({}) => {
+const OrderDetails: FC = () => {
   const [shippingStatus, setShippingStatus] = useState('');
   const { orderId } = useParams();
- 
-  // TODO: call the usequeryorderdetails
-  
+
+  // TODO: call the usequeryorderdetails with the id
+
   const handleShippingStatusChange = (event: SelectChangeEvent) => {
     setShippingStatus(event.target.value);
-    // TODO: fetch the order details with usequeryorderdetails
-    
+    // TODO: update the order details with useupdateorderdetails
+
     console.log(event.target.value);
   };
 
@@ -43,7 +44,7 @@ const OrderDetails: FC<Props> = ({}) => {
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
             <Typography sx={{ color: '#96999F', marginRight: '10px' }}>
-              Order Number:
+              Order Number: \id: {orderId}
             </Typography>
             <Typography sx={{ fontWeight: 'bold' }}>4WNGO39EJ46</Typography>
           </Box>
@@ -115,7 +116,7 @@ const OrderDetails: FC<Props> = ({}) => {
         </Box>
       </Box>
 
-      <OrderDetailsTable />
+      <OrderDetailsTable orderItemRows={orderItemRows} />
     </Paper>
   );
 };

@@ -26,9 +26,10 @@ export interface Order {
 export interface OrderedItem {
   // ordered_item_id: string;
   name: string;
-  quantity: string;
+  quantity: number;
   unit_price: number;
-  total_price: string;
+  category: ProductCategory;
+  total_price: number;
 }
 
 export interface Product {
