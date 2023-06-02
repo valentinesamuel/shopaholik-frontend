@@ -5,7 +5,7 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://jsonplaceholder.typicode.com',
   }),
-  tagTypes: ['Order', 'Supplier', 'Personnel', 'Product', 'InventoryProduct'],
+  tagTypes: ['Order', 'Supplier', 'Personnel', 'Product', 'InventoryProduct', 'Metric'],
   endpoints: () => ({}),
 });
 // addPost: build.mutation<Post, Omit<Post, 'id'>>({

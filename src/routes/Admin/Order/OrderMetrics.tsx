@@ -4,9 +4,13 @@ import Warning from '@mui/icons-material/Warning';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { Box, Typography } from '@mui/material';
+import { useAppSelector } from '../../../Utils/StateDispatch';
+import { convertNumberToLocale } from '../../../Utils/Converter';
 
 const OrderMetrics: FC = () => {
   // TODO: get the data from her and add it in the metrics reducer
+  const orderMetrics = useAppSelector((state) => state.metricReducer);
+
   return (
     <Box
       sx={{
@@ -32,10 +36,10 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            Pending Orders
+            {orderMetrics.pendingOrders.name}
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            12
+            {orderMetrics.pendingOrders.value}
           </Typography>
         </Box>
         <Box>
@@ -58,10 +62,10 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            Received Orders
+            {orderMetrics.receivedOrders.name}
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            4
+            {orderMetrics.receivedOrders.value}
           </Typography>
         </Box>
         <Box>
@@ -84,10 +88,10 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            Shipped Orders
+            {orderMetrics.shippedOrders.name}
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            10
+            {orderMetrics.shippedOrders.value}
           </Typography>
         </Box>
         <Box>
@@ -110,10 +114,12 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            Cost of Pending Orders
+            {orderMetrics.costOfPendingOrders.name}
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            170,530
+            {convertNumberToLocale(
+              orderMetrics.costOfPendingOrders.value as number,
+            )}
           </Typography>
         </Box>
         <Box>

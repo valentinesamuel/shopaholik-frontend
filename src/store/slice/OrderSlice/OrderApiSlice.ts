@@ -35,12 +35,13 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         result ? [{ type: 'Order', id: result.orderId }] : ['Order'],
     }),
 
-    updateOrder: builder.query<Order, Order>({
+    updateOrder: builder.mutation<Order, Order>({
       query: (updatedOrder) => ({
         url: `/orders/${updatedOrder.orderId}`,
         method: 'PATCH',
         body: updatedOrder,
       }),
+      invalidatesTags: ['Metric'],
     }),
   }),
 });
@@ -48,5 +49,5 @@ export const {
   useGetOrderQuery,
   useGetSupplierOrdersQuery,
   useGetOrdersQuery,
-  useUpdateOrderQuery,
+  useUpdateOrderMutation,
 } = orderApiSlice;

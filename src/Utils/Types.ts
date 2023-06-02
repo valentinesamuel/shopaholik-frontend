@@ -97,6 +97,29 @@ export interface PersonnelLogin {
   designation: string;
 }
 
+interface MetricValue {
+  id: string;
+  name: string;
+  value: string | number;
+}
+
+export interface Metrics {
+  dailyProfit: MetricValue;
+  purchaseCount: MetricValue;
+  dailyLoss: MetricValue;
+  dailySales: MetricValue;
+  inventoryCost: MetricValue;
+  staffOnDuty: MetricValue;
+  lowInStock: MetricValue;
+  outOfStock: MetricValue;
+  expiredProducts: MetricValue;
+  overdueShipments: MetricValue;
+  pendingOrders: MetricValue;
+  receivedOrders: MetricValue;
+  shippedOrders: MetricValue;
+  costOfPendingOrders: MetricValue;
+}
+
 export enum StockStatus {
   IN_STOCK = 'IN STOCK',
   OUT_OF_STOCK = 'OUT OF STOCK',

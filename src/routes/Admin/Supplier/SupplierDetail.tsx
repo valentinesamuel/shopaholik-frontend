@@ -18,6 +18,8 @@ import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import NewSupplierOrderModal from './NewSupplierOrderModal';
 import SupplierOrderTable from './SupplierOrderTable';
 import { useDebounce } from '../../../hooks/UseDebounce';
+import { useLocation } from 'react-router-dom';
+import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 
 interface Props {}
 
@@ -27,6 +29,7 @@ const SupplierDetail: FC<Props> = ({}) => {
   const [open, setOpen] = useState(false);
   const [filter, setFilter] = useState('');
   const debouncedSearchedOrder = useDebounce(searchSupplierOrder, 500);
+  const location = useLocation();
 
   const handleTabChange = (_: SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
@@ -47,6 +50,7 @@ const SupplierDetail: FC<Props> = ({}) => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
+      <BreadCrumbNavigation currentLocation={location} />
       <Box
         sx={{
           display: 'flex',

@@ -18,7 +18,13 @@ const BreadCrumbNavigation: FC<Props> = ({ currentLocation }) => {
       {breadcrumbPath.map((path) => (
         <Link
           style={{ textDecoration: 'none' }}
-          to={`/${path === 'order' ? 'manager/order' : path}`}
+          to={`/${
+            path === 'order'
+              ? 'manager/order'
+              : path === 'supplier'
+              ? 'manager/supplier'
+              : path
+          }`}
           key={path}
         >
           <Typography sx={{ textTransform: 'capitalize' }} color="#9b9a9a">

@@ -1,25 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { Metrics } from '../../../Utils/Types';
+import { metricApiSlice } from './MetricApiSlice';
 
-interface MetricValue {
-  id: string;
-  name: string;
-  value: string | number;
-}
-
-interface IinitialState {
-  dailyProfit: MetricValue;
-  purchaseCount: MetricValue;
-  dailyLoss: MetricValue;
-  dailySales: MetricValue;
-  inventoryCost: MetricValue;
-  staffOnDuty: MetricValue;
-  lowInStock: MetricValue;
-  outOfStock: MetricValue;
-  expiredProducts: MetricValue;
-  overdueShipments: MetricValue;
-}
-
-const initialState: IinitialState = {
+const initialState: Metrics = {
   dailyProfit: {
     id: '220d9cdd',
     name: "today's profit",
@@ -70,13 +53,40 @@ const initialState: IinitialState = {
     name: 'Overdue Shipments',
     value: 40,
   },
+  pendingOrders: {
+    id: '81b4b01b',
+    name: 'Pending Orders',
+    value: 23,
+  },
+  receivedOrders: {
+    id: '896eec4d',
+    name: 'Received Orders',
+    value: 42,
+  },
+  shippedOrders: {
+    id: 'c3e19de3',
+    name: 'Shipped Orders',
+    value: 83,
+  },
+  costOfPendingOrders: {
+    id: 'c3e19de3',
+    name: 'Cost of Pending Orders',
+    value: 170530,
+  },
 };
 
 export const metricSlice = createSlice({
   name: 'metric',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      metricApiSlice.endpoints.getMetrics.matchFulfilled,
+      (state, action) => {
+        state = action.payload;
+      },
+    );
+  },
 });
 
 export default metricSlice.reducer;
