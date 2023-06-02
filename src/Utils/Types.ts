@@ -76,6 +76,18 @@ export interface Personnel {
   monthlySalary: number;
 }
 
+export interface User {
+  name: string;
+  role: ADMINROLE;
+}
+
+export interface PersonnelLogin {
+  name: string;
+  workerID: string;
+  password: string;
+  designation: string;
+}
+
 export enum StockStatus {
   IN_STOCK = 'IN STOCK',
   OUT_OF_STOCK = 'OUT OF STOCK',

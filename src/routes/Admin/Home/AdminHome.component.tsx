@@ -12,10 +12,19 @@ import SideLink from '../../../components/SideLink';
 import logout from '../../../assets/icons/logout.svg';
 import { Box, Modal } from '@mui/material';
 import Navbar from '../../../components/Navbar';
+import { useAppSelector } from '../../../Utils/StateDispatch';
+
+const currentSideRoutes = {
+  MANAGER: managerSideRoutes,
+  SUPERVISOR: supervisorSideRoutes,
+  CASHIER: cashierSideRoutes,
+};
 
 const AdminHome: FC = () => {
   const [showNav, setShowNav] = useState(false);
   const handleOpen = () => setShowNav(true);
+  const role = useAppSelector((state) => state.userReducer.user.role);
+
   const handleClose = () => setShowNav(false);
 
   return (
@@ -41,7 +50,7 @@ const AdminHome: FC = () => {
         <Sidebar>
           <div className="routes">
             <StyledLink to="/manager">Shopaholik</StyledLink>
-            {managerSideRoutes.map((route) => {
+            {currentSideRoutes[role].map((route) => {
               return (
                 <SideLink
                   destination={route.destination}

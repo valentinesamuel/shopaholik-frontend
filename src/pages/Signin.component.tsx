@@ -7,42 +7,16 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { ADMINROLE, AvailAbilityStatus, Personnel } from '../Utils/Types';
+import {
+  ADMINROLE,
+  AvailAbilityStatus,
+  Personnel,
+  PersonnelLogin,
+} from '../Utils/Types';
 import SelectOptions from '../components/SelectOptions';
 import { useNavigate } from 'react-router-dom';
 
-const defaultPersonnel: Personnel = {
-  personnel_id: 'ab8f4673',
-  first_name: '',
-  last_name: '',
-  middle_name: '',
-  date_of_birth: '',
-  profile_picture_url: '',
-  phone: '74535678467',
-  email: '',
-  religion: '',
-  address: '',
-  city: '',
-  state: '',
-  marital_status: '',
-  gender: '',
-  country: '',
-  additional_info: '',
-  guarantor: {
-    name: '',
-    date_of_birth: '',
-    relationship_with_staff: '',
-    phone: '23420803535',
-    email: '',
-    address: '',
-    gender: '',
-  },
-  job_designation: ADMINROLE.MANAGER,
-  availability_status: AvailAbilityStatus.ON_DUTY,
-  monthly_salary: 70000,
-};
-
-const dummyPersonnel = {
+const dummyPersonnel: PersonnelLogin = {
   name: '',
   workerID: '',
   password: '',

@@ -1,18 +1,12 @@
 import { FC, useEffect } from 'react';
 import { ADMINROLE } from '../../Utils/Types';
 import { Outlet, useNavigate } from 'react-router-dom';
-
-// const userRoles = {
-//   MANAGER: <ManagerHome />,
-//   SUPERVISOR: <SupervisorHome />,
-//   CASHIER: <CashierHome />,
-// };
-
-export const role: ADMINROLE = ADMINROLE.MANAGER;
+import { useAppSelector } from '../../Utils/StateDispatch';
 
 const RoleHome: FC = () => {
+  const role = useAppSelector((state) => state.userReducer.user.role);
+
   const navigate = useNavigate();
-  // TODO: create a user slice to hold the user role and details
 
   useEffect(() => {
     if (role === String(ADMINROLE.MANAGER)) {

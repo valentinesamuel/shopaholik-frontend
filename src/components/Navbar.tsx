@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
 import blue from '@mui/material/colors/blue';
 import ThemeSwitcher from './ThemeSwitcher';
+import { useAppSelector } from '../Utils/StateDispatch';
 
 const NavbarContainer = styled(Box)`
   display: flex;
@@ -35,6 +36,8 @@ const NavbarContainer = styled(Box)`
 `;
 
 const Navbar: FC = () => {
+  const name = useAppSelector((state) => state.userReducer.user.name);
+
   return (
     <NavbarContainer>
       <div className="role-greeting">
@@ -46,7 +49,7 @@ const Navbar: FC = () => {
           }}
           variant="body1"
         >
-          Emmanuel
+          {name}
         </Typography>
       </div>
       <div className="image">
@@ -59,7 +62,7 @@ const Navbar: FC = () => {
             marginRight: 3,
           }}
         >
-          EM
+          {name.split(' ')[1][0]}
         </Avatar>
         <Typography
           sx={{
@@ -72,7 +75,7 @@ const Navbar: FC = () => {
           }}
           variant="body1"
         >
-          Emmanuel
+          {name.split(' ')[1]}
         </Typography>
         <ThemeSwitcher />
       </div>
