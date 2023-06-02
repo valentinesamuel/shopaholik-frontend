@@ -3,7 +3,6 @@ import { FC } from 'react';
 import { styled } from 'styled-components';
 import { UserTheme } from '../Utils/UserTheme';
 import blue from '@mui/material/colors/blue';
-import ThemeSwitcher from './ThemeSwitcher';
 import { useAppSelector } from '../Utils/StateDispatch';
 
 const NavbarContainer = styled(Box)`
@@ -77,7 +76,6 @@ const Navbar: FC = () => {
         >
           {name.split(' ')[1]}
         </Typography>
-        <ThemeSwitcher />
       </div>
     </NavbarContainer>
   );
