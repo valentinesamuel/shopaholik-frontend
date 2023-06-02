@@ -48,6 +48,7 @@ const AddProductModal: FC<Props> = () => {
   const [supplierList, _] = useState(suppliersList);
 
   const handleAddProduct = () => {
+    //TODO: call the api to add a product here
     console.log(product);
   };
 

@@ -16,19 +16,25 @@ import RoleHome from './routes/RoleHome/RoleHome.component';
 import CashierSale from './routes/Cashier/CashierSale.component';
 import OrderDetails from './routes/Admin/Order/OrderDetails';
 import MissingPage from './pages/404';
+import { useAppSelector } from './Utils/StateDispatch';
 
 function App() {
-  // TODO: create a slice for the theme
-  const [mode, setMode] = useState<PaletteMode>('dark');
+  const currentTheme = useAppSelector((state) => state.themeReducer.theme);
+  console.log(currentTheme);
+
+  const [mode, setMode] = useState<PaletteMode>(currentTheme as PaletteMode);
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
+        console.log(mode);
+
         setMode((prevMode: PaletteMode) =>
           prevMode === 'light' ? 'dark' : 'light',
         );
       },
     }),
-    [],
+    [mode],
   );
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
 

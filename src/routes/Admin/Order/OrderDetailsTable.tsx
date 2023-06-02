@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -9,20 +9,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { MoreHoriz } from '@mui/icons-material';
 import { ProductCategory } from '../../../Utils/Types';
-import dayjs from 'dayjs';
-import ProductDetailModal from '../../../components/ProductDetailModal';
 
 interface Column {
-  id:
-    | 'quantity'
-    | 'productName'
-    | 'dateOfOrder'
-    | 'totalPrice'
-    | 'unitPrice'
-    | 'estimatedTimeOfArrival'
-    | 'category';
+  id: 'quantity' | 'productName' | 'totalPrice' | 'unitPrice' | 'category';
   label: string;
   minWidth?: number | string;
   width?: number | string;
@@ -46,13 +36,6 @@ const columns: readonly Column[] = [
     align: 'left',
   },
   {
-    id: 'dateOfOrder',
-    label: 'Date of Order',
-    // minWidth: 100
-    align: 'center',
-  },
-
-  {
     id: 'unitPrice',
     label: 'Unit Price',
     format: (value: number) => value.toLocaleString('en-US'),
@@ -66,12 +49,7 @@ const columns: readonly Column[] = [
     // minWidth: 170,
     align: 'center',
   },
-  {
-    id: 'estimatedTimeOfArrival',
-    label: 'ETA',
-    // minWidth: 170,
-    align: 'center',
-  },
+
   {
     id: 'category',
     label: 'Category',
@@ -83,8 +61,6 @@ const columns: readonly Column[] = [
 interface Data {
   quantity: number;
   productName: string;
-  estimatedTimeOfArrival: string;
-  dateOfOrder: string;
   unitPrice: number;
   totalPrice: number;
 
@@ -94,8 +70,6 @@ interface Data {
 function createData(
   quantity: number,
   productName: string,
-  dateOfOrder: dayjs.Dayjs,
-  estimatedTimeOfArrival: dayjs.Dayjs,
   unitPrice: number,
   totalPrice: number,
 
@@ -104,13 +78,8 @@ function createData(
   return {
     quantity,
     productName,
-    dateOfOrder: dateOfOrder.format('D MMM, YYYY.  H:M A'),
-    estimatedTimeOfArrival: estimatedTimeOfArrival.format(
-      'D MMM, YYYY.  H:M A',
-    ),
     unitPrice,
     totalPrice,
-
     category,
   };
 }
@@ -119,11 +88,8 @@ const rows = [
   createData(
     23,
     'Nike Tech Fleece',
-    dayjs(new Date()),
-    dayjs(new Date()),
     15000,
     345000,
-
     ProductCategory.CLOTHING_AND_ACCESSORIES,
   ),
 ];
@@ -170,10 +136,6 @@ const OrderDetailsTable: React.FC = () => {
                     </TableCell>
                   </React.Fragment>
                 ))}
-                <TableCell
-                  sx={{ backgroundColor: 'primary.main', width: '5%' }}
-                  align="right"
-                ></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -198,9 +160,6 @@ const OrderDetailsTable: React.FC = () => {
                             </TableCell>
                           );
                         })}
-                        <TableCell align="right">
-                          <TableModal orderRow={row} />
-                        </TableCell>
                       </TableRow>
                     </React.Fragment>
                   );
@@ -225,16 +184,3 @@ const OrderDetailsTable: React.FC = () => {
 };
 
 export default OrderDetailsTable;
-
-const TableModal: React.FC<{ orderRow: Data }> = () => {
-  // const [open, setOpen] = React.useState(false);
-
-  return (
-    <div>
-      {/* <IconButton onClick={() => setOpen(true)}> */}
-        <MoreHoriz sx={{ display: 'none' }} />
-      {/* </IconButton> */}
-      {/* <ProductDetailModal open={open} onClose={() => setOpen(false)} /> */}
-    </div>
-  );
-};

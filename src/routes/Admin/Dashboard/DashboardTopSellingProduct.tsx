@@ -11,10 +11,12 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
 import ProductDetailModal from '../../../components/ProductDetailModal';
-import { StockStatus } from '../../../Utils/Types';
+import { Product, StockStatus } from '../../../Utils/Types';
+import { RootState } from '../../../store/store';
+import { useAppSelector } from '../../../Utils/StateDispatch';
 
 interface Column {
-  id: 'product' | 'price' | 'quantity_sold' | 'stock_status';
+  id: 'name' | 'unit_price' | 'quantity_sold' | 'stock_status';
   label: string;
   minWidth?: number | string;
   width?: number | string;
@@ -24,14 +26,14 @@ interface Column {
 
 const columns: readonly Column[] = [
   {
-    id: 'product',
+    id: 'name',
     label: 'Product',
     minWidth: '30%',
     width: '50%',
     align: 'left',
   },
   {
-    id: 'price',
+    id: 'unit_price',
     label: 'Price',
     // minWidth: 100
     format: (value: number) => value.toLocaleString('en-US'),
@@ -52,8 +54,8 @@ const columns: readonly Column[] = [
 ];
 
 interface Data {
-  product: string;
-  price: number;
+  name: string;
+  unit_price: number;
   quantity_sold: number;
   min_quantity: number;
   stock_quantity: number;
@@ -61,8 +63,8 @@ interface Data {
 }
 
 function createData(
-  product: string,
-  price: number,
+  name: string,
+  unit_price: number,
   quantity_sold: number,
   min_quantity: number,
   stock_quantity: number,
@@ -76,8 +78,8 @@ function createData(
       ? StockStatus.IN_STOCK
       : StockStatus.EXPIRED;
   return {
-    price,
-    product,
+    unit_price,
+    name,
     quantity_sold,
     stock_quantity,
     min_quantity,
@@ -85,7 +87,7 @@ function createData(
   };
 }
 
-const rows = [
+const inventoryProducts = [
   createData('Moncler Padded Cotton Jacket', 15000, 34, 5, 3),
   createData('Fresh Apples', 50, 100, 10, 2),
   createData('Organic Eggs (Dozen)', 80, 80, 15, 0),
@@ -118,6 +120,7 @@ const rows = [
   createData('Pet Supplies', 1000, 45, 10, 15),
   createData('Outdoor Camping Gear', 5000, 20, 4, 6),
 ];
+
 const DashboardTopSellingProductContainer = styled(Box)`
   height: fit-content;
 `;
@@ -125,6 +128,9 @@ const DashboardTopSellingProductContainer = styled(Box)`
 const DashboardTopSellingProduct: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const inventoryProducts = useAppSelector(
+    (state: RootState) => state.inventoryReducer.inventoryProducts,
+  );
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -167,11 +173,11 @@ const DashboardTopSellingProduct: React.FC = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows
+              {inventoryProducts
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <React.Fragment key={row.product}>
+                    <React.Fragment key={row.name}>
                       <TableRow
                         sx={{ cursor: 'pointer' }}
                         hover
@@ -189,7 +195,7 @@ const DashboardTopSellingProduct: React.FC = () => {
                           );
                         })}
                         <TableCell align="right">
-                          <TableModal />
+                          <TableModal key={row.product_id} product={row} />
                         </TableCell>
                       </TableRow>
                     </React.Fragment>
@@ -202,7 +208,7 @@ const DashboardTopSellingProduct: React.FC = () => {
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={inventoryProducts.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
@@ -215,7 +221,7 @@ const DashboardTopSellingProduct: React.FC = () => {
 
 export default DashboardTopSellingProduct;
 
-const TableModal: React.FC = () => {
+const TableModal: React.FC<{ product: Product }> = ({ product }) => {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -223,7 +229,11 @@ const TableModal: React.FC = () => {
       <IconButton onClick={() => setOpen(true)}>
         <MoreHoriz />
       </IconButton>
-      <ProductDetailModal open={open} onClose={() => setOpen(false)} />
+      <ProductDetailModal
+        open={open}
+        onClose={() => setOpen(false)}
+        productDetail={product}
+      />
     </Box>
   );
 };

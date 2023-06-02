@@ -29,7 +29,6 @@ export const orderApiSlice = apiSlice.injectEndpoints({
           : ['Order'],
     }),
 
-    // TODO: use a comprehensive order which will include the order metadata and the items in that order(orderedItems)
     getOrder: builder.query<Order, string>({
       query: (id) => `/orders/${id}`,
       providesTags: (result) =>

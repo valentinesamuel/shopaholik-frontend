@@ -12,6 +12,10 @@ interface Props {
 }
 
 const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
+  const deleteProduct = () => {
+    console.log(productDetail.product_id);
+  };
+
   return (
     <Modal keepMounted open={open} onClose={onClose}>
       <Paper
@@ -173,6 +177,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
         </Box>
         <Button
           color="error"
+          onClick={deleteProduct}
           startIcon={<DeleteForever />}
           variant="contained"
           sx={{

@@ -3,6 +3,11 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Switch } from '@mui/material';
 import { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../Utils/StateDispatch';
+import {
+  setTheme,
+  toggleTheme,
+} from '../store/slice/ThemeSlice/ThemeSlice.store';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -52,11 +57,13 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 export default function ThemeSwitcher() {
-  const [checked, setChecked] = useState(true);
+  const [_, setChecked] = useState(false);
+  const dispatch = useAppDispatch();
+  const theme = useAppSelector((state) => state.themeReducer.theme);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleThemeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
-    console.log(event.target.checked);
+    dispatch(toggleTheme(event.target.checked));
   };
 
   return (
@@ -65,8 +72,8 @@ export default function ThemeSwitcher() {
         control={
           <MaterialUISwitch
             sx={{ m: 1 }}
-            checked={checked}
-            onChange={handleChange}
+            checked={theme === 'dark' ? true : false}
+            onChange={handleThemeChange}
             inputProps={{ 'aria-label': 'controlled' }}
           />
         }

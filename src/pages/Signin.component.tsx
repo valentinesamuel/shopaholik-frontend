@@ -7,12 +7,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import {
-  ADMINROLE,
-  AvailAbilityStatus,
-  Personnel,
-  PersonnelLogin,
-} from '../Utils/Types';
+import { ADMINROLE, PersonnelLogin } from '../Utils/Types';
 import SelectOptions from '../components/SelectOptions';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,7 +36,8 @@ const SignIn: FC = () => {
 
   const onLogin = () => {
     console.log(personnelDetails);
-    navigate('/');
+    //TODO: Make a call to api to login
+    navigate(`/${personnelDetails.designation}`);
   };
 
   return (

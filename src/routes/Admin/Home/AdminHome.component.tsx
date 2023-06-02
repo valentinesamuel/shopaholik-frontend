@@ -1,7 +1,6 @@
 import { FC, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import ViewHeadlineIcon from '@mui/icons-material/ViewHeadline';
 import { DisplayArea, Sidebar, StyledLink, Wrapper2 } from './AdminHome.styles';
 import {
   cashierSideRoutes,
@@ -23,7 +22,7 @@ const currentSideRoutes = {
 const AdminHome: FC = () => {
   const [showNav, setShowNav] = useState(false);
   const handleOpen = () => setShowNav(true);
-  const role = useAppSelector((state) => state.userReducer.user.role);
+  const role = useAppSelector((state) => state.userReducer.user?.role);
 
   const handleClose = () => setShowNav(false);
 
@@ -38,54 +37,36 @@ const AdminHome: FC = () => {
           borderRadius: 1,
           borderColor: 'primary.dark',
           height: 'fit-content',
+          position: 'fixed',
         }}
       >
         {showNav ? (
-          <KeyboardDoubleArrowLeftIcon color="action" />
+          <ViewHeadlineIcon color="action" />
         ) : (
-          <KeyboardDoubleArrowRightIcon color="action" onClick={handleOpen} />
+          <ViewHeadlineIcon color="action" onClick={handleOpen} />
         )}
       </Box>
       <Modal keepMounted open={showNav} onClose={handleClose}>
         <Sidebar>
           <div className="routes">
             <StyledLink to="/manager">Shopaholik</StyledLink>
-            {currentSideRoutes[role].map((route) => {
-              return (
-                <SideLink
-                  destination={route.destination}
-                  icon={route.icon}
-                  name={route.name}
-                  key={route.id}
-                />
-              );
-            })}
+            {role &&
+              currentSideRoutes[role].map((route) => {
+                return (
+                  <SideLink
+                    destination={route.destination}
+                    icon={route.icon}
+                    name={route.name}
+                    key={route.id}
+                  />
+                );
+              })}
           </div>
           <div className="signout">
             <SideLink destination="/signin" icon={logout} name="sign out" />
           </div>
         </Sidebar>
       </Modal>
-      {/* {showNav && (
-        <Sidebar>
-          <div className="routes">
-            <StyledLink to="/">Shopaholik</StyledLink>
-            {sideRoutes.map((route) => {
-              return (
-                <SideLink
-                  destination={route.destination}
-                  icon={route.icon}
-                  name={route.name}
-                  key={route.id}
-                />
-              );
-            })}
-          </div>
-          <div className="signout">
-            <SideLink destination="signout" icon={logout} name="sign out" />
-          </div>
-        </Sidebar>
-      )} */}
       <DisplayArea>
         <Navbar />
         <Outlet />

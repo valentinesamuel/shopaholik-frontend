@@ -10,7 +10,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         body: personnelLoginCredentials,
       }),
     }),
-    logoutUser: builder.query<null, null>({
+    logoutUser: builder.query<null, User>({
       query: () => '/login',
     }),
   }),

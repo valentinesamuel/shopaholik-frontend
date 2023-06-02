@@ -4,7 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../Utils/StateDispatch';
 
 const RoleHome: FC = () => {
-  const role = useAppSelector((state) => state.userReducer.user.role);
+  const role = useAppSelector((state) => state.userReducer.user?.role);
 
   const navigate = useNavigate();
 
@@ -15,6 +15,9 @@ const RoleHome: FC = () => {
       navigate('/supervisor');
     } else if (role === String(ADMINROLE.CASHIER)) {
       navigate('/cashier');
+    }
+    if (role === null) {
+      navigate('/signin');
     }
   }, [role]);
 

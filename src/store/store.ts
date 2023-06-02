@@ -8,8 +8,10 @@ import personnelReducer from './slice/PersonnelSlice/PersonnelSlice.store';
 import metricReducer from './slice/MetricSlice/MetricSlice.store';
 import inventoryReducer from './slice/InventorySlice/InventorySlice';
 import userReducer from './slice/UserSlice/UserSlice.store';
+import themeReducer from './slice/ThemeSlice/ThemeSlice.store';
 
 const rootReducer = combineReducers({
+  themeReducer,
   userReducer,
   metricReducer,
   inventoryReducer,
