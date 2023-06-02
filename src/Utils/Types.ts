@@ -51,11 +51,19 @@ export interface Product {
 }
 
 export interface Personnel {
+  department:
+    | 'management'
+    | 'supervisor'
+    | 'floor worker'
+    | 'janitory'
+    | 'security'
+    | 'cashier';
   personnelId: string;
   firstName: string;
   lastName: string;
   middleName: string;
   dateOfBirth: Date | Dayjs;
+  dateOfHire: Date | Dayjs;
   profilePictureUrl: string;
   phone: string;
   email: string;

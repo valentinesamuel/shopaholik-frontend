@@ -27,7 +27,7 @@ const BreadCrumbNavigation: FC<Props> = ({ currentLocation }) => {
         </Link>
       ))}
       <Link style={{ textDecoration: 'none' }} to="">
-        <Typography color="#2196f3" sx={{ textTransform: 'capitalize' }}>
+        <Typography color="#007bf6" sx={{ textTransform: 'capitalize' }}>
           {currentPage}
         </Typography>
       </Link>

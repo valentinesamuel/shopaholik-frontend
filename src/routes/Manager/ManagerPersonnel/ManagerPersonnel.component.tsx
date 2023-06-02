@@ -15,9 +15,9 @@ import { ChangeEvent, FC, useState } from 'react';
 import { personnelTabs } from '../../../Utils/OrderandShippinTab';
 import PersonnelCard from './PersonnelCard';
 import NewPersonnelModal from './NewPersonnelModal';
-import { personnels as personnelsList } from './personnels';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 import { useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../../Utils/StateDispatch';
 
 interface Props {}
 
@@ -25,7 +25,10 @@ const ManagerPersonnel: FC<Props> = () => {
   const [searchedPersonnel, setSearchedPersonnel] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
-  const [personnels, setPersonnels] = useState(personnelsList);
+  const personnelList = useAppSelector(
+    (state) => state.personnelReducer.personnels,
+  );
+  const [personnels, setPersonnels] = useState(personnelList);
   const location = useLocation();
 
   const handleOpen = () => setOpen(true);
@@ -35,11 +38,13 @@ const ManagerPersonnel: FC<Props> = () => {
     setCurrentTab(newTab);
     const currentPersonnelDepartment = personnelTabs[newTab].personnelTab;
 
-    const filterPersonnels = personnelsList.filter((personnel) => {
+    const filterPersonnels = personnelList.filter((personnel) => {
       if (currentPersonnelDepartment === '') {
         return true;
       }
-      return personnel.department === currentPersonnelDepartment;
+      //FIXME:Check this for compatiblity with tabs
+      console.log(personnel.department);
+      return personnel.jobDesignation === currentPersonnelDepartment;
     });
 
     setPersonnels(filterPersonnels);
@@ -48,11 +53,13 @@ const ManagerPersonnel: FC<Props> = () => {
   const handleSearchPersonnel = (event: ChangeEvent<HTMLInputElement>) => {
     const newPersonnel = event.target.value;
     setSearchedPersonnel(newPersonnel);
-    const filterPersonnels = personnelsList.filter((personnel) => {
+    const filterPersonnels = personnelList.filter((personnel) => {
       if (newPersonnel === '') {
         return true;
       }
-      return personnel.name.toLowerCase().includes(newPersonnel.toLowerCase());
+      return `${personnel.firstName} ${personnel.lastName}`
+        .toLowerCase()
+        .includes(newPersonnel.toLowerCase());
     });
 
     setPersonnels(filterPersonnels);
@@ -63,7 +70,6 @@ const ManagerPersonnel: FC<Props> = () => {
       sx={{
         width: '100%',
         height: '100%',
-        // height: '100vh',
         overflowX: 'auto',
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
@@ -150,7 +156,7 @@ const ManagerPersonnel: FC<Props> = () => {
         }}
       >
         {personnels.map((personnel) => (
-          <PersonnelCard personnel={personnel} key={personnel.name} />
+          <PersonnelCard personnel={personnel} key={personnel.personnelId} />
         ))}
       </Box>
 

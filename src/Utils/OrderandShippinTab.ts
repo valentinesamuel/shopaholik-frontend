@@ -44,7 +44,7 @@ export const inventoryTabs = [
     stockStatusTab: StockStatus.EXPIRED,
   },
 ];
-
+// Personnel.department: "security" | "management" | "supervisor" | "floor worker" | "janitory"
 export const personnelTabs = [
   {
     id: '1',

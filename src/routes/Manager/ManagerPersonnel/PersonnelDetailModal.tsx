@@ -12,7 +12,9 @@ import {
   SelectChangeEvent,
   Typography,
 } from '@mui/material';
-import { Personnel } from './personnels';
+import { Personnel } from '../../../Utils/Types';
+import { convertNumberToLocale } from '../../../Utils/Converter';
+import dayjs from 'dayjs';
 
 interface Props {
   open: boolean;
@@ -21,7 +23,9 @@ interface Props {
 }
 
 const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
-  const [jobDesignation, setJobDesignation] = useState('');
+  const [jobDesignation, setJobDesignation] = useState(
+    personnel.jobDesignation as string,
+  );
 
   const handleJobDesignationChange = (event: SelectChangeEvent) => {
     setJobDesignation(event.target.value);
@@ -72,7 +76,8 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
               },
             }}
           >
-            SM
+            {personnel.firstName[0].toUpperCase()}
+            {personnel.lastName[0].toUpperCase()}
           </Avatar>
           <Box
             sx={{ width: '100%', marginTop: { mobile: '5%', desktop: '0' } }}
@@ -82,14 +87,17 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                 Staff ID:
               </Typography>
               <Typography sx={{ fontWeight: 'bold' }}>
-                {personnel.id.toUpperCase()}
+                {personnel.personnelId.toUpperCase()}
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', margin: '3% 0' }}>
               <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
                 Department:
               </Typography>
-              <Typography sx={{ fontWeight: 'bold' }}>Management</Typography>
+              <Typography sx={{ fontWeight: 'bold' }}>
+                {' '}
+                {personnel.department}
+              </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
               <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
@@ -109,7 +117,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                 Pay rate:
               </Typography>
               <Typography sx={{ marginRight: '3%' }}>
-                N 35,000 per month
+                N {convertNumberToLocale(personnel.monthlySalary)}
               </Typography>
             </Box>
           </Box>
@@ -152,7 +160,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    Uwaila
+                    {personnel.firstName}
                   </Typography>
                 </Box>
                 <Box
@@ -170,7 +178,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    Uwaila
+                    {personnel.lastName}
                   </Typography>
                 </Box>
                 <Box
@@ -182,13 +190,13 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                   }}
                 >
                   <Typography variant="subtitle2" color="gray">
-                    First Name
+                    Middle Name
                   </Typography>
                   <Typography
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    Uwaila
+                    {personnel.middleName}
                   </Typography>
                 </Box>
               </div>
@@ -208,7 +216,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    +234 (1) 2850 1300
+                    {personnel.phone}
                   </Typography>
                 </Box>
                 <Box
@@ -226,7 +234,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    priscillia4life@yahoo.com
+                    {personnel.email}
                   </Typography>
                 </Box>
                 <Box
@@ -244,7 +252,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    13, January, 1997
+                    {dayjs(personnel.dateOfBirth).format('ll')}
                   </Typography>
                 </Box>
               </div>
@@ -262,23 +270,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    23, March, 2020
-                  </Typography>
-                </Box>
-                <Box
-                  sx={{
-                    margin: {
-                      desktop: '2% 0',
-                      mobile: '5% 0',
-                    },
-                  }}
-                >
-                  <Typography color="gray">Date of Birth</Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
-                  >
-                    13, January, 1997
+                    {dayjs(personnel.dateOfHire).format('ll')}
                   </Typography>
                 </Box>
                 <Box
@@ -294,7 +286,8 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                     variant="body1"
                     sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                   >
-                    38, Bori camp. Niger State, Minna
+                    {personnel.address}, {personnel.city}. {personnel.state},
+                    Nigeria
                   </Typography>
                 </Box>
               </div>
@@ -320,7 +313,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                   variant="body1"
                   sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                 >
-                  Rogers James
+                  {personnel.guarantor.name}
                 </Typography>
               </Box>
               <Box
@@ -338,7 +331,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                   variant="body1"
                   sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                 >
-                  +234 (080) 4275 2486
+                  {personnel.guarantor.phone}
                 </Typography>
               </Box>
               <Box
@@ -356,7 +349,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                   variant="body1"
                   sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                 >
-                  Upper Lawane. Benin City{' '}
+                  {personnel.guarantor.address}
                 </Typography>
               </Box>
             </Box>
