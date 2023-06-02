@@ -11,7 +11,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
 import ProductDetailModal from '../../../components/ProductDetailModal';
-import { Product, StockStatus } from '../../../Utils/Types';
+import { Product } from '../../../Utils/Types';
 import { RootState } from '../../../store/store';
 import { useAppSelector } from '../../../Utils/StateDispatch';
 
@@ -69,6 +69,9 @@ const DashboardTopSellingProduct: React.FC = () => {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const inventoryProducts = useAppSelector(
     (state: RootState) => state.inventoryReducer.inventoryProducts,
+  ).filter(
+    (inventoryProduct) =>
+      inventoryProduct.quantity_sold && inventoryProduct.quantity_sold > 100,
   );
 
   const handleChangePage = (_: unknown, newPage: number) => {

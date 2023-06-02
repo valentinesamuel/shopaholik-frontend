@@ -16,6 +16,7 @@ export const supplierApiSlice = apiSlice.injectEndpoints({
           : ['Supplier'],
     }),
 
+    // FIXME: This will also return a list of the suppliers orders 
     getSupplier: builder.query<Supplier, string>({
       query: (id) => `/suppliers/${id}`,
       providesTags: (result) =>

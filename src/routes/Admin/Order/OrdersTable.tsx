@@ -10,7 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Order, ShippingStatus } from '../../../Utils/Types';
-import dayjs from 'dayjs';
 import { getShippingStatusColor } from '../../../Utils/StatusColor';
 import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';

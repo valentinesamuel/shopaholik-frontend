@@ -1,19 +1,18 @@
 import { Avatar, Box, Paper, Typography } from '@mui/material';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Supplier } from '../../../Utils/Types';
+import dayjs from 'dayjs';
 
 interface Props {
-  destination: string;
-  name: string;
-  id: number;
+  supplier: Supplier;
 }
 
-const SupplierCard: FC<Props> = ({ destination, name, id }) => {
+const SupplierCard: FC<Props> = ({ supplier }) => {
   const navigate = useNavigate();
 
   const gotoSupplierDetails = () => {
-    console.log(id);
-    navigate(`${destination}`);
+    navigate(`${supplier.supplierId}`);
   };
 
   return (
@@ -28,14 +27,15 @@ const SupplierCard: FC<Props> = ({ destination, name, id }) => {
       <Avatar sx={{ width: 80, height: 80, marginRight: '8%' }}>NI</Avatar>
       <Box>
         <Typography variant="body1" sx={{ fontWeight: '600' }}>
-          {name}
+          {supplier.name}
         </Typography>
         <Typography sx={{ margin: '10px 0' }}>
-          22-24 Industrial Avenue, Ilupeju. PMB 21164 Ikeja, Lagos State.
-          Nigeria
+          {supplier.address} {supplier.state}. Nigeria
         </Typography>
-        <Typography sx={{ margin: '10px 0' }}>+234 (1) 280 1300</Typography>
-        <Typography>Last used: 4 days ago </Typography>
+        <Typography sx={{ margin: '10px 0' }}>{supplier.phone}</Typography>
+        <Typography>
+          Last used: {dayjs(supplier.last_order_date).format('ll')}
+        </Typography>
       </Box>
     </Paper>
   );

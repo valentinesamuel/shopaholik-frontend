@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { Supplier } from '../../../Utils/Types';
 import { supplierApiSlice } from './SupplierApiSlice';
+import dayjs from 'dayjs';
 
 interface IinitialState {
   suppliers: Supplier[];
@@ -13,7 +14,7 @@ const initialState: IinitialState = {
       name: 'Leona Cook Partners',
       address: '666 Lahib Lane',
       phone: '(985) 819-1868',
-      last_order_date: new Date(),
+      last_order_date: dayjs(new Date()),
       profile_pic_url: 'https://example.com/profile-pic-1.jpg',
       state: 'Piumrin',
     },
@@ -22,7 +23,7 @@ const initialState: IinitialState = {
       name: 'Mendoza Fitness',
       address: '1839 Ofoder Key',
       phone: '(513) 858-8850',
-      last_order_date: new Date(),
+      last_order_date: dayjs(new Date()),
       profile_pic_url: 'https://example.com/profile-pic-2.jpg',
       state: 'Dohepdar',
     },

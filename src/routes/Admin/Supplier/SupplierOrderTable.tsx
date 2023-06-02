@@ -9,12 +9,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { ShippingStatus } from '../../../Utils/Types';
-import dayjs from 'dayjs';
+import { Order } from '../../../Utils/Types';
 import { getShippingStatusColor } from '../../../Utils/StatusColor';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import { filterAndSearchOrders } from '../Order/helpers';
+import { useAppSelector } from '../../../Utils/StateDispatch';
 
 interface Column {
   id:
@@ -72,54 +72,6 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
-  orderNumber: string;
-  price: number;
-  shippingStatus: ShippingStatus;
-  dateOfOrder: string;
-  estimatedTimeOfArrival: string;
-  supplier: string;
-}
-
-function createData(
-  orderNumber: string,
-  price: number,
-  dateOfOrder: dayjs.Dayjs,
-  shippingStatus: ShippingStatus,
-  estimatedTimeOfArrival: dayjs.Dayjs,
-  supplier: string,
-): Data {
-  return {
-    orderNumber,
-    price,
-    dateOfOrder: dateOfOrder.format('D MMM, YYYY.  H:M A'),
-    shippingStatus,
-    estimatedTimeOfArrival: estimatedTimeOfArrival.format(
-      'D MMM, YYYY.  H:M A',
-    ),
-    supplier,
-  };
-}
-
-const rows = [
-  createData(
-    'W4NU935',
-    12000,
-    dayjs(new Date()),
-    ShippingStatus.DELIVERED,
-    dayjs(new Date()),
-    'Nike Inc',
-  ),
-  createData(
-    'KF5M6YR',
-    63060,
-    dayjs(new Date()),
-    ShippingStatus.PENDING,
-    dayjs(new Date()),
-    'Nestle Inc',
-  ),
-];
-
 const SupplierOrderTableContainer = styled(Box)`
   height: fit-content;
 `;
@@ -130,6 +82,10 @@ const SupplierOrderTable: React.FC<{
 }> = ({ filterTab, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const supplierOrders = useAppSelector((state) => state.orderReducer.orders);
+
+  const { supplierId } = useParams();
+  //TODO: call useGetSupplier with this ID
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -172,7 +128,7 @@ const SupplierOrderTable: React.FC<{
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterAndSearchOrders(rows, filterTab, searchFilter)
+              {filterAndSearchOrders(supplierOrders, filterTab, searchFilter)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
@@ -190,7 +146,10 @@ const SupplierOrderTable: React.FC<{
                               align={column.align}
                               key={column.id}
                               sx={{
-                                color: getShippingStatusColor(column, value),
+                                color: getShippingStatusColor(
+                                  column,
+                                  value as string,
+                                ),
                               }}
                             >
                               {column.format && typeof value === 'number'
@@ -213,7 +172,7 @@ const SupplierOrderTable: React.FC<{
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={supplierOrders.length}
           key={page}
           rowsPerPage={rowsPerPage}
           page={page}
@@ -227,7 +186,7 @@ const SupplierOrderTable: React.FC<{
 
 export default SupplierOrderTable;
 
-const TableModal: React.FC<{ orderRow: Data }> = ({ orderRow }) => {
+const TableModal: React.FC<{ orderRow: Order }> = ({ orderRow }) => {
   const navigate = useNavigate();
 
   return (

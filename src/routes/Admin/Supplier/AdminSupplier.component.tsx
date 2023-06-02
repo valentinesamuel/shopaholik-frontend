@@ -10,60 +10,15 @@ import {
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import { Search } from '@mui/icons-material';
-import SupplierCard from '../../../components/SupplierCard';
+import SupplierCard from './SupplierCard';
 import { useDebounce } from '../../../hooks/UseDebounce';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 import { useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../../Utils/StateDispatch';
 
-const suppliers = [
-  {
-    id: 1,
-    destination: 'asd',
-    name: 'Adele Sutton',
-  },
-  {
-    id: 2,
-    destination: 'asd',
-    name: 'Catherine Weaver',
-  },
-  {
-    id: 3,
-    destination: 'dhtyj',
-    name: 'Jonathan Barnes',
-  },
-  {
-    id: 4,
-    destination: 'wyj',
-    name: 'Zachary Steele',
-  },
-  {
-    id: 5,
-    destination: 'weytnfv',
-    name: 'Minerva Russell',
-  },
-  {
-    id: 6,
-    destination: 'xbn',
-    name: 'Jared Ray',
-  },
-  {
-    id: 7,
-    destination: 'w35',
-    name: 'Nancy Fernandez',
-  },
-  {
-    id: 8,
-    destination: 'ktu',
-    name: 'Bertie Manning',
-  },
-  {
-    id: 9,
-    destination: 'dxfng',
-    name: 'Ada Jones',
-  },
-];
 const AdminSupplier: FC = () => {
   const [searchedSupplier, setSearchedSupplier] = useState('');
+  const suppliers = useAppSelector((state) => state.supplierReducer.suppliers);
   const [suppliersList, setSuppliersList] = useState(suppliers);
   let debouncedSearchedSupplier = useDebounce(searchedSupplier, 200);
   const location = useLocation();
@@ -141,12 +96,7 @@ const AdminSupplier: FC = () => {
         }}
       >
         {suppliersList.map((supplier) => (
-          <SupplierCard
-            destination={supplier.destination}
-            key={supplier.id}
-            name={supplier.name}
-            id={supplier.id}
-          />
+          <SupplierCard key={supplier.supplierId} supplier={supplier} />
         ))}
       </Box>
     </Paper>

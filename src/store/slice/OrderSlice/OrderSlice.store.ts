@@ -1,7 +1,7 @@
 import { Order } from '../../../Utils/Types';
 import dayjs from 'dayjs';
 import { ShippingStatus } from '../../../Utils/Types';
-import { Slice, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { orderApiSlice } from './OrderApiSlice';
 
 interface IinitialState {
