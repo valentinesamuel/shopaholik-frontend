@@ -16,6 +16,8 @@ import { personnelTabs } from '../../../Utils/OrderandShippinTab';
 import PersonnelCard from './PersonnelCard';
 import NewPersonnelModal from './NewPersonnelModal';
 import { personnels as personnelsList } from './personnels';
+import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
+import { useLocation } from 'react-router-dom';
 
 interface Props {}
 
@@ -24,6 +26,7 @@ const ManagerPersonnel: FC<Props> = () => {
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
   const [personnels, setPersonnels] = useState(personnelsList);
+  const location = useLocation();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -65,6 +68,7 @@ const ManagerPersonnel: FC<Props> = () => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
+      <BreadCrumbNavigation currentLocation={location} />
       <FormControl>
         <InputLabel htmlFor="searchPersonnel">Search Personnel</InputLabel>
         <OutlinedInput

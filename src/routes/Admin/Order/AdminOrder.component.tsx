@@ -1,5 +1,6 @@
 import {
   Box,
+  Breadcrumbs,
   FormControl,
   IconButton,
   InputAdornment,
@@ -8,6 +9,7 @@ import {
   Paper,
   Tab,
   Tabs,
+  Typography,
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import { Search } from '@mui/icons-material';
@@ -15,6 +17,8 @@ import OrderMetrics from './OrderMetrics';
 import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import OrdersTable from './OrdersTable';
 import { useDebounce } from '../../../hooks/UseDebounce';
+import { useLocation } from 'react-router-dom';
+import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 
 interface Props {}
 
@@ -23,6 +27,7 @@ const AdminOrder: FC<Props> = ({}) => {
   const [currentTab, setCurrentTab] = useState(0);
   const [filter, setFilter] = useState('');
   const debouncedSearchedOrder = useDebounce(searchedOrder, 500);
+  const location = useLocation();
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
@@ -42,6 +47,7 @@ const AdminOrder: FC<Props> = ({}) => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
+      <BreadCrumbNavigation currentLocation={location} />
       <OrderMetrics />
 
       <Box

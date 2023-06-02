@@ -12,6 +12,8 @@ import { ChangeEvent, FC, useState } from 'react';
 import { Search } from '@mui/icons-material';
 import SupplierCard from '../../../components/SupplierCard';
 import { useDebounce } from '../../../hooks/UseDebounce';
+import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
+import { useLocation } from 'react-router-dom';
 
 const suppliers = [
   {
@@ -64,6 +66,7 @@ const AdminSupplier: FC = () => {
   const [searchedSupplier, setSearchedSupplier] = useState('');
   const [suppliersList, setSuppliersList] = useState(suppliers);
   let debouncedSearchedSupplier = useDebounce(searchedSupplier, 200);
+  const location = useLocation();
 
   const handleSearchedProductChange = (
     event: ChangeEvent<HTMLInputElement>,
@@ -91,6 +94,7 @@ const AdminSupplier: FC = () => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
+      <BreadCrumbNavigation currentLocation={location} />
       <FormControl fullWidth>
         <InputLabel htmlFor="searchSupplier">Search Supplier</InputLabel>
         <OutlinedInput

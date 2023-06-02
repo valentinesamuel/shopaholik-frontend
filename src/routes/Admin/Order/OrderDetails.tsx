@@ -3,14 +3,16 @@ import { FC, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { shippingStatusOptions } from '../../../Utils/categories';
 import OrderDetailsTable from './OrderDetailsTable';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { orderedItems } from './OrderRows';
+import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 
 const orderItemRows = orderedItems;
 
 const OrderDetails: FC = () => {
   const [shippingStatus, setShippingStatus] = useState('');
   const { orderId } = useParams();
+  const location = useLocation();
 
   // TODO: call the usequeryorderdetails with the id
 
@@ -30,6 +32,7 @@ const OrderDetails: FC = () => {
         padding: { desktop: '1% 3% 3% 3%', mobile: '1% 20px 20px 20px' },
       }}
     >
+      <BreadCrumbNavigation currentLocation={location} />
       <Box
         sx={{
           display: 'flex',

@@ -3,8 +3,12 @@ import DashboardMetric from '../../../components/DashboardMetric';
 import { Paper } from '@mui/material';
 import StockQuantityCard from '../../../components/StockQuantityRow';
 import DashboardTopSellingProduct from './DashboardTopSellingProduct';
+import { useLocation } from 'react-router-dom';
+import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 
 const AdminDashboard: FC = () => {
+  const location = useLocation();
+
   return (
     <Paper
       sx={{
@@ -13,6 +17,7 @@ const AdminDashboard: FC = () => {
         padding: '1% 3% 3% 3%',
       }}
     >
+      <BreadCrumbNavigation currentLocation={location} />
       <DashboardMetric />
       <StockQuantityCard />
       <Paper
