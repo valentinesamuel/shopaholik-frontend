@@ -14,6 +14,7 @@ const OrderMetrics: FC = () => {
   const orderMetrics = data ? data : stateorderMetrics;
   // const orderMetrics = data;
   
+  
 
   if (isLoading) {
     // Render loading state if fetching data
@@ -42,7 +43,6 @@ const OrderMetrics: FC = () => {
         gap: '1rem',
       }}
     >
-      {data?.pendingOrders.name}
       <Box
         sx={{
           backgroundColor: '#D6A013',
