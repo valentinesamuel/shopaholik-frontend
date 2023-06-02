@@ -41,4 +41,9 @@ export const personnelApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useGetPersonnelsQuery } = personnelApiSlice;
+export const {
+  useGetPersonnelsQuery,
+  useGetPersonnelQuery,
+  useAddPersonnelMutation,
+  useUpdatePersonnelMutation,
+} = personnelApiSlice;

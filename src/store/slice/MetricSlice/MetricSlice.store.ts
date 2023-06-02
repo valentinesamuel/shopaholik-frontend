@@ -83,6 +83,8 @@ export const metricSlice = createSlice({
     builder.addMatcher(
       metricApiSlice.endpoints.getMetrics.matchFulfilled,
       (state, action) => {
+        console.log(action.payload);
+
         state = action.payload;
       },
     );

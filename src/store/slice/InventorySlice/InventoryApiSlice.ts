@@ -16,21 +16,6 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
             ]
           : ['InventoryProduct'],
     }),
-
-    // TODO: this this data by filtering the inventory product with quantity_sold > 50
-    // getMostSoldInventoryProducts: builder.query<Product[], null>({
-    //   query: () => '/inventory/mostSold',
-    //   providesTags: (result) =>
-    //     result
-    //       ? [
-    //           ...result.map(({ product_id }) => ({
-    //             type: 'Product' as const,
-    //             id: product_id,
-    //           })),
-    //           { type: 'Product' },
-    //         ]
-    //       : ['Product'],
-    // }),
     addInventoryProducts: builder.mutation<Product, Product>({
       query: (product) => ({
         url: '/inventory',
@@ -51,7 +36,6 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetInventoryProductsQuery,
-  // useGetMostSoldInventoryProductsQuery,
   useAddInventoryProductsMutation,
   useDeleteInventoryProductsMutation,
 } = inventoryApiSlice;

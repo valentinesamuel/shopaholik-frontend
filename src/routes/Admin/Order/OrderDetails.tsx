@@ -13,8 +13,8 @@ const OrderDetails: FC = () => {
   const [shippingStatus, setShippingStatus] = useState('');
   const { orderId } = useParams();
   const location = useLocation();
-
   // TODO: call the usequeryorderdetails with the id
+
 
   const handleShippingStatusChange = (event: SelectChangeEvent) => {
     setShippingStatus(event.target.value);

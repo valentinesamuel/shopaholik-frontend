@@ -3,9 +3,16 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://jsonplaceholder.typicode.com',
+    baseUrl: 'https://shopaholik.free.beeceptor.com',
   }),
-  tagTypes: ['Order', 'Supplier', 'Personnel', 'Product', 'InventoryProduct', 'Metric'],
+  tagTypes: [
+    'Order',
+    'Supplier',
+    'Personnel',
+    'Product',
+    'InventoryProduct',
+    'Metric',
+  ],
   endpoints: () => ({}),
 });
 // addPost: build.mutation<Post, Omit<Post, 'id'>>({

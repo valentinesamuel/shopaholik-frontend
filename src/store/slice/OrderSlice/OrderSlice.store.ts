@@ -1,5 +1,4 @@
 import { Order } from '../../../Utils/Types';
-import dayjs from 'dayjs';
 import { ShippingStatus } from '../../../Utils/Types';
 import { createSlice } from '@reduxjs/toolkit';
 import { orderApiSlice } from './OrderApiSlice';
@@ -15,8 +14,8 @@ const initialState: IinitialState = {
       orderNumber: 'W4NU935',
       price: 12000,
       shippingStatus: ShippingStatus.DELIVERED,
-      dateOfOrder: dayjs(new Date()),
-      estimatedTimeOfArrival: dayjs(new Date()),
+      dateOfOrder: '2019-03-06T08:00:00+08:00',
+      estimatedTimeOfArrival: '2019-03-06T08:00:00+08:00',
       supplier: 'Nestle Inc',
       items: [],
     },
@@ -25,8 +24,8 @@ const initialState: IinitialState = {
       orderNumber: 'KF5M6YR',
       price: 59032,
       shippingStatus: ShippingStatus.CONFIRMED,
-      dateOfOrder: dayjs(new Date()),
-      estimatedTimeOfArrival: dayjs(new Date()),
+      dateOfOrder: '2019-03-06T08:00:00+08:00',
+      estimatedTimeOfArrival: '2019-03-06T08:00:00+08:00',
       supplier: 'Nike Inc',
       items: [],
     },
@@ -35,8 +34,8 @@ const initialState: IinitialState = {
       orderNumber: 'F3549G4',
       price: 34000,
       shippingStatus: ShippingStatus.PENDING,
-      dateOfOrder: dayjs(new Date()),
-      estimatedTimeOfArrival: dayjs(new Date()),
+      dateOfOrder: '2019-03-06T08:00:00+08:00',
+      estimatedTimeOfArrival: '2019-03-06T08:00:00+08:00',
       supplier: 'Black Waters',
       items: [],
     },
@@ -45,8 +44,8 @@ const initialState: IinitialState = {
       orderNumber: '30T4GKS0',
       price: 68950,
       shippingStatus: ShippingStatus.PENDING,
-      dateOfOrder: dayjs(new Date()),
-      estimatedTimeOfArrival: dayjs(new Date()),
+      dateOfOrder: '2019-03-06T08:00:00+08:00',
+      estimatedTimeOfArrival: '2019-03-06T08:00:00+08:00',
       supplier: 'Bunker Fitness',
       items: [],
     },

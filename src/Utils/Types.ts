@@ -1,11 +1,10 @@
-import { Dayjs } from 'dayjs';
 
 export interface Supplier {
   supplierId: string;
   name: string;
   address: string;
   phone: string;
-  last_order_date: Date | Dayjs;
+  last_order_date: string;
   profile_pic_url: string;
   state: string;
   additional_infromation?: string;
@@ -15,10 +14,10 @@ export interface Supplier {
 export interface Order {
   orderId: string;
   orderNumber: string;
-  dateOfOrder: Date | Dayjs;
+  dateOfOrder: string;
   shippingStatus: ShippingStatus;
   price: number;
-  estimatedTimeOfArrival: Date | Dayjs;
+  estimatedTimeOfArrival: string;
   supplier: string;
   items?: OrderedItem[];
 }
@@ -40,8 +39,8 @@ export interface Product {
   quantity_in_stock: number;
   min_quantity: number;
   unit_price: number;
-  date_of_arrival: Date | Dayjs;
-  expiry_date: Date | Dayjs;
+  date_of_arrival: string;
+  expiry_date: string;
   supplier_id: string;
   quantity?: number;
   quantity_sold?: number;
@@ -62,8 +61,8 @@ export interface Personnel {
   firstName: string;
   lastName: string;
   middleName: string;
-  dateOfBirth: Date | Dayjs;
-  dateOfHire: Date | Dayjs;
+  dateOfBirth: string;
+  dateOfHire: string;
   profilePictureUrl: string;
   phone: string;
   email: string;

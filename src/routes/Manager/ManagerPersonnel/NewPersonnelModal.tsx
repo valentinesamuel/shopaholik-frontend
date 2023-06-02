@@ -20,8 +20,8 @@ const defaultNewPersonnel = {
   firstName: '',
   lastName: '',
   middleName: '',
-  dateOfHire: dayjs(new Date()),
-  dateOfBirth: dayjs(new Date()),
+  dateOfHire: '',
+  dateOfBirth: '',
   phoneNumber: '',
   email: '',
   address: '',
@@ -34,7 +34,7 @@ const defaultNewPersonnel = {
     phone: '',
     address: '',
     email: '',
-    dateOfBirth: dayjs(new Date()),
+    dateOfBirth: '',
   },
 };
 
@@ -192,7 +192,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 onChange={(newDateOfBirth) =>
                   setNewPersonnel({
                     ...newPersonnel,
-                    dateOfBirth: newDateOfBirth as Dayjs,
+                    dateOfBirth: dayjs(newDateOfBirth).format(),
                   })
                 }
               />
@@ -202,7 +202,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 onChange={(newDateOfHire) =>
                   setNewPersonnel({
                     ...newPersonnel,
-                    dateOfHire: newDateOfHire as Dayjs,
+                    dateOfHire: dayjs(newDateOfHire).format(),
                   })
                 }
               />
@@ -342,7 +342,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                     ...newPersonnel,
                     guarantor: {
                       ...newPersonnel.guarantor,
-                      dateOfBirth: newDateOfBirth as Dayjs,
+                      dateOfBirth: dayjs(newDateOfBirth).format(),
                     },
                   })
                 }
