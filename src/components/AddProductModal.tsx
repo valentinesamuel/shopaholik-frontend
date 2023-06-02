@@ -26,8 +26,8 @@ const defaultNewProduct: Product = {
   quantity_in_stock: 0,
   min_quantity: 0,
   unit_price: 0,
-  date_of_arrival: dayjs(new Date()),
-  expiry_date: dayjs(new Date()),
+  date_of_arrival: '',
+  expiry_date: '',
   supplier_id: '',
   quantity: 0,
   unit_of_measurement: 'Carton',
@@ -164,7 +164,7 @@ const AddProductModal: FC<Props> = () => {
           onChange={(newExpiryDate) =>
             setProduct({
               ...product,
-              expiry_date: newExpiryDate as Dayjs,
+              expiry_date: dayjs(newExpiryDate).format(),
             })
           }
         />
@@ -237,7 +237,7 @@ const AddProductModal: FC<Props> = () => {
           onChange={(newDateOfArrival) =>
             setProduct({
               ...product,
-              date_of_arrival: newDateOfArrival as Dayjs,
+              date_of_arrival: dayjs(newDateOfArrival).format(),
             })
           }
         />

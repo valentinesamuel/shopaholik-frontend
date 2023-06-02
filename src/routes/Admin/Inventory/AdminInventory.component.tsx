@@ -1,6 +1,5 @@
 import {
   Box,
-  Breadcrumbs,
   Button,
   FormControl,
   IconButton,
@@ -12,7 +11,6 @@ import {
   SelectChangeEvent,
   Tab,
   Tabs,
-  Typography,
 } from '@mui/material';
 import Search from '@mui/icons-material/Search';
 
@@ -24,7 +22,7 @@ import { inventoryTabs } from '../../../Utils/OrderandShippinTab';
 import AddProductModal from '../../../components/AddProductModal';
 import InventoryProductTable from './InventoryProductsTable';
 import { useDebounce } from '../../../hooks/UseDebounce';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 
 function a11yProps(index: number) {

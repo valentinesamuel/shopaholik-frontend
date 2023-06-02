@@ -15,6 +15,7 @@ import { Product, ProductCategory, StockStatus } from '../../../Utils/Types';
 import { filterAndSearchInventoryItems } from './helpers';
 import { useAppSelector } from '../../../Utils/StateDispatch';
 import { RootState } from '../../../store/store';
+import { useGetInventoryProductsQuery } from '../../../store/slice/InventorySlice/InventoryApiSlice';
 
 interface Column {
   id: 'name' | 'unit_price' | 'quantity_sold' | 'stock_status' | 'category';
@@ -108,9 +109,11 @@ const InventoryProductTable: React.FC<{
 }> = ({ filterTab, filterCategory, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const inventoryProducts = useAppSelector(
+  const stateInventoryProducts = useAppSelector(
     (state: RootState) => state.inventoryReducer.inventoryProducts,
   );
+  const { data, isError, isLoading } = useGetInventoryProductsQuery();
+  const inventoryProducts = data ? data : stateInventoryProducts;
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
