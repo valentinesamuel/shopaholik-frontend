@@ -12,12 +12,8 @@ const OrderMetrics: FC = () => {
   const stateorderMetrics = useAppSelector((state) => state.metricReducer);
   const { data, isError, isLoading } = useGetMetricsQuery();
   const orderMetrics = data ? data : stateorderMetrics;
-  // const orderMetrics = data;
-  
-  
 
   if (isLoading) {
-    // Render loading state if fetching data
     return <Skeleton variant="rectangular" width={'100%'} height={100} />;
   }
 

@@ -1,4 +1,4 @@
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, Skeleton } from '@mui/material';
 import { styled as MUIStyled } from '@mui/material';
 import { FC } from 'react';
 import styled from 'styled-components';
@@ -10,6 +10,7 @@ import tag from '../assets/icons/price-tag.svg';
 import loss from '../assets/icons/stop.svg';
 import { useAppSelector } from '../Utils/StateDispatch';
 import { convertNumberToLocale } from '../Utils/Converter';
+import { useGetMetricsQuery } from '../store/slice/MetricSlice/MetricApiSlice';
 
 const DashboardMetricContainer = MUIStyled('div')(() => ({
   display: 'flex',
@@ -42,7 +43,13 @@ const Content = styled(Box)`
 `;
 
 const DashboardMetric: FC = () => {
-  const metrics = useAppSelector((state) => state.metricReducer);
+  const stateDashboardMetrics = useAppSelector((state) => state.metricReducer);
+  const { data, isLoading } = useGetMetricsQuery();
+  const dashboardMetrics = data ? data : stateDashboardMetrics;
+
+  if (isLoading) {
+    return <Skeleton variant="rectangular" width={'100%'} height={100} />;
+  }
 
   return (
     <Paper
@@ -62,51 +69,61 @@ const DashboardMetric: FC = () => {
     >
       <DashboardMetricContainer style={{ backgroundColor: '#6FCF97' }}>
         <Content>
-          <p className="title">{metrics.dailyProfit.name}</p>
+          <p className="title">{dashboardMetrics.dailyProfit.name}</p>
           <p className="value">
-            ₦ {convertNumberToLocale(metrics.dailyProfit.value as number)}
+            ₦{' '}
+            {convertNumberToLocale(
+              dashboardMetrics.dailyProfit.value as number,
+            )}
           </p>
         </Content>
         <Icon src={profit} alt="profit" />
       </DashboardMetricContainer>
       <DashboardMetricContainer style={{ backgroundColor: '#DEB03B' }}>
         <Content>
-          <p className="title">{metrics.purchaseCount.name}</p>
+          <p className="title">{dashboardMetrics.purchaseCount.name}</p>
           <p className="value">
-            ₦ {convertNumberToLocale(metrics.purchaseCount.value as number)}
+            ₦{' '}
+            {convertNumberToLocale(
+              dashboardMetrics.purchaseCount.value as number,
+            )}
           </p>
         </Content>
         <Icon src={tag} alt="icon" />
       </DashboardMetricContainer>
       <DashboardMetricContainer style={{ backgroundColor: '#96999F' }}>
         <Content>
-          <p className="title">{metrics.dailyLoss.name}</p>
+          <p className="title">{dashboardMetrics.dailyLoss.name}</p>
           <p className="value">
-            ₦ {convertNumberToLocale(metrics.dailyLoss.value as number)}
+            ₦{' '}
+            {convertNumberToLocale(dashboardMetrics.dailyLoss.value as number)}
           </p>
         </Content>
         <Icon src={loss} alt="loss" />
       </DashboardMetricContainer>
       <DashboardMetricContainer style={{ backgroundColor: '#9B51E0' }}>
         <Content>
-          <p className="title">{metrics.dailySales.name}</p>
-          <p className="value">{metrics.dailySales.value}</p>
+          <p className="title">{dashboardMetrics.dailySales.name}</p>
+          <p className="value">{dashboardMetrics.dailySales.value}</p>
         </Content>
         <Icon src={coins} alt="coins" />
       </DashboardMetricContainer>
       <DashboardMetricContainer style={{ backgroundColor: '#D635B2' }}>
         <Content>
-          <p className="title">{metrics.inventoryCost.name}</p>
+          <p className="title">{dashboardMetrics.inventoryCost.name}</p>
           <p className="value">
-            ₦ {convertNumberToLocale(metrics.inventoryCost.value as number)}
+            ₦{' '}
+            {convertNumberToLocale(
+              dashboardMetrics.inventoryCost.value as number,
+            )}
           </p>
         </Content>
         <Icon src={tag} alt="tag" />
       </DashboardMetricContainer>
       <DashboardMetricContainer style={{ backgroundColor: '#5D16CF' }}>
         <Content>
-          <p className="title">{metrics.staffOnDuty.name}</p>
-          <p className="value">{metrics.staffOnDuty.value}</p>
+          <p className="title">{dashboardMetrics.staffOnDuty.name}</p>
+          <p className="value">{dashboardMetrics.staffOnDuty.value}</p>
         </Content>
         <Icon src={personnel} alt="icon" />
       </DashboardMetricContainer>

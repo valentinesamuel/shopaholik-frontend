@@ -1,9 +1,19 @@
 import ReportIcon from '@mui/icons-material/Report';
 import FmdBadIcon from '@mui/icons-material/FmdBad';
 import Warning from '@mui/icons-material/Warning';
-import { Box, Typography } from '@mui/material';
+import { Box, Skeleton, Typography } from '@mui/material';
+import { useGetMetricsQuery } from '../../../store/slice/MetricSlice/MetricApiSlice';
+import { useAppSelector } from '../../../Utils/StateDispatch';
 
 const InventoryMetrics = () => {
+  const stateinventoryMetrics = useAppSelector((state) => state.metricReducer);
+  const { data, isError, isLoading } = useGetMetricsQuery();
+  const inventoryMetrics = data ? data : stateinventoryMetrics;
+
+  if (isLoading) {
+    return <Skeleton variant="rectangular" width={'100%'} height={100} />;
+  }
+
   return (
     <Box
       sx={{
@@ -29,10 +39,10 @@ const InventoryMetrics = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            Low in stock
+            {inventoryMetrics.lowInStock.name}
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            5
+            {inventoryMetrics.lowInStock.value}
           </Typography>
         </Box>
         <Box>
@@ -55,10 +65,10 @@ const InventoryMetrics = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            Out of stock
+            {inventoryMetrics.outOfStock.name}
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            12
+            {inventoryMetrics.outOfStock.value}
           </Typography>
         </Box>
         <Box>
@@ -81,10 +91,10 @@ const InventoryMetrics = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            Expired Products
+            {inventoryMetrics.expiredProducts.name}
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            13
+            {inventoryMetrics.expiredProducts.value}
           </Typography>
         </Box>
         <Box>

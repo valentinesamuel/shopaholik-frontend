@@ -6,6 +6,7 @@ import { Box, Typography, Paper } from '@mui/material';
 import { styled as MUIStyled } from '@mui/material';
 import { Fragment } from 'react';
 import { useAppSelector } from '../Utils/StateDispatch';
+import { useGetMetricsQuery } from '../store/slice/MetricSlice/MetricApiSlice';
 
 export const StockQtyItem = MUIStyled(Box)(() => ({
   display: 'flex',
@@ -22,7 +23,9 @@ export const StockQtyItemText = MUIStyled(Box)(() => ({
 }));
 
 const StockQuantityRow = () => {
-  const metrics = useAppSelector((state) => state.metricReducer);
+  const stateStockmetrics = useAppSelector((state) => state.metricReducer);
+   const { data, isLoading } = useGetMetricsQuery();
+   const stockMetrics = data ? data : stateStockmetrics;
 
   return (
     <Fragment>
@@ -54,7 +57,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {metrics.lowInStock.value}
+              {stockMetrics.lowInStock.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -65,7 +68,7 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {metrics.lowInStock.name}
+              {stockMetrics.lowInStock.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -80,7 +83,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {metrics.outOfStock.value}
+              {stockMetrics.outOfStock.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -91,7 +94,7 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {metrics.outOfStock.name}
+              {stockMetrics.outOfStock.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -106,7 +109,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {metrics.expiredProducts.value}
+              {stockMetrics.expiredProducts.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -117,7 +120,7 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {metrics.expiredProducts.name}
+              {stockMetrics.expiredProducts.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -132,7 +135,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {metrics.overdueShipments.value}
+              {stockMetrics.overdueShipments.value}
             </Typography>
             <Typography
               variant="inherit"
@@ -143,7 +146,7 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {metrics.overdueShipments.name}
+              {stockMetrics.overdueShipments.name}
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
