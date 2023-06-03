@@ -1,4 +1,4 @@
-import { Product, ProductCategory } from './../../../Utils/Types';
+import { Product } from './../../../Utils/Types';
 import { apiSlice } from '..';
 
 export const inventoryApiSlice = apiSlice.injectEndpoints({

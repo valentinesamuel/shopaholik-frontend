@@ -9,14 +9,20 @@ import {
   MenuItem,
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import SelectOptions from './SelectOptions';
 import { categories } from '../Utils/categories';
-import { Product, ProductCategory, StockStatus } from '../Utils/Types';
+import {
+  Product,
+  ProductCategory,
+  StockStatus,
+  Supplier,
+} from '../Utils/Types';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useAddInventoryProductsMutation } from '../store/slice/InventorySlice/InventoryApiSlice';
+import { useAppSelector } from '../Utils/StateDispatch';
 
 const defaultNewProduct: Product = {
   product_id: '',
@@ -36,17 +42,14 @@ const defaultNewProduct: Product = {
   stock_status: StockStatus.IN_STOCK,
 };
 
-const suppliersList = [
-  { id: 'w3094', name: 'Nike Inc', value: 'nike' },
-  { id: 'dfvn30', name: 'Nestle Inc', value: 'nestle' },
-  { id: '2904nm', name: 'Artzy Group Inc', value: 'artzy_group' },
-];
-
 interface Props {}
 
 const AddProductModal: FC<Props> = () => {
   const [product, setProduct] = useState(defaultNewProduct);
-  const [supplierList, _] = useState(suppliersList);
+  const storeSupplierList = useAppSelector(
+    (state) => state.supplierReducer.suppliers,
+  );
+  const [supplierList, _] = useState(storeSupplierList);
   const [addProductToInventory] = useAddInventoryProductsMutation();
 
   const handleAddProduct = () => {
@@ -59,20 +62,14 @@ const AddProductModal: FC<Props> = () => {
     setProduct({ ...product, [name]: value });
   };
 
-  const onSelectSupplier = (supplier: {
-    id: string;
-    name: string;
-    value: string;
-  }) => {
-    setProduct({ ...product, supplier_id: supplier.id });
+  const onSelectSupplier = (supplier: Supplier) => {
+    setProduct({ ...product, supplier_id: supplier.supplierId });
   };
 
   return (
     <Box>
       <Typography variant="h4">Add Product</Typography>
-      <Typography variant="h6" onClick={() => console.log(product)}>
-        Product Information
-      </Typography>
+      <Typography variant="h6">Product Information</Typography>
       <Box
         sx={{
           display: { desktop: 'grid' },
@@ -207,9 +204,9 @@ const AddProductModal: FC<Props> = () => {
             </MenuItem>
             {supplierList.map((supplier) => (
               <MenuItem
-                key={supplier.id}
+                key={supplier.supplierId}
                 onClick={() => onSelectSupplier(supplier)}
-                value={supplier.id}
+                value={supplier.supplierId}
               >
                 {supplier.name}
               </MenuItem>
