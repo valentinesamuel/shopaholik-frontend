@@ -43,11 +43,12 @@ const SignIn: FC = () => {
   };
 
   const onLogin = async () => {
-    const res = await loginUser(personnelDetails).unwrap();
-    console.log(res);
-    if (res) {
-      navigate(`/${loggedInUser.role}`);
-    } else {
+    try {
+      const res = await loginUser(personnelDetails).unwrap();
+      if (res) {
+        navigate(`/${loggedInUser.role}`);
+      }
+    } catch (error) {
       setErrMsg('Network Problem. Please refresh the page and re-login');
     }
   };
