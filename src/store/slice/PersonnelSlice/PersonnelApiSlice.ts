@@ -12,6 +12,7 @@ export const personnelApiSlice = apiSlice.injectEndpoints({
                 type: 'Personnel' as const,
                 personnelId,
               })),
+              'Personnel',
             ]
           : ['Personnel'],
     }),
@@ -19,7 +20,7 @@ export const personnelApiSlice = apiSlice.injectEndpoints({
       query: (personnelId) => `/personnels/${personnelId}`,
       providesTags: (result) =>
         result
-          ? [{ type: 'Personnel', id: result.personnelId }]
+          ? [{ type: 'Personnel', id: result.personnelId }, 'Personnel']
           : ['Personnel'],
     }),
     addPersonnel: builder.mutation<Personnel, Personnel>({

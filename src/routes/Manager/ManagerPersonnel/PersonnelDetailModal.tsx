@@ -87,7 +87,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                 Staff ID:
               </Typography>
               <Typography sx={{ fontWeight: 'bold' }}>
-                {personnel.personnelId.toUpperCase()}
+                {personnel.personnelId?.toUpperCase()}
               </Typography>
             </Box>
 
@@ -108,7 +108,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                 label="job-desgination"
                 width={'40%'}
                 handleChange={handleJobDesignationChange}
-                value={jobDesignation}
+                value={personnel.jobDesignation}
               />
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center', margin: '3% 0' }}>

@@ -1,4 +1,5 @@
 import {
+  Alert,
   Avatar,
   Box,
   Button,
@@ -50,18 +51,39 @@ interface Props {
 }
 
 const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
+  const [errMsg, setErrMsg] = useState({
+    error: '',
+    success: '',
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [newPersonnel, setNewPersonnel] = useState(defaultNewPersonnel);
-  const [addPersonnel] = useAddPersonnelMutation();
+  const [addPersonnel, { isLoading }] = useAddPersonnelMutation();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setNewPersonnel({ ...newPersonnel, [name]: value });
   };
 
-  const handleAddNewPersonnel = () => {
+  const handleAddNewPersonnel = async () => {
     console.log(newPersonnel);
-    addPersonnel(newPersonnel);
+    try {
+      await addPersonnel(newPersonnel).unwrap();
+      setErrMsg({
+        error: '',
+        success: 'Personnel  added',
+      });
+      setTimeout(() => {
+        setErrMsg({ error: '', success: '' });
+      }, 2000);
+    } catch (error) {
+      setErrMsg({
+        error: 'Failed to add personnel. Please try again',
+        success: '',
+      });
+      setTimeout(() => {
+        setErrMsg({ error: '', success: '' });
+      }, 2000);
+    }
   };
 
   const handleButtonClick = () => {
@@ -479,10 +501,20 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
             </Box>
           </Box>
         </Box>
-
+        {errMsg.error && (
+          <Alert sx={{ position: 'stick', left: '50%' }} severity="error">
+            {errMsg.error}
+          </Alert>
+        )}
+        {errMsg.success && (
+          <Alert sx={{ position: 'absolute', left: '50%' }} severity="success">
+            {errMsg.success}
+          </Alert>
+        )}
         <Button
           color="success"
           startIcon={<DoneAllIcon />}
+          disabled={isLoading}
           onClick={handleAddNewPersonnel}
           variant="contained"
           sx={{
@@ -490,7 +522,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
             width: '100%',
           }}
         >
-          Save Personnel
+          {isLoading ? 'Loading...' : 'Save Personnel'}
         </Button>
       </Paper>
     </Modal>

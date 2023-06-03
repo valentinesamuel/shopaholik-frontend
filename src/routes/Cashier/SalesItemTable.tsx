@@ -67,6 +67,7 @@ const TopSellingProductContainer = styled(Box)`
 const SalesItemTable: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);

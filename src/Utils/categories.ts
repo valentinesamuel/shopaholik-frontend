@@ -164,11 +164,16 @@ export const jobDesignationOptions = [
   },
   {
     id: '4',
+    name: JobDesignation.FLOOR_WORKER,
+    value: JobDesignation.FLOOR_WORKER,
+  },
+  {
+    id: '5',
     name: JobDesignation.JANITOR,
     value: JobDesignation.JANITOR,
   },
   {
-    id: '5',
+    id: '6',
     name: JobDesignation.SECURITY,
     value: JobDesignation.SECURITY,
   },

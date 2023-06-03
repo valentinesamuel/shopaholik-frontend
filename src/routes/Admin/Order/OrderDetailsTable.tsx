@@ -37,7 +37,7 @@ const columns: readonly Column[] = [
   },
   {
     id: 'unit_price',
-    label: 'Unit Price',
+    label: 'Unit Price (N)',
     format: (value: number) => value.toLocaleString('en-US'),
     // minWidth: 170,
     align: 'center',

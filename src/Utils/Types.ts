@@ -22,7 +22,7 @@ export interface Order {
 }
 
 export interface OrderedItem {
-  // ordered_item_id: string;
+  ordered_item_id: string;
   name: string;
   quantity: number;
   unit_price: number;
