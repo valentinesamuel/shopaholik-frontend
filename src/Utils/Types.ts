@@ -71,7 +71,6 @@ export interface Personnel {
     address: string;
   };
   jobDesignation: JobDesignation | ADMINROLE;
-  availabilityStatus: AvailAbilityStatus;
   monthlySalary: number;
 }
 
@@ -84,7 +83,7 @@ export interface PersonnelLogin {
   name: string;
   workerID: string;
   password: string;
-  designation: string;
+  role: string;
 }
 
 interface MetricValue {
@@ -143,12 +142,6 @@ export enum JobDesignation {
   CASHIER = 'CASHIER',
   SECURITY = 'SECURITY',
   JANITOR = 'JANITOR',
-}
-
-export enum AvailAbilityStatus {
-  ON_DUTY = 'ON DUTY',
-  OFF_DUTY = 'OFF DUTY',
-  ON_LEAVE = 'ON LEAVE',
 }
 
 export enum ShippingStatus {

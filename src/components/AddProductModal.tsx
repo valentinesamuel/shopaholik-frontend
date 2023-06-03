@@ -16,6 +16,7 @@ import { categories } from '../Utils/categories';
 import { Product, ProductCategory, StockStatus } from '../Utils/Types';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useAddInventoryProductsMutation } from '../store/slice/InventorySlice/InventoryApiSlice';
 
 const defaultNewProduct: Product = {
   product_id: '',
@@ -46,9 +47,10 @@ interface Props {}
 const AddProductModal: FC<Props> = () => {
   const [product, setProduct] = useState(defaultNewProduct);
   const [supplierList, _] = useState(suppliersList);
+  const [addProductToInventory] = useAddInventoryProductsMutation();
 
   const handleAddProduct = () => {
-    //TODO: call the api to add a product here
+    addProductToInventory(product);
     console.log(product);
   };
 

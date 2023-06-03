@@ -7,12 +7,8 @@ interface IinitialState {
 }
 
 const initialState: IinitialState = {
-  user: {
-    name: 'Uthred Ragnarson',
-    role: ADMINROLE.MANAGER,
-  },
+  user: null,
 };
-
 export const userSlice = createSlice({
   name: 'User',
   initialState,

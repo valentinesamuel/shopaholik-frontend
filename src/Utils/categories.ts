@@ -1,9 +1,4 @@
-import {
-  ShippingStatus,
-  JobDesignation,
-  AvailAbilityStatus,
-  ProductCategory,
-} from './Types';
+import { ShippingStatus, JobDesignation, ProductCategory } from './Types';
 
 export const categories = [
   {
@@ -179,23 +174,5 @@ export const jobDesignationOptions = [
     id: '5',
     name: JobDesignation.SECURITY,
     value: JobDesignation.SECURITY,
-  },
-];
-
-export const jobAvailabilityStatus = [
-  {
-    id: '1',
-    name: AvailAbilityStatus.OFF_DUTY,
-    value: AvailAbilityStatus.OFF_DUTY,
-  },
-  {
-    id: '2',
-    name: AvailAbilityStatus.ON_DUTY,
-    value: AvailAbilityStatus.ON_DUTY,
-  },
-  {
-    id: '3',
-    name: AvailAbilityStatus.ON_LEAVE,
-    value: AvailAbilityStatus.ON_LEAVE,
   },
 ];

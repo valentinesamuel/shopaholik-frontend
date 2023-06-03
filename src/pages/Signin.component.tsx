@@ -1,26 +1,34 @@
 import { ChangeEvent, FC, MouseEventHandler, useState } from 'react';
 import {
+  Alert,
   Box,
   Button,
+  CircularProgress,
   Paper,
   SelectChangeEvent,
+  Skeleton,
   TextField,
   Typography,
 } from '@mui/material';
 import { ADMINROLE, PersonnelLogin } from '../Utils/Types';
 import SelectOptions from '../components/SelectOptions';
 import { useNavigate } from 'react-router-dom';
+import { useLoginUserMutation } from '../store/slice/UserSlice/UserApiSlice';
 
 const dummyPersonnel: PersonnelLogin = {
   name: '',
   workerID: '',
   password: '',
-  designation: '',
+  role: '',
 };
 
 const SignIn: FC = () => {
   const [personnelDetails, setPersonnelDetails] = useState(dummyPersonnel);
+  const [loginUser, { data, isLoading }] = useLoginUserMutation();
   const navigate = useNavigate();
+  const [errMsg, setErrMsg] = useState<string | null>();
+
+  const loggedInUser = data ? data : personnelDetails;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -30,18 +38,22 @@ const SignIn: FC = () => {
   const handleDesignationChange = (event: SelectChangeEvent) => {
     setPersonnelDetails({
       ...personnelDetails,
-      designation: event.target.value,
+      role: event.target.value,
     });
   };
 
-  const onLogin = () => {
-    console.log(personnelDetails);
-    //TODO: Make a call to api to login
-    navigate(`/${personnelDetails.designation}`);
+  const onLogin = async () => {
+    const res = await loginUser(personnelDetails).unwrap();
+    console.log(res);
+    if (res) {
+      navigate(`/${loggedInUser.role}`);
+    } else {
+      setErrMsg('Network Problem. Please refresh the page and re-login');
+    }
   };
 
   return (
-    <Paper sx={{ height: '100vh' }}>
+    <Paper>
       <Box
         sx={{
           display: 'flex',
@@ -50,6 +62,7 @@ const SignIn: FC = () => {
             desktop: 'row',
             mobile: 'column',
           },
+          height: '100vh',
         }}
       >
         <Box
@@ -58,6 +71,7 @@ const SignIn: FC = () => {
             padding: { desktop: '7% 5% 0 10%', mobile: '20px' },
           }}
         >
+          {errMsg && <Alert severity="error">{errMsg}</Alert>}
           <Box>
             <Typography variant="h3" color="primary">
               Welcome to
@@ -101,7 +115,7 @@ const SignIn: FC = () => {
             <SelectOptions
               handleChange={handleDesignationChange}
               selectLabel="Designation"
-              value={personnelDetails.designation}
+              value={personnelDetails.role}
               label="Designation"
               options={[
                 { value: ADMINROLE.MANAGER, id: '1', name: 'Manager' },
@@ -113,23 +127,36 @@ const SignIn: FC = () => {
                 margin: '3% 0',
               }}
             />
-            <Button
-              onClick={onLogin}
-              color="success"
-              variant="contained"
-              sx={{
-                marginTop: {
-                  desktop: '0%',
-                  mobile: '5%',
-                },
-                width: {
-                  desktop: '100%',
-                  mobile: '100%',
-                },
-              }}
-            >
-              Login
-            </Button>
+            <Box sx={{ position: 'relative' }}>
+              <Button
+                onClick={onLogin}
+                color="success"
+                disabled={isLoading}
+                variant="contained"
+                sx={{
+                  marginTop: {
+                    desktop: '0%',
+                    mobile: '5%',
+                  },
+                  width: '100%',
+                }}
+              >
+                Login
+              </Button>
+              {isLoading && (
+                <CircularProgress
+                  size={24}
+                  sx={{
+                    color: 'inherit',
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    marginTop: '-12px',
+                    marginLeft: '-12px',
+                  }}
+                />
+              )}
+            </Box>
           </Box>
         </Box>
         <Box

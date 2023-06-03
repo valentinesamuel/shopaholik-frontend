@@ -16,12 +16,7 @@ import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useAddPersonnelMutation } from '../../../store/slice/PersonnelSlice/PersonnelApiSlice';
-import {
-  AvailAbilityStatus,
-  Gender,
-  JobDesignation,
-  Personnel,
-} from '../../../Utils/Types';
+import { Gender, JobDesignation, Personnel } from '../../../Utils/Types';
 import SelectOptions from '../../../components/SelectOptions';
 import { gender, personnelTabs } from '../../../Utils/OrderandShippinTab';
 
@@ -39,8 +34,7 @@ const defaultNewPersonnel: Personnel = {
   state: '',
   profilePicture: '',
   monthlySalary: 0,
-  gender: Gender.MALE, //FIXME: Make a select for this
-  availabilityStatus: AvailAbilityStatus.OFF_DUTY,
+  gender: Gender.MALE,
   guarantor: {
     name: '',
     relationshipWithStaff: '',
@@ -225,7 +219,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
             <Box
               sx={{
                 display: { desktop: 'grid' },
-                gridTemplateColumns: ' minmax(200px, 1fr) minmax(300px, 2fr)',
+                gridTemplateColumns: ' minmax(200px, 2fr) minmax(300px, 2fr)',
                 gap: '10px',
               }}
             >
@@ -268,6 +262,14 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                     gender: gender.target.value as Gender,
                   });
                 }}
+              />
+              <TextField
+                name="monthlySalary"
+                onChange={handleChange}
+                value={newPersonnel.monthlySalary as number}
+                type="number"
+                label="Monthly Salary"
+                variant="outlined"
               />
             </Box>
             <Box sx={{ marginTop: '2%' }}>
