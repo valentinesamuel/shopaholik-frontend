@@ -1,9 +1,11 @@
-import { Box, Button, Modal, Paper, Typography } from '@mui/material';
+import { Alert, Box, Button, Modal, Paper, Typography } from '@mui/material';
 import DeleteForever from '@mui/icons-material/DeleteForever';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { Product } from '../Utils/Types';
 import { convertNumberToLocale } from '../Utils/Converter';
 import dayjs from 'dayjs';
+import { useDeleteInventoryProductsMutation } from '../store/slice/InventorySlice/InventoryApiSlice';
+import { useAppSelector } from '../Utils/StateDispatch';
 
 interface Props {
   open: boolean;
@@ -12,8 +14,34 @@ interface Props {
 }
 
 const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
-  const deleteProduct = () => {
-    console.log(productDetail.product_id);
+  const [errMsg, setErrMsg] = useState({
+    error: '',
+    success: '',
+  });
+  const role = useAppSelector((state) => state.userReducer.user?.role);
+
+  const [removeProductFromApi, { isLoading }] =
+    useDeleteInventoryProductsMutation();
+
+  const deleteProduct = async () => {
+    try {
+      await removeProductFromApi(productDetail.product_id).unwrap();
+      setErrMsg({
+        error: '',
+        success: 'Product deleted',
+      });
+      setTimeout(() => {
+        setErrMsg({ error: '', success: '' });
+      }, 2000);
+    } catch (error) {
+      setErrMsg({
+        error: 'Faild to delete product. Please try again',
+        success: '',
+      });
+      setTimeout(() => {
+        setErrMsg({ error: '', success: '' });
+      }, 2000);
+    }
   };
 
   return (
@@ -30,6 +58,8 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
           overflowX: 'auto',
         }}
       >
+        {errMsg.error && <Alert severity="error">{errMsg.error}</Alert>}
+        {errMsg.success && <Alert severity="success">{errMsg.success}</Alert>}
         <Box
           sx={{
             display: 'flex',
@@ -146,6 +176,14 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
                   {productDetail && productDetail.min_quantity}
                 </Typography>
               </Box>
+              <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
+                  Qty Sold:
+                </Typography>
+                <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
+                  {productDetail && productDetail.quantity_sold}
+                </Typography>
+              </Box>
             </Box>
             <Box
               sx={{
@@ -175,17 +213,20 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
             </Box>
           </Box>
         </Box>
-        <Button
-          color="error"
-          onClick={deleteProduct}
-          startIcon={<DeleteForever />}
-          variant="contained"
-          sx={{
-            marginTop: '7%',
-          }}
-        >
-          Delete Product
-        </Button>
+        {role === 'MANAGER' && (
+          <Button
+            color="error"
+            disabled={isLoading}
+            onClick={deleteProduct}
+            startIcon={<DeleteForever />}
+            variant="contained"
+            sx={{
+              marginTop: '7%',
+            }}
+          >
+            {isLoading ? 'Loading...' : 'Delete Product'}
+          </Button>
+        )}
       </Paper>
     </Modal>
   );

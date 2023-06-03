@@ -21,7 +21,6 @@ import {
   Supplier,
 } from '../Utils/Types';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useAddInventoryProductsMutation } from '../store/slice/InventorySlice/InventoryApiSlice';
 import { useAppSelector } from '../Utils/StateDispatch';
 
@@ -38,7 +37,7 @@ const defaultNewProduct: Product = {
   expiry_date: '',
   supplier_id: '',
   quantity: 0,
-  unit_of_measurement: 'Carton',
+  unit_of_measurement: '',
   shelf_life_duration: '',
   stock_status: StockStatus.IN_STOCK,
 };
@@ -59,7 +58,6 @@ const AddProductModal: FC<Props> = () => {
     useAddInventoryProductsMutation();
 
   const handleAddProduct = async () => {
-    // console.log(product);
     try {
       await addProductToInventory(product).unwrap();
       setErrMsg({
@@ -266,55 +264,23 @@ const AddProductModal: FC<Props> = () => {
           }
         />
       </Box>
-      <Box
+
+      <Button
+        disabled={isLoading}
+        color="success"
+        onClick={handleAddProduct}
+        startIcon={<DoneAllIcon />}
+        variant="contained"
         sx={{
-          marginTop: '10%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexDirection: {
-            desktop: 'row',
-            mobile: 'column',
+          marginTop: {
+            desktop: '0%',
+            mobile: '5%',
           },
+          width: '100%',
         }}
       >
-        <Button
-          color="error"
-          variant="contained"
-          startIcon={<DeleteForeverIcon />}
-          sx={{
-            marginTop: {
-              desktop: '0%',
-              mobile: '5%',
-            },
-            width: {
-              desktop: 'fit-content',
-              mobile: '100%',
-            },
-          }}
-        >
-          Delete Product
-        </Button>
-        <Button
-          disabled={isLoading}
-          color="success"
-          onClick={handleAddProduct}
-          startIcon={<DoneAllIcon />}
-          variant="contained"
-          sx={{
-            marginTop: {
-              desktop: '0%',
-              mobile: '5%',
-            },
-            width: {
-              desktop: '30%',
-              mobile: '100%',
-            },
-          }}
-        >
-          Save Product
-        </Button>
-      </Box>
+        {isLoading ? 'Loading...' : 'Save Product'}
+      </Button>
     </Box>
   );
 };

@@ -25,12 +25,16 @@ export const inventorySlice = createSlice({
     builder.addMatcher(
       inventoryApiSlice.endpoints.addInventoryProducts.matchFulfilled,
       (state, action) => {
+        // state.inventoryProducts = action.payload;
+        // TODO: When using real api, check to make sure that you do not edit the state here since you are invalidating tags and fetching fresh data from DB. If so, then no need to do anything special like mutating state
         state.inventoryProducts = [action.payload, ...state.inventoryProducts];
       },
     );
     builder.addMatcher(
       inventoryApiSlice.endpoints.deleteInventoryProducts.matchFulfilled,
       (state, action) => {
+        // state.inventoryProducts = action.payload;
+        // TODO: When using real api, check to make sure that you do not edit the state here since you are invalidating tags and fetching fresh data from DB. If so, then no need to do anything special like mutating state
         state.inventoryProducts = state.inventoryProducts.filter(
           (invetoryProduct) =>
             invetoryProduct.product_id !== action.payload.product_id,
