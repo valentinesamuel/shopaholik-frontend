@@ -18,8 +18,9 @@ import { orderTabs } from '../../../Utils/OrderandShippinTab';
 import NewSupplierOrderModal from './NewSupplierOrderModal';
 import SupplierOrderTable from './SupplierOrderTable';
 import { useDebounce } from '../../../hooks/UseDebounce';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
+import { useGetSupplierOrdersQuery } from '../../../store/slice/OrderSlice/OrderApiSlice';
 
 interface Props {}
 
@@ -30,6 +31,13 @@ const SupplierDetail: FC<Props> = ({}) => {
   const [filter, setFilter] = useState('');
   const debouncedSearchedOrder = useDebounce(searchSupplierOrder, 500);
   const location = useLocation();
+  const { supplierId } = useParams();
+  console.log(supplierId);
+
+  const { data } = useGetSupplierOrdersQuery(supplierId as string);
+  console.log(data);
+
+  // TODO: bring in all the orders that belon to this supplier
 
   const handleTabChange = (_: SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);

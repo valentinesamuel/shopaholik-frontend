@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Skeleton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import { filterAndSearchOrders } from './helpers';
 import { useAppSelector } from '../../../Utils/StateDispatch';
+import { useGetOrdersQuery } from '../../../store/slice/OrderSlice/OrderApiSlice';
 
 interface Column {
   id:
@@ -82,7 +83,9 @@ const OrdersTable: React.FC<{
 }> = ({ filterTab, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const orders = useAppSelector((state) => state.orderReducer.orders);
+  const stateOrders = useAppSelector((state) => state.orderReducer.orders);
+  const { data, isLoading } = useGetOrdersQuery();
+  const orders = data ? data : stateOrders;
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -94,6 +97,10 @@ const OrdersTable: React.FC<{
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  if (isLoading) {
+    return <Skeleton variant="rectangular" width={'100%'} height={100} />;
+  }
 
   return (
     <OrdersTableContainer>

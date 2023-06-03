@@ -6,20 +6,28 @@ import OrderDetailsTable from './OrderDetailsTable';
 import { useLocation, useParams } from 'react-router-dom';
 import { orderedItems } from './OrderRows';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
+import {
+  useGetOrderQuery,
+  useUpdateOrderMutation,
+} from '../../../store/slice/OrderSlice/OrderApiSlice';
+import { Order } from '../../../Utils/Types';
 
 const orderItemRows = orderedItems;
 
 const OrderDetails: FC = () => {
-  const [shippingStatus, setShippingStatus] = useState('');
+  const [shippStatus, setShippingStatus] = useState('');
   const { orderId } = useParams();
   const location = useLocation();
-  // TODO: call the usequeryorderdetails with the id
-
+  const { data } = useGetOrderQuery(orderId as string);
+  console.log(data);
 
   const handleShippingStatusChange = (event: SelectChangeEvent) => {
     setShippingStatus(event.target.value);
-    // TODO: update the order details with useupdateorderdetails
-
+    // // FIXME: update the order details with useupdateorderdetails and recencile the types
+    // useUpdateOrderMutation({
+    //   ...data,
+    //   shippingStatus: event.target.value,
+    // });
     console.log(event.target.value);
   };
 
@@ -69,7 +77,7 @@ const OrderDetails: FC = () => {
             label="shipping-status"
             options={shippingStatusOptions}
             handleChange={handleShippingStatusChange}
-            value={shippingStatus}
+            value={shippStatus}
           />
         </Box>
 

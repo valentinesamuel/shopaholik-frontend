@@ -5,8 +5,11 @@ import StockQuantityCard from '../../../components/StockQuantityRow';
 import DashboardTopSellingProduct from './DashboardTopSellingProduct';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
+import { useGetInventoryProductsQuery } from '../../../store/slice/InventorySlice/InventoryApiSlice';
 
 const AdminDashboard: FC = () => {
+    const { _ } = useGetInventoryProductsQuery();
+
   const location = useLocation();
 
   return (

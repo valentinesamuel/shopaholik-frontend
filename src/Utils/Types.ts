@@ -1,4 +1,3 @@
-
 export interface Supplier {
   supplierId: string;
   name: string;

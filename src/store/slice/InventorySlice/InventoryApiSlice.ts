@@ -15,18 +15,6 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
               { type: 'InventoryProduct' },
             ]
           : ['InventoryProduct'],
-      // transformResponse: (response: Product[]) => {
-      //   const transformedProduct: Product[] = response.map((product) => {
-      //     return {
-      //       ...product,
-      //       category: stringToCategory(
-      //         ProductCategory,
-      //         product.category as string,
-      //       ),
-      //     };
-      //   });
-      //   return transformedProduct;
-      // },
     }),
     addInventoryProducts: builder.mutation<Product, Product>({
       query: (product) => ({
@@ -34,7 +22,7 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
         method: 'POST',
         product,
       }),
-      invalidatesTags: ['InventoryProduct'],
+      invalidatesTags: ['InventoryProduct', 'Metric', 'Order', 'Product'],
     }),
     deleteInventoryProducts: builder.mutation<Product, string>({
       query: (id) => ({
@@ -42,6 +30,7 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
         method: 'DELETE',
         body: id,
       }),
+      invalidatesTags: ['Metric', 'Order', 'InventoryProduct', 'Product'],
     }),
   }),
 });

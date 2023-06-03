@@ -10,7 +10,7 @@ import { useGetMetricsQuery } from '../../../store/slice/MetricSlice/MetricApiSl
 
 const OrderMetrics: FC = () => {
   const stateorderMetrics = useAppSelector((state) => state.metricReducer);
-  const { data, isError, isLoading } = useGetMetricsQuery();
+  const { data, isLoading } = useGetMetricsQuery();
   const orderMetrics = data ? data : stateorderMetrics;
 
   if (isLoading) {

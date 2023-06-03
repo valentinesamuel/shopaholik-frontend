@@ -41,7 +41,7 @@ const columns: readonly Column[] = [
   },
   {
     id: 'unit_price',
-    label: 'Price',
+    label: 'Price (₦)',
     // minWidth: 100
     format: (value: number) => value.toLocaleString('en-US'),
     align: 'center',

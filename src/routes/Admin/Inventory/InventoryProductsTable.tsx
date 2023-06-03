@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Skeleton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -36,7 +36,7 @@ const columns: readonly Column[] = [
   },
   {
     id: 'unit_price',
-    label: 'Price',
+    label: 'Price (₦)',
     // minWidth: 100
     format: (value: number) => value.toLocaleString('en-US'),
     align: 'center',
@@ -61,43 +61,6 @@ const columns: readonly Column[] = [
   },
 ];
 
-export interface Data {
-  name: string;
-  unit_price: number;
-  quantity_sold: number;
-  min_quantity: number;
-  category: ProductCategory;
-  stock_quantity: number;
-  stock_status: StockStatus;
-}
-
-function createData(
-  name: string,
-  unit_price: number,
-  quantity_sold: number,
-  min_quantity: number,
-  category: ProductCategory,
-): Data {
-  const stock_quantity = Math.floor(Math.random() * (min_quantity + 10));
-  const stock_status =
-    stock_quantity === 0
-      ? StockStatus.OUT_OF_STOCK
-      : stock_quantity < min_quantity
-      ? StockStatus.LOW_IN_STOCK
-      : stock_quantity > min_quantity
-      ? StockStatus.IN_STOCK
-      : StockStatus.EXPIRED;
-  return {
-    unit_price,
-    category,
-    name,
-    quantity_sold,
-    stock_quantity,
-    min_quantity,
-    stock_status,
-  };
-}
-
 const InventoryProductTableContainer = styled(Box)`
   height: fit-content;
 `;
@@ -112,7 +75,7 @@ const InventoryProductTable: React.FC<{
   const stateInventoryProducts = useAppSelector(
     (state: RootState) => state.inventoryReducer.inventoryProducts,
   );
-  const { data, isError, isLoading } = useGetInventoryProductsQuery();
+  const { data, isLoading } = useGetInventoryProductsQuery();
   const inventoryProducts = data ? data : stateInventoryProducts;
 
   const handleChangePage = (_: unknown, newPage: number) => {
@@ -125,6 +88,32 @@ const InventoryProductTable: React.FC<{
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  if (isLoading) {
+    return (
+      <div>
+        <Skeleton variant="rectangular" width={'100%'} height={100} />;
+        <Skeleton
+          variant="rectangular"
+          sx={{ margin: '3% 0' }}
+          width={'100%'}
+          height={100}
+        />
+        <Skeleton
+          variant="rectangular"
+          sx={{ margin: '3% 0' }}
+          width={'100%'}
+          height={100}
+        />
+        <Skeleton
+          variant="rectangular"
+          sx={{ margin: '3% 0' }}
+          width={'100%'}
+          height={100}
+        />
+      </div>
+    );
+  }
 
   return (
     <InventoryProductTableContainer>

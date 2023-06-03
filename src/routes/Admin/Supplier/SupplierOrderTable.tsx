@@ -15,6 +15,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import { filterAndSearchOrders } from '../Order/helpers';
 import { useAppSelector } from '../../../Utils/StateDispatch';
+import { useGetSupplierOrdersQuery } from '../../../store/slice/OrderSlice/OrderApiSlice';
 
 interface Column {
   id:
@@ -82,10 +83,12 @@ const SupplierOrderTable: React.FC<{
 }> = ({ filterTab, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const supplierOrders = useAppSelector((state) => state.orderReducer.orders);
-
+  const stateSupplierOrders = useAppSelector(
+    (state) => state.orderReducer.orders,
+  );
   const { supplierId } = useParams();
-  //TODO: call useGetSupplier with this ID
+  const { data } = useGetSupplierOrdersQuery(supplierId as string);
+  const supplierOrders = data ? data : stateSupplierOrders;
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
