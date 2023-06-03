@@ -15,11 +15,3 @@ export const apiSlice = createApi({
   ],
   endpoints: () => ({}),
 });
-// addPost: build.mutation<Post, Omit<Post, 'id'>>({
-//       query: (body) => ({
-//         url: 'post',
-//         method: 'POST',
-//         body,
-//       }),
-//       invalidatesTags: ['Post'],
-//     }),

@@ -49,28 +49,20 @@ export interface Product {
 }
 
 export interface Personnel {
-  department:
-    | 'management'
-    | 'supervisor'
-    | 'floor worker'
-    | 'janitory'
-    | 'security'
-    | 'cashier';
-  personnelId: string;
+  personnelId?: string;
   firstName: string;
   lastName: string;
   middleName: string;
   dateOfBirth: string;
   dateOfHire: string;
-  profilePictureUrl: string;
+  profilePicture?: string;
   phone: string;
   email: string;
   address: string;
   city: string;
   state: string;
-  maritalStatus: string;
-  gender: string;
-  additionalInfo: string;
+  gender: Gender;
+  additionalInfo?: string;
   guarantor: {
     name: string;
     relationshipWithStaff: string;
@@ -116,6 +108,19 @@ export interface Metrics {
   receivedOrders: MetricValue;
   shippedOrders: MetricValue;
   costOfPendingOrders: MetricValue;
+}
+
+export enum Gender {
+  MALE = 'MALE',
+  FEMALE = 'FEMALE',
+}
+
+export enum Department {
+  MANAGEMENT = 'MANGEMENT',
+  FLOOR_WORKER = 'FLOOR WORKER',
+  JANITOR = 'JANITOR',
+  SECURITY = 'SECURITY',
+  CASHIER = 'CASHIER',
 }
 
 export enum StockStatus {

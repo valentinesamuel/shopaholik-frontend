@@ -36,15 +36,13 @@ const ManagerPersonnel: FC<Props> = () => {
 
   const handleTabChange = (_: React.SyntheticEvent, newTab: number) => {
     setCurrentTab(newTab);
-    const currentPersonnelDepartment = personnelTabs[newTab].personnelTab;
+    const currentPersonnelDesignation = personnelTabs[newTab].value;
 
     const filterPersonnels = personnelList.filter((personnel) => {
-      if (currentPersonnelDepartment === '') {
+      if (currentPersonnelDesignation === '') {
         return true;
       }
-      //FIXME:Check this for compatiblity with tabs
-      console.log(personnel.department);
-      return personnel.jobDesignation === currentPersonnelDepartment;
+      return personnel.jobDesignation === currentPersonnelDesignation;
     });
 
     setPersonnels(filterPersonnels);

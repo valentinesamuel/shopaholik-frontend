@@ -8,7 +8,7 @@ interface Props {
 }
 
 const PersonnelCard: FC<Props> = ({ personnel }) => {
-  const { firstName, lastName, department } = personnel;
+  const { firstName, lastName, jobDesignation } = personnel;
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -46,7 +46,7 @@ const PersonnelCard: FC<Props> = ({ personnel }) => {
             </span>
           </Typography>
           <Typography sx={{ display: 'flex', alignItems: 'center' }}>
-            Department:
+            Designation:
             <span
               style={{
                 color: '#4558FF',
@@ -54,7 +54,7 @@ const PersonnelCard: FC<Props> = ({ personnel }) => {
                 marginRight: '2%',
               }}
             >
-              {department}
+              {jobDesignation}
             </span>
           </Typography>
         </Box>

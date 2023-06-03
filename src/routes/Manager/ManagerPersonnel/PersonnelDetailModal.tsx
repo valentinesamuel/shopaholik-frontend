@@ -90,16 +90,15 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                 {personnel.personnelId.toUpperCase()}
               </Typography>
             </Box>
-            <Box sx={{ display: 'flex', margin: '3% 0' }}>
-              <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
-                Department:
-              </Typography>
-              <Typography sx={{ fontWeight: 'bold' }}>
-                {' '}
-                {personnel.department}
-              </Typography>
-            </Box>
-            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                width: '100%',
+                margin: '3% 0',
+              }}
+            >
               <Typography sx={{ color: '#96989E', marginRight: '3%' }}>
                 Job Desc.:
               </Typography>

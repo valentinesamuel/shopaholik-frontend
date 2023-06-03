@@ -12,29 +12,41 @@ import {
   Typography,
 } from '@mui/material';
 import { ChangeEvent, FC, useRef, useState } from 'react';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { useAddPersonnelMutation } from '../../../store/slice/PersonnelSlice/PersonnelApiSlice';
+import {
+  AvailAbilityStatus,
+  Gender,
+  JobDesignation,
+  Personnel,
+} from '../../../Utils/Types';
+import SelectOptions from '../../../components/SelectOptions';
+import { gender, personnelTabs } from '../../../Utils/OrderandShippinTab';
 
-const defaultNewPersonnel = {
+const defaultNewPersonnel: Personnel = {
   firstName: '',
   lastName: '',
   middleName: '',
   dateOfHire: '',
   dateOfBirth: '',
-  phoneNumber: '',
+  phone: '',
   email: '',
+  jobDesignation: JobDesignation.FLOOR_WORKER,
   address: '',
   city: '',
   state: '',
-  country: '',
+  profilePicture: '',
+  monthlySalary: 0,
+  gender: Gender.MALE, //FIXME: Make a select for this
+  availabilityStatus: AvailAbilityStatus.OFF_DUTY,
   guarantor: {
-    guarantorName: '',
-    relationship: '',
+    name: '',
+    relationshipWithStaff: '',
     phone: '',
     address: '',
     email: '',
-    dateOfBirth: '',
   },
 };
 
@@ -44,9 +56,9 @@ interface Props {
 }
 
 const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [newPersonnel, setNewPersonnel] = useState(defaultNewPersonnel);
+  const [addPersonnel] = useAddPersonnelMutation();
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -55,6 +67,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
 
   const handleAddNewPersonnel = () => {
     console.log(newPersonnel);
+    addPersonnel(newPersonnel);
   };
 
   const handleButtonClick = () => {
@@ -63,11 +76,13 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    console.log(file);
     if (file && file.type.startsWith('image/')) {
       const reader = new FileReader();
       reader.onload = () => {
-        setSelectedImage(reader.result as string);
+        setNewPersonnel({
+          ...newPersonnel,
+          profilePicture: reader.result as string,
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -110,7 +125,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
           <Avatar
             sx={{ marginRight: '4%', height: '150px', width: '150px' }}
             alt="Remy Sharp"
-            src={selectedImage as string}
+            src={newPersonnel.profilePicture}
           />
           <Button
             sx={{
@@ -217,7 +232,7 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
               <TextField
                 name="phoneNumber"
                 onChange={handleChange}
-                value={newPersonnel.phoneNumber}
+                value={newPersonnel.phone}
                 type="tel"
                 label="Phone Number"
                 variant="outlined"
@@ -239,6 +254,19 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 variant="outlined"
                 sx={{
                   width: '100%',
+                }}
+              />
+              <SelectOptions
+                value={newPersonnel.gender}
+                label="gender"
+                sxStyles={{ width: '100%' }}
+                selectLabel="Gender"
+                options={gender}
+                handleChange={(gender) => {
+                  setNewPersonnel({
+                    ...newPersonnel,
+                    gender: gender.target.value as Gender,
+                  });
                 }}
               />
             </Box>
@@ -280,12 +308,19 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 label="State"
                 variant="outlined"
               />
-              <TextField
-                name="country"
-                onChange={handleChange}
-                value={newPersonnel.country}
-                label="Country"
-                variant="outlined"
+              <SelectOptions
+                value={newPersonnel.jobDesignation}
+                label="department"
+                sxStyles={{ width: '100%' }}
+                selectLabel="Department"
+                options={personnelTabs.slice(1)}
+                handleChange={(jobDesignation) => {
+                  setNewPersonnel({
+                    ...newPersonnel,
+                    jobDesignation: jobDesignation.target
+                      .value as JobDesignation,
+                  });
+                }}
               />
             </Box>
           </Box>
@@ -325,41 +360,30 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                     ...newPersonnel,
                     guarantor: {
                       ...newPersonnel.guarantor,
-                      guarantorName: newGuarantorName.target.value,
+                      name: newGuarantorName.target.value,
                     },
                   })
                 }
-                value={newPersonnel.guarantor.guarantorName}
+                value={newPersonnel.guarantor.name}
                 type="text"
                 label="Name"
                 variant="outlined"
               />
-              <DatePicker
-                label="Date of Birth"
-                value={newPersonnel.guarantor.dateOfBirth}
-                onChange={(newDateOfBirth) =>
-                  setNewPersonnel({
-                    ...newPersonnel,
-                    guarantor: {
-                      ...newPersonnel.guarantor,
-                      dateOfBirth: dayjs(newDateOfBirth).format(),
-                    },
-                  })
-                }
-              />
               <FormControl>
-                <InputLabel id="relationship">Unit of Measurement</InputLabel>
+                <InputLabel id="staff-relationship">
+                  Staff Relationship
+                </InputLabel>
                 <Select
-                  labelId="relationship"
-                  id="relationship"
-                  value={newPersonnel.guarantor.relationship}
+                  labelId="staff-relationship"
+                  id="staff-relationship"
+                  value={newPersonnel.guarantor.relationshipWithStaff}
                   label="relationship"
                   onChange={(newRel) =>
                     setNewPersonnel({
                       ...newPersonnel,
                       guarantor: {
                         ...newPersonnel.guarantor,
-                        relationship: newRel.target.value,
+                        relationshipWithStaff: newRel.target.value,
                       },
                     })
                   }

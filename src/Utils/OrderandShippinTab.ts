@@ -44,41 +44,54 @@ export const inventoryTabs = [
     stockStatusTab: StockStatus.EXPIRED,
   },
 ];
-// Personnel.department: "security" | "management" | "supervisor" | "floor worker" | "janitory"
+
 export const personnelTabs = [
   {
     id: '1',
     label: 'All Personnel',
-    personnelTab: '',
+    value: '',
   },
   {
     id: '2',
     label: 'Management',
-    personnelTab: JobDesignation.MANAGER,
+    value: JobDesignation.MANAGER,
   },
   {
     id: '3',
     label: 'Supervisor',
-    personnelTab: JobDesignation.SUPERVISOR,
+    value: JobDesignation.SUPERVISOR,
   },
   {
     id: '4',
     label: 'Floor Worker',
-    personnelTab: JobDesignation.FLOOR_WORKER,
+    value: JobDesignation.FLOOR_WORKER,
   },
   {
     id: '5',
     label: 'Cashier',
-    personnelTab: JobDesignation.CASHIER,
+    value: JobDesignation.CASHIER,
   },
   {
     id: '6',
     label: 'Security',
-    personnelTab: JobDesignation.SECURITY,
+    value: JobDesignation.SECURITY,
   },
   {
     id: '7',
     label: 'Janitor',
-    personnelTab: JobDesignation.JANITOR,
+    value: JobDesignation.JANITOR,
+  },
+];
+
+export const gender = [
+  {
+    id: '1',
+    label: 'MALE',
+    value: 'MALE',
+  },
+  {
+    id: '2',
+    label: 'FEMALE',
+    value: 'FEMALE',
   },
 ];
