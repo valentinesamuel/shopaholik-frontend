@@ -7,6 +7,7 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Alert,
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import dayjs from 'dayjs';
@@ -45,16 +46,38 @@ const defaultNewProduct: Product = {
 interface Props {}
 
 const AddProductModal: FC<Props> = () => {
+  const [errMsg, setErrMsg] = useState({
+    error: '',
+    success: '',
+  });
   const [product, setProduct] = useState(defaultNewProduct);
   const storeSupplierList = useAppSelector(
     (state) => state.supplierReducer.suppliers,
   );
   const [supplierList, _] = useState(storeSupplierList);
-  const [addProductToInventory] = useAddInventoryProductsMutation();
+  const [addProductToInventory, { isLoading }] =
+    useAddInventoryProductsMutation();
 
-  const handleAddProduct = () => {
-    addProductToInventory(product);
-    console.log(product);
+  const handleAddProduct = async () => {
+    // console.log(product);
+    try {
+      await addProductToInventory(product).unwrap();
+      setErrMsg({
+        error: '',
+        success: 'Product added',
+      });
+      setTimeout(() => {
+        setErrMsg({ error: '', success: '' });
+      }, 2000);
+    } catch (error) {
+      setErrMsg({
+        error: 'Faild to add product. Please try again',
+        success: '',
+      });
+      setTimeout(() => {
+        setErrMsg({ error: '', success: '' });
+      }, 2000);
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -68,6 +91,8 @@ const AddProductModal: FC<Props> = () => {
 
   return (
     <Box>
+      {errMsg.error && <Alert severity="error">{errMsg.error}</Alert>}
+      {errMsg.success && <Alert severity="success">{errMsg.success}</Alert>}
       <Typography variant="h4">Add Product</Typography>
       <Typography variant="h6">Product Information</Typography>
       <Box
@@ -241,7 +266,6 @@ const AddProductModal: FC<Props> = () => {
           }
         />
       </Box>
-
       <Box
         sx={{
           marginTop: '10%',
@@ -272,6 +296,7 @@ const AddProductModal: FC<Props> = () => {
           Delete Product
         </Button>
         <Button
+          disabled={isLoading}
           color="success"
           onClick={handleAddProduct}
           startIcon={<DoneAllIcon />}
