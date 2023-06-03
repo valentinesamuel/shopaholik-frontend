@@ -9,7 +9,6 @@ import {
   Paper,
   Tab,
   Tabs,
-  Typography,
 } from '@mui/material';
 import { ChangeEvent, FC, useState } from 'react';
 import { Search } from '@mui/icons-material';

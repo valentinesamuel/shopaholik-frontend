@@ -69,7 +69,7 @@ const AddProductModal: FC<Props> = () => {
       }, 2000);
     } catch (error) {
       setErrMsg({
-        error: 'Faild to add product. Please try again',
+        error: 'Failed to add product. Please try again',
         success: '',
       });
       setTimeout(() => {

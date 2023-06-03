@@ -1,5 +1,12 @@
-import { Box, Paper, SelectChangeEvent, Typography } from '@mui/material';
-import { FC, useState } from 'react';
+import {
+  Alert,
+  Box,
+  CircularProgress,
+  Paper,
+  SelectChangeEvent,
+  Typography,
+} from '@mui/material';
+import { FC, Fragment, useState } from 'react';
 import SelectOptions from '../../../components/SelectOptions';
 import { shippingStatusOptions } from '../../../Utils/categories';
 import OrderDetailsTable from './OrderDetailsTable';
@@ -10,25 +17,36 @@ import {
   useGetOrderQuery,
   useUpdateOrderMutation,
 } from '../../../store/slice/OrderSlice/OrderApiSlice';
-import { Order } from '../../../Utils/Types';
+import { Order, ShippingStatus } from '../../../Utils/Types';
 
 const orderItemRows = orderedItems;
 
 const OrderDetails: FC = () => {
-  const [shippStatus, setShippingStatus] = useState('');
+  const [errMsg, setErrMsg] = useState('');
   const { orderId } = useParams();
   const location = useLocation();
   const { data } = useGetOrderQuery(orderId as string);
-  console.log(data);
+  const currentOrder = data as Order;
+  const [updateOrder, { isLoading }] = useUpdateOrderMutation();
 
-  const handleShippingStatusChange = (event: SelectChangeEvent) => {
-    setShippingStatus(event.target.value);
-    // // FIXME: update the order details with useupdateorderdetails and recencile the types
-    // useUpdateOrderMutation({
-    //   ...data,
-    //   shippingStatus: event.target.value,
-    // });
-    console.log(event.target.value);
+  const handleShippingStatusChange = async (event: SelectChangeEvent) => {
+    try {
+      const newOrder: Order = {
+        ...currentOrder,
+        orderId: orderId as string,
+        shippingStatus: event.target.value as ShippingStatus,
+      };
+      await updateOrder(newOrder).unwrap();
+      setErrMsg('Updated  product');
+      setTimeout(() => {
+        setErrMsg('');
+      }, 2000);
+    } catch (error) {
+      setErrMsg('Failed to update order. Please try again');
+      setTimeout(() => {
+        setErrMsg('');
+      }, 2000);
+    }
   };
 
   return (
@@ -52,6 +70,19 @@ const OrderDetails: FC = () => {
           marginBottom: '40px',
         }}
       >
+        {errMsg && (
+          <Alert
+            sx={{
+              position: 'fixed',
+              top: '10%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+            severity="error"
+          >
+            {errMsg}
+          </Alert>
+        )}
         <Box>
           <Box sx={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
             <Typography sx={{ color: '#96999F', marginRight: '10px' }}>
@@ -65,20 +96,27 @@ const OrderDetails: FC = () => {
             </Typography>
             <Typography sx={{ fontWeight: 'bold' }}>12 May, 2023</Typography>
           </Box>
-          <SelectOptions
-            sxStyles={{
-              width: {
-                desktop: '100%',
-                mobile: '100%',
-                tablet: '60%',
-              },
-            }}
-            selectLabel="Delivery Status"
-            label="shipping-status"
-            options={shippingStatusOptions}
-            handleChange={handleShippingStatusChange}
-            value={shippStatus}
-          />
+          {isLoading ? (
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <CircularProgress color="primary" sx={{ mr: 2 }} />{' '}
+              <p>Updating delivery status</p>
+            </Box>
+          ) : (
+            <SelectOptions
+              sxStyles={{
+                width: {
+                  desktop: '100%',
+                  mobile: '100%',
+                  tablet: '60%',
+                },
+              }}
+              selectLabel="Delivery Status"
+              label="shipping-status"
+              options={shippingStatusOptions}
+              handleChange={handleShippingStatusChange}
+              value={data ? data.shippingStatus : ShippingStatus.PENDING}
+            />
+          )}
         </Box>
 
         <Box>
