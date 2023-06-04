@@ -96,7 +96,7 @@ const CashierSale = () => {
       sx={{
         width: '100%',
         overflowX: 'auto',
-        padding: '1% 3% 3% 3%',
+        padding: '1% 3% 3% 2%',
         display: 'flex',
         flexDirection: {
           desktop: 'row',
@@ -104,7 +104,7 @@ const CashierSale = () => {
         },
       }}
     >
-      1489
+      
       <Paper
         sx={{
           width: { desktop: '80%', mobile: '100%' },
