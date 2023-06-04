@@ -9,8 +9,10 @@ import metricReducer from './slice/MetricSlice/MetricSlice.store';
 import inventoryReducer from './slice/InventorySlice/InventorySlice';
 import userReducer from './slice/UserSlice/UserSlice.store';
 import themeReducer from './slice/ThemeSlice/ThemeSlice.store';
+import cashierReducer from './slice/CashierSlice/CashierSlice.store';
 
 const rootReducer = combineReducers({
+  cashierReducer,
   themeReducer,
   userReducer,
   metricReducer,

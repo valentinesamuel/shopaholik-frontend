@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -9,10 +9,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { MoreHoriz } from '@mui/icons-material';
+import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
+import { useAppDispatch, useAppSelector } from '../../Utils/StateDispatch';
+import {
+  addToSalesList,
+  increaseProductQuantity,
+  reduceProductQuantity,
+  removeFromSalesList,
+} from '../../store/slice/CashierSlice/CashierSlice.store';
 
 interface Column {
-  id: 'quantity' | 'product' | 'price';
+  id: 'saleQuantity' | 'name' | 'unit_price';
   label: string;
   minWidth?: number | string;
   width?: number | string;
@@ -22,25 +31,25 @@ interface Column {
 
 const columns: readonly Column[] = [
   {
-    id: 'quantity',
+    id: 'saleQuantity',
     label: 'Quantity',
     minWidth: '5%',
     width: '5%',
     align: 'left',
   },
   {
-    id: 'product',
+    id: 'name',
     label: 'Product',
     minWidth: '85%',
     width: '85%',
     align: 'left',
   },
   {
-    id: 'price',
-    label: 'Price (N)',
+    id: 'unit_price',
+    label: 'Unit Price (N)',
     minWidth: '15%',
     width: '20%',
-    align: 'right',
+    align: 'center',
     format: (value: number) => value.toLocaleString('en-US'),
   },
 ];
@@ -67,7 +76,8 @@ const TopSellingProductContainer = styled(Box)`
 const SalesItemTable: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  
+  const dispatch = useAppDispatch();
+  const salesList = useAppSelector((state) => state.cashierReducer.salesList);
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -82,80 +92,118 @@ const SalesItemTable: React.FC = () => {
 
   return (
     <TopSellingProductContainer>
-      <Paper
-        elevation={1}
-        sx={{
-          overflowX: 'auto',
-        }}
-      >
-        <TableContainer sx={{ height: '100%', minHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <>
-                    <TableCell
-                      sx={{ backgroundColor: 'primary.main' }}
-                      key={column.id}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth, width: column.width }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  </>
-                ))}
-                <TableCell
-                  sx={{ backgroundColor: 'primary.main' }}
-                  align="right"
-                ></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <>
-                      <TableRow
-                        key={row.price}
-                        sx={{ cursor: 'pointer' }}
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
+      {salesList.length > 0 ? (
+        <Paper
+          elevation={1}
+          sx={{
+            overflowX: 'auto',
+          }}
+        >
+          <TableContainer sx={{ height: '100%', minHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table" sx={{}}>
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <React.Fragment key={column.id}>
+                      <TableCell
+                        sx={{
+                          backgroundColor: 'primary.main',
+                          position: 'unset',
+                        }}
+                        key={column.id}
+                        align={column.align}
+                        style={{
+                          minWidth: column.minWidth,
+                          width: column.width,
+                        }}
                       >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell align={column.align} key={column.id}>
-                              {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                        <TableCell align="right">
-                          <IconButton onClick={() => console.log('removed')}>
-                            <MoreHoriz />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    </>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          sx={{ backgroundColor: 'primary.light' }}
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+                        {column.label}
+                      </TableCell>
+                    </React.Fragment>
+                  ))}
+                  <TableCell
+                    sx={{
+                      backgroundColor: 'primary.main',
+                      width: '100%',
+                      position: 'unset',
+                    }}
+                    align="right"
+                  ></TableCell>
+                  <TableCell
+                    sx={{ backgroundColor: 'primary.main', position: 'unset' }}
+                    align="right"
+                  ></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {salesList
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <React.Fragment key={row.product_id}>
+                        <TableRow
+                          key={row.product_id}
+                          sx={{ cursor: 'pointer' }}
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell align={column.align} key={column.id}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                          <TableCell align="right" sx={{ position: 'unset' }}>
+                            <IconButton
+                              onClick={() =>
+                                dispatch(increaseProductQuantity(row))
+                              }
+                            >
+                              <AddIcon />
+                            </IconButton>
+                            <IconButton
+                              onClick={() =>
+                                dispatch(reduceProductQuantity(row))
+                              }
+                            >
+                              <RemoveIcon />
+                            </IconButton>
+                          </TableCell>
+                          <TableCell align="right" sx={{ position: 'unset' }}>
+                            <IconButton
+                              onClick={() => dispatch(removeFromSalesList(row))}
+                            >
+                              <RemoveCircleIcon />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      </React.Fragment>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            sx={{ backgroundColor: 'primary.light' }}
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={rows.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      ) : (
+        <Typography variant="h5">
+          Sorry, no products yet.. Search for prodcuts to add them to the list
+        </Typography>
+      )}
     </TopSellingProductContainer>
   );
 };

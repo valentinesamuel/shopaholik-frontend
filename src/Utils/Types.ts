@@ -48,6 +48,10 @@ export interface Product {
   stock_status: StockStatus;
 }
 
+export interface SaleProduct extends Product {
+  saleQuantity: number;
+}
+
 export interface Personnel {
   personnelId?: string;
   firstName: string;
