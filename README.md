@@ -106,6 +106,8 @@ Overall, the project aims to develop a robust and intuitive web application that
 
 - [![css][css]][css-url]
 
+- [![figma][figma]][figma-url]
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
@@ -239,3 +241,5 @@ Project Link: [https://github.com/valentinesamuel/shopaholik-frontend](https://g
 [html]: https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white
 [css-url]: https://en.wikipedia.org/wiki/CSS
 [css]: https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white
+[figma-url]: https://www.figma.com
+[figma]: https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white
