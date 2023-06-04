@@ -14,7 +14,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import { useAppDispatch, useAppSelector } from '../../Utils/StateDispatch';
 import {
-  addToSalesList,
   increaseProductQuantity,
   reduceProductQuantity,
   removeFromSalesList,

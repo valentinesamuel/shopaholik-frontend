@@ -1,9 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {
-  ProductCategory,
-  SaleProduct,
-  StockStatus,
-} from '../../../Utils/Types';
+import { SaleProduct } from '../../../Utils/Types';
 import { cashierApiSlice } from './CashierApiSlice';
 
 interface IinitialState {

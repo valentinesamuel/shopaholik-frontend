@@ -1,4 +1,4 @@
-import { Clear, ClearAll, Search } from '@mui/icons-material';
+import { Clear } from '@mui/icons-material';
 import {
   Alert,
   Box,
@@ -38,7 +38,7 @@ const CashierSale = () => {
   });
   const salesList = useAppSelector((state) => state.cashierReducer.salesList);
   const dispatch = useAppDispatch();
-  const [makeSale] = useMakePurchaseMutation();
+  const [makeSale, { isLoading }] = useMakePurchaseMutation();
   const [cost, setCost] = useState('');
 
   const handleSearchedProductChange = (
@@ -58,23 +58,28 @@ const CashierSale = () => {
     setCost(event.target.value);
   };
 
-  const makePurchase = () => {
-    console.log(salesList);
-
-    setcompletedPurchase({
-      error: true,
-      success: null,
-    });
-    setTimeout(() => {
-      setcompletedPurchase({
-        error: null,
-        success: null,
-      });
-    }, 2000);
+  const makePurchase = async () => {
     try {
+      // const res: { status: number } = await makeSale(salesList).unwrap();
+      await makeSale(salesList)
+        .unwrap()
+        .then((_res) => {
+           setcompletedPurchase({
+             error: null,
+             success: true,
+           });
+           setCost(String(0));
+           setTimeout(() => {
+             setcompletedPurchase({
+               error: null,
+               success: null,
+             });
+           }, 2000);
+           dispatch(clearSalesList());
+        });
     } catch (error) {
       setcompletedPurchase({
-        error: false,
+        error: true,
         success: null,
       });
       setTimeout(() => {
@@ -99,6 +104,7 @@ const CashierSale = () => {
         },
       }}
     >
+      1489
       <Paper
         sx={{
           width: { desktop: '80%', mobile: '100%' },
@@ -318,19 +324,23 @@ const CashierSale = () => {
             fullWidth
             variant="contained"
             color="success"
+            disabled={
+              calculateTotalPrice(salesList) - Number(cost) > 0 ? true : false
+            }
             onClick={makePurchase}
           >
-            Purchase
+            {isLoading ? 'Making Purchase' : 'Purchase'}
           </Button>
 
           <Button
             sx={{ margin: '20px 0' }}
             fullWidth
+            disabled={isLoading}
             variant="contained"
             color="error"
             onClick={() => dispatch(clearSalesList())}
           >
-            Cancel
+            {isLoading ? 'Making Purchase' : 'Cancel'}
           </Button>
         </Stack>
       </Paper>
