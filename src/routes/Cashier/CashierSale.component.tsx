@@ -1,5 +1,6 @@
 import { Clear, ClearAll, Search } from '@mui/icons-material';
 import {
+  Alert,
   Box,
   Button,
   Divider,
@@ -21,14 +22,23 @@ import { clearSalesList } from '../../store/slice/CashierSlice/CashierSlice.stor
 import { convertNumberToLocale } from '../../Utils/Converter';
 import { useDebounce } from '../../hooks/UseDebounce';
 import SearchResults from './SearchResults';
+import { useMakePurchaseMutation } from '../../store/slice/CashierSlice/CashierApiSlice';
 
 const CashierSale = () => {
   const [searchedProduct, setSearchedSProduct] = useState('');
   const debouncedSearchedProduct = useDebounce(searchedProduct, 1000);
   const [searchedProductCode, setSearchedSProductCode] = useState('');
   const debouncedSearchedProductCode = useDebounce(searchedProductCode, 1000);
+  const [completedPurchase, setcompletedPurchase] = useState<{
+    success: boolean | null;
+    error: boolean | null;
+  }>({
+    success: null,
+    error: null,
+  });
   const salesList = useAppSelector((state) => state.cashierReducer.salesList);
   const dispatch = useAppDispatch();
+  const [makeSale] = useMakePurchaseMutation();
   const [cost, setCost] = useState('');
 
   const handleSearchedProductChange = (
@@ -48,8 +58,32 @@ const CashierSale = () => {
     setCost(event.target.value);
   };
 
-  const searchProduct = () => {
-    console.log(searchedProduct);
+  const makePurchase = () => {
+    console.log(salesList);
+
+    setcompletedPurchase({
+      error: true,
+      success: null,
+    });
+    setTimeout(() => {
+      setcompletedPurchase({
+        error: null,
+        success: null,
+      });
+    }, 2000);
+    try {
+    } catch (error) {
+      setcompletedPurchase({
+        error: false,
+        success: null,
+      });
+      setTimeout(() => {
+        setcompletedPurchase({
+          error: null,
+          success: null,
+        });
+      }, 2000);
+    }
   };
 
   return (
@@ -176,6 +210,12 @@ const CashierSale = () => {
           padding: '20px',
         }}
       >
+        {completedPurchase.error && (
+          <Alert severity="error">Failed to make a purchase</Alert>
+        )}
+        {completedPurchase.success && (
+          <Alert severity="success">Sucessfull Purchase.</Alert>
+        )}
         <Typography
           variant="h5"
           sx={{ marginBottom: '5%', fontWeight: 'bold' }}
@@ -278,9 +318,7 @@ const CashierSale = () => {
             fullWidth
             variant="contained"
             color="success"
-            onClick={() => {
-              console.log(salesList);
-            }}
+            onClick={makePurchase}
           >
             Purchase
           </Button>
