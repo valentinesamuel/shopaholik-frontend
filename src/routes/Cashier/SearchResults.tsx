@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from '@mui/material';
-import { FC, Fragment, useEffect, useState } from 'react';
+import { FC, Fragment } from 'react';
 import { useSearchProductQuery } from '../../store/slice/CashierSlice/CashierApiSlice';
 import { useAppDispatch, useAppSelector } from '../../Utils/StateDispatch';
 import { SaleProduct } from '../../Utils/Types';
@@ -19,31 +19,17 @@ const SearchResults: FC<Props> = ({
     ? searchProductCodeString
     : searchProductString;
   const dispatch = useAppDispatch();
-  const [searchProds, setSearchProds] = useState<SaleProduct[]>([]);
-  // const { data } = useSearchProductQuery(str as string);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const getSearchProducts: Promise<SaleProduct[]> = await fetch(
-          'https://apimocha.com/shopaholk/search/scassd',
-        ).then((response) => response.json());
-        setSearchProds(await getSearchProducts);
-        // Dispatch the fetched data to the Redux store
-      } catch (error) {
-        // Handle any errors that occur during the fetch request
-        console.error('Error fetching data:', error);
-      }
-    };
+  
+  const { data } = useSearchProductQuery(str as string);
 
-    getData();
-  }, [str]);
+  
 
   const stateProductsList = useAppSelector(
     (state) => state.cashierReducer.salesList,
   );
-  const productList = searchProds
-    ? searchProds.map((prod) => ({ ...prod, saleQuantity: 1 } as SaleProduct))
+  const productList = data
+    ? data.map((prod) => ({ ...prod, saleQuantity: 1 } as SaleProduct))
     : stateProductsList;
 
   return (
@@ -54,7 +40,7 @@ const SearchResults: FC<Props> = ({
         position: 'relative',
       }}
     >
-      {searchProds.length >= 1 ? (
+      {data ? (
         <Fragment>
           {productList.map((saleProd) => (
             <Fragment key={saleProd.product_id}>
@@ -80,7 +66,7 @@ const SearchResults: FC<Props> = ({
           ))}
         </Fragment>
       ) : (
-        <Typography variant="h2">No products found. Try again</Typography>
+        <Typography>No products found. Try again</Typography>
       )}
     </Box>
   );
