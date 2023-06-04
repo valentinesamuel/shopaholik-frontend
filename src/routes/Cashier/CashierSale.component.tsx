@@ -24,9 +24,9 @@ import SearchResults from './SearchResults';
 
 const CashierSale = () => {
   const [searchedProduct, setSearchedSProduct] = useState('');
-  const debouncedSearchedProduct = useDebounce(searchedProduct, 500);
+  const debouncedSearchedProduct = useDebounce(searchedProduct, 1000);
   const [searchedProductCode, setSearchedSProductCode] = useState('');
-  const debouncedSearchedProductCode = useDebounce(searchedProductCode, 500);
+  const debouncedSearchedProductCode = useDebounce(searchedProductCode, 1000);
   const salesList = useAppSelector((state) => state.cashierReducer.salesList);
   const dispatch = useAppDispatch();
   const [cost, setCost] = useState('');
@@ -79,6 +79,7 @@ const CashierSale = () => {
           <Box
             sx={{
               display: 'flex',
+
               flexDirection: {
                 desktop: 'row',
                 mobile: 'column',
@@ -146,11 +147,14 @@ const CashierSale = () => {
           </Box>
           {(searchedProduct.length >= 1 || searchedProductCode.length >= 1) && (
             <Paper
+              elevation={3}
               sx={{
                 position: 'absolute',
                 maxHeight: '500%',
+                padding: '12px',
                 overflow: 'auto',
                 zIndex: '2',
+                width: '100%',
               }}
             >
               <SearchResults

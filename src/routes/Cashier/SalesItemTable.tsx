@@ -84,7 +84,7 @@ const SalesItemTable: React.FC = () => {
             overflowX: 'auto',
           }}
         >
-          <TableContainer sx={{ height: '100%', minHeight: 440 }}>
+          <TableContainer sx={{ height: '70%', minHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table" sx={{}}>
               <TableHead>
                 <TableRow>

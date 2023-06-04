@@ -1,5 +1,5 @@
 import { apiSlice } from '..';
-import { SaleProduct } from '../../../Utils/Types';
+import { Product, SaleProduct } from '../../../Utils/Types';
 
 export const cashierApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -7,7 +7,12 @@ export const cashierApiSlice = apiSlice.injectEndpoints({
       query: () => '/purchase',
       invalidatesTags: ['Metric', 'Product', 'InventoryProduct'],
     }),
+    searchProduct: builder.query<Product[], string>({
+      query: (searchString) => `/search/scassd`,
+      // query: (searchString) => `/search${searchString}`,
+    }),
   }),
 });
 
-export const { useMakePurchaseMutation } = cashierApiSlice;
+export const { useMakePurchaseMutation, useSearchProductQuery } =
+  cashierApiSlice;
