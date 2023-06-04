@@ -82,18 +82,6 @@ export const cashierSlice = createSlice({
         // TODO: might need to create a property to allow something happed when a purchase is successful
       },
     );
-    // builder.addMatcher(
-    //   cashierApiSlice.endpoints.searchProduct.matchFulfilled,
-    //   (state, action) => {
-    //     state.salesList = action.payload.map(
-    //       (saleProduct) =>
-    //         ({
-    //           ...saleProduct,
-    //           saleQuantity: 1,
-    //         } as SaleProduct),
-    //     );
-    //   },
-    // );
   },
 });
 

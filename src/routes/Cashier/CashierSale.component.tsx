@@ -1,4 +1,4 @@
-import { Search } from '@mui/icons-material';
+import { Clear, ClearAll, Search } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -108,10 +108,10 @@ const CashierSale = () => {
                   <InputAdornment position="end">
                     <IconButton
                       aria-label="search button"
-                      onClick={searchProduct}
+                      onClick={() => setSearchedSProduct('')}
                       edge="end"
                     >
-                      <Search />
+                      {searchedProduct && <Clear />}
                     </IconButton>
                   </InputAdornment>
                 }
@@ -137,8 +137,12 @@ const CashierSale = () => {
                 value={searchedProductCode}
                 endAdornment={
                   <InputAdornment position="end">
-                    <IconButton aria-label="search button" edge="end">
-                      <Search />
+                    <IconButton
+                      onClick={() => setSearchedSProductCode('')}
+                      aria-label="search button"
+                      edge="end"
+                    >
+                      {searchedProductCode && <Clear />}
                     </IconButton>
                   </InputAdornment>
                 }
