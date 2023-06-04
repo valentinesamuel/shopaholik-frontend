@@ -35,10 +35,12 @@ const CashierSale = () => {
     event: ChangeEvent<HTMLInputElement>,
   ) => {
     setSearchedSProduct(event.target.value);
+    setSearchedSProductCode('');
   };
   const handleSearchedProductCodeChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => {
+    setSearchedSProduct('');
     setSearchedSProductCode(event.target.value);
   };
 
@@ -142,21 +144,21 @@ const CashierSale = () => {
               />
             </FormControl>
           </Box>
-          {String(debouncedSearchedProduct).length >= 1 ||
-            (String(debouncedSearchedProductCode).length >= 1 && (
-              <Paper
-                sx={{
-                  position: 'absolute',
-                  maxHeight: '500%',
-                  overflow: 'auto',
-                  zIndex: '2',
-                }}
-              >
-                <SearchResults
-                  searchSring={debouncedSearchedProduct as string}
-                />
-              </Paper>
-            ))}
+          {(searchedProduct.length >= 1 || searchedProductCode.length >= 1) && (
+            <Paper
+              sx={{
+                position: 'absolute',
+                maxHeight: '500%',
+                overflow: 'auto',
+                zIndex: '2',
+              }}
+            >
+              <SearchResults
+                searchProductString={debouncedSearchedProduct as string}
+                searchProductCodeString={debouncedSearchedProductCode as string}
+              />
+            </Paper>
+          )}
         </Box>
         <SalesItemTable />
       </Paper>

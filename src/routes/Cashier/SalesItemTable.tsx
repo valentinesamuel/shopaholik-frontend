@@ -32,7 +32,7 @@ interface Column {
 const columns: readonly Column[] = [
   {
     id: 'saleQuantity',
-    label: 'Quantity',
+    label: 'Qty',
     minWidth: '5%',
     width: '5%',
     align: 'left',
@@ -54,21 +54,6 @@ const columns: readonly Column[] = [
   },
 ];
 
-interface Data {
-  quantity: number;
-  product: string;
-  price: number;
-}
-
-function createData(quantity: number, product: string, price: number): Data {
-  return { quantity, product, price };
-}
-
-const rows = [
-  createData(43, 'Milo refill beverage', 1200),
-  createData(1, 'Peak Milk full cream', 3200),
-  createData(43, '32gb flash drive', 8000),
-];
 const TopSellingProductContainer = styled(Box)`
   height: fit-content;
 `;
@@ -192,7 +177,7 @@ const SalesItemTable: React.FC = () => {
             sx={{ backgroundColor: 'primary.light' }}
             rowsPerPageOptions={[10, 25, 100]}
             component="div"
-            count={rows.length}
+            count={salesList.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

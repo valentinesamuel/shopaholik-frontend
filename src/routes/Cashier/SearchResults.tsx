@@ -2,10 +2,18 @@ import { Box } from '@mui/material';
 import { FC } from 'react';
 
 interface Props {
-  searchSring: string;
+  searchProductString: string;
+  searchProductCodeString: string;
 }
 
-const SearchResults: FC<Props> = ({ searchSring }) => {
+const SearchResults: FC<Props> = ({
+  searchProductCodeString,
+  searchProductString,
+}) => {
+  const str = searchProductCodeString
+    ? searchProductCodeString
+    : searchProductString;
+
   return (
     <Box
       sx={{
@@ -14,8 +22,8 @@ const SearchResults: FC<Props> = ({ searchSring }) => {
         position: 'relative',
         padding: '2% 0',
       }}
-      >
-          sdfwserfwefr
+    >
+      sdfgsdfg {str}
     </Box>
   );
 };
