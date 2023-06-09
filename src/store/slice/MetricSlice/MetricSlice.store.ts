@@ -6,42 +6,42 @@ const initialState: Metrics = {
   dailyProfit: {
     id: '220d9cdd',
     name: "today's profit",
-    value: 0,
+    value: 120243,
   },
   purchaseCount: {
     id: 'b1e69cb2',
     name: "today's purchase count",
-    value: 0,
+    value: 2482,
   },
   dailyLoss: {
     id: '599abac5',
     name: "today's loss",
-    value: 0,
+    value: 1200,
   },
   dailySales: {
     id: '78b7ff27',
     name: 'items sold since today',
-    value: 0,
+    value: 500,
   },
   inventoryCost: {
     id: '453fde02',
     name: 'total inventory cost',
-    value: 0,
+    value: 2000000,
   },
   staffOnDuty: {
     id: 'f19ea5be',
     name: 'staff on duty',
-    value: 0,
+    value: 12,
   },
   lowInStock: {
     id: 'bb4eb591',
     name: 'Low in Stock',
-    value: 0,
+    value: 10,
   },
   outOfStock: {
     id: 'b24fb843',
     name: 'Out of Stock',
-    value: 0,
+    value: 3,
   },
   expiredProducts: {
     id: 'a826cf9d',
@@ -56,22 +56,22 @@ const initialState: Metrics = {
   pendingOrders: {
     id: '81b4b01b',
     name: 'Pending Orders',
-    value: 0,
+    value: 2,
   },
   receivedOrders: {
     id: '896eec4d',
     name: 'Received Orders',
-    value: 0,
+    value: 10,
   },
   shippedOrders: {
     id: 'c3e19de3',
     name: 'Shipped Orders',
-    value: 0,
+    value: 12,
   },
   costOfPendingOrders: {
     id: 'c3e19de3',
     name: 'Cost of Pending Orders',
-    value: 0,
+    value: 250000,
   },
 };
 

@@ -4,7 +4,7 @@ import { Supplier } from '../../../Utils/Types';
 export const supplierApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getSuppliers: builder.query<Supplier[], string>({
-      query: () => '/suppliers',
+      query: () => '/supplier',
       providesTags: (result) =>
         result
           ? [
@@ -16,9 +16,8 @@ export const supplierApiSlice = apiSlice.injectEndpoints({
           : ['Supplier'],
     }),
 
-    // FIXME: This will also return a list of the suppliers orders 
     getSupplier: builder.query<Supplier, string>({
-      query: (id) => `/suppliers/${id}`,
+      query: (id) => `/supplier/${id}`,
       providesTags: (result) =>
         result ? [{ type: 'Supplier', id: result.supplierId }] : ['Supplier'],
     }),

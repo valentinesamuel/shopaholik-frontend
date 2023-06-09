@@ -4,7 +4,7 @@ import { Personnel } from '../../../Utils/Types';
 export const personnelApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPersonnels: builder.query<Personnel[], string>({
-      query: () => '/personnels',
+      query: () => '/personnel',
       providesTags: (result) =>
         result
           ? [
@@ -17,7 +17,7 @@ export const personnelApiSlice = apiSlice.injectEndpoints({
           : ['Personnel'],
     }),
     getPersonnel: builder.query<Personnel, string>({
-      query: (personnelId) => `/personnels/${personnelId}`,
+      query: (personnelId) => `/personnel/${personnelId}`,
       providesTags: (result) =>
         result
           ? [{ type: 'Personnel', id: result.personnelId }, 'Personnel']

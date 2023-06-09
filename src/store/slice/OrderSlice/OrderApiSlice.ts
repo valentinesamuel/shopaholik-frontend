@@ -4,7 +4,7 @@ import { Order } from '../../../Utils/Types';
 export const orderApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getOrders: builder.query<Order[], void>({
-      query: () => '/orders',
+      query: () => '/order',
       providesTags: (result) =>
         result
           ? [
@@ -17,7 +17,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
     }),
 
     getSupplierOrders: builder.query<Order[], string>({
-      query: (supplierId) => `/orders/${supplierId}`,
+      query: (supplierId) => `/order/${supplierId}`,
       providesTags: (result) =>
         result
           ? [
@@ -30,18 +30,18 @@ export const orderApiSlice = apiSlice.injectEndpoints({
     }),
 
     getOrder: builder.query<Order, string>({
-      query: (id) => `/orders/${id}`,
+      query: (id) => `/order/${id}`,
       providesTags: (result) =>
         result ? [{ type: 'Order', id: result.orderId }] : ['Order'],
     }),
 
     updateOrder: builder.mutation<Order, Order>({
       query: (order) => ({
-        url: `/orders/${order.orderId}`,
+        url: `/order/${order.orderId}`,
         method: 'PATCH',
         body: order,
       }),
-      invalidatesTags: ['Metric'],
+      // invalidatesTags: ['Metric'],
     }),
   }),
 });

@@ -81,6 +81,7 @@ export interface Personnel {
 export interface User {
   name: string;
   role: ADMINROLE;
+  token?: string | null;
 }
 
 export interface PersonnelLogin {

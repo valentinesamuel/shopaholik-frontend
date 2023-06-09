@@ -4,7 +4,7 @@ import { apiSlice } from '..';
 export const inventoryApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getInventoryProducts: builder.query<Product[], void>({
-      query: () => '/inventory',
+      query: () => '/product',
       providesTags: (result) =>
         result
           ? [
@@ -18,19 +18,19 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
     }),
     addInventoryProducts: builder.mutation<Product, Product>({
       query: (product) => ({
-        url: '/inventory',
+        url: '/product',
         method: 'POST',
         product,
       }),
-      invalidatesTags: ['InventoryProduct', 'Metric', 'Order', 'Product'],
+      invalidatesTags: ['InventoryProduct', 'Order', 'Product'],
     }),
     deleteInventoryProducts: builder.mutation<Product, string>({
       query: (id) => ({
-        url: '/inventory',
+        url: '/product',
         method: 'DELETE',
         body: id,
       }),
-      invalidatesTags: ['Metric', 'Order', 'InventoryProduct', 'Product'],
+      invalidatesTags: ['Order', 'InventoryProduct', 'Product'],
     }),
   }),
 });

@@ -35,7 +35,7 @@ const NavbarContainer = styled(Box)`
 `;
 
 const Navbar: FC = () => {
-  const name = useAppSelector((state) => state.userReducer.user.name);
+  const name = useAppSelector((state) => state.userReducer.user?.name);
 
   return (
     <NavbarContainer>
@@ -61,7 +61,7 @@ const Navbar: FC = () => {
             marginRight: 3,
           }}
         >
-          {name.split(' ')[1][0]}
+          {name?.split(' ')[1][0]}
         </Avatar>
         <Typography
           sx={{
@@ -74,7 +74,7 @@ const Navbar: FC = () => {
           }}
           variant="body1"
         >
-          {name.split(' ')[1]}
+          {name?.split(' ')[1]}
         </Typography>
       </div>
     </NavbarContainer>
