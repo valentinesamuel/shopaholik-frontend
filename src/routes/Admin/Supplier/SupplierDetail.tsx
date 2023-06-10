@@ -31,10 +31,9 @@ const SupplierDetail: FC<Props> = ({}) => {
   const [filter, setFilter] = useState('');
   const debouncedSearchedOrder = useDebounce(searchSupplierOrder, 500);
   const location = useLocation();
-  const { supplierId } = useParams();
-  console.log(supplierId);
+  const { supplier_id } = useParams();
 
-  const { data } = useGetSupplierOrdersQuery(supplierId as string);
+  const { data } = useGetSupplierOrdersQuery(supplier_id as string);
   console.log(data);
 
   // TODO: bring in all the orders that belon to this supplier
@@ -186,6 +185,7 @@ const SupplierDetail: FC<Props> = ({}) => {
       <SupplierOrderTable
         searchFilter={debouncedSearchedOrder as string}
         filterTab={filter}
+        orders={data ? data : []}
       />
     </Paper>
   );

@@ -14,7 +14,6 @@ import { getShippingStatusColor } from '../../../Utils/StatusColor';
 import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import { filterAndSearchOrders } from './helpers';
-import { useAppSelector } from '../../../Utils/StateDispatch';
 import { useGetOrdersQuery } from '../../../store/slice/OrderSlice/OrderApiSlice';
 
 interface Column {
@@ -83,9 +82,8 @@ const OrdersTable: React.FC<{
 }> = ({ filterTab, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const stateOrders = useAppSelector((state) => state.orderReducer.orders);
   const { data, isLoading } = useGetOrdersQuery();
-  const orders = data ? data : stateOrders;
+  const orders = data;
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -99,7 +97,7 @@ const OrdersTable: React.FC<{
   };
 
   if (isLoading) {
-    return <Skeleton variant="rectangular" width={'100%'} height={100} />;
+    return <Skeleton variant="rectangular" width={'100%'} height={'100%'} />;
   }
 
   return (
@@ -132,7 +130,7 @@ const OrdersTable: React.FC<{
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterAndSearchOrders(orders, filterTab, searchFilter)
+              {orders && filterAndSearchOrders(orders, filterTab, searchFilter)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
@@ -176,7 +174,7 @@ const OrdersTable: React.FC<{
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={orders.length}
+          count={orders ? orders.length : 0}
           key={page}
           rowsPerPage={rowsPerPage}
           page={page}

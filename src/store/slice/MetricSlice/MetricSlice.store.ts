@@ -79,14 +79,14 @@ export const metricSlice = createSlice({
   name: 'metric',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      metricApiSlice.endpoints.getMetrics.matchFulfilled,
-      (state, action) => {
-        state = action.payload;
-      },
-    );
-  },
+  // extraReducers: (builder) => {
+  //   builder.addMatcher(
+  //     metricApiSlice.endpoints.getMetrics.matchFulfilled,
+  //     (state, action) => {
+  //       state = action.payload;
+  //     },
+  //   );
+  // },
 });
 
 export default metricSlice.reducer;

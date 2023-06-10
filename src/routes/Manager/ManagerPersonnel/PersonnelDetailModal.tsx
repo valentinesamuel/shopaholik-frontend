@@ -312,7 +312,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                   variant="body1"
                   sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                 >
-                  {personnel.guarantor.name}
+                  {personnel.guarantorName}
                 </Typography>
               </Box>
               <Box
@@ -330,7 +330,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                   variant="body1"
                   sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                 >
-                  {personnel.guarantor.phone}
+                  {personnel.guarantorPhone}
                 </Typography>
               </Box>
               <Box
@@ -348,7 +348,7 @@ const PersonnelDetailModal: FC<Props> = ({ onClose, open, personnel }) => {
                   variant="body1"
                   sx={{ fontWeight: 'bold', fontSize: '1.125rem' }}
                 >
-                  {personnel.guarantor.address}
+                  {personnel.guarantorAddress}
                 </Typography>
               </Box>
             </Box>

@@ -17,7 +17,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
     }),
 
     getSupplierOrders: builder.query<Order[], string>({
-      query: (supplierId) => `/order/${supplierId}`,
+      query: (supplierId) => `/supplier/order/${supplierId}`,
       providesTags: (result) =>
         result
           ? [
@@ -30,7 +30,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
     }),
 
     getOrder: builder.query<Order, string>({
-      query: (id) => `/order/${id}`,
+      query: (orderId) => `/order/${orderId}`,
       providesTags: (result) =>
         result ? [{ type: 'Order', id: result.orderId }] : ['Order'],
     }),

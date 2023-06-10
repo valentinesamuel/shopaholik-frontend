@@ -5,8 +5,7 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { Box, Typography, Paper } from '@mui/material';
 import { styled as MUIStyled } from '@mui/material';
 import { Fragment } from 'react';
-import { useAppSelector } from '../Utils/StateDispatch';
-import { useGetMetricsQuery } from '../store/slice/MetricSlice/MetricApiSlice';
+// import { useGetMetricsQuery } from '../store/slice/MetricSlice/MetricApiSlice';
 
 export const StockQtyItem = MUIStyled(Box)(() => ({
   display: 'flex',
@@ -23,9 +22,9 @@ export const StockQtyItemText = MUIStyled(Box)(() => ({
 }));
 
 const StockQuantityRow = () => {
-  const stateStockmetrics = useAppSelector((state) => state.metricReducer);
-   const { data, isLoading } = useGetMetricsQuery();
-   const stockMetrics = data ? data : stateStockmetrics;
+  // const stateStockmetrics = useAppSelector((state) => state.metricReducer);
+  //  const { data, isLoading } = useGetMetricsQuery();
+  // const stockMetrics = stateStockmetrics;
 
   return (
     <Fragment>
@@ -57,7 +56,8 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {stockMetrics.lowInStock.value}
+              {/* {stockMetrics.lowInStock.value} */}
+              12
             </Typography>
             <Typography
               variant="inherit"
@@ -68,7 +68,8 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {stockMetrics.lowInStock.name}
+              {/* {stockMetrics.lowInStock.name} */}
+              low in stock
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -83,7 +84,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {stockMetrics.outOfStock.value}
+              {/* {stockMetrics.outOfStock.value} */}1
             </Typography>
             <Typography
               variant="inherit"
@@ -94,7 +95,8 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {stockMetrics.outOfStock.name}
+              {/* {stockMetrics.outOfStock.name} */}
+              out of stock
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -109,7 +111,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {stockMetrics.expiredProducts.value}
+              2{/* {stockMetrics.expiredProducts.value} */}
             </Typography>
             <Typography
               variant="inherit"
@@ -120,7 +122,8 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {stockMetrics.expiredProducts.name}
+              {/* {stockMetrics.expiredProducts.name} */}
+              expired products
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>
@@ -135,7 +138,7 @@ const StockQuantityRow = () => {
                 color: 'primary.contrastText',
               }}
             >
-              {stockMetrics.overdueShipments.value}
+              {/* {stockMetrics.overdueShipments.value} */}5
             </Typography>
             <Typography
               variant="inherit"
@@ -146,7 +149,8 @@ const StockQuantityRow = () => {
                 fontWeight: 'regular',
               }}
             >
-              {stockMetrics.overdueShipments.name}
+              {/* {stockMetrics.overdueShipments.name} */}
+              overdue shipments
             </Typography>
           </StockQtyItemText>
         </StockQtyItem>

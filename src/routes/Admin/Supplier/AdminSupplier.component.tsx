@@ -15,11 +15,13 @@ import { useDebounce } from '../../../hooks/UseDebounce';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 import { useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../../Utils/StateDispatch';
+import { useGetSuppliersQuery } from '../../../store/slice/SupplierSlice/SupplierApiSlice';
 
 const AdminSupplier: FC = () => {
   const [searchedSupplier, setSearchedSupplier] = useState('');
-  const suppliers = useAppSelector((state) => state.supplierReducer.suppliers);
-  const [suppliersList, setSuppliersList] = useState(suppliers);
+  // const suppliers = useAppSelector((state) => state.supplierReducer.suppliers);
+  const { data } = useGetSuppliersQuery();
+  const [suppliersList, setSuppliersList] = useState(data);
   let debouncedSearchedSupplier = useDebounce(searchedSupplier, 200);
   const location = useLocation();
 
@@ -29,7 +31,7 @@ const AdminSupplier: FC = () => {
     setSearchedSupplier(event.target.value);
     debouncedSearchedSupplier = event.target.value;
 
-    const filterSupplierList = suppliers.filter((supplier) =>
+    const filterSupplierList = data?.filter((supplier) =>
       supplier.name
         .toLowerCase()
         .includes((debouncedSearchedSupplier as string).toLowerCase()),
@@ -95,9 +97,10 @@ const AdminSupplier: FC = () => {
           rowGap: '5%',
         }}
       >
-        {suppliersList.map((supplier) => (
-          <SupplierCard key={supplier.supplierId} supplier={supplier} />
-        ))}
+        {suppliersList &&
+          suppliersList.map((supplier) => (
+            <SupplierCard key={supplier.supplier_id} supplier={supplier} />
+          ))}
       </Box>
     </Paper>
   );

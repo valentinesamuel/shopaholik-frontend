@@ -168,7 +168,7 @@ const SignIn: FC = () => {
             },
           }}
         >
-          <imgeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJDU0gtRjQxNzEwQ0IiLCJuYW1lIjoidmFsbGUiLCJ3b3JrZXJJRCI6IkNTSC1GNDE3MTBDQiIsInJvbGUiOiJDQVNISUVSIiwiaWF0IjoxNjg2MzI2NjA5LCJleHAiOjE2ODYzMjY2Njl9.RC2zfmJ1SBfgn7g9LKwztT2OS5sJlv0PpWIOpbaeFCw
+          <img
             src="https://images.unsplash.com/photo-1601600576337-c1d8a0d1373c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
             alt="header-image"
             style={{

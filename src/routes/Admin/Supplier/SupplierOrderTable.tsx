@@ -80,15 +80,15 @@ const SupplierOrderTableContainer = styled(Box)`
 const SupplierOrderTable: React.FC<{
   filterTab: string;
   searchFilter: string;
-}> = ({ filterTab, searchFilter }) => {
+  orders: Order[];
+}> = ({ filterTab, searchFilter, orders }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const stateSupplierOrders = useAppSelector(
-    (state) => state.orderReducer.orders,
-  );
-  const { supplierId } = useParams();
-  const { data } = useGetSupplierOrdersQuery(supplierId as string);
-  const supplierOrders = data ? data : stateSupplierOrders;
+
+  // const supplierOrders = orders ? orders : stateSupplierOrders;
+  const { supplier_id } = useParams();
+  useGetSupplierOrdersQuery(supplier_id as string);
+  // const supplierOrders = stateSupplierOrders;
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -131,7 +131,7 @@ const SupplierOrderTable: React.FC<{
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterAndSearchOrders(supplierOrders, filterTab, searchFilter)
+              {filterAndSearchOrders(orders && orders, filterTab, searchFilter)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
@@ -175,7 +175,7 @@ const SupplierOrderTable: React.FC<{
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={supplierOrders.length}
+          count={orders.length || 0}
           key={page}
           rowsPerPage={rowsPerPage}
           page={page}

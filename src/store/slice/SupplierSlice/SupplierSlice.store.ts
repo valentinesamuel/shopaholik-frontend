@@ -9,7 +9,7 @@ interface IinitialState {
 const initialState: IinitialState = {
   suppliers: [
     {
-      supplierId: '1',
+      supplier_id: '1',
       name: 'Leona Cook Partners',
       address: '666 Lahib Lane',
       phone: '(985) 819-1868',
@@ -18,7 +18,7 @@ const initialState: IinitialState = {
       state: 'Piumrin',
     },
     {
-      supplierId: '2',
+      supplier_id: '2',
       name: 'Mendoza Fitness',
       address: '1839 Ofoder Key',
       phone: '(513) 858-8850',
@@ -33,14 +33,14 @@ export const supplierSlice = createSlice({
   name: 'supplier',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      supplierApiSlice.endpoints.getSuppliers.matchFulfilled,
-      (state, action) => {
-        state.suppliers = action.payload;
-      },
-    );
-  },
+  // extraReducers: (builder) => {
+  //   builder.addMatcher(
+  //     supplierApiSlice.endpoints.getSuppliers.matchFulfilled,
+  //     (state, action) => {
+  //       state.suppliers = action.payload;
+  //     },
+  //   );
+  // },
 });
 
 export default supplierSlice.reducer;

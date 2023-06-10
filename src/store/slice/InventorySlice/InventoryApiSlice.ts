@@ -13,6 +13,7 @@ export const inventoryApiSlice = apiSlice.injectEndpoints({
                 id: product_id,
               })),
               { type: 'InventoryProduct' },
+              { type: 'Product' },
             ]
           : ['InventoryProduct'],
     }),

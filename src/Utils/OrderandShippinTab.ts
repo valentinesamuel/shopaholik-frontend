@@ -87,11 +87,11 @@ export const gender = [
   {
     id: '1',
     label: 'MALE',
-    value: 'MALE',
+    value: 'Male',
   },
   {
     id: '2',
     label: 'FEMALE',
-    value: 'FEMALE',
+    value: 'Female',
   },
 ];

@@ -17,7 +17,7 @@ import PersonnelCard from './PersonnelCard';
 import NewPersonnelModal from './NewPersonnelModal';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 import { useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../../Utils/StateDispatch';
+import { useGetPersonnelsQuery } from '../../../store/slice/PersonnelSlice/PersonnelApiSlice';
 
 interface Props {}
 
@@ -25,9 +25,7 @@ const ManagerPersonnel: FC<Props> = () => {
   const [searchedPersonnel, setSearchedPersonnel] = useState('');
   const [currentTab, setCurrentTab] = useState(0);
   const [open, setOpen] = useState(false);
-  const personnelList = useAppSelector(
-    (state) => state.personnelReducer.personnels,
-  );
+  const { data: personnelList } = useGetPersonnelsQuery();
   const [personnels, setPersonnels] = useState(personnelList);
   const location = useLocation();
 
@@ -38,7 +36,7 @@ const ManagerPersonnel: FC<Props> = () => {
     setCurrentTab(newTab);
     const currentPersonnelDesignation = personnelTabs[newTab].value;
 
-    const filterPersonnels = personnelList.filter((personnel) => {
+    const filterPersonnels = personnelList?.filter((personnel) => {
       if (currentPersonnelDesignation === '') {
         return true;
       }
@@ -51,7 +49,7 @@ const ManagerPersonnel: FC<Props> = () => {
   const handleSearchPersonnel = (event: ChangeEvent<HTMLInputElement>) => {
     const newPersonnel = event.target.value;
     setSearchedPersonnel(newPersonnel);
-    const filterPersonnels = personnelList.filter((personnel) => {
+    const filterPersonnels = personnelList?.filter((personnel) => {
       if (newPersonnel === '') {
         return true;
       }
@@ -153,9 +151,10 @@ const ManagerPersonnel: FC<Props> = () => {
           columnGap: '1%',
         }}
       >
-        {personnels.map((personnel) => (
-          <PersonnelCard personnel={personnel} key={personnel.personnelId} />
-        ))}
+        {personnels &&
+          personnels.map((personnel) => (
+            <PersonnelCard personnel={personnel} key={personnel.personnelId} />
+          ))}
       </Box>
 
       <NewPersonnelModal open={open} onClose={handleClose} />

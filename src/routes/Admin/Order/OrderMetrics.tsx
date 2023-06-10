@@ -3,19 +3,17 @@ import FmdBadIcon from '@mui/icons-material/FmdBad';
 import Warning from '@mui/icons-material/Warning';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import { Alert, Box, Skeleton, Typography } from '@mui/material';
+import { Box, Skeleton, Typography } from '@mui/material';
 import { useAppSelector } from '../../../Utils/StateDispatch';
 import { convertNumberToLocale } from '../../../Utils/Converter';
-import { useGetMetricsQuery } from '../../../store/slice/MetricSlice/MetricApiSlice';
+// import { useGetMetricsQuery } from '../../../store/slice/MetricSlice/MetricApiSlice';
 
 const OrderMetrics: FC = () => {
-  const stateorderMetrics = useAppSelector((state) => state.metricReducer);
-  const { data, isLoading } = useGetMetricsQuery();
-  const orderMetrics = data ? data : stateorderMetrics;
+  // const { data, isLoading } = useGetMetricsQuery();
 
-  if (isLoading) {
-    return <Skeleton variant="rectangular" width={'100%'} height={100} />;
-  }
+  // if (isLoading) {
+  //   return <Skeleton variant="rectangular" width={'100%'} height={100} />;
+  // }
 
   // if (isError) {
   //   return (
@@ -50,10 +48,12 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            {orderMetrics?.pendingOrders.name}
+            {/* {orderMetrics?.pendingOrders.name} */}
+            pending orders
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            {orderMetrics?.pendingOrders.value}
+            {/* {orderMetrics?.pendingOrders.value} */}
+            3
           </Typography>
         </Box>
         <Box>
@@ -76,10 +76,12 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            {orderMetrics?.receivedOrders.name}
+            {/* {orderMetrics?.receivedOrders.name} */}
+            received orders
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            {orderMetrics?.receivedOrders.value}
+            {/* {orderMetrics?.receivedOrders.value} */}
+            51
           </Typography>
         </Box>
         <Box>
@@ -102,10 +104,12 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            {orderMetrics?.shippedOrders.name}
+            {/* {orderMetrics?.shippedOrders.name} */}
+            shipped orders
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
-            {orderMetrics?.shippedOrders.value}
+            {/* {orderMetrics?.shippedOrders.value} */}
+            4
           </Typography>
         </Box>
         <Box>
@@ -128,11 +132,13 @@ const OrderMetrics: FC = () => {
       >
         <Box>
           <Typography variant="body1" sx={{ color: 'white', marginBottom: 3 }}>
-            {orderMetrics?.costOfPendingOrders.name}
+            {/* {orderMetrics?.costOfPendingOrders.name} */}
+            cost of pending orders
           </Typography>
           <Typography variant="h4" sx={{ color: 'white' }}>
             {convertNumberToLocale(
-              orderMetrics?.costOfPendingOrders.value as number,
+              // orderMetrics?.costOfPendingOrders.value as number,
+              20000
             )}
           </Typography>
         </Box>

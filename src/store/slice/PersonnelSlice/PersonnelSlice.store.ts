@@ -23,13 +23,11 @@ const initialState: IinitialState = {
       state: 'Bebbangurg',
       gender: Gender.MALE,
       additionalInfo: 'Anything extra',
-      guarantor: {
-        name: 'Jerry Guzman',
-        relationshipWithStaff: 'Father',
-        phone: '(285) 770-5744',
-        email: 'futocuj@coozo.co',
-        address: '491 Unde Square',
-      },
+      guarantorName: 'Jerry Guzman',
+      relationshipWithStaff: 'Father',
+      guarantorPhone: '(285) 770-5744',
+      guarantorEmail: 'futocuj@coozo.co',
+      guarantorAddress: '491 Unde Square',
       jobDesignation: JobDesignation.MANAGER,
       monthlySalary: 32000,
     },
@@ -48,38 +46,11 @@ const initialState: IinitialState = {
       state: 'Wessez',
       gender: Gender.FEMALE,
       additionalInfo: 'Anything extra goes here',
-      guarantor: {
-        name: 'Devin Lowe',
-        relationshipWithStaff: 'Father',
-        phone: '(684) 566-9571',
-        email: 'sunkedif@af.pl',
-        address: '448 Arigah Glene',
-      },
-      jobDesignation: JobDesignation.FLOOR_WORKER,
-      monthlySalary: 15000,
-    },
-    {
-      personnelId: '530e8a71',
-      firstName: 'Rose',
-      lastName: 'Barnett',
-      middleName: 'Riley',
-      dateOfBirth: '2019-03-06T08:00:00+08:00',
-      dateOfHire: '2019-03-06T08:00:00+08:00',
-      profilePicture: 'http://hicus.hn/rotgo',
-      phone: '(546) 242-4737',
-      email: 'gil@dukre.pf',
-      address: '416 Likaj Road',
-      city: 'Wevdana',
-      state: 'Merianoz',
-      gender: Gender.FEMALE,
-      additionalInfo: 'Anything extra for Rose goes here',
-      guarantor: {
-        name: 'Jesse Nash',
-        relationshipWithStaff: 'Father',
-        phone: '(734) 742-4771',
-        email: 'wahihi@ehgijun.am',
-        address: '1990 Zoag Trail',
-      },
+      guarantorName: 'Devin Lowe',
+      relationshipWithStaff: 'Father',
+      guarantorPhone: '(684) 566-9571',
+      guarantorEmail: 'sunkedif@af.pl',
+      guarantorAddress: '448 Arigah Glene',
       jobDesignation: JobDesignation.FLOOR_WORKER,
       monthlySalary: 15000,
     },
@@ -90,14 +61,14 @@ export const personnelSlice = createSlice({
   name: 'personnel',
   initialState,
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      personnelApiSlice.endpoints.getPersonnels.matchFulfilled,
-      (state, action) => {
-        state.personnels = action.payload;
-      },
-    );
-  },
+  // extraReducers: (builder) => {
+  //   builder.addMatcher(
+  //     personnelApiSlice.endpoints.getPersonnels.matchFulfilled,
+  //     (state, action) => {
+  //       state.personnels = action.payload;
+  //     },
+  //   );
+  // },
 });
 
 export default personnelSlice.reducer;
