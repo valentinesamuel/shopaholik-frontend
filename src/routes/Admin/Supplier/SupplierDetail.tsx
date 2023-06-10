@@ -21,6 +21,7 @@ import { useDebounce } from '../../../hooks/UseDebounce';
 import { useLocation, useParams } from 'react-router-dom';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 import { useGetSupplierOrdersQuery } from '../../../store/slice/OrderSlice/OrderApiSlice';
+import dayjs from 'dayjs';
 
 interface Props {}
 
@@ -34,7 +35,6 @@ const SupplierDetail: FC<Props> = ({}) => {
   const { supplier_id } = useParams();
 
   const { data } = useGetSupplierOrdersQuery(supplier_id as string);
-  console.log(data);
 
   // TODO: bring in all the orders that belon to this supplier
 
@@ -107,16 +107,20 @@ const SupplierDetail: FC<Props> = ({}) => {
           }}
         >
           <Typography variant="body1" sx={{ fontWeight: '600' }}>
-            Nestle Inc
+            {data?.name}
           </Typography>
           <Typography
             sx={{ margin: '10px 0', width: '60%', display: 'inline-flex' }}
           >
-            22-24 Industrial Avenue, Ilupeju. PMB 21164 Ikeja, Lagos State.
-            Nigeria
+            {data?.address} {'  '}
+            {data?.state}
           </Typography>
-          <Typography sx={{ margin: '10px 0' }}>+234 (1) 280 1300</Typography>
-          <Typography>Last used: 4 days ago </Typography>
+          <Typography sx={{ margin: '10px 0' }}> {data?.phone}</Typography>
+          <Typography>
+            Last used:{' '}
+            {data?.last_order_date &&
+              dayjs(data.last_order_date).format('ll')}
+          </Typography>
         </Box>
       </Box>
 
@@ -185,7 +189,7 @@ const SupplierDetail: FC<Props> = ({}) => {
       <SupplierOrderTable
         searchFilter={debouncedSearchedOrder as string}
         filterTab={filter}
-        orders={data ? data : []}
+        orders={data?.orders || []}
       />
     </Paper>
   );

@@ -14,12 +14,10 @@ import SupplierCard from './SupplierCard';
 import { useDebounce } from '../../../hooks/UseDebounce';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
 import { useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../../Utils/StateDispatch';
 import { useGetSuppliersQuery } from '../../../store/slice/SupplierSlice/SupplierApiSlice';
 
 const AdminSupplier: FC = () => {
   const [searchedSupplier, setSearchedSupplier] = useState('');
-  // const suppliers = useAppSelector((state) => state.supplierReducer.suppliers);
   const { data } = useGetSuppliersQuery();
   const [suppliersList, setSuppliersList] = useState(data);
   let debouncedSearchedSupplier = useDebounce(searchedSupplier, 200);

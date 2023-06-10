@@ -62,10 +62,9 @@ const OrderDetailsTableContainer = styled(Box)`
   height: fit-content;
 `;
 
-
-const OrderDetailsTable: React.FC<{ orderItemRows: OrderedItem[] }> = ({
-  orderItemRows,
-}) => {
+const OrderDetailsTable: React.FC<{
+  orderItemRows: OrderedItem[] | undefined;
+}> = ({ orderItemRows }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -106,31 +105,32 @@ const OrderDetailsTable: React.FC<{ orderItemRows: OrderedItem[] }> = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {orderItemRows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <React.Fragment key={row.name}>
-                      <TableRow
-                        sx={{ cursor: 'pointer' }}
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell align={column.align} key={column.id}>
-                              {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : String(value)}
-                            </TableCell>
-                          );
-                        })}
-                      </TableRow>
-                    </React.Fragment>
-                  );
-                })}
+              {orderItemRows &&
+                orderItemRows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <React.Fragment key={row.name}>
+                        <TableRow
+                          sx={{ cursor: 'pointer' }}
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell align={column.align} key={column.id}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : String(value)}
+                              </TableCell>
+                            );
+                          })}
+                        </TableRow>
+                      </React.Fragment>
+                    );
+                  })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -138,7 +138,7 @@ const OrderDetailsTable: React.FC<{ orderItemRows: OrderedItem[] }> = ({
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={orderItemRows.length}
+          count={orderItemRows?.length || 0}
           key={page}
           rowsPerPage={rowsPerPage}
           page={page}

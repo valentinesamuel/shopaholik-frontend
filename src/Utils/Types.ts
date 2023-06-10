@@ -17,7 +17,7 @@ export interface Order {
   shippingStatus: ShippingStatus;
   price: number;
   estimatedTimeOfArrival: string;
-  supplier: string;
+  supplier_id: string;
   items?: OrderedItem[];
 }
 
