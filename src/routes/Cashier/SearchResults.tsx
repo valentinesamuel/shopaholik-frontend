@@ -19,21 +19,23 @@ const SearchResults: FC<Props> = ({
     ? searchProductCodeString
     : searchProductString;
   const dispatch = useAppDispatch();
-  const [searchProduct] = useSearchProductMutation();
+  const [searchProduct, { isLoading }] = useSearchProductMutation();
 
-    useEffect(() => {
-      const fetchData = async () => {
-       await searchProduct(str);
-      };
+  useEffect(() => {
+    const fetchData = async () => {
+      await searchProduct(str);
+    };
 
-      fetchData();
-    }, [searchProduct, str]);
+    fetchData();
+  }, [searchProduct, str]);
 
-    const stateProductsList = useAppSelector(
-      (state) => state.cashierReducer.salesList,
-    );
-
-    const productList = stateProductsList || [];
+  const stateProductsList = useAppSelector(
+    (state) => state.cashierReducer.salesList,
+  );
+  const productList = stateProductsList || [];
+  if (isLoading) {
+    return <Typography variant="body2">Loading..</Typography>;
+  }
 
   return (
     <Box
