@@ -3,7 +3,6 @@ import { Avatar, Box, Paper, Typography } from '@mui/material';
 import PersonnelDetailModal from './PersonnelDetailModal';
 import { Personnel } from '../../../Utils/Types';
 import { convertNumberToLocale } from '../../../Utils/Converter';
-import { Phone } from '@mui/icons-material';
 
 interface Props {
   personnel: Personnel;

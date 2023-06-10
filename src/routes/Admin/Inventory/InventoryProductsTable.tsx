@@ -11,10 +11,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
 import ProductDetailModal from '../../../components/ProductDetailModal';
-import { Product, ProductCategory, StockStatus } from '../../../Utils/Types';
+import { Product } from '../../../Utils/Types';
 import { filterAndSearchInventoryItems } from './helpers';
-import { useAppSelector } from '../../../Utils/StateDispatch';
-import { RootState } from '../../../store/store';
+
 import { useGetInventoryProductsQuery } from '../../../store/slice/InventorySlice/InventoryApiSlice';
 
 interface Column {
@@ -72,11 +71,9 @@ const InventoryProductTable: React.FC<{
 }> = ({ filterTab, filterCategory, searchFilter }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const stateInventoryProducts = useAppSelector(
-    (state: RootState) => state.inventoryReducer.inventoryProducts,
-  );
+
   const { data, isLoading } = useGetInventoryProductsQuery();
-  const inventoryProducts = data ? data : stateInventoryProducts;
+  const inventoryProducts = data;
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -145,39 +142,40 @@ const InventoryProductTable: React.FC<{
               </TableRow>
             </TableHead>
             <TableBody>
-              {filterAndSearchInventoryItems(
-                inventoryProducts,
-                filterTab,
-                searchFilter,
-                filterCategory,
-              )
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <React.Fragment key={row.name}>
-                      <TableRow
-                        sx={{ cursor: 'pointer' }}
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell align={column.align} key={column.id}>
-                              {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                        <TableCell align="right">
-                          <TableModal product={row} />
-                        </TableCell>
-                      </TableRow>
-                    </React.Fragment>
-                  );
-                })}
+              {inventoryProducts &&
+                filterAndSearchInventoryItems(
+                  inventoryProducts,
+                  filterTab,
+                  searchFilter,
+                  filterCategory,
+                )
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <React.Fragment key={row.name}>
+                        <TableRow
+                          sx={{ cursor: 'pointer' }}
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell align={column.align} key={column.id}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                          <TableCell align="right">
+                            <TableModal product={row} />
+                          </TableCell>
+                        </TableRow>
+                      </React.Fragment>
+                    );
+                  })}
             </TableBody>
           </Table>
         </TableContainer>
@@ -186,7 +184,7 @@ const InventoryProductTable: React.FC<{
           rowsPerPageOptions={[10, 25, 100]}
           key={page}
           component="div"
-          count={inventoryProducts.length}
+          count={inventoryProducts?.length || 0}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

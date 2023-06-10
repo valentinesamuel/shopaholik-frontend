@@ -12,7 +12,7 @@ const SupplierCard: FC<Props> = ({ supplier }) => {
   const navigate = useNavigate();
 
   const gotoSupplierDetails = () => {
-    navigate(`${supplier.supplierId}`);
+    navigate(`${supplier.supplier_id}`);
   };
 
   return (

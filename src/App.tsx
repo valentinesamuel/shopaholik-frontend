@@ -1,28 +1,44 @@
-import { PaletteMode, ThemeProvider, createTheme } from '@mui/material';
-
 import { useMemo, useState } from 'react';
 import { getDesignTokens } from './Utils/MaterialTheme';
 import { ColorModeContext } from './Utils/ColorMode.context';
 import { Route, Routes } from 'react-router-dom';
-import SignIn from './pages/Signin.component';
-import AdminDashboard from './routes/Admin/Dashboard/AdminDashboard.component';
-import AdminInventory from './routes/Admin/Inventory/AdminInventory.component';
-import SupplierDetail from './routes/Admin/Supplier/SupplierDetail';
-import ManagerPersonnel from './routes/Manager/ManagerPersonnel/ManagerPersonnel.component';
-import AdminHome from './routes/Admin/Home/AdminHome.component';
-import AdminOrder from './routes/Admin/Order/AdminOrder.component';
-import AdminSupplier from './routes/Admin/Supplier/AdminSupplier.component';
-import RoleHome from './routes/RoleHome/RoleHome.component';
-import CashierSale from './routes/Cashier/CashierSale.component';
-import OrderDetails from './routes/Admin/Order/OrderDetails';
+import {
+  CircularProgress,
+  PaletteMode,
+  ThemeProvider,
+  createTheme,
+} from '@mui/material';
+import { lazy, Suspense } from 'react';
+
+const SignIn = lazy(() => import('./pages/Signin.component'));
+const AdminDashboard = lazy(
+  () => import('./routes/Admin/Dashboard/AdminDashboard.component'),
+);
+const AdminInventory = lazy(
+  () => import('./routes/Admin/Inventory/AdminInventory.component'),
+);
+const SupplierDetail = lazy(
+  () => import('./routes/Admin/Supplier/SupplierDetail'),
+);
+const ManagerPersonnel = lazy(
+  () => import('./routes/Manager/ManagerPersonnel/ManagerPersonnel.component'),
+);
+const AdminHome = lazy(() => import('./routes/Admin/Home/AdminHome.component'));
+const AdminOrder = lazy(
+  () => import('./routes/Admin/Order/AdminOrder.component'),
+);
+const AdminSupplier = lazy(
+  () => import('./routes/Admin/Supplier/AdminSupplier.component'),
+);
+const RoleHome = lazy(() => import('./routes/RoleHome/RoleHome.component'));
+const CashierSale = lazy(
+  () => import('./routes/Cashier/CashierSale.component'),
+);
+const OrderDetails = lazy(() => import('./routes/Admin/Order/OrderDetails'));
 import MissingPage from './pages/404';
-import { useAppSelector } from './Utils/StateDispatch';
 
 function App() {
-  const currentTheme = useAppSelector((state) => state.themeReducer.theme);
-  console.log(currentTheme);
-
-  const [mode, setMode] = useState<PaletteMode>(currentTheme as PaletteMode);
+  const [mode, setMode] = useState<PaletteMode>('light');
 
   const colorMode = useMemo(
     () => ({
@@ -41,32 +57,39 @@ function App() {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/" element={<RoleHome />}>
-            <Route path="/manager" element={<AdminHome />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="inventory" element={<AdminInventory />} />
-              <Route path="order" element={<AdminOrder />} />
-              <Route path="order/:orderId" element={<OrderDetails />} />
-              <Route path="supplier" element={<AdminSupplier />} />
-              <Route path="supplier/:supplierId" element={<SupplierDetail />} />
-              <Route path="personnel" element={<ManagerPersonnel />} />
+        <Suspense
+          fallback={<CircularProgress color="primary" sx={{ mr: 2 }} />}
+        >
+          <Routes>
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/" element={<RoleHome />}>
+              <Route path="/manager" element={<AdminHome />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="inventory" element={<AdminInventory />} />
+                <Route path="order" element={<AdminOrder />} />
+                <Route path="order/:orderId" element={<OrderDetails />} />
+                <Route path="supplier" element={<AdminSupplier />} />
+                <Route
+                  path="supplier/:supplier_id"
+                  element={<SupplierDetail />}
+                />
+                <Route path="personnel" element={<ManagerPersonnel />} />
+              </Route>
+              <Route path="/supervisor" element={<AdminHome />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="inventory" element={<AdminInventory />} />
+              </Route>
+              <Route path="/cashier" element={<AdminHome />}>
+                <Route index element={<AdminDashboard />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="sale" element={<CashierSale />} />
+              </Route>
             </Route>
-            <Route path="/supervisor" element={<AdminHome />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="inventory" element={<AdminInventory />} />
-            </Route>
-            <Route path="/cashier" element={<AdminHome />}>
-              <Route index element={<AdminDashboard />} />
-              <Route path="dashboard" element={<AdminDashboard />} />
-              <Route path="sale" element={<CashierSale />} />
-            </Route>
-          </Route>
-          <Route path="*" element={<MissingPage />} />
-        </Routes>
+            <Route path="*" element={<MissingPage />} />
+          </Routes>
+        </Suspense>
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

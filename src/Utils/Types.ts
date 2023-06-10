@@ -1,5 +1,5 @@
 export interface Supplier {
-  supplierId: string;
+  supplier_id: string;
   name: string;
   address: string;
   phone: string;
@@ -53,6 +53,7 @@ export interface SaleProduct extends Product {
 }
 
 export interface Personnel {
+  id?: string;
   personnelId?: string;
   firstName: string;
   lastName: string;
@@ -67,13 +68,11 @@ export interface Personnel {
   state: string;
   gender: Gender;
   additionalInfo?: string;
-  guarantor: {
-    name: string;
-    relationshipWithStaff: string;
-    phone: string;
-    email: string;
-    address: string;
-  };
+  guarantorName: string;
+  relationshipWithStaff: string;
+  guarantorPhone: string;
+  guarantorEmail: string;
+  guarantorAddress: string;
   jobDesignation: JobDesignation | ADMINROLE;
   monthlySalary: number;
 }
@@ -81,7 +80,7 @@ export interface Personnel {
 export interface User {
   name: string;
   role: ADMINROLE;
-  token?: string | null;
+  access_token?: string | null;
 }
 
 export interface PersonnelLogin {
@@ -115,8 +114,8 @@ export interface Metrics {
 }
 
 export enum Gender {
-  MALE = 'MALE',
-  FEMALE = 'FEMALE',
+  MALE = 'Male',
+  FEMALE = 'Female',
 }
 
 export enum Department {

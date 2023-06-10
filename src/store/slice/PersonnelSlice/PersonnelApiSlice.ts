@@ -3,14 +3,14 @@ import { Personnel } from '../../../Utils/Types';
 
 export const personnelApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getPersonnels: builder.query<Personnel[], string>({
+    getPersonnels: builder.query<Personnel[], void>({
       query: () => '/personnel',
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ personnelId }) => ({
+              ...result.map(({ id }) => ({
                 type: 'Personnel' as const,
-                personnelId,
+                id,
               })),
               'Personnel',
             ]
@@ -25,7 +25,7 @@ export const personnelApiSlice = apiSlice.injectEndpoints({
     }),
     addPersonnel: builder.mutation<Personnel, Personnel>({
       query: (personnel) => ({
-        url: '/personnels',
+        url: '/personnel',
         method: 'POST',
         body: personnel,
       }),
@@ -33,7 +33,7 @@ export const personnelApiSlice = apiSlice.injectEndpoints({
     }),
     updatePersonnel: builder.mutation<Personnel, Personnel>({
       query: (personnel) => ({
-        url: `/personnels/${personnel.personnelId}`,
+        url: `/personnel/${personnel.personnelId}`,
         method: 'PATCH',
         body: personnel,
       }),

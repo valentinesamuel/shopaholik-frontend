@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Skeleton } from '@mui/material';
 import { styled } from 'styled-components';
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -12,8 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import { MoreHoriz } from '@mui/icons-material';
 import ProductDetailModal from '../../../components/ProductDetailModal';
 import { Product } from '../../../Utils/Types';
-import { RootState } from '../../../store/store';
-import { useAppSelector } from '../../../Utils/StateDispatch';
+import { useGetInventoryProductsQuery } from '../../../store/slice/InventorySlice/InventoryApiSlice';
 
 interface Column {
   id: 'name' | 'category' | 'unit_price' | 'quantity_sold' | 'stock_status';
@@ -67,9 +66,8 @@ const DashboardTopSellingProductContainer = styled(Box)`
 const DashboardTopSellingProduct: React.FC = () => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const inventoryProducts = useAppSelector(
-    (state: RootState) => state.inventoryReducer.inventoryProducts,
-  ).filter(
+  const { data, isLoading } = useGetInventoryProductsQuery();
+  const inventoryProducts = data?.filter(
     (inventoryProduct) =>
       inventoryProduct.quantity_sold && inventoryProduct.quantity_sold > 100,
   );
@@ -87,76 +85,83 @@ const DashboardTopSellingProduct: React.FC = () => {
 
   return (
     <DashboardTopSellingProductContainer>
-      <Paper
-        elevation={1}
-        sx={{
-          overflowX: 'auto',
-        }}
-      >
-        <TableContainer sx={{ height: '100%', minHeight: 440 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <React.Fragment key={column.id}>
-                    <TableCell
-                      sx={{ backgroundColor: 'primary.main' }}
-                      align={column.align}
-                      style={{ minWidth: column.minWidth, width: column.width }}
-                    >
-                      {column.label}
-                    </TableCell>
-                  </React.Fragment>
-                ))}
-                <TableCell
-                  sx={{ backgroundColor: 'primary.main', width: '5%' }}
-                  align="right"
-                ></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {inventoryProducts
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <React.Fragment key={row.name}>
-                      <TableRow
-                        sx={{ cursor: 'pointer' }}
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
+      {isLoading ? (
+        <Skeleton height={'100%'} width={'100%'}></Skeleton>
+      ) : (
+        <Paper
+          elevation={1}
+          sx={{
+            overflowX: 'auto',
+          }}
+        >
+          <TableContainer sx={{ height: '100%', minHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <React.Fragment key={column.id}>
+                      <TableCell
+                        sx={{ backgroundColor: 'primary.main' }}
+                        align={column.align}
+                        style={{
+                          minWidth: column.minWidth,
+                          width: column.width,
+                        }}
                       >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell align={column.align} key={column.id}>
-                              {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : value}
-                            </TableCell>
-                          );
-                        })}
-                        <TableCell align="right">
-                          <TableModal key={row.product_id} product={row} />
-                        </TableCell>
-                      </TableRow>
+                        {column.label}
+                      </TableCell>
                     </React.Fragment>
-                  );
-                })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          sx={{ backgroundColor: 'primary.light' }}
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={inventoryProducts.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-      </Paper>
+                  ))}
+                  <TableCell
+                    sx={{ backgroundColor: 'primary.main', width: '5%' }}
+                    align="right"
+                  ></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {inventoryProducts
+                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <React.Fragment key={row.name}>
+                        <TableRow
+                          sx={{ cursor: 'pointer' }}
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell align={column.align} key={column.id}>
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : value}
+                              </TableCell>
+                            );
+                          })}
+                          <TableCell align="right">
+                            <TableModal key={row.product_id} product={row} />
+                          </TableCell>
+                        </TableRow>
+                      </React.Fragment>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            sx={{ backgroundColor: 'primary.light' }}
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={inventoryProducts?.length || 0}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+        </Paper>
+      )}
     </DashboardTopSellingProductContainer>
   );
 };

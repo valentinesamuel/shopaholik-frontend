@@ -22,7 +22,7 @@ import {
 } from '../Utils/Types';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { useAddInventoryProductsMutation } from '../store/slice/InventorySlice/InventoryApiSlice';
-import { useAppSelector } from '../Utils/StateDispatch';
+import { useGetSuppliersQuery } from '../store/slice/SupplierSlice/SupplierApiSlice';
 
 const defaultNewProduct: Product = {
   product_id: '',
@@ -50,9 +50,7 @@ const AddProductModal: FC<Props> = () => {
     success: '',
   });
   const [product, setProduct] = useState(defaultNewProduct);
-  const storeSupplierList = useAppSelector(
-    (state) => state.supplierReducer.suppliers,
-  );
+  const { data: storeSupplierList } = useGetSuppliersQuery();
   const [supplierList, _] = useState(storeSupplierList);
   const [addProductToInventory, { isLoading }] =
     useAddInventoryProductsMutation();
@@ -84,7 +82,7 @@ const AddProductModal: FC<Props> = () => {
   };
 
   const onSelectSupplier = (supplier: Supplier) => {
-    setProduct({ ...product, supplier_id: supplier.supplierId });
+    setProduct({ ...product, supplier_id: supplier.supplier_id });
   };
 
   return (
@@ -225,15 +223,16 @@ const AddProductModal: FC<Props> = () => {
             <MenuItem disabled value={''}>
               Select
             </MenuItem>
-            {supplierList.map((supplier) => (
-              <MenuItem
-                key={supplier.supplierId}
-                onClick={() => onSelectSupplier(supplier)}
-                value={supplier.supplierId}
-              >
-                {supplier.name}
-              </MenuItem>
-            ))}
+            {supplierList &&
+              supplierList.map((supplier) => (
+                <MenuItem
+                  key={supplier.supplier_id}
+                  onClick={() => onSelectSupplier(supplier)}
+                  value={supplier.supplier_id}
+                >
+                  {supplier.name}
+                </MenuItem>
+              ))}
           </Select>
         </FormControl>
 

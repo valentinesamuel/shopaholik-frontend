@@ -36,13 +36,11 @@ const defaultNewPersonnel: Personnel = {
   profilePicture: '',
   monthlySalary: 0,
   gender: Gender.MALE,
-  guarantor: {
-    name: '',
-    relationshipWithStaff: '',
-    phone: '',
-    address: '',
-    email: '',
-  },
+  guarantorName: '',
+  relationshipWithStaff: '',
+  guarantorPhone: '',
+  guarantorAddress: '',
+  guarantorEmail: '',
 };
 
 interface Props {
@@ -382,13 +380,10 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 onChange={(newGuarantorName) =>
                   setNewPersonnel({
                     ...newPersonnel,
-                    guarantor: {
-                      ...newPersonnel.guarantor,
-                      name: newGuarantorName.target.value,
-                    },
+                    guarantorName: newGuarantorName.target.value,
                   })
                 }
-                value={newPersonnel.guarantor.name}
+                value={newPersonnel.guarantorName}
                 type="text"
                 label="Name"
                 variant="outlined"
@@ -400,15 +395,12 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 <Select
                   labelId="staff-relationship"
                   id="staff-relationship"
-                  value={newPersonnel.guarantor.relationshipWithStaff}
+                  value={newPersonnel.relationshipWithStaff}
                   label="relationship"
                   onChange={(newRel) =>
                     setNewPersonnel({
                       ...newPersonnel,
-                      guarantor: {
-                        ...newPersonnel.guarantor,
-                        relationshipWithStaff: newRel.target.value,
-                      },
+                      relationshipWithStaff: newRel.target.value,
                     })
                   }
                 >
@@ -436,13 +428,10 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 onChange={(newGuarantorPhone) =>
                   setNewPersonnel({
                     ...newPersonnel,
-                    guarantor: {
-                      ...newPersonnel.guarantor,
-                      phone: newGuarantorPhone.target.value,
-                    },
+                    guarantorPhone: newGuarantorPhone.target.value,
                   })
                 }
-                value={newPersonnel.guarantor.phone}
+                value={newPersonnel.guarantorPhone}
                 type="tel"
                 label="Phone Number"
                 variant="outlined"
@@ -460,13 +449,10 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 onChange={(newGuarantorEmail) =>
                   setNewPersonnel({
                     ...newPersonnel,
-                    guarantor: {
-                      ...newPersonnel.guarantor,
-                      email: newGuarantorEmail.target.value,
-                    },
+                    guarantorEmail: newGuarantorEmail.target.value,
                   })
                 }
-                value={newPersonnel.guarantor.email}
+                value={newPersonnel.guarantorEmail}
                 type="text"
                 label="Email"
                 variant="outlined"
@@ -481,13 +467,10 @@ const NewPersonnelModal: FC<Props> = ({ onClose, open }) => {
                 onChange={(newGuarantorAddress) =>
                   setNewPersonnel({
                     ...newPersonnel,
-                    guarantor: {
-                      ...newPersonnel.guarantor,
-                      address: newGuarantorAddress.target.value,
-                    },
+                    guarantorAddress: newGuarantorAddress.target.value,
                   })
                 }
-                value={newPersonnel.guarantor.address}
+                value={newPersonnel.guarantorAddress}
                 label="Address"
                 variant="outlined"
                 sx={{
