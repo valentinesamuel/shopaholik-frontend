@@ -11,16 +11,14 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Order } from '../../../Utils/Types';
 import { getShippingStatusColor } from '../../../Utils/StatusColor';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import { filterAndSearchOrders } from '../Order/helpers';
-import { useAppSelector } from '../../../Utils/StateDispatch';
-import { useGetSupplierOrdersQuery } from '../../../store/slice/OrderSlice/OrderApiSlice';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface Column {
   id:
     | 'orderNumber'
-    | 'supplier'
     | 'dateOfOrder'
     | 'price'
     | 'estimatedTimeOfArrival'
@@ -30,6 +28,7 @@ interface Column {
   width?: number | string;
   align?: 'right' | 'left' | 'center';
   format?: (value: number) => string;
+  formatDate?: (value: Dayjs) => string;
 }
 
 const columns: readonly Column[] = [
@@ -45,6 +44,7 @@ const columns: readonly Column[] = [
     label: 'Date of Order',
     // minWidth: 100
     align: 'center',
+    formatDate: (value: Dayjs) => dayjs(value).format('ll'),
   },
   {
     id: 'shippingStatus',
@@ -64,12 +64,7 @@ const columns: readonly Column[] = [
     label: 'ETA',
     // minWidth: 170,
     align: 'center',
-  },
-  {
-    id: 'supplier',
-    label: 'Supplier',
-    // minWidth: 170,
-    align: 'center',
+    formatDate: (value: Dayjs) => dayjs(value).format('ll'),
   },
 ];
 
@@ -84,11 +79,6 @@ const SupplierOrderTable: React.FC<{
 }> = ({ filterTab, searchFilter, orders }) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  // const supplierOrders = orders ? orders : stateSupplierOrders;
-  const { supplier_id } = useParams();
-  useGetSupplierOrdersQuery(supplier_id as string);
-  // const supplierOrders = stateSupplierOrders;
 
   const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
@@ -157,6 +147,8 @@ const SupplierOrderTable: React.FC<{
                             >
                               {column.format && typeof value === 'number'
                                 ? column.format(value)
+                                : column.formatDate
+                                ? column.formatDate(dayjs(value))
                                 : String(value)}
                             </TableCell>
                           );
@@ -175,7 +167,7 @@ const SupplierOrderTable: React.FC<{
           sx={{ backgroundColor: 'primary.light' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={orders.length || 0}
+          count={orders?.length || 0}
           key={page}
           rowsPerPage={rowsPerPage}
           page={page}

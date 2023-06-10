@@ -8,9 +8,9 @@ export const supplierApiSlice = apiSlice.injectEndpoints({
       providesTags: (result) =>
         result
           ? [
-              ...result.map(({ supplierId }) => ({
+              ...result.map(({ supplier_id }) => ({
                 type: 'Supplier' as const,
-                supplierId,
+                supplier_id,
               })),
             ]
           : ['Supplier'],
@@ -19,7 +19,7 @@ export const supplierApiSlice = apiSlice.injectEndpoints({
     getSupplier: builder.query<Supplier, string>({
       query: (id) => `/supplier/${id}`,
       providesTags: (result) =>
-        result ? [{ type: 'Supplier', id: result.supplierId }] : ['Supplier'],
+        result ? [{ type: 'Supplier', id: result.supplier_id }] : ['Supplier'],
     }),
   }),
 });

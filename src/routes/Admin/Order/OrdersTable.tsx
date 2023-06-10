@@ -15,11 +15,11 @@ import { useNavigate } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
 import { filterAndSearchOrders } from './helpers';
 import { useGetOrdersQuery } from '../../../store/slice/OrderSlice/OrderApiSlice';
+import dayjs, { Dayjs } from 'dayjs';
 
 interface Column {
   id:
     | 'orderNumber'
-    | 'supplier'
     | 'dateOfOrder'
     | 'price'
     | 'estimatedTimeOfArrival'
@@ -29,6 +29,7 @@ interface Column {
   width?: number | string;
   align?: 'right' | 'left' | 'center';
   format?: (value: number) => string;
+  formatDate?: (value: Dayjs) => string;
 }
 
 const columns: readonly Column[] = [
@@ -44,6 +45,7 @@ const columns: readonly Column[] = [
     label: 'Date of Order',
     // minWidth: 100
     align: 'center',
+    formatDate: (value: Dayjs) => dayjs(value).format('ll'),
   },
   {
     id: 'shippingStatus',
@@ -63,12 +65,7 @@ const columns: readonly Column[] = [
     label: 'ETA',
     // minWidth: 170,
     align: 'center',
-  },
-  {
-    id: 'supplier',
-    label: 'Supplier',
-    // minWidth: 170,
-    align: 'center',
+    formatDate: (value: Dayjs) => dayjs(value).format('ll'),
   },
 ];
 
@@ -130,43 +127,46 @@ const OrdersTable: React.FC<{
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders && filterAndSearchOrders(orders, filterTab, searchFilter)
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <React.Fragment key={row.orderNumber}>
-                      <TableRow
-                        sx={{ cursor: 'pointer' }}
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          return (
-                            <TableCell
-                              align={column.align}
-                              key={column.id}
-                              sx={{
-                                color: getShippingStatusColor(
-                                  column,
-                                  value as string,
-                                ),
-                              }}
-                            >
-                              {column.format && typeof value === 'number'
-                                ? column.format(value)
-                                : String(value)}
-                            </TableCell>
-                          );
-                        })}
-                        <TableCell align="right">
-                          <TableModal orderRow={row} />
-                        </TableCell>
-                      </TableRow>
-                    </React.Fragment>
-                  );
-                })}
+              {orders &&
+                filterAndSearchOrders(orders, filterTab, searchFilter)
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <React.Fragment key={row.orderNumber}>
+                        <TableRow
+                          sx={{ cursor: 'pointer' }}
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                        >
+                          {columns.map((column) => {
+                            const value = row[column.id];
+                            return (
+                              <TableCell
+                                align={column.align}
+                                key={column.id}
+                                sx={{
+                                  color: getShippingStatusColor(
+                                    column,
+                                    value as string,
+                                  ),
+                                }}
+                              >
+                                {column.format && typeof value === 'number'
+                                  ? column.format(value)
+                                  : column.formatDate
+                                  ? column.formatDate(dayjs(value))
+                                  : String(value)}
+                              </TableCell>
+                            );
+                          })}
+                          <TableCell align="right">
+                            <TableModal orderRow={row} />
+                          </TableCell>
+                        </TableRow>
+                      </React.Fragment>
+                    );
+                  })}
             </TableBody>
           </Table>
         </TableContainer>

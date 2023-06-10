@@ -1,5 +1,5 @@
 import { apiSlice } from '..';
-import { Order } from '../../../Utils/Types';
+import { Order, Supplier } from '../../../Utils/Types';
 
 export const orderApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -16,16 +16,11 @@ export const orderApiSlice = apiSlice.injectEndpoints({
           : ['Order'],
     }),
 
-    getSupplierOrders: builder.query<Order[], string>({
+    getSupplierOrders: builder.query<Supplier, string>({
       query: (supplierId) => `/supplier/order/${supplierId}`,
       providesTags: (result) =>
         result
-          ? [
-              ...result.map(({ orderId }) => ({
-                type: 'Order' as const,
-                orderId,
-              })),
-            ]
+          ? [{ id: result.supplier_id, type: 'Supplier' }, 'Order']
           : ['Order'],
     }),
 

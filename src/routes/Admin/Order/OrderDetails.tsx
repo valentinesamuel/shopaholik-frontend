@@ -20,6 +20,7 @@ import {
 import { Order, ShippingStatus } from '../../../Utils/Types';
 import dayjs from 'dayjs';
 import { convertNumberToLocale } from '../../../Utils/Converter';
+import { useGetSupplierQuery } from '../../../store/slice/SupplierSlice/SupplierApiSlice';
 
 const orderItemRows = orderedItems;
 
@@ -29,9 +30,8 @@ const OrderDetails: FC = () => {
   const location = useLocation();
   const { data } = useGetOrderQuery(orderId as string);
   const [updateOrder, { isLoading, isError }] = useUpdateOrderMutation();
+  const { data: supplier } = useGetSupplierQuery(data?.supplier_id as string);
   const currentOrder = data as Order;
-  // TODO: get the supplier details(name,address and phone) with orderId
-  // TODO: let the orders from the supplier details be sent to OrderDetailsTable component
 
   const handleShippingStatusChange = async (event: SelectChangeEvent) => {
     try {
@@ -179,21 +179,23 @@ const OrderDetails: FC = () => {
               }}
             >
               <Typography variant="body1" sx={{ fontWeight: '600' }}>
-                {data ? data.supplier : 'Nestle Inc'}
+                {data ? supplier?.name : 'Nestle Inc'}
               </Typography>
               <Typography
                 sx={{ margin: '10px 0', width: '50%', display: 'inline-flex' }}
               >
-                22-24 Industrial Avenue, Ilupeju. PMB 21164 Ikeja, Lagos State.
-                Nigeria
+                {data
+                  ? supplier?.address
+                  : '22-24 Industrial Avenue, Ilupeju. PMB 21164 Ikeja, Lagos State. Nigeria'}
+                , {supplier?.state}.
               </Typography>
               <Typography sx={{ margin: '10px 0' }}>
-                +234 (1) 280 1300
+                {supplier?.phone}
               </Typography>
             </Box>
           </Box>
 
-          <OrderDetailsTable orderItemRows={orderItemRows} />
+          <OrderDetailsTable orderItemRows={data?.items} />
         </Box>
       )}
     </Paper>

@@ -4,7 +4,7 @@ import { PERSIST, persistReducer, persistStore } from 'redux-persist';
 import { apiSlice } from './slice';
 // import orderReducer from './slice/OrderSlice/OrderSlice.store';
 // import supplierReducer from './slice/SupplierSlice/SupplierSlice.store';
-import personnelReducer from './slice/PersonnelSlice/PersonnelSlice.store';
+// import personnelReducer from './slice/PersonnelSlice/PersonnelSlice.store';
 // import metricReducer from './slice/MetricSlice/MetricSlice.store';
 
 import userReducer from './slice/UserSlice/UserSlice.store';
