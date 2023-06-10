@@ -1,6 +1,6 @@
 import { Box, Divider, Typography } from '@mui/material';
-import { FC, Fragment } from 'react';
-import { useSearchProductQuery } from '../../store/slice/CashierSlice/CashierApiSlice';
+import { FC, Fragment, useEffect } from 'react';
+import { useSearchProductMutation } from '../../store/slice/CashierSlice/CashierApiSlice';
 import { useAppDispatch, useAppSelector } from '../../Utils/StateDispatch';
 import { SaleProduct } from '../../Utils/Types';
 import { convertNumberToLocale } from '../../Utils/Converter';
@@ -19,18 +19,21 @@ const SearchResults: FC<Props> = ({
     ? searchProductCodeString
     : searchProductString;
   const dispatch = useAppDispatch();
+  const [searchProduct] = useSearchProductMutation();
 
-  
-  const { data } = useSearchProductQuery(str as string);
+    useEffect(() => {
+      const fetchData = async () => {
+       await searchProduct(str);
+      };
 
-  
+      fetchData();
+    }, [searchProduct, str]);
 
-  const stateProductsList = useAppSelector(
-    (state) => state.cashierReducer.salesList,
-  );
-  const productList = data
-    ? data.map((prod) => ({ ...prod, saleQuantity: 1 } as SaleProduct))
-    : stateProductsList;
+    const stateProductsList = useAppSelector(
+      (state) => state.cashierReducer.salesList,
+    );
+
+    const productList = stateProductsList || [];
 
   return (
     <Box
@@ -40,9 +43,9 @@ const SearchResults: FC<Props> = ({
         position: 'relative',
       }}
     >
-      {data ? (
+      {productList ? (
         <Fragment>
-          {productList.map((saleProd) => (
+          {productList.map((saleProd: SaleProduct) => (
             <Fragment key={saleProd.product_id}>
               <Box
                 sx={{

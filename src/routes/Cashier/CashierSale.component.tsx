@@ -64,18 +64,18 @@ const CashierSale = () => {
       await makeSale(salesList)
         .unwrap()
         .then((_res) => {
-           setcompletedPurchase({
-             error: null,
-             success: true,
-           });
-           setCost(String(0));
-           setTimeout(() => {
-             setcompletedPurchase({
-               error: null,
-               success: null,
-             });
-           }, 2000);
-           dispatch(clearSalesList());
+          setcompletedPurchase({
+            error: null,
+            success: true,
+          });
+          setCost(String(0));
+          setTimeout(() => {
+            setcompletedPurchase({
+              error: null,
+              success: null,
+            });
+          }, 2000);
+          dispatch(clearSalesList());
         });
     } catch (error) {
       setcompletedPurchase({
@@ -104,7 +104,6 @@ const CashierSale = () => {
         },
       }}
     >
-      
       <Paper
         sx={{
           width: { desktop: '80%', mobile: '100%' },

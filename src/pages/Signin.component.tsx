@@ -48,7 +48,7 @@ const SignIn: FC = () => {
         navigate(`/${loggedInUser.role}`);
       }
     } catch (error) {
-      setErrMsg('Network Problem. Please refresh the page and re-login');
+      setErrMsg('Login Failed. Please re-try');
     }
   };
 

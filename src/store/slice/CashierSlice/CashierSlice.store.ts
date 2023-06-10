@@ -77,7 +77,7 @@ export const cashierSlice = createSlice({
       (_state, _action) => {
         // TODO: might need to create a property to allow something happed when a purchase is successful
       },
-    );
+  );
   },
 });
 
