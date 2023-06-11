@@ -77,6 +77,8 @@ const CashierSale = () => {
           }, 2000);
           dispatch(clearSalesList());
         });
+      console.log('sold');
+      
     } catch (error) {
       setcompletedPurchase({
         error: true,
@@ -160,6 +162,7 @@ const CashierSale = () => {
               fullWidth
               variant="outlined"
               sx={{
+                display: 'none',
                 marginBottom: {
                   desktop: '30px',
                   mobile: '0',

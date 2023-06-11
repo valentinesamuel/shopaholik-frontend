@@ -34,11 +34,11 @@ const defaultNewProduct: Product = {
   min_quantity: 0,
   unit_price: 0,
   date_of_arrival: '',
-  expiry_date: '',
+  expiry_date: 'N/A',
   supplier_id: '',
   quantity: 0,
   unit_of_measurement: '',
-  shelf_life_duration: '',
+  shelf_life_duration: 'N/A',
   stock_status: StockStatus.IN_STOCK,
 };
 
@@ -57,7 +57,9 @@ const AddProductModal: FC<Props> = () => {
 
   const handleAddProduct = async () => {
     try {
-      await addProductToInventory(product).unwrap();
+      console.log(product);
+
+      await addProductToInventory(product).unwrap().then;
       setErrMsg({
         error: '',
         success: 'Product added',
@@ -65,6 +67,8 @@ const AddProductModal: FC<Props> = () => {
       setTimeout(() => {
         setErrMsg({ error: '', success: '' });
       }, 2000);
+      ``;
+      // console.log(product);
     } catch (error) {
       setErrMsg({
         error: 'Failed to add product. Please try again',
@@ -149,9 +153,10 @@ const AddProductModal: FC<Props> = () => {
           name="quantity"
           onChange={handleChange}
           value={product.quantity}
-          type="text"
+          type="number"
           label="Quantity"
           variant="outlined"
+          inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
         />
       </Box>
       <Box
@@ -166,7 +171,7 @@ const AddProductModal: FC<Props> = () => {
           name="unit_price"
           onChange={handleChange}
           value={product.unit_price}
-          type="text"
+          type="number"
           label="Unit Price"
           variant="outlined"
         />
@@ -174,7 +179,7 @@ const AddProductModal: FC<Props> = () => {
           name="quantity_in_stock"
           onChange={handleChange}
           value={product.quantity_in_stock}
-          type="text"
+          type="number"
           label="Stock Quantity"
           variant="outlined"
         />
@@ -198,7 +203,7 @@ const AddProductModal: FC<Props> = () => {
         }}
       >
         <TextField
-          name="unit-of-measurement"
+          name="unit_of_measurement"
           onChange={handleChange}
           value={product.unit_of_measurement}
           type="text"
@@ -213,12 +218,14 @@ const AddProductModal: FC<Props> = () => {
             id="supplier"
             value={product.supplier_id}
             label="supplier"
-            onChange={(supplier) =>
+            onChange={(supplier) => {
+              console.log(supplier.target.value);
+
               setProduct({
                 ...product,
                 supplier_id: supplier.target.value,
-              })
-            }
+              });
+            }}
           >
             <MenuItem disabled value={''}>
               Select
@@ -248,7 +255,7 @@ const AddProductModal: FC<Props> = () => {
           name="min_quantity"
           onChange={handleChange}
           value={product.min_quantity}
-          type="text"
+          type="number"
           label="Min. Quantity"
           variant="outlined"
         />
