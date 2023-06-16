@@ -52,7 +52,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: { desktop: '40%', mobile: '80%' },
+          width: { desktop: '50%', mobile: '80%' },
           padding: '30px',
           height: { desktop: 'auto', mobile: '80%' },
           overflowX: 'auto',
@@ -101,7 +101,7 @@ const ProductDetailModal: FC<Props> = ({ open, onClose, productDetail }) => {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography sx={{ color: '#96989E', marginRight: '14px' }}>
-                Expired Date:
+                Expiry Date:
               </Typography>
               <Typography variant="subtitle1" sx={{ fontWeight: '600' }}>
                 {productDetail &&

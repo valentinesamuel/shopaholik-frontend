@@ -5,9 +5,11 @@ import StockQuantityCard from '../../../components/StockQuantityRow';
 import DashboardTopSellingProduct from './DashboardTopSellingProduct';
 import { useLocation } from 'react-router-dom';
 import BreadCrumbNavigation from '../../../components/BreadCrumbNavigation';
+import { useGetPersonnelsQuery } from '../../../store/slice/PersonnelSlice/PersonnelApiSlice';
 
 const AdminDashboard: FC = () => {
   const location = useLocation();
+  useGetPersonnelsQuery();
 
   return (
     <Paper

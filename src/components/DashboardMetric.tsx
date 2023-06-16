@@ -89,10 +89,10 @@ const DashboardMetric: FC = () => {
             today's purchase count
           </p>
           <p className="value">
-            ₦{' '}
+            {' '}
             {convertNumberToLocale(
               // dashboardMetrics.purchaseCount.value as number,
-              2455,
+              55,
             )}
           </p>
         </Content>
@@ -129,7 +129,7 @@ const DashboardMetric: FC = () => {
         <Content>
           <p className="title">
             {/* {dashboardMetrics.inventoryCost.name} */}
-            total incentory cost
+            total inventory cost
           </p>
           <p className="value">
             ₦{' '}

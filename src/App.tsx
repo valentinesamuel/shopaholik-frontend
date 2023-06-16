@@ -38,7 +38,7 @@ const OrderDetails = lazy(() => import('./routes/Admin/Order/OrderDetails'));
 import MissingPage from './pages/404';
 
 function App() {
-  const [mode, setMode] = useState<PaletteMode>('light');
+  const [mode, setMode] = useState<PaletteMode>('dark');
 
   const colorMode = useMemo(
     () => ({

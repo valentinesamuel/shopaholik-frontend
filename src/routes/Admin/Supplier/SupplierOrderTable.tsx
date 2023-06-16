@@ -187,7 +187,7 @@ const TableModal: React.FC<{ orderRow: Order }> = ({ orderRow }) => {
   return (
     <div>
       <IconButton
-        onClick={() => navigate(`/manager/order/${orderRow.orderNumber}`)}
+        onClick={() => navigate(`/manager/order/${orderRow.orderId}`)}
       >
         <InfoIcon />
       </IconButton>
