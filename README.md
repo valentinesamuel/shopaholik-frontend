@@ -34,6 +34,8 @@ Overall, the project aims to develop a robust and intuitive web application that
 <a href="https://github.com/valentinesamuel/shopaholik-frontend/issues">Report Bug</a>
 ·
 <a href="https://github.com/valentinesamuel/shopaholik-frontend/issues">Request Feature</a>
+·
+<a href="https://drive.google.com/file/d/1scBh9cvD0ZovqMpLPd9keMkD1la6oZs9/view?usp=sharing">Watch Presentation/Demo</a>
 
   </p>
 </div>
