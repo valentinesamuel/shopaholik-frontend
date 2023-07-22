@@ -9,6 +9,7 @@
 
 <!-- PROJECT LOGO -->
 <br />
+<br />
 <div align="center">
   <a href="https://github.com/valentinesamuel/shopaholik-frontend">
     <img src="./src/assets/images/shopaholik-logo.svg" alt="Logo" height="100" width="100">
